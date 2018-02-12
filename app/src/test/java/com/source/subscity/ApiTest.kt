@@ -1,4 +1,4 @@
-package com.source.subscity.api
+package com.source.subscity
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
