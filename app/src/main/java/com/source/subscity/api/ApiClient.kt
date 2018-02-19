@@ -1,4 +1,4 @@
-package com.source.subscity.api.client
+package com.source.subscity.api
 
 import com.google.gson.Gson
 import com.source.subscity.api.services.SubsCityService
@@ -11,9 +11,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 /**
  * @author Vitaliy Markus
  */
-class SubsCityClient(okHttpClient: OkHttpClient,
-                     gson: Gson,
-                     scheduler: Scheduler) {
+class ApiClient(okHttpClient: OkHttpClient,
+                gson: Gson,
+                scheduler: Scheduler) {
 
     private val retrofit = Retrofit.Builder()
             .baseUrl("http://localhost") //ignored

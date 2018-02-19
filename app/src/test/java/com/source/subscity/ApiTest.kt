@@ -2,7 +2,7 @@ package com.source.subscity
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.source.subscity.api.client.SubsCityClient
+import com.source.subscity.api.ApiClient
 import com.source.subscity.api.deserializers.DateTimeDeserializer
 import com.source.subscity.api.deserializers.SubsCityTypeAdapterFactory
 import com.source.subscity.api.entities.movie.Movie
@@ -18,7 +18,7 @@ import org.junit.Test
  */
 class ApiTest {
 
-    private val subsCityClient = SubsCityClient(configureOkHttp(), configureGson(), Schedulers.single())
+    private val subsCityClient = ApiClient(configureOkHttp(), configureGson(), Schedulers.single())
 
     fun configureOkHttp(): OkHttpClient {
         return OkHttpClient.Builder()
