@@ -39,4 +39,5 @@ ext {
     daggerVersion = '2.14.1'
     crashlyticsVersion = '2.8.0'
     bottomSheetBuilderVersion = '1.6.0'
+    moxyVersion = '1.5.3'
 }
