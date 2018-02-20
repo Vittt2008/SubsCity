@@ -2,6 +2,7 @@ package com.source.subscity.ui.movies
 
 import android.os.Bundle
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,7 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.source.subscity.R
 import com.source.subscity.dagger.SubsCityDagger
 import com.arellomobile.mvp.presenter.InjectPresenter
-
+import com.source.subscity.api.entities.movie.Movie
 
 
 /**
@@ -34,7 +35,10 @@ class MoviesFragment : MvpAppCompatFragment(), MoviesView {
         return moviesList
     }
 
-    override fun toast() {
-        Toast.makeText(activity, "TOAST_TOAST", Toast.LENGTH_LONG).show()
+    override fun showMovies(movies: List<Movie>) {
+        moviesList.run {
+            layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
+            adapter = MoviesAdapter(movies)
+        }
     }
 }

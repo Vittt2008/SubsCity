@@ -66,6 +66,10 @@ dependencies {
     compile "com.arello-mobile:moxy-app-compat:$moxyVersion"
     kapt "com.arello-mobile:moxy-compiler:$moxyVersion"
 
+    //GLIDE
+//    implementation "com.github.bumptech.glide:glide:$glideVersion"
+//    kapt "com.github.bumptech.glide:compiler:$glideVersion"
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     testImplementation 'junit:junit:4.12'

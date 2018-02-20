@@ -40,4 +40,5 @@ ext {
     crashlyticsVersion = '2.8.0'
     bottomSheetBuilderVersion = '1.6.0'
     moxyVersion = '1.5.3'
+    glideVersion = '4.6.1'
 }

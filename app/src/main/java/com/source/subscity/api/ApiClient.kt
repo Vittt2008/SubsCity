@@ -22,5 +22,5 @@ class ApiClient(okHttpClient: OkHttpClient,
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(scheduler))
             .build()
 
-    val subsCityService by lazy { retrofit.create(SubsCityService::class.java) }
+    val subsCityService by lazy { retrofit.create(SubsCityService::class.java)!! }
 }
