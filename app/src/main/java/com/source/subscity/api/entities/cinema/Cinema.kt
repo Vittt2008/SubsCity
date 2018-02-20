@@ -2,14 +2,14 @@ package com.source.subscity.api.entities.cinema
 
 import android.arch.persistence.room.*
 import com.google.gson.annotations.SerializedName
-import com.source.subscity.db.converters.LongListConverter
+import com.source.subscity.db.converters.Converter
 import java.io.Serializable
 
 /**
  * @author Vitaliy Markus
  */
 @Entity
-@TypeConverters(LongListConverter::class)
+@TypeConverters(Converter::class)
 data class Cinema(@SerializedName("id") @PrimaryKey val id: Long,
                   @SerializedName("location") @Embedded(prefix = "location_") val location: Location,
                   @SerializedName("movies") val movies: List<Long>,

@@ -17,5 +17,5 @@ interface CinemaDao {
     fun getAllCinemas(): Flowable<List<Cinema>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun saveCinemas(list: List<Cinema>)
+    fun saveCinemas(cinemas: List<Cinema>)
 }
