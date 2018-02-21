@@ -22,14 +22,18 @@ import com.source.subscity.widgets.transformations.Crop
  */
 class MoviesAdapter(context: Context, private val movies: List<Movie>) : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 
+    private val RATING = 6.9
+
     private val layoutInflater = LayoutInflater.from(context)
     private val width: Int
+    private val isFullSpans: MutableList<Boolean> = ArrayList()
 
     init {
         val metrics = DisplayMetrics()
         val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
         windowManager.defaultDisplay.getMetrics(metrics)
         width = metrics.widthPixels
+        updateFullSpans()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -42,7 +46,18 @@ class MoviesAdapter(context: Context, private val movies: List<Movie>) : Recycle
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(movies[position])
+        holder.bind(movies[position], isFullSpans[position])
+    }
+
+    private fun updateFullSpans() {
+        movies.forEach { movie ->
+            if (movie.commonRating > RATING && isFullSpans.count { !it } % 2 == 0) {
+                isFullSpans.add(true)
+            } else {
+                isFullSpans.add(false)
+            }
+        }
+        isFullSpans[movies.lastIndex] = true
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -53,13 +68,14 @@ class MoviesAdapter(context: Context, private val movies: List<Movie>) : Recycle
         private val movieRating = view.findViewById<TextView>(R.id.tv_movie_rating)
         private val movieName = view.findViewById<TextView>(R.id.tv_movie_name)
 
-        fun bind(movie: Movie) {
+        fun bind(movie: Movie, isFullSpan: Boolean) {
             val layoutParams = itemView.layoutParams as StaggeredGridLayoutManager.LayoutParams
-            layoutParams.isFullSpan = movie.commonRating > 7
+            layoutParams.isFullSpan = isFullSpan
 
-            val posterWidth = if (layoutParams.isFullSpan) width else width / 2
-            val textSizeIdRes = if (layoutParams.isFullSpan) R.dimen.poster_text_size_huge else R.dimen.poster_text_size
-            GlideApp.with(moviePoster).asBitmap().load(movie.poster).override(posterWidth, layoutParams.height).transform(Crop(movie.poster)).into(moviePoster)
+            val posterWidth = if (isFullSpan) width else width / 2
+            val textSizeIdRes = if (isFullSpan) R.dimen.poster_text_size_huge else R.dimen.poster_text_size
+            val maxLines = if (isFullSpan) R.integer.poster_max_line_huge else R.integer.poster_max_line
+            GlideApp.with(moviePoster).asBitmap().load(movie.poster).override(posterWidth, layoutParams.height).transform(Crop()).into(moviePoster)
 
             movieLanguage.text = movie.languages.firstOrNull()?.capitalize()
             movieLanguage.visibility = if (movieLanguage.text.isNotEmpty()) View.VISIBLE else View.GONE
@@ -74,7 +90,10 @@ class MoviesAdapter(context: Context, private val movies: List<Movie>) : Recycle
             }
 
             movieName.text = movie.title.russian
-            movieName.setTextSize(TypedValue.COMPLEX_UNIT_PX, movieName.context.resources.getDimensionPixelSize(textSizeIdRes).toFloat())
+            movieName.context.resources.also { resources ->
+                movieName.setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimensionPixelSize(textSizeIdRes).toFloat())
+                movieName.maxLines = resources.getInteger(maxLines)
+            }
         }
     }
 }

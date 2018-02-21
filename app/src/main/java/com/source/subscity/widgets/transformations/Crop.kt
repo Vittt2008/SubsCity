@@ -21,7 +21,7 @@ import java.util.concurrent.locks.ReentrantLock
 /**
  * @author Vitaliy Markus
  */
-class Crop(val url: String) : BitmapTransformation() {
+class Crop : BitmapTransformation() {
 
     companion object {
         private const val ID = "com.source.subscity.widgets.transformations.Crop"
