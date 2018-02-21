@@ -33,7 +33,7 @@ data class Movie(@SerializedName("id") @PrimaryKey val id: Long,
             emptyList(), 0, emptyList(), emptyList(), "", Ratings(), Screenings(),
             Titles(), Trailers(), 0)
 
-    val commonRaiting: Double
+    val commonRating: Double
         get() {
             val sum = rating.imdb.rating + rating.kinopoisk.rating
             val count = if (rating.imdb.rating != 0.0 && rating.kinopoisk.rating != 0.0) 2 else 1

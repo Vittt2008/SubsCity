@@ -5,6 +5,7 @@ import android.graphics.Canvas
 import android.graphics.Matrix
 import android.graphics.Paint
 import android.os.Build
+import android.widget.ImageView
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation
 import com.bumptech.glide.load.resource.bitmap.TransformationUtils
@@ -20,7 +21,7 @@ import java.util.concurrent.locks.ReentrantLock
 /**
  * @author Vitaliy Markus
  */
-class Crop : BitmapTransformation() {
+class Crop(val url: String) : BitmapTransformation() {
 
     companion object {
         private const val ID = "com.source.subscity.widgets.transformations.Crop"
@@ -85,8 +86,7 @@ class Crop : BitmapTransformation() {
         messageDigest.update(ID_BYTES)
     }
 
-    private fun centerCrop(pool: BitmapPool, inBitmap: Bitmap, width: Int,
-                           height: Int): Bitmap {
+    private fun centerCrop(pool: BitmapPool, inBitmap: Bitmap, width: Int, height: Int): Bitmap {
         if (inBitmap.width == width && inBitmap.height == height) {
             return inBitmap
         }
@@ -97,12 +97,12 @@ class Crop : BitmapTransformation() {
         val m = Matrix()
         if (inBitmap.width * height > width * inBitmap.height) {
             scale = height.toFloat() / inBitmap.height.toFloat()
-            dx = (width - inBitmap.width * scale) * 0.5f
+            dx = (width - inBitmap.width * scale) * 0.2f
             dy = 0f
         } else {
             scale = width.toFloat() / inBitmap.width.toFloat()
             dx = 0f
-            dy = (height - inBitmap.height * scale) * 0.5f
+            dy = (height - inBitmap.height * scale) * 0.2f
         }
 
         m.setScale(scale, scale)

@@ -37,8 +37,8 @@ class MoviesFragment : MvpAppCompatFragment(), MoviesView {
 
     override fun showMovies(movies: List<Movie>) {
         moviesList.run {
-            layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
-            adapter = MoviesAdapter(movies)
+            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            adapter = MoviesAdapter(activity!!, movies)
         }
     }
 }
