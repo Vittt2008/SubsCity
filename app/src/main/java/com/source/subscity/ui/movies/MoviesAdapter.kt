@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-//import com.bumptech.glide.Glide
 import com.source.subscity.R
 import com.source.subscity.api.entities.movie.Movie
+import com.source.subscity.dagger.GlideApp
+import com.source.subscity.dagger.SubsCityGlideModule
+import com.source.subscity.widgets.transformations.Crop
 
 /**
  * @author Vitaliy Markus
@@ -37,7 +39,7 @@ class MoviesAdapter(private val movies: List<Movie>) : RecyclerView.Adapter<Movi
         private val movieName = view.findViewById<TextView>(R.id.tv_movie_name)
 
         fun bind(movie: Movie) {
-            //Glide.with(moviePoster).load(movie.poster).into(moviePoster)
+            GlideApp.with(moviePoster).load(movie.poster).transform(Crop()).into(moviePoster)
             movieLanguage.text = movie.languages.firstOrNull()
             movieRating.text = movie.commonRaiting.toString()
             movieName.text = movie.title.russian
