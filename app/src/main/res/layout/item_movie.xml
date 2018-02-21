@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="236dp">
 
-    <com.source.subscity.widgets.PosterImageView
+    <ImageView
         android:id="@+id/iv_movie_poster"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
@@ -16,48 +16,56 @@
         android:layout_height="match_parent"
         android:background="@drawable/movie_shadow_background" />
 
-    <TextView
-        android:id="@+id/tv_movie_language"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:fontFamily="sans-serif"
-        android:textColor="#ffffff"
-        android:textSize="14sp"
-        android:textStyle="normal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="На английском" />
+        app:layout_constraintStart_toStartOf="parent">
 
-    <ImageView
-        android:id="@+id/iv_star"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp"
-        android:src="@drawable/ic_movie_star"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_movie_language"
-        app:layout_constraintStart_toEndOf="@+id/tv_movie_language"
-        app:layout_constraintTop_toTopOf="@+id/tv_movie_language" />
+        <TextView
+            android:id="@+id/tv_movie_language"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            android:layout_marginRight="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/iv_star"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="На английском" />
 
-    <TextView
-        android:id="@+id/tv_movie_rating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
-        android:textColor="#ffffff"
-        android:textSize="14sp"
-        android:textStyle="normal"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_movie_language"
-        app:layout_constraintStart_toEndOf="@+id/iv_star"
-        tools:text="5.7" />
+        <ImageView
+            android:id="@+id/iv_star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_movie_star"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tv_movie_rating"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_movie_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="5.7" />
+
+    </android.support.constraint.ConstraintLayout>
 
     <TextView
         android:id="@+id/tv_movie_name"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="56dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
@@ -72,7 +80,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         tools:text="Темные времена" />
 
 </android.support.constraint.ConstraintLayout>
