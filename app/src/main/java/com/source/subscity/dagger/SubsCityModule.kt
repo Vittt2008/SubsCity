@@ -1,10 +1,13 @@
 package com.source.subscity.dagger
 
+import android.arch.persistence.room.Room
+import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.source.subscity.api.ApiClient
 import com.source.subscity.api.deserializers.DateTimeDeserializer
 import com.source.subscity.api.deserializers.SubsCityTypeAdapterFactory
+import com.source.subscity.db.DatabaseClient
 import dagger.Module
 import dagger.Provides
 import io.reactivex.schedulers.Schedulers
@@ -17,7 +20,7 @@ import javax.inject.Singleton
  * @author Vitaliy Markus
  */
 @Module
-class SubsCityModule {
+class SubsCityModule(private val context: Context) {
 
     @Provides
     @Singleton
@@ -41,7 +44,13 @@ class SubsCityModule {
 
     @Provides
     @Singleton
-    fun apiCLient(okHttpClient: OkHttpClient, gson: Gson): ApiClient {
+    fun apiClient(okHttpClient: OkHttpClient, gson: Gson): ApiClient {
         return ApiClient(okHttpClient, gson, Schedulers.io())
+    }
+
+    @Provides
+    @Singleton
+    fun databaseClient(): DatabaseClient {
+        return Room.databaseBuilder(context, DatabaseClient::class.java, "subs_city").build()
     }
 }

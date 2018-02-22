@@ -41,4 +41,8 @@ class MoviesFragment : MvpAppCompatFragment(), MoviesView {
             adapter = MoviesAdapter(activity!!, movies)
         }
     }
+
+    override fun onError(throwable: Throwable) {
+        Toast.makeText(activity, throwable.message, Toast.LENGTH_SHORT).show()
+    }
 }

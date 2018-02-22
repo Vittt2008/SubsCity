@@ -14,7 +14,7 @@ class SubsCityApplication : Application() {
         super.onCreate()
 
         val subsCityComponent = DaggerSubsCityComponent.builder()
-                .subsCityModule(SubsCityModule())
+                .subsCityModule(SubsCityModule(this))
                 .build()
         SubsCityDagger.init(subsCityComponent)
     }

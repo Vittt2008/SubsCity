@@ -19,6 +19,9 @@ object SubsCityTypeAdapterFactory : TypeAdapterFactory {
         if (type.rawType == List::class.java && (type.type as ParameterizedType).actualTypeArguments[0] == String::class.java) {
             val delegate = gson.getDelegateAdapter(this, type)
             return ListStringTypeAdapter(delegate as TypeAdapter<Any>) as TypeAdapter<T>
+        } else if (type.rawType == String::class.java) {
+            val delegate = gson.getDelegateAdapter(this, type)
+            return StringTypeAdapter(delegate as TypeAdapter<Any>) as TypeAdapter<T>
         }
         return null
     }
@@ -38,6 +41,22 @@ object SubsCityTypeAdapterFactory : TypeAdapterFactory {
         override fun write(writer: JsonWriter, value: List<String>) {
             delegate.write(writer, value)
         }
+    }
 
+    @Suppress("UNCHECKED_CAST")
+    class StringTypeAdapter(private val delegate: TypeAdapter<Any>) : TypeAdapter<String>() {
+
+        override fun read(reader: JsonReader): String {
+            return if (reader.peek() === JsonToken.NULL) {
+                reader.nextNull()
+                ""
+            } else {
+                delegate.read(reader) as String
+            }
+        }
+
+        override fun write(writer: JsonWriter, value: String) {
+            delegate.write(writer, value)
+        }
     }
 }
