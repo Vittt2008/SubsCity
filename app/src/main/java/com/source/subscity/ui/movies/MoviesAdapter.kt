@@ -57,7 +57,9 @@ class MoviesAdapter(context: Context, private val movies: List<Movie>) : Recycle
                 isFullSpans.add(false)
             }
         }
-        isFullSpans[movies.lastIndex] = true
+        if (isFullSpans.count { !it } % 2 != 0) {
+            isFullSpans[movies.lastIndex] = true
+        }
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
