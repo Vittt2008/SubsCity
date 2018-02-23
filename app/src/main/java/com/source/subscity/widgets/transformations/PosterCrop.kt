@@ -5,7 +5,6 @@ import android.graphics.Canvas
 import android.graphics.Matrix
 import android.graphics.Paint
 import android.os.Build
-import android.widget.ImageView
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation
 import com.bumptech.glide.load.resource.bitmap.TransformationUtils
@@ -21,10 +20,10 @@ import java.util.concurrent.locks.ReentrantLock
 /**
  * @author Vitaliy Markus
  */
-class Crop : BitmapTransformation() {
+class PosterCrop : BitmapTransformation() {
 
     companion object {
-        private const val ID = "com.source.subscity.widgets.transformations.Crop"
+        private const val ID = "com.source.subscity.widgets.transformations.PosterCrop"
         private val ID_BYTES = ID.toByteArray(CHARSET)
         private val DEFAULT_PAINT = Paint(PAINT_FLAGS)
         private val MODELS_REQUIRING_BITMAP_LOCK = HashSet(
@@ -75,7 +74,7 @@ class Crop : BitmapTransformation() {
     }
 
     override fun equals(other: Any?): Boolean {
-        return other is Crop
+        return other is PosterCrop
     }
 
     override fun hashCode(): Int {
@@ -97,7 +96,7 @@ class Crop : BitmapTransformation() {
         val m = Matrix()
         if (inBitmap.width * height > width * inBitmap.height) {
             scale = height.toFloat() / inBitmap.height.toFloat()
-            dx = (width - inBitmap.width * scale) * 0.2f
+            dx = (width - inBitmap.width * scale) * 0.5f
             dy = 0f
         } else {
             scale = width.toFloat() / inBitmap.width.toFloat()

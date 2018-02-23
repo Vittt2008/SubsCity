@@ -18,7 +18,7 @@ interface MovieDao {
     fun getAllMovies(): Flowable<List<Movie>>
 
     @Query("SELECT * FROM Movie WHERE id = :arg0 LIMIT 1")
-    fun getMovie(id: String): Single<Movie>
+    fun getMovie(id: Long): Single<Movie>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveMovies(movies: List<Movie>)

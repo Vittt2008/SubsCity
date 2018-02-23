@@ -1,7 +1,7 @@
 package com.source.subscity.repositories
 
 import com.source.subscity.api.ApiClient
-import com.source.subscity.api.entities.movie.Movie
+import com.source.subscity.api.entities.cinema.Cinema
 import com.source.subscity.db.DatabaseClient
 import io.reactivex.Single
 import java.util.concurrent.TimeUnit
@@ -10,28 +10,28 @@ import javax.inject.Inject
 /**
  * @author Vitaliy Markus
  */
-class MovieRepository @Inject constructor(apiClient: ApiClient, databaseClient: DatabaseClient) :
+class CinemaRepository @Inject constructor(apiClient: ApiClient, databaseClient: DatabaseClient) :
         CachedRepository(apiClient, databaseClient) {
 
     private val city = "spb"
 
-    fun getMovies(): Single<List<Movie>> {
+    fun getCinemas(): Single<List<Cinema>> {
         return isCacheActual()
                 .flatMap { isActual ->
                     if (isActual) {
-                        getMoviesFromDb()
+                        getCinemasFromDb()
                     } else {
-                        getMoviesFromApi()
-                                .onErrorResumeNext(getMoviesFromDb())
+                        getCinemaFromApi()
+                                .onErrorResumeNext(getCinemasFromDb())
                     }
                 }
-                .map { movies -> movies.sortedBy { it.title.russian } }
+                .map { cinema -> cinema.sortedBy { it.name } }
     }
 
-    fun getMovie(id: Long): Single<Movie> {
-        return databaseClient.movieDao.getMovie(id)
+    fun getCinema(id: Long): Single<Cinema> {
+        return databaseClient.cinemaDao.getCinema(id)
                 .onErrorResumeNext {
-                    getMoviesFromApi()
+                    getCinemaFromApi()
                             .toObservable()
                             .flatMapIterable { it }
                             .filter { it.id == id }
@@ -39,18 +39,18 @@ class MovieRepository @Inject constructor(apiClient: ApiClient, databaseClient: 
                 }
     }
 
-    override fun getDefaultCacheKey() = "movie"
+    override fun getDefaultCacheKey() = "cinema"
 
     override fun getCacheLifetime() = TimeUnit.DAYS.toMillis(1)
 
-    private fun getMoviesFromApi(): Single<List<Movie>> {
-        return apiClient.subsCityService.getMovies(city)
-                .doOnSuccess { it -> databaseClient.movieDao.saveMovies(it) }
+    private fun getCinemaFromApi(): Single<List<Cinema>> {
+        return apiClient.subsCityService.getCinemas(city)
+                .doOnSuccess { it -> databaseClient.cinemaDao.saveCinemas(it) }
                 .doOnSuccess { updateCacheTimestamp() }
     }
 
-    private fun getMoviesFromDb(): Single<List<Movie>> {
-        return databaseClient.movieDao.getAllMovies()
+    private fun getCinemasFromDb(): Single<List<Cinema>> {
+        return databaseClient.cinemaDao.getAllCinemas()
                 .firstOrError()
     }
 }

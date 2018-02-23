@@ -14,7 +14,7 @@ import android.widget.TextView
 import com.source.subscity.R
 import com.source.subscity.api.entities.movie.Movie
 import com.source.subscity.dagger.GlideApp
-import com.source.subscity.widgets.transformations.Crop
+import com.source.subscity.widgets.transformations.PosterCrop
 
 
 /**
@@ -77,7 +77,7 @@ class MoviesAdapter(context: Context, private val movies: List<Movie>) : Recycle
             val posterWidth = if (isFullSpan) width else width / 2
             val textSizeIdRes = if (isFullSpan) R.dimen.poster_text_size_huge else R.dimen.poster_text_size
             val maxLines = if (isFullSpan) R.integer.poster_max_line_huge else R.integer.poster_max_line
-            GlideApp.with(moviePoster).asBitmap().load(movie.poster).override(posterWidth, layoutParams.height).transform(Crop()).into(moviePoster)
+            GlideApp.with(moviePoster).asBitmap().load(movie.poster).override(posterWidth, layoutParams.height).transform(PosterCrop()).into(moviePoster)
 
             movieLanguage.text = movie.languages.firstOrNull()?.capitalize()
             movieLanguage.visibility = if (movieLanguage.text.isNotEmpty()) View.VISIBLE else View.GONE
