@@ -5,6 +5,7 @@ import android.arch.persistence.room.Insert
 import android.arch.persistence.room.OnConflictStrategy
 import android.arch.persistence.room.Query
 import com.source.subscity.db.entity.CacheTimestamp
+import io.reactivex.Single
 
 /**
  * @author Vitaliy Markus
@@ -13,7 +14,7 @@ import com.source.subscity.db.entity.CacheTimestamp
 interface CacheTimestampDao {
 
     @Query("SELECT * FROM CacheTimestamp WHERE key = :arg0 LIMIT 1")
-    fun getCacheTimestamp(key: String): CacheTimestamp?
+    fun getCacheTimestamp(key: String): Single<CacheTimestamp>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun updateCacheTimestamp(timestamp: CacheTimestamp)

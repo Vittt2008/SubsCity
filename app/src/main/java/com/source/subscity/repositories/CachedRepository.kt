@@ -43,13 +43,11 @@ abstract class CachedRepository(protected val apiClient: ApiClient, protected va
     protected open fun getCacheLifetime(key: String) = 0L
 
     private fun isCacheActual(key: String, lifetime: Long): Single<Boolean> {
-        return Single.fromCallable {
-            val current = DateTime.now().millis
-            val start = current - lifetime
-            val cacheTimestamp = databaseClient.cacheTimestampDao.getCacheTimestamp(key)
-            val isActual: Boolean = cacheTimestamp?.let { it.timestamp in start..current } ?: false
-            return@fromCallable isActual
-        }
+        val current = DateTime.now().millis
+        val start = current - lifetime
+        return databaseClient.cacheTimestampDao.getCacheTimestamp(key)
+                .map { it.timestamp in start..current }
+                .onErrorReturnItem(false)
     }
 
     private fun checkAndGetDefaultKey(): String {

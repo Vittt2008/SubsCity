@@ -17,18 +17,27 @@ class MovieRepository @Inject constructor(apiClient: ApiClient, databaseClient: 
         return isCacheActual()
                 .flatMap { isActual ->
                     if (isActual) {
-                        databaseClient.movieDao.getAllMovies()
-                                .firstOrError()
-                                .map { it.reversed() }
+                        getMoviesFromDb()
                     } else {
                         apiClient.subsCityService.getMovies(city)
                                 .doOnSuccess { it -> databaseClient.movieDao.saveMovies(it) }
                                 .doOnSuccess { updateCacheTimestamp() }
+                                .onErrorResumeNext(getMoviesFromDb())
                     }
                 }
+                .map { movies -> movies.sortedBy { it.title.russian } }
+    }
+
+    fun getMovie(id: String): Single<Movie> {
+        return databaseClient.movieDao.getMovie(id)
     }
 
     override fun getDefaultCacheKey() = "movie"
 
     override fun getCacheLifetime() = TimeUnit.DAYS.toMillis(1)
+
+    private fun getMoviesFromDb(): Single<List<Movie>> {
+        return databaseClient.movieDao.getAllMovies()
+                .firstOrError()
+    }
 }
