@@ -1,39 +1,32 @@
 package com.source.subscity.db.dao
 
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.OnConflictStrategy
-import android.arch.persistence.room.Query
-import com.source.subscity.api.entities.screening.CinemaScreening
-import com.source.subscity.api.entities.screening.DateScreening
-import com.source.subscity.api.entities.screening.MovieScreening
+import android.arch.persistence.room.*
+import com.source.subscity.api.entities.screening.Screening
+import com.source.subscity.db.converters.Converter
 import io.reactivex.Flowable
+import org.joda.time.DateTime
 
 /**
  * @author Vitaliy Markus
  */
 @Dao
+@TypeConverters(Converter::class)
 interface ScreeningDao {
 
-    @Query("SELECT * FROM CinemaScreening")
-    fun getAllCinemaScreening(): Flowable<List<CinemaScreening>>
+    @Query("SELECT * FROM Screening")
+    fun getAllScreening(): Flowable<List<Screening>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun saveCinemaScreening(screenings: List<CinemaScreening>)
+    fun saveScreening(screenings: List<Screening>)
 
+    @Query("SELECT * FROM Screening WHERE movieId = :arg0")
+    fun getScreeningByMovie(movieId: Long): Flowable<List<Screening>>
 
-    @Query("SELECT * FROM DateScreening")
-    fun getAllDateScreening(): Flowable<List<DateScreening>>
+    @Query("SELECT * FROM Screening WHERE cinemaId = :arg0")
+    fun getScreeningByCinema(cinemaId: Long): Flowable<List<Screening>>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun saveDateScreening(screenings: List<DateScreening>)
-
-
-    @Query("SELECT * FROM MovieScreening")
-    fun getAllMovieScreening(): Flowable<List<MovieScreening>>
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun saveMovieScreening(screenings: List<MovieScreening>)
+    @Query("SELECT * FROM Screening WHERE dateTime = :arg0")
+    fun getScreeningByDate(date: DateTime): Flowable<List<Screening>>
 
 
 }
