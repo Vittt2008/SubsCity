@@ -14,19 +14,19 @@ import org.joda.time.DateTime
 interface ScreeningDao {
 
     @Query("SELECT * FROM Screening")
-    fun getAllScreening(): Flowable<List<Screening>>
+    fun getAllScreenings(): Flowable<List<Screening>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveScreening(screenings: List<Screening>)
 
     @Query("SELECT * FROM Screening WHERE movieId = :arg0")
-    fun getScreeningByMovie(movieId: Long): Flowable<List<Screening>>
+    fun getMovieScreenings(movieId: Long): Flowable<List<Screening>>
 
     @Query("SELECT * FROM Screening WHERE cinemaId = :arg0")
-    fun getScreeningByCinema(cinemaId: Long): Flowable<List<Screening>>
+    fun getCinemaScreenings(cinemaId: Long): Flowable<List<Screening>>
 
-    @Query("SELECT * FROM Screening WHERE dateTime = :arg0")
-    fun getScreeningByDate(date: DateTime): Flowable<List<Screening>>
+    @Query("SELECT * FROM Screening WHERE dateTime > :arg0 AND dateTime < :arg1")
+    fun getDateScreenings(from: DateTime, to: DateTime): Flowable<List<Screening>>
 
 
 }

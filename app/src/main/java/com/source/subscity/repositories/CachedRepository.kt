@@ -40,7 +40,7 @@ abstract class CachedRepository(protected val apiClient: ApiClient, protected va
 
     protected open fun getCacheLifetime() = 0L
 
-    protected open fun getCacheLifetime(key: String) = 0L
+    protected open fun getCacheLifetime(key: String) = getCacheLifetime()
 
     private fun isCacheActual(key: String, lifetime: Long): Single<Boolean> {
         val current = DateTime.now().millis

@@ -14,13 +14,14 @@ import java.io.Serializable
  */
 @Entity
 @TypeConverters(Converter::class)
-data class Screening(@SerializedName("movie_id") val movieId: Long,
+data class Screening(@SerializedName("id") @PrimaryKey val id: Long,
+                     @SerializedName("tickets_url") val ticketsUrl: String,
+                     @SerializedName("movie_id") val movieId: Long,
                      @SerializedName("cinema_id") val cinemaId: Long,
                      @SerializedName("date_time") val dateTime: DateTime,
                      @SerializedName("price_max") val priceMax: Int,
-                     @SerializedName("price_min") val priceMin: Int,
-                     @SerializedName("screening_id") @PrimaryKey val screeningId: Long) : Serializable {
+                     @SerializedName("price_min") val priceMin: Int) : Serializable {
 
     @Ignore
-    constructor() : this(0, 0, DateTime(0), 0, 0, 0)
+    constructor() : this(0, "", 0, 0, DateTime(0), 0, 0)
 }

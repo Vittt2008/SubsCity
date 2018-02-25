@@ -32,7 +32,6 @@ class ApiTest {
         return GsonBuilder()
                 .registerTypeAdapter(DateTime::class.java, DateTimeDeserializer)
                 .registerTypeAdapterFactory(SubsCityTypeAdapterFactory)
-                .serializeNulls()
                 .create()
     }
 
@@ -69,7 +68,7 @@ class ApiTest {
         val movies = subsCityClient.subsCityService.getMovies("spb").blockingGet()
         val films = subsCityClient.subsCityService.getCinemas("spb")
                 .flattenAsObservable { it }
-                .flatMapSingle { subsCityClient.subsCityService.geCinemaScreenings("spb", it.id) }
+                .flatMapSingle { subsCityClient.subsCityService.getCinemaScreenings("spb", it.id) }
                 .flatMapIterable { it }
                 .map { screening -> movies.first { movie -> movie.id == screening.movieId } }
                 .distinct()
@@ -80,7 +79,7 @@ class ApiTest {
 
     @Test
     fun getDataScreenings() {
-        val list = subsCityClient.subsCityService.geDateScreenings("spb", LocalDate.now()).blockingGet()
+        val list = subsCityClient.subsCityService.getDateScreenings("spb", DateTime.now()).blockingGet()
         assert(true)
     }
 }

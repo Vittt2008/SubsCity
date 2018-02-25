@@ -1,10 +1,11 @@
 package com.source.subscity.api.services
 
+import com.source.subscity.api.annotations.OnlyDate
 import com.source.subscity.api.entities.cinema.Cinema
 import com.source.subscity.api.entities.movie.Movie
 import com.source.subscity.api.entities.screening.Screening
 import io.reactivex.Single
-import org.joda.time.LocalDate
+import org.joda.time.DateTime
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -23,9 +24,9 @@ interface SubsCityService {
     fun getMovieScreenings(@Path("city") city: String, @Path("movie_id") movieId: Long): Single<List<Screening>>
 
     @GET("https://{city}.subscity.ru/cinemas/screenings/{cinema_id}.json")
-    fun geCinemaScreenings(@Path("city") city: String, @Path("cinema_id") cinemaId: Long): Single<List<Screening>>
+    fun getCinemaScreenings(@Path("city") city: String, @Path("cinema_id") cinemaId: Long): Single<List<Screening>>
 
     @GET("https://{city}.subscity.ru/dates/screenings/{date}.json")
-    fun geDateScreenings(@Path("city") city: String, @Path("date") date: LocalDate): Single<List<Screening>>
+    fun getDateScreenings(@Path("city") city: String, @Path("date") @OnlyDate date: DateTime): Single<List<Screening>>
 
 }

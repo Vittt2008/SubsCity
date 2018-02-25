@@ -25,7 +25,7 @@ class StringConverterFactory : Converter.Factory() {
     class OnlyDateConverter : Converter<DateTime, String> {
 
         override fun convert(value: DateTime): String {
-            return "[${value.year}]-[${value.monthOfYear}]-[${value.dayOfMonth}]"
+            return value.toString("yyyy-MM-dd")
         }
     }
 
