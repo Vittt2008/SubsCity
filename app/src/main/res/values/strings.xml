@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">SubsCity</string>
+    
+    <!-- SettingsFragment -->
+    <string name="setting_new_in_cinema_title">Скоро в прокате</string>
+    <string name="setting_cinema_map_title">Карта кинотеатров</string>
+    <string name="setting_sale_title">Акции</string>
+    <string name="setting_about_title">О приложении</string>
+    <string name="setting_city_title">Город</string>
+
 </resources>

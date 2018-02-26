@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+    <color name="title_color">#000000</color>
     <color name="subtitle_color">#8A000000</color>
 
     <!-- St. Petersburg Metro -->
