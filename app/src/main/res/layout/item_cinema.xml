@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="96dp"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tv_cinema_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="normal"
+        tools:text="Формула Кино Галерея" />
+
+    <TextView
+        android:id="@+id/tv_cinema_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:textColor="@color/subtitle_color"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        tools:text="Мал.Морская, 24" />
+
+    <TextView
+        android:id="@+id/tv_cinema_metro_station"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:textColor="@color/subtitle_color"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        tools:text="м. Адмиралтейская" />
+
+
+</LinearLayout>

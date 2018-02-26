@@ -3,4 +3,15 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="subtitle_color">#8A000000</color>
+
+    <!-- St. Petersburg Metro -->
+    <color name="metro_spb_line_1">#d51c36</color>
+    <color name="metro_spb_line_2">#197dce</color>
+    <color name="metro_spb_line_3">#1b9958</color>
+    <color name="metro_spb_line_4">#dd700d</color>
+    <color name="metro_spb_line_5">#6c0b78</color>
+    <color name="metro_spb_line_6">#8d5b2f</color>
+
 </resources>

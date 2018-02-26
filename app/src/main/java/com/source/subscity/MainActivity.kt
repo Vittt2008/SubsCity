@@ -2,7 +2,7 @@ package com.source.subscity
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import com.source.subscity.ui.movies.MoviesFragment
+import com.source.subscity.ui.cinemas.CinemasFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                    .add(android.R.id.content, MoviesFragment())
+                    .add(android.R.id.content, CinemasFragment())
                     .commit()
         }
     }
