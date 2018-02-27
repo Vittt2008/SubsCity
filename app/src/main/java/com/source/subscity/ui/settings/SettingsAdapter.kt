@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.source.subscity.R
 
 /**
@@ -40,10 +41,14 @@ class SettingsAdapter : RecyclerView.Adapter<SettingsAdapter.ViewHolder>() {
         private val settingTitle = view.findViewById<TextView>(R.id.tv_setting_title)
         private val settingCity = view.findViewById<TextView>(R.id.tv_settings_city)
 
+        init {
+            view.setOnClickListener { Toast.makeText(view.context, "CLICK", Toast.LENGTH_SHORT).show() }
+        }
+
         fun bind(item: SettingItem) {
             settingIcon.setImageResource(item.icon)
             settingTitle.setText(item.title)
-            if (item.city.isNullOrEmpty()) {
+            if (item.city.isEmpty()) {
                 settingCity.visibility = View.GONE
             } else {
                 settingCity.text = item.city
