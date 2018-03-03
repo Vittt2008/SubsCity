@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="56dp"
-    android:background="@drawable/setting_item_bg"
+    android:background="@drawable/selectable_item_bg"
     android:padding="16dp">
 
     <ImageView

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import com.source.subscity.R
 import com.source.subscity.api.entities.cinema.Cinema
 import com.source.subscity.providers.metro.SpbMetroTextProvider
@@ -34,6 +35,10 @@ class CinemasAdapter(context: Context, private val cinemas: List<Cinema>) : Recy
         private val cinemaName = view.findViewById<TextView>(R.id.tv_cinema_name)
         private val cinemaAddress = view.findViewById<TextView>(R.id.tv_cinema_address)
         private val cinemaMetroStation = view.findViewById<TextView>(R.id.tv_cinema_metro_station)
+
+        init {
+            view.setOnClickListener { Toast.makeText(view.context, "CLICK", Toast.LENGTH_SHORT).show() }
+        }
 
         fun bind(cinema: Cinema) {
             cinemaName.text = cinema.name
