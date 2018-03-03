@@ -13,4 +13,9 @@
     <string name="setting_about_title">О приложении</string>
     <string name="setting_city_title">Город</string>
 
+    <!-- LanguageProvider -->
+    <string name="language_provider_ending">ий</string>
+    <string name="language_provider_format_declinable">На %sом</string>
+    <string name="language_provider_format_undeclinable">На %s</string>
+
 </resources>

@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.source.subscity.R
 import com.source.subscity.api.entities.cinema.Cinema
-import com.source.subscity.repositories.metro.SpbMetroTextProvider
+import com.source.subscity.providers.metro.SpbMetroTextProvider
 
 /**
  * @author Vitaliy Markus

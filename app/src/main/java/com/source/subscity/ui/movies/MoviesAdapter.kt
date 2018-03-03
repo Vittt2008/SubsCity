@@ -1,6 +1,7 @@
 package com.source.subscity.ui.movies
 
 import android.content.Context
+import android.graphics.Color
 import android.support.v4.widget.TextViewCompat
 import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.RecyclerView
@@ -16,19 +17,28 @@ import android.widget.TextView
 import com.source.subscity.R
 import com.source.subscity.api.entities.movie.Movie
 import com.source.subscity.dagger.GlideApp
+import com.source.subscity.providers.LanguageProvider
 import com.source.subscity.widgets.transformations.PosterCrop
+import android.graphics.drawable.shapes.RectShape
+import android.graphics.drawable.PaintDrawable
+import android.graphics.Shader
+import android.graphics.LinearGradient
+import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.ShapeDrawable
+import android.support.v4.content.ContextCompat
 
 
 /**
  * @author Vitaliy Markus
  */
-class MoviesAdapter(context: Context, private val movies: List<Movie>) : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
+class MoviesAdapter(private val context: Context, private val movies: List<Movie>) : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 
     private val RATING = 6.9
 
     private val layoutInflater = LayoutInflater.from(context)
     private val width: Int
     private val isFullSpans: MutableList<Boolean> = ArrayList()
+    private val languageProvider = LanguageProvider(context)
 
     init {
         val metrics = DisplayMetrics()
@@ -71,6 +81,31 @@ class MoviesAdapter(context: Context, private val movies: List<Movie>) : Recycle
         private val movieName = view.findViewById<AppCompatTextView>(R.id.tv_movie_name)
         private val movieGenre = view.findViewById<TextView>(R.id.tv_movie_genre)
 
+        init {
+//            val gradientDrawable = GradientDrawable(
+//                    GradientDrawable.Orientation.TOP_BOTTOM,
+//                    intArrayOf(
+//                            ContextCompat.getColor(context, R.color.black_color),
+//                            ContextCompat.getColor(context, R.color.black_color_16),
+//                            ContextCompat.getColor(context, R.color.black_color_24),
+//                            ContextCompat.getColor(context, R.color.black_color)))
+//            shadow.background = gradientDrawable
+//
+//            val shaderFactory = object : ShapeDrawable.ShaderFactory() {
+//                override fun resize(width: Int, height: Int): Shader {
+//                    return LinearGradient(0f, 0f, width.toFloat(), height.toFloat(),
+//                            intArrayOf(Color.BLACK, Color.RED, Color.BLUE, Color.YELLOW), //substitute the correct colors for these
+//                            floatArrayOf(0f, 0.40f, 0.60f, 1f),
+//                            Shader.TileMode.MIRROR)
+//
+//                }
+//            }
+//            val paint = PaintDrawable()
+//            paint.shape = RectShape()
+//            paint.shaderFactory = shaderFactory
+//            shadow.background = paint
+        }
+
         fun bind(movie: Movie, isFullSpan: Boolean) {
             val layoutParams = itemView.layoutParams as StaggeredGridLayoutManager.LayoutParams
             layoutParams.isFullSpan = isFullSpan
@@ -84,7 +119,7 @@ class MoviesAdapter(context: Context, private val movies: List<Movie>) : Recycle
 
             GlideApp.with(moviePoster).asBitmap().load(movie.poster).override(posterWidth, layoutParams.height).transform(PosterCrop()).into(moviePoster)
 
-            movieLanguage.text = movie.languages.firstOrNull()?.capitalize()
+            movieLanguage.text = movieLanguage(movie)
             movieLanguage.visibility = if (movieLanguage.text.isNotEmpty()) View.VISIBLE else View.GONE
 
             movieGenre.text = movie.genres.joinToString(", ").capitalize()
@@ -96,5 +131,14 @@ class MoviesAdapter(context: Context, private val movies: List<Movie>) : Recycle
                 TextViewCompat.setAutoSizeTextTypeUniformWithPresetSizes(movieName, dimensions, TypedValue.COMPLEX_UNIT_PX)
             }
         }
+    }
+
+    private fun movieLanguage(movie: Movie): String {
+        val movieLanguage = languageProvider.languageFormat(movie)
+        val age = movie.ageRestriction.toString() + "+"
+        if (movieLanguage.isNullOrEmpty()) {
+            return age
+        }
+        return "$movieLanguage, $age"
     }
 }

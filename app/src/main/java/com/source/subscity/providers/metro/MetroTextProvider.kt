@@ -1,4 +1,4 @@
-package com.source.subscity.repositories.metro
+package com.source.subscity.providers.metro
 
 import android.text.SpannableStringBuilder
 

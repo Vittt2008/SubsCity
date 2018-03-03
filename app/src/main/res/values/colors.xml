@@ -4,9 +4,16 @@
     <color name="colorPrimaryDark">@color/primary_dark_color</color>
     <color name="colorAccent">#FF4081</color>
 
+    <color name="black_color">#000000</color>
+    <color name="black_color_16">#29000000</color>
+    <color name="black_color_24">#3d000000</color>
+
     <color name="primary_color">#642957</color>
+    <color name="primary_color_16">#29642957</color>
+    <color name="primary_color_24">#3d642957</color>
+
     <color name="primary_dark_color">#4F2045</color>
-    <color name="title_color">#000000</color>
+    <color name="title_color">@color/black_color</color>
     <color name="subtitle_color">#8A000000</color>
     <color name="inactive_color">#a9aeb2</color>
     <color name="white_color">#FFFFFF</color>
