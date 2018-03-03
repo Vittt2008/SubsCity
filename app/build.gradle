@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'io.fabric'
+
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -71,6 +73,9 @@ dependencies {
         exclude group: "com.android.support"
     }
     kapt "com.github.bumptech.glide:compiler:$glideVersion"
+
+    //UI
+    implementation "com.aurelhubert:ahbottomnavigation:$bottomNavifationVersion"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 

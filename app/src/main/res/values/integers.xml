@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <integer name="poster_max_line">5</integer>
+    <integer name="poster_max_line">4</integer>
     <integer name="poster_max_line_huge">3</integer>
 </resources>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/item_films"
+        android:icon="@drawable/ic_menu_movie"
+        android:title="@string/main_films" />
+
+    <item
+        android:id="@+id/item_cinemas"
+        android:icon="@drawable/ic_menu_event_seat"
+        android:title="@string/main_cinemas" />
+
+    <item
+        android:id="@+id/item_settings"
+        android:icon="@drawable/ic_menu_settings"
+        android:title="@string/main_settings" />
+
+</menu>

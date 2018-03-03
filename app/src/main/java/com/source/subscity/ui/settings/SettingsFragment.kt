@@ -1,6 +1,7 @@
 package com.source.subscity.ui.settings
 
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -11,6 +12,8 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.source.subscity.R
 import com.source.subscity.dagger.SubsCityDagger
+import com.source.subscity.extensions.supportActionBar
+import com.source.subscity.ui.cinemas.CinemasFragment
 
 /**
  * @author Vitaliy Markus
@@ -21,6 +24,10 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
     lateinit var settingsPresenter: SettingsPresenter
 
     private lateinit var settingsList: RecyclerView
+
+    companion object {
+        fun newInstance() = SettingsFragment()
+    }
 
     @ProvidePresenter
     fun moviesPresenter(): SettingsPresenter {
@@ -36,6 +43,13 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
         settingsList.run {
             layoutManager = LinearLayoutManager(activity)
             adapter = SettingsAdapter()
+        }
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (isVisibleToUser) {
+            activity?.let { it.supportActionBar.setTitle(R.string.main_settings) }
         }
     }
 }

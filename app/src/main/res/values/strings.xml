@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">SubsCity</string>
-    
+
+    <!-- MainActivity -->
+    <string name="main_films">Фильмы</string>
+    <string name="main_cinemas">Кинотеатры</string>
+    <string name="main_settings">Меню</string>
+
     <!-- SettingsFragment -->
     <string name="setting_new_in_cinema_title">Скоро в прокате</string>
     <string name="setting_cinema_map_title">Карта кинотеатров</string>

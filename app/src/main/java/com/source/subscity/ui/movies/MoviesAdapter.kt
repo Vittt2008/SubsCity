@@ -1,6 +1,8 @@
 package com.source.subscity.ui.movies
 
 import android.content.Context
+import android.support.v4.widget.TextViewCompat
+import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.util.DisplayMetrics
@@ -66,35 +68,32 @@ class MoviesAdapter(context: Context, private val movies: List<Movie>) : Recycle
         private val moviePoster = view.findViewById<ImageView>(R.id.iv_movie_poster)
         private val shadow = view.findViewById<View>(R.id.shadow)
         private val movieLanguage = view.findViewById<TextView>(R.id.tv_movie_language)
-        private val movieStar = view.findViewById<ImageView>(R.id.iv_star)
-        private val movieRating = view.findViewById<TextView>(R.id.tv_movie_rating)
-        private val movieName = view.findViewById<TextView>(R.id.tv_movie_name)
+        private val movieName = view.findViewById<AppCompatTextView>(R.id.tv_movie_name)
+        private val movieGenre = view.findViewById<TextView>(R.id.tv_movie_genre)
 
         fun bind(movie: Movie, isFullSpan: Boolean) {
             val layoutParams = itemView.layoutParams as StaggeredGridLayoutManager.LayoutParams
             layoutParams.isFullSpan = isFullSpan
 
             val posterWidth = if (isFullSpan) width else width / 2
-            val textSizeIdRes = if (isFullSpan) R.dimen.poster_text_size_huge else R.dimen.poster_text_size
             val maxLines = if (isFullSpan) R.integer.poster_max_line_huge else R.integer.poster_max_line
+            val sizes = if (isFullSpan)
+                intArrayOf(R.dimen.poster_text_size_middle, R.dimen.poster_text_size_huge)
+            else
+                intArrayOf(R.dimen.poster_text_size)
+
             GlideApp.with(moviePoster).asBitmap().load(movie.poster).override(posterWidth, layoutParams.height).transform(PosterCrop()).into(moviePoster)
 
             movieLanguage.text = movie.languages.firstOrNull()?.capitalize()
             movieLanguage.visibility = if (movieLanguage.text.isNotEmpty()) View.VISIBLE else View.GONE
 
-            if (movie.commonRating != 0.0) {
-                movieRating.text = String.format("%.${2}f", movie.commonRating)
-                movieStar.visibility = View.VISIBLE
-                movieRating.visibility = View.VISIBLE
-            } else {
-                movieStar.visibility = View.GONE
-                movieRating.visibility = View.GONE
-            }
+            movieGenre.text = movie.genres.joinToString(", ").capitalize()
 
             movieName.text = movie.title.russian
             movieName.context.resources.also { resources ->
-                movieName.setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimensionPixelSize(textSizeIdRes).toFloat())
                 movieName.maxLines = resources.getInteger(maxLines)
+                val dimensions = sizes.map { resources.getDimension(it).toInt() }.toIntArray()
+                TextViewCompat.setAutoSizeTextTypeUniformWithPresetSizes(movieName, dimensions, TypedValue.COMPLEX_UNIT_PX)
             }
         }
     }

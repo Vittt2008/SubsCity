@@ -16,70 +16,57 @@
         android:layout_height="match_parent"
         android:background="@drawable/movie_shadow_background" />
 
-    <android.support.constraint.ConstraintLayout
+    <TextView
+        android:id="@+id/tv_movie_language"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         android:layout_marginLeft="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif"
+        android:textColor="#ffffff"
+        android:textSize="12sp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="На английском, 18+" />
 
-        <TextView
-            android:id="@+id/tv_movie_language"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:textColor="#ffffff"
-            android:textSize="14sp"
-            android:textStyle="normal"
-            android:layout_marginRight="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/iv_star"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="На английском" />
-
-        <ImageView
-            android:id="@+id/iv_star"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_movie_star"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/tv_movie_rating"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_movie_rating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:textColor="#ffffff"
-            android:textSize="14sp"
-            android:textStyle="normal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="5.7" />
-
-    </android.support.constraint.ConstraintLayout>
-
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/tv_movie_name"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="56dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="20dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         android:ellipsize="end"
         android:fontFamily="sans-serif-medium"
         android:gravity="left|bottom"
         android:maxLines="3"
         android:textColor="#ffffff"
-        android:textSize="24sp"
         android:textStyle="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tv_movie_genre"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:text="Темные времена" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_movie_language"
+        tools:text="В\nтри\nстрочки"
+        tools:textSize="48sp" />
+
+    <TextView
+        android:id="@+id/tv_movie_genre"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:ellipsize="marquee"
+        android:fontFamily="sans-serif"
+        android:singleLine="true"
+        android:textColor="#ffffff"
+        android:textSize="12sp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="@+id/shadow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="боевик, приключение, боевик, приключение, боевик, приключение, боевик, приключение, боевик, приключение, боевик, приключение" />
 
 </android.support.constraint.ConstraintLayout>
