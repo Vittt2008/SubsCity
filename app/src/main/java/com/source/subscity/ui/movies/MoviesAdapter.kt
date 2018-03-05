@@ -1,7 +1,6 @@
 package com.source.subscity.ui.movies
 
 import android.content.Context
-import android.graphics.Color
 import android.support.v4.widget.TextViewCompat
 import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.RecyclerView
@@ -19,19 +18,14 @@ import com.source.subscity.api.entities.movie.Movie
 import com.source.subscity.dagger.GlideApp
 import com.source.subscity.providers.LanguageProvider
 import com.source.subscity.widgets.transformations.PosterCrop
-import android.graphics.drawable.shapes.RectShape
-import android.graphics.drawable.PaintDrawable
-import android.graphics.Shader
-import android.graphics.LinearGradient
-import android.graphics.drawable.GradientDrawable
-import android.graphics.drawable.ShapeDrawable
-import android.support.v4.content.ContextCompat
 
 
 /**
  * @author Vitaliy Markus
  */
-class MoviesAdapter(private val context: Context, private val movies: List<Movie>) : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
+class MoviesAdapter(context: Context,
+                    private val movies: List<Movie>,
+                    private val clickListener: (Movie) -> Unit) : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 
     private val RATING = 6.9
 
@@ -75,6 +69,9 @@ class MoviesAdapter(private val context: Context, private val movies: List<Movie
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
+        private lateinit var movie: Movie
+
         private val moviePoster = view.findViewById<ImageView>(R.id.iv_movie_poster)
         private val shadow = view.findViewById<View>(R.id.shadow)
         private val movieLanguage = view.findViewById<TextView>(R.id.tv_movie_language)
@@ -104,9 +101,12 @@ class MoviesAdapter(private val context: Context, private val movies: List<Movie
 //            paint.shape = RectShape()
 //            paint.shaderFactory = shaderFactory
 //            shadow.background = paint
+            view.setOnClickListener { clickListener.invoke(movie) }
         }
 
         fun bind(movie: Movie, isFullSpan: Boolean) {
+            this.movie = movie
+
             val layoutParams = itemView.layoutParams as StaggeredGridLayoutManager.LayoutParams
             layoutParams.isFullSpan = isFullSpan
 

@@ -13,9 +13,22 @@
     <string name="setting_about_title">О приложении</string>
     <string name="setting_city_title">Город</string>
 
+    <!-- MovieFragment -->
+    <string name="movie_genre_title">Жанр:</string>
+    <string name="movie_language_title">Язык озвучки:</string>
+    <string name="movie_durability_title">Длительность:</string>
+    <string name="movie_age_title">Возрастное ограничение:</string>
+    <string name="movie_rating_kinopoisk_title">КиноПоиск:</string>
+    <string name="movie_rating_imdb_title">IMDB:</string>
+    <string name="movie_description_title">Описание</string>
+    <string name="movie_sessions_title">Сеансы</string>
+
     <!-- LanguageProvider -->
     <string name="language_provider_ending">ий</string>
     <string name="language_provider_format_declinable">На %sом</string>
     <string name="language_provider_format_undeclinable">На %s</string>
+
+    <!-- DurationProvider -->
+    <string name="duration_provider_format">%1$d ч %2$d мин</string>
 
 </resources>

@@ -15,6 +15,7 @@ import com.source.subscity.dagger.SubsCityDagger
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.source.subscity.api.entities.movie.Movie
 import com.source.subscity.extensions.supportActionBar
+import com.source.subscity.ui.movie.MovieActivity
 
 
 /**
@@ -51,7 +52,7 @@ class MoviesFragment : MvpAppCompatFragment(), MoviesView {
     override fun showMovies(movies: List<Movie>) {
         moviesList.run {
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-            adapter = MoviesAdapter(activity!!, movies)
+            adapter = MoviesAdapter(activity!!, movies) { MovieActivity.start(activity!!, it.id) }
         }
     }
 

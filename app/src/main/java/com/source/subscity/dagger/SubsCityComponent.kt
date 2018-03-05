@@ -1,10 +1,12 @@
 package com.source.subscity.dagger
 
 import com.source.subscity.ui.cinemas.CinemasPresenter
+import com.source.subscity.ui.movie.MoviePresenter
 import com.source.subscity.ui.movies.MoviesPresenter
 import com.source.subscity.ui.settings.SettingsPresenter
 import dagger.Component
 import javax.inject.Singleton
+
 
 /**
  * @author Vitaliy Markus
@@ -16,4 +18,5 @@ interface SubsCityComponent {
     fun createMoviesPresenter(): MoviesPresenter
     fun createCinemasPresenter(): CinemasPresenter
     fun createSettingsPresenter(): SettingsPresenter
+    fun createMoviePresenter(): MoviePresenter
 }

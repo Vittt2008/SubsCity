@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="8dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="8dp">
+
+    <TextView
+        android:id="@+id/tv_genre_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/movie_genre_title"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_genre_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:fontFamily="sans-serif"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_genre_title"
+        app:layout_constraintTop_toTopOf="@+id/tv_genre_title"
+        tools:text="Исторический, драма, военный" />
+
+    <TextView
+        android:id="@+id/tv_language_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/movie_language_title"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="@+id/tv_genre_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_genre_value" />
+
+    <TextView
+        android:id="@+id/tv_language_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:fontFamily="sans-serif"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toEndOf="@+id/tv_language_title"
+        app:layout_constraintTop_toTopOf="@+id/tv_language_title"
+        tools:text="Английский" />
+
+    <TextView
+        android:id="@+id/tv_durability_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/movie_durability_title"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="@+id/tv_language_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_language_title" />
+
+    <TextView
+        android:id="@+id/tv_durability_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:fontFamily="sans-serif"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toEndOf="@+id/tv_durability_title"
+        app:layout_constraintTop_toTopOf="@+id/tv_durability_title"
+        tools:text="2 ч 5 мин" />
+
+    <TextView
+        android:id="@+id/tv_age_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/movie_age_title"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="@+id/tv_durability_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_durability_title" />
+
+    <TextView
+        android:id="@+id/tv_age_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:fontFamily="sans-serif"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toEndOf="@+id/tv_age_title"
+        app:layout_constraintTop_toTopOf="@+id/tv_age_title"
+        tools:text="16+" />
+
+    <TextView
+        android:id="@+id/tv_rating_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/movie_rating_kinopoisk_title"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="@+id/tv_age_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_age_title" />
+
+    <TextView
+        android:id="@+id/tv_rating_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:fontFamily="sans-serif"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toEndOf="@+id/tv_rating_title"
+        app:layout_constraintTop_toTopOf="@+id/tv_rating_title"
+        tools:text="7.5" />
+
+    <TextView
+        android:id="@+id/tv_description_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/movie_description_title"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="@+id/tv_rating_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_rating_title" />
+
+    <TextView
+        android:id="@+id/tv_description_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="sans-serif"
+        android:textColor="#000000"
+        android:textSize="12sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_description_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_description_title"
+        tools:text="История о первом и решающем шаге Уинстона Черчилля на посту премьер-министра Великобритании, получившего власть при чрезвычайных обстоятельствах. Успехи нацистской армии взбудоражили британское сообщество, но вопреки давлению и страху других политиков Черчилль отказывается идти на соглашение с Гитлером." />
+
+</android.support.constraint.ConstraintLayout>

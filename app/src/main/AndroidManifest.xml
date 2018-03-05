@@ -10,7 +10,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="df22a2da753e542199a3247a4ceec3e927d4522a" />
@@ -23,6 +22,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.movie.MovieActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

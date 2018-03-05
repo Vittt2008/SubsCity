@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         ahBottomView.defaultBackgroundColor = ContextCompat.getColor(this, R.color.white_color)
         ahBottomView.titleState = AHBottomNavigation.TitleState.ALWAYS_HIDE
         ahBottomView.setOnTabSelectedListener { position, wasSelected -> viewPager.setCurrentItem(position, false); true }
+        ahBottomView.setUseElevation(true)
     }
 
 
