@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationAdapter
 import com.source.subscity.R
-import com.source.subscity.ui.settings.SettingsFragment
 
 class MainActivity : AppCompatActivity() {
 

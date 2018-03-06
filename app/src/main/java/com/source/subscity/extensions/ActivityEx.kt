@@ -16,17 +16,21 @@ val FragmentActivity.supportActionBar: ActionBar
     get() = (this as AppCompatActivity).supportActionBar!!
 
 fun FragmentActivity.setSupportActionBar(toolbar: Toolbar) {
-    (this as AppCompatActivity).setSupportActionBar(toolbar)
+    val appCompatActivity = this as AppCompatActivity
+    appCompatActivity.setSupportActionBar(toolbar)
+    appCompatActivity.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+    appCompatActivity.supportActionBar!!.setDisplayShowHomeEnabled(true)
+    toolbar.setNavigationOnClickListener { this.onBackPressed() }
 }
 
-fun Context.toast(text: String) {
+fun Context.toast(text: String?) {
     Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
 }
 
-fun Fragment.toast(text: String) {
+fun Fragment.toast(text: String?) {
     Toast.makeText(this.activity, text, Toast.LENGTH_SHORT).show()
 }
 
-fun View.toast(text: String) {
+fun View.toast(text: String?) {
     Toast.makeText(this.context, text, Toast.LENGTH_SHORT).show()
 }

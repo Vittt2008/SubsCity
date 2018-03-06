@@ -72,7 +72,7 @@
         android:textSize="14sp"
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="@+id/tv_language_title"
-        app:layout_constraintTop_toBottomOf="@+id/tv_language_title" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_language_value" />
 
     <TextView
         android:id="@+id/tv_durability_value"

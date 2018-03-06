@@ -1,13 +1,13 @@
 package com.source.subscity.ui.movie
 
 import android.os.Bundle
+import android.support.design.widget.CollapsingToolbarLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
@@ -16,7 +16,7 @@ import com.source.subscity.api.entities.movie.Movie
 import com.source.subscity.dagger.GlideApp
 import com.source.subscity.dagger.SubsCityDagger
 import com.source.subscity.extensions.setSupportActionBar
-import com.source.subscity.extensions.supportActionBar
+import com.source.subscity.extensions.toast
 import com.source.subscity.widgets.transformations.PosterCrop
 
 /**
@@ -28,6 +28,8 @@ class MovieFragment : MvpAppCompatFragment(), MovieView {
     lateinit var moviesPresenter: MoviePresenter
 
     private lateinit var moviePoster: ImageView
+    private lateinit var trailerButton: ImageView
+    private lateinit var toolbarLayout: CollapsingToolbarLayout
     private lateinit var movieInfoList: RecyclerView
 
     companion object {
@@ -50,13 +52,16 @@ class MovieFragment : MvpAppCompatFragment(), MovieView {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root = inflater.inflate(R.layout.fragment_movie, container, false)
         moviePoster = root.findViewById(R.id.iv_movie_poster)
+        trailerButton = root.findViewById(R.id.iv_play)
+        toolbarLayout = root.findViewById(R.id.toolbar_layout)
         movieInfoList = root.findViewById(R.id.rv_list)
         activity!!.setSupportActionBar(root.findViewById(R.id.toolbar))
+        trailerButton.setOnClickListener { }
         return root
     }
 
     override fun showMovie(movie: Movie) {
-        activity!!.supportActionBar.title = movie.title.russian
+        toolbarLayout.title = movie.title.russian
         GlideApp.with(moviePoster).asBitmap().load(movie.poster).transform(PosterCrop()).into(moviePoster)
         movieInfoList.run {
             layoutManager = LinearLayoutManager(activity)
@@ -65,6 +70,6 @@ class MovieFragment : MvpAppCompatFragment(), MovieView {
     }
 
     override fun onError(throwable: Throwable) {
-        Toast.makeText(activity, throwable.message, Toast.LENGTH_SHORT).show()
+        toast(throwable.message)
     }
 }
