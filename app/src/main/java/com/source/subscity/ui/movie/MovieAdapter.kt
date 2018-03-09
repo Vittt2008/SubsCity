@@ -9,20 +9,26 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.source.subscity.R
 import com.source.subscity.api.entities.movie.Movie
+import com.source.subscity.dagger.SubsCityDagger
 import com.source.subscity.providers.DurationProvider
+import javax.inject.Inject
 
 /**
  * @author Vitaliy Markus
  */
-class MovieAdapter(context: Context,
-                   private val movie: Movie,
+class MovieAdapter(private val movie: Movie,
                    private var cinemaScreenings: List<MoviePresenter.CinemaScreenings>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val MOVIE_INFO_VIEW_TYPE = 0
     private val MOVIE_DATE_VIEW_TYPE = 1
     private val MOVIE_SESSION_VIEW_TYPE = 2
 
-    private val durationProvider = DurationProvider(context)
+    @Inject
+    lateinit var durationProvider: DurationProvider
+
+    init {
+        SubsCityDagger.component.inject(this)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {

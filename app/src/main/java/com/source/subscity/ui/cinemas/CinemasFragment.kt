@@ -52,7 +52,7 @@ class CinemasFragment : MvpAppCompatFragment(), CinemasView {
         cinemas.toString().equals("", true)
         cinemasList.run {
             layoutManager = LinearLayoutManager(activity)
-            adapter = CinemasAdapter(activity!!, cinemas)
+            adapter = CinemasAdapter(cinemas)
             addItemDecoration(MarginDivider(activity!!).apply { setDrawable(R.drawable.cinema_divider) })
         }
     }

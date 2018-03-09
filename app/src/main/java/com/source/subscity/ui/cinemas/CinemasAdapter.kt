@@ -1,6 +1,5 @@
 package com.source.subscity.ui.cinemas
 
-import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -9,14 +8,21 @@ import android.widget.TextView
 import android.widget.Toast
 import com.source.subscity.R
 import com.source.subscity.api.entities.cinema.Cinema
-import com.source.subscity.providers.metro.SpbMetroTextProvider
+import com.source.subscity.dagger.SubsCityDagger
+import com.source.subscity.providers.MetroProvider
+import javax.inject.Inject
 
 /**
  * @author Vitaliy Markus
  */
-class CinemasAdapter(context: Context, private val cinemas: List<Cinema>) : RecyclerView.Adapter<CinemasAdapter.ViewHolder>() {
+class CinemasAdapter(private val cinemas: List<Cinema>) : RecyclerView.Adapter<CinemasAdapter.ViewHolder>() {
 
-    val spbMetroTextProvider = SpbMetroTextProvider(context)
+    @Inject
+    lateinit var metroProvider: MetroProvider
+
+    init {
+        SubsCityDagger.component.inject(this)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val item = LayoutInflater.from(parent.context).inflate(R.layout.item_cinema, parent, false)
@@ -43,7 +49,7 @@ class CinemasAdapter(context: Context, private val cinemas: List<Cinema>) : Recy
         fun bind(cinema: Cinema) {
             cinemaName.text = cinema.name
             cinemaAddress.text = cinema.location.address
-            cinemaMetroStation.text = spbMetroTextProvider.formatMetroListStation(cinema.location.metro)
+            cinemaMetroStation.text = metroProvider.currentMetroTextProvider.formatMetroListStation(cinema.location.metro)
         }
 
     }

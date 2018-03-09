@@ -67,7 +67,7 @@ class MovieFragment : MvpAppCompatFragment(), MovieView {
         if (adapter == null) {
             toolbarLayout.title = movie.title.russian
             GlideApp.with(moviePoster).asBitmap().load(movie.poster).transform(PosterCrop()).into(moviePoster)
-            adapter = MovieAdapter(activity!!, movie, cinemaScreenings)
+            adapter = MovieAdapter(movie, cinemaScreenings)
             movieInfoList.adapter = adapter
         } else {
             adapter!!.updateScreenings(cinemaScreenings)

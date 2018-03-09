@@ -18,8 +18,10 @@ import android.widget.TextView
 import com.source.subscity.R
 import com.source.subscity.api.entities.movie.Movie
 import com.source.subscity.dagger.GlideApp
+import com.source.subscity.dagger.SubsCityDagger
 import com.source.subscity.providers.LanguageProvider
 import com.source.subscity.widgets.transformations.PosterCrop
+import javax.inject.Inject
 
 
 /**
@@ -34,7 +36,9 @@ class MoviesAdapter(private val context: Context,
     private val layoutInflater = LayoutInflater.from(context)
     private val width: Int
     private val isFullSpans: MutableList<Boolean> = ArrayList()
-    private val languageProvider = LanguageProvider(context)
+
+    @Inject
+    lateinit var languageProvider: LanguageProvider
 
     init {
         val metrics = DisplayMetrics()
@@ -42,6 +46,7 @@ class MoviesAdapter(private val context: Context,
         windowManager.defaultDisplay.getMetrics(metrics)
         width = metrics.widthPixels
         updateFullSpans()
+        SubsCityDagger.component.inject(this)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
