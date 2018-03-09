@@ -20,7 +20,7 @@ import javax.inject.Singleton
  * @author Vitaliy Markus
  */
 @Module
-class SubsCityModule(private val context: Context) {
+class SubsCityModule(@get:Provides val context: Context) {
 
     @Provides
     @Singleton
@@ -46,11 +46,5 @@ class SubsCityModule(private val context: Context) {
     @Singleton
     fun apiClient(okHttpClient: OkHttpClient, gson: Gson): ApiClient {
         return ApiClient(okHttpClient, gson, Schedulers.io())
-    }
-
-    @Provides
-    @Singleton
-    fun databaseClient(): DatabaseClient {
-        return Room.databaseBuilder(context, DatabaseClient::class.java, "subs_city").build()
     }
 }

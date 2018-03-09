@@ -3,6 +3,8 @@ package com.source.subscity.repositories
 import com.source.subscity.api.ApiClient
 import com.source.subscity.api.entities.cinema.Cinema
 import com.source.subscity.db.DatabaseClient
+import com.source.subscity.providers.CityProvider
+import com.source.subscity.providers.DatabaseProvider
 import io.reactivex.Single
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -10,10 +12,9 @@ import javax.inject.Inject
 /**
  * @author Vitaliy Markus
  */
-class CinemaRepository @Inject constructor(apiClient: ApiClient, databaseClient: DatabaseClient) :
-        CachedRepository(apiClient, databaseClient) {
-
-    private val city = "spb"
+class CinemaRepository @Inject constructor(apiClient: ApiClient,
+                                           databaseProvider: DatabaseProvider,
+                                           private val cityProvider: CityProvider) : CachedRepository(apiClient, databaseProvider) {
 
     fun getCinemas(): Single<List<Cinema>> {
         return isCacheActual()
@@ -29,7 +30,7 @@ class CinemaRepository @Inject constructor(apiClient: ApiClient, databaseClient:
     }
 
     fun getCinema(id: Long): Single<Cinema> {
-        return databaseClient.cinemaDao.getCinema(id)
+        return databaseProvider.currentDatabaseClient.cinemaDao.getCinema(id)
                 .onErrorResumeNext {
                     getCinemaFromApi()
                             .toObservable()
@@ -44,13 +45,13 @@ class CinemaRepository @Inject constructor(apiClient: ApiClient, databaseClient:
     override fun getCacheLifetime() = TimeUnit.DAYS.toMillis(1)
 
     private fun getCinemaFromApi(): Single<List<Cinema>> {
-        return apiClient.subsCityService.getCinemas(city)
-                .doOnSuccess { it -> databaseClient.cinemaDao.saveCinemas(it) }
+        return apiClient.subsCityService.getCinemas(cityProvider.city)
+                .doOnSuccess { it -> databaseProvider.currentDatabaseClient.cinemaDao.saveCinemas(it) }
                 .doOnSuccess { updateCacheTimestamp() }
     }
 
     private fun getCinemasFromDb(): Single<List<Cinema>> {
-        return databaseClient.cinemaDao.getAllCinemas()
+        return databaseProvider.currentDatabaseClient.cinemaDao.getAllCinemas()
                 .firstOrError()
     }
 }

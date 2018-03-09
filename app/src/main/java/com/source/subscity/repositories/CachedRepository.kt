@@ -1,15 +1,15 @@
 package com.source.subscity.repositories
 
 import com.source.subscity.api.ApiClient
-import com.source.subscity.db.DatabaseClient
 import com.source.subscity.db.entity.CacheTimestamp
+import com.source.subscity.providers.DatabaseProvider
 import io.reactivex.Single
 import org.joda.time.DateTime
 
 /**
  * @author Vitaliy Markus
  */
-abstract class CachedRepository(protected val apiClient: ApiClient, protected val databaseClient: DatabaseClient) {
+abstract class CachedRepository(protected val apiClient: ApiClient, protected val databaseProvider: DatabaseProvider) {
 
     protected fun updateCacheTimestamp() {
         updateCacheTimestamp(checkAndGetDefaultKey())
@@ -17,7 +17,7 @@ abstract class CachedRepository(protected val apiClient: ApiClient, protected va
 
     protected fun updateCacheTimestamp(key: String) {
         val timestamp = CacheTimestamp(key, DateTime.now().millis)
-        databaseClient.cacheTimestampDao.updateCacheTimestamp(timestamp)
+        databaseProvider.currentDatabaseClient.cacheTimestampDao.updateCacheTimestamp(timestamp)
     }
 
     protected fun isCacheActual(): Single<Boolean> {
@@ -33,7 +33,7 @@ abstract class CachedRepository(protected val apiClient: ApiClient, protected va
     }
 
     protected fun deleteCacheStamp(key: String) {
-        return databaseClient.cacheTimestampDao.deleteCacheTimestamp(key)
+        return databaseProvider.currentDatabaseClient.cacheTimestampDao.deleteCacheTimestamp(key)
     }
 
     protected open fun getDefaultCacheKey(): String? = null
@@ -45,7 +45,7 @@ abstract class CachedRepository(protected val apiClient: ApiClient, protected va
     private fun isCacheActual(key: String, lifetime: Long): Single<Boolean> {
         val current = DateTime.now().millis
         val start = current - lifetime
-        return databaseClient.cacheTimestampDao.getCacheTimestamp(key)
+        return databaseProvider.currentDatabaseClient.cacheTimestampDao.getCacheTimestamp(key)
                 .map { it.timestamp in start..current }
                 .onErrorReturnItem(false)
     }
