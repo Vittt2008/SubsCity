@@ -1,6 +1,8 @@
 package com.source.subscity.ui.movies
 
 import android.content.Context
+import android.graphics.drawable.GradientDrawable
+import android.support.v4.content.ContextCompat
 import android.support.v4.widget.TextViewCompat
 import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.RecyclerView
@@ -23,7 +25,7 @@ import com.source.subscity.widgets.transformations.PosterCrop
 /**
  * @author Vitaliy Markus
  */
-class MoviesAdapter(context: Context,
+class MoviesAdapter(private val context: Context,
                     private val movies: List<Movie>,
                     private val clickListener: (Movie) -> Unit) : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 

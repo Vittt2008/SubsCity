@@ -1,6 +1,7 @@
 package com.source.subscity.ui.movie
 
 import android.content.Context
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -13,11 +14,14 @@ import com.source.subscity.providers.DurationProvider
 /**
  * @author Vitaliy Markus
  */
-class MovieAdapter(context: Context, private val movie: Movie) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MovieAdapter(context: Context,
+                   private val movie: Movie,
+                   private var cinemaScreenings: List<MoviePresenter.CinemaScreenings>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val MOVIE_INFO_VIEW_TYPE = 0
     private val MOVIE_DATE_VIEW_TYPE = 1
     private val MOVIE_SESSION_VIEW_TYPE = 2
+
     private val durationProvider = DurationProvider(context)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -31,22 +35,21 @@ class MovieAdapter(context: Context, private val movie: Movie) : RecyclerView.Ad
                 SessionsViewHolder(view)
             }
             else -> {
-                val view = LayoutInflater.from(parent.context).inflate(R.layout.item_movie_info, parent, false)
-                InfoViewHolder(view)
+                val view = LayoutInflater.from(parent.context).inflate(R.layout.item_movie_screening, parent, false)
+                CinemaSessionViewHolder(view)
             }
         }
     }
 
     override fun getItemCount(): Int {
-        return 4
+        return 2 + cinemaScreenings.size
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (position) {
             MOVIE_INFO_VIEW_TYPE -> (holder as InfoViewHolder).bind(movie)
             MOVIE_DATE_VIEW_TYPE -> (holder as SessionsViewHolder).bind(movie)
-            else -> {
-            }
+            else -> (holder as CinemaSessionViewHolder).bind(cinemaScreenings[position - 2])
         }
     }
 
@@ -54,8 +57,14 @@ class MovieAdapter(context: Context, private val movie: Movie) : RecyclerView.Ad
         return when (position) {
             MOVIE_INFO_VIEW_TYPE -> MOVIE_INFO_VIEW_TYPE
             MOVIE_DATE_VIEW_TYPE -> MOVIE_DATE_VIEW_TYPE
-            else -> MOVIE_INFO_VIEW_TYPE
+            else -> MOVIE_SESSION_VIEW_TYPE
         }
+    }
+
+    fun updateScreenings(cinemaScreenings: List<MoviePresenter.CinemaScreenings>) {
+        val oldSize = itemCount
+        this.cinemaScreenings = cinemaScreenings
+        notifyItemRangeInserted(oldSize, itemCount - oldSize)
     }
 
     inner class InfoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -106,6 +115,20 @@ class MovieAdapter(context: Context, private val movie: Movie) : RecyclerView.Ad
 
         fun bind(movie: Movie) {
             date.text = movie.screenings.next.toString("EEEE, d MMMM").capitalize()
+        }
+    }
+
+    inner class CinemaSessionViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        private val cinemaTitle = view.findViewById<TextView>(R.id.tv_cinema_title)
+        private val cinemaMetro = view.findViewById<TextView>(R.id.tv_cinema_metro)
+        private val screenings = view.findViewById<RecyclerView>(R.id.rv_list)
+
+        fun bind(cinemaScreenings: MoviePresenter.CinemaScreenings) {
+            cinemaTitle.text = cinemaScreenings.cinema.name
+            screenings.apply {
+                layoutManager = LinearLayoutManager(screenings.context, LinearLayoutManager.HORIZONTAL, false)
+                adapter = MovieScreeningAdapter(cinemaScreenings.screenings)
+            }
         }
     }
 }

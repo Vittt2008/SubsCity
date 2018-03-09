@@ -32,6 +32,8 @@ class MovieFragment : MvpAppCompatFragment(), MovieView {
     private lateinit var toolbarLayout: CollapsingToolbarLayout
     private lateinit var movieInfoList: RecyclerView
 
+    private var adapter: MovieAdapter? = null
+
     companion object {
         fun newInstance(movieId: Long): MovieFragment {
             return MovieFragment().apply {
@@ -55,18 +57,22 @@ class MovieFragment : MvpAppCompatFragment(), MovieView {
         trailerButton = root.findViewById(R.id.iv_play)
         toolbarLayout = root.findViewById(R.id.toolbar_layout)
         movieInfoList = root.findViewById(R.id.rv_list)
+        movieInfoList.layoutManager = LinearLayoutManager(activity)
         activity!!.setSupportActionBar(root.findViewById(R.id.toolbar))
         trailerButton.setOnClickListener { }
         return root
     }
 
-    override fun showMovie(movie: Movie) {
-        toolbarLayout.title = movie.title.russian
-        GlideApp.with(moviePoster).asBitmap().load(movie.poster).transform(PosterCrop()).into(moviePoster)
-        movieInfoList.run {
-            layoutManager = LinearLayoutManager(activity)
-            adapter = MovieAdapter(activity!!, movie)
+    override fun showMovie(movie: Movie, cinemaScreenings: List<MoviePresenter.CinemaScreenings>) {
+        if (adapter == null) {
+            toolbarLayout.title = movie.title.russian
+            GlideApp.with(moviePoster).asBitmap().load(movie.poster).transform(PosterCrop()).into(moviePoster)
+            adapter = MovieAdapter(activity!!, movie, cinemaScreenings)
+            movieInfoList.adapter = adapter
+        } else {
+            adapter!!.updateScreenings(cinemaScreenings)
         }
+
     }
 
     override fun onError(throwable: Throwable) {

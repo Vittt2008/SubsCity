@@ -16,12 +16,12 @@ class ScreeningRepository @Inject constructor(apiClient: ApiClient, databaseClie
 
     private val city = "spb"
 
-    private val movieScreeningKey = "movie_screening"
-    private val cinemaScreeningKey = "cinema_screening"
-    private val dateScreeningKey = "date_screening"
+    private val movieScreeningKey = "movie_screening_"
+    private val cinemaScreeningKey = "cinema_screening_"
+    private val dateScreeningKey = "date_screening_"
 
     fun getMovieScreenings(movieId: Long): Single<List<Screening>> {
-        return isCacheActual(movieScreeningKey)
+        return isCacheActual(movieScreeningKey + movieId)
                 .flatMap { isActual ->
                     if (isActual) {
                         getMovieScreeningsFromDb(movieId)
@@ -34,7 +34,7 @@ class ScreeningRepository @Inject constructor(apiClient: ApiClient, databaseClie
     }
 
     fun getCinemaScreenings(cinemaId: Long): Single<List<Screening>> {
-        return isCacheActual(cinemaScreeningKey)
+        return isCacheActual(cinemaScreeningKey + cinemaId)
                 .flatMap { isActual ->
                     if (isActual) {
                         getCinemaScreeningsFromDb(cinemaId)
@@ -47,7 +47,7 @@ class ScreeningRepository @Inject constructor(apiClient: ApiClient, databaseClie
     }
 
     fun getDateScreenings(dateTime: DateTime): Single<List<Screening>> {
-        return isCacheActual(dateScreeningKey)
+        return isCacheActual(dateScreeningKey + dateTime.toString())
                 .flatMap { isActual ->
                     if (isActual) {
                         getDateScreeningsFromDb(dateTime)
