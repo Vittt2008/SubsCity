@@ -25,7 +25,7 @@ class MetroProvider @Inject constructor(private val cityProvider: CityProvider,
             currentProvider = when (currentCity) {
                 CityProvider.SAINT_PETERSBURG -> SubsCityDagger.component.createSpbMetroTextProvider()
                 CityProvider.MOSCOW -> SubsCityDagger.component.createMoscowMetroTextProvider()
-                else -> defaultMetroTextProvider
+                else -> throw IllegalArgumentException("Not supported city = $currentCity")
             }
             return currentProvider
         }

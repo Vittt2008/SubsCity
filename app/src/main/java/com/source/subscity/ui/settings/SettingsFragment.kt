@@ -1,7 +1,6 @@
 package com.source.subscity.ui.settings
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -13,7 +12,7 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.source.subscity.R
 import com.source.subscity.dagger.SubsCityDagger
 import com.source.subscity.extensions.supportActionBar
-import com.source.subscity.ui.cinemas.CinemasFragment
+import com.source.subscity.ui.city.CityActivity
 
 /**
  * @author Vitaliy Markus
@@ -42,7 +41,7 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         settingsList.run {
             layoutManager = LinearLayoutManager(activity)
-            adapter = SettingsAdapter()
+            adapter = SettingsAdapter() { CityActivity.start(activity!!) }
         }
     }
 

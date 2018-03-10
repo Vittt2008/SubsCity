@@ -8,20 +8,38 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import com.source.subscity.R
+import com.source.subscity.dagger.SubsCityDagger
+import com.source.subscity.providers.CityProvider
+import javax.inject.Inject
 
 /**
  * @author Vitaliy Markus
  */
-class SettingsAdapter : RecyclerView.Adapter<SettingsAdapter.ViewHolder>() {
+class SettingsAdapter(private val clickListener: (Int) -> Unit) : RecyclerView.Adapter<SettingsAdapter.ViewHolder>() {
 
-    private val settings = listOf(
-            SettingItem(R.drawable.ic_movie_star, R.string.setting_new_in_cinema_title),
-            SettingItem(R.drawable.ic_movie_star, R.string.setting_cinema_map_title),
-            SettingItem(R.drawable.ic_movie_star, R.string.setting_sale_title),
-            SettingItem(R.drawable.ic_movie_star, R.string.setting_about_title),
-            SettingItem(R.drawable.ic_movie_star, R.string.setting_city_title, "Санкт-Петербург"))
+    companion object {
+        const val SOON_AT_BOX_OFFICE = 0
+        const val CINEMA_MAP = 1
+        const val SALES = 2
+        const val ABOUT = 3
+        const val CITY = 4
+    }
+
+    @Inject
+    lateinit var cityProvider: CityProvider
+
+    private val settings: List<SettingItem>
+
+    init {
+        SubsCityDagger.component.inject(this)
+        settings = listOf(
+                SettingItem(SOON_AT_BOX_OFFICE, R.drawable.ic_movie_star, R.string.setting_new_in_cinema_title),
+                SettingItem(CINEMA_MAP, R.drawable.ic_movie_star, R.string.setting_cinema_map_title),
+                SettingItem(SALES, R.drawable.ic_movie_star, R.string.setting_sale_title),
+                SettingItem(ABOUT, R.drawable.ic_movie_star, R.string.setting_about_title),
+                SettingItem(CITY, R.drawable.ic_movie_star, R.string.setting_city_title, cityProvider.cityName))
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val item = LayoutInflater.from(parent.context).inflate(R.layout.item_setting, parent, false)
@@ -37,15 +55,20 @@ class SettingsAdapter : RecyclerView.Adapter<SettingsAdapter.ViewHolder>() {
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
+        private lateinit var item: SettingItem
+
         private val settingIcon = view.findViewById<ImageView>(R.id.iv_setting_icon)
         private val settingTitle = view.findViewById<TextView>(R.id.tv_setting_title)
         private val settingCity = view.findViewById<TextView>(R.id.tv_settings_city)
 
         init {
-            view.setOnClickListener { Toast.makeText(view.context, "CLICK", Toast.LENGTH_SHORT).show() }
+            view.setOnClickListener { clickListener.invoke(item.id) }
         }
 
         fun bind(item: SettingItem) {
+            this.item = item
+
             settingIcon.setImageResource(item.icon)
             settingTitle.setText(item.title)
             if (item.city.isEmpty()) {
@@ -57,5 +80,5 @@ class SettingsAdapter : RecyclerView.Adapter<SettingsAdapter.ViewHolder>() {
         }
     }
 
-    class SettingItem(@DrawableRes val icon: Int, @StringRes val title: Int, val city: String = "")
+    class SettingItem(val id: Int, @DrawableRes val icon: Int, @StringRes val title: Int, val city: String = "")
 }

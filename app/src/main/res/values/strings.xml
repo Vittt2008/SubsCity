@@ -27,6 +27,9 @@
     <string name="cinema_point_on_map">На карте</string>
     <string name="cinema_no_map_application">Отсутвуют приложния для работы с картой</string>
 
+    <!-- CityFragment -->
+    <string name="city_title">Выбор города</string>
+
     <!-- LanguageProvider -->
     <string name="language_provider_ending">ий</string>
     <string name="language_provider_format_declinable">На %sом</string>
@@ -34,6 +37,10 @@
 
     <!-- DurationProvider -->
     <string name="duration_provider_format">%1$d ч %2$d мин</string>
+
+    <!-- CityProvider -->
+    <string name="saint_petersburg">Санкт-Петербург</string>
+    <string name="moscow">Москва</string>
 
     <!-- GeoUri -->
     <string name="geo_uri">geo:%1$f,%2$f?z=15&amp;q=%3$s</string>
