@@ -40,6 +40,5 @@ interface SubsCityComponent {
     fun inject(adapter: MoviesAdapter)
     fun inject(adapter: CinemaAdapter)
     fun inject(adapter: CityAdapter)
-    fun inject(adapter: SettingsAdapter)
 
 }

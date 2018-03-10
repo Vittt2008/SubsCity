@@ -38,10 +38,10 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
         return settingsList
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun showSettings(city: String) {
         settingsList.run {
             layoutManager = LinearLayoutManager(activity)
-            adapter = SettingsAdapter() { CityActivity.start(activity!!) }
+            adapter = SettingsAdapter(city) { CityActivity.start(activity!!) }
         }
     }
 

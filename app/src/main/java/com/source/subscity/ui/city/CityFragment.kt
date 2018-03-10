@@ -46,7 +46,7 @@ class CityFragment : MvpAppCompatFragment(), CityView {
     override fun showCities(cities: List<City>) {
         cityList.apply {
             layoutManager = LinearLayoutManager(activity)
-            adapter = CityAdapter(activity!!, cities)
+            adapter = CityAdapter(activity!!, cities) { cityPresenter.updateCity(it) }
         }
     }
 

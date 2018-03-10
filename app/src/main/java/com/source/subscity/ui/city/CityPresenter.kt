@@ -22,4 +22,8 @@ class CityPresenter @Inject constructor(private val cityProvider: CityProvider) 
                         { viewState.onError(it) }
                 )
     }
+
+    fun updateCity(city: String) {
+        cityProvider.city = city //TODO использовать Subject
+    }
 }

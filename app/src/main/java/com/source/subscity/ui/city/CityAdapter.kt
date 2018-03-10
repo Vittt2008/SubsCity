@@ -17,7 +17,9 @@ import javax.inject.Inject
 /**
  * @author Vitaliy Markus
  */
-class CityAdapter(private val context: Context, cities: List<City>) : RecyclerView.Adapter<CityAdapter.ViewHolder>() {
+class CityAdapter(private val context: Context,
+                  cities: List<City>,
+                  private val clickListener: (String) -> Unit) : RecyclerView.Adapter<CityAdapter.ViewHolder>() {
 
     @Inject
     lateinit var cityProvider: CityProvider
@@ -52,6 +54,7 @@ class CityAdapter(private val context: Context, cities: List<City>) : RecyclerVi
                 selectableCities.forEach { it.isSelected = false }
                 city.isSelected = true
                 notifyItemRangeChanged(0, selectableCities.size)
+                clickListener.invoke(city.id)
             }
         }
 

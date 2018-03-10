@@ -9,14 +9,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.source.subscity.R
-import com.source.subscity.dagger.SubsCityDagger
-import com.source.subscity.providers.CityProvider
-import javax.inject.Inject
 
 /**
  * @author Vitaliy Markus
  */
-class SettingsAdapter(private val clickListener: (Int) -> Unit) : RecyclerView.Adapter<SettingsAdapter.ViewHolder>() {
+class SettingsAdapter(city: String, private val clickListener: (Int) -> Unit) : RecyclerView.Adapter<SettingsAdapter.ViewHolder>() {
 
     companion object {
         const val SOON_AT_BOX_OFFICE = 0
@@ -26,20 +23,12 @@ class SettingsAdapter(private val clickListener: (Int) -> Unit) : RecyclerView.A
         const val CITY = 4
     }
 
-    @Inject
-    lateinit var cityProvider: CityProvider
-
-    private val settings: List<SettingItem>
-
-    init {
-        SubsCityDagger.component.inject(this)
-        settings = listOf(
-                SettingItem(SOON_AT_BOX_OFFICE, R.drawable.ic_movie_star, R.string.setting_new_in_cinema_title),
-                SettingItem(CINEMA_MAP, R.drawable.ic_movie_star, R.string.setting_cinema_map_title),
-                SettingItem(SALES, R.drawable.ic_movie_star, R.string.setting_sale_title),
-                SettingItem(ABOUT, R.drawable.ic_movie_star, R.string.setting_about_title),
-                SettingItem(CITY, R.drawable.ic_movie_star, R.string.setting_city_title, cityProvider.cityName))
-    }
+    private val settings = listOf(
+            SettingItem(SOON_AT_BOX_OFFICE, R.drawable.ic_movie_star, R.string.setting_new_in_cinema_title),
+            SettingItem(CINEMA_MAP, R.drawable.ic_movie_star, R.string.setting_cinema_map_title),
+            SettingItem(SALES, R.drawable.ic_movie_star, R.string.setting_sale_title),
+            SettingItem(ABOUT, R.drawable.ic_movie_star, R.string.setting_about_title),
+            SettingItem(CITY, R.drawable.ic_movie_star, R.string.setting_city_title, city))
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val item = LayoutInflater.from(parent.context).inflate(R.layout.item_setting, parent, false)
