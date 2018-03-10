@@ -19,6 +19,7 @@ import javax.inject.Inject
  */
 class CityAdapter(private val context: Context,
                   cities: List<City>,
+                  city: String,
                   private val clickListener: (String) -> Unit) : RecyclerView.Adapter<CityAdapter.ViewHolder>() {
 
     @Inject
@@ -27,7 +28,7 @@ class CityAdapter(private val context: Context,
 
     init {
         SubsCityDagger.component.inject(this)
-        selectableCities = cities.map { SelectableCity(it.id, it.name, it.id == cityProvider.city) }
+        selectableCities = cities.map { SelectableCity(it.id, it.name, it.id == city) }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

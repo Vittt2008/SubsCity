@@ -18,12 +18,12 @@ class CityPresenter @Inject constructor(private val cityProvider: CityProvider) 
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        { viewState.showCities(it) },
+                        { viewState.showCities(it, cityProvider.city) },
                         { viewState.onError(it) }
                 )
     }
 
     fun updateCity(city: String) {
-        cityProvider.city = city //TODO использовать Subject
+        cityProvider.changeCity(city)
     }
 }

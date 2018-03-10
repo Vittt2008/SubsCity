@@ -3,7 +3,9 @@ package com.source.subscity.providers
 import android.content.Context
 import com.source.subscity.R
 import com.source.subscity.api.entities.City
+import io.reactivex.Observable
 import io.reactivex.Single
+import io.reactivex.subjects.BehaviorSubject
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -22,11 +24,17 @@ class CityProvider @Inject constructor(private val context: Context) {
     }
 
     private val sharedPreferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE)
+    private val citySubject = BehaviorSubject.create<String>()
+
     var city = sharedPreferences.getString(CITY_KEY, SAINT_PETERSBURG)!!
-        set(value) {
+        private set(value) {
             field = value
             sharedPreferences.edit().putString(CITY_KEY, value).apply()
         }
+
+    init {
+        citySubject.onNext(city)
+    }
 
     val cityName: String
         get() = when (city) {
@@ -38,4 +46,11 @@ class CityProvider @Inject constructor(private val context: Context) {
     val supportedCities = Single.just(listOf(
             City(SAINT_PETERSBURG, context.getString(R.string.saint_petersburg)),
             City(MOSCOW, context.getString(R.string.moscow))))
+
+    val asyncCity: Observable<String> = citySubject
+
+    fun changeCity(city: String) {
+        this.city = city
+        this.citySubject.onNext(city)
+    }
 }
