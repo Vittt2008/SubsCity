@@ -15,7 +15,8 @@ import javax.inject.Inject
 /**
  * @author Vitaliy Markus
  */
-class CinemasAdapter(private val cinemas: List<Cinema>) : RecyclerView.Adapter<CinemasAdapter.ViewHolder>() {
+class CinemasAdapter(private val cinemas: List<Cinema>,
+                     private val clickListener: (Cinema) -> Unit) : RecyclerView.Adapter<CinemasAdapter.ViewHolder>() {
 
     @Inject
     lateinit var metroProvider: MetroProvider
@@ -38,15 +39,20 @@ class CinemasAdapter(private val cinemas: List<Cinema>) : RecyclerView.Adapter<C
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
+        private lateinit var cinema: Cinema
+
         private val cinemaName = view.findViewById<TextView>(R.id.tv_cinema_name)
         private val cinemaAddress = view.findViewById<TextView>(R.id.tv_cinema_address)
         private val cinemaMetroStation = view.findViewById<TextView>(R.id.tv_cinema_metro_station)
 
         init {
-            view.setOnClickListener { Toast.makeText(view.context, "CLICK", Toast.LENGTH_SHORT).show() }
+            view.setOnClickListener { clickListener.invoke(cinema) }
         }
 
         fun bind(cinema: Cinema) {
+            this.cinema = cinema
+
             cinemaName.text = cinema.name
             cinemaAddress.text = cinema.location.address
             cinemaMetroStation.text = metroProvider.currentMetroTextProvider.formatMetroListStation(cinema.location.metro)

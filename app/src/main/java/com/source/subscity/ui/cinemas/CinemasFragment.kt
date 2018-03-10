@@ -15,6 +15,7 @@ import com.source.subscity.R
 import com.source.subscity.api.entities.cinema.Cinema
 import com.source.subscity.dagger.SubsCityDagger
 import com.source.subscity.extensions.supportActionBar
+import com.source.subscity.ui.cinema.CinemaActivity
 import com.source.subscity.widgets.divider.MarginDivider
 
 /**
@@ -52,7 +53,7 @@ class CinemasFragment : MvpAppCompatFragment(), CinemasView {
         cinemas.toString().equals("", true)
         cinemasList.run {
             layoutManager = LinearLayoutManager(activity)
-            adapter = CinemasAdapter(cinemas)
+            adapter = CinemasAdapter(cinemas) { CinemaActivity.start(activity!!, it.id) }
             addItemDecoration(MarginDivider(activity!!).apply { setDrawable(R.drawable.cinema_divider) })
         }
     }

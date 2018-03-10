@@ -23,6 +23,10 @@
     <string name="movie_description_title">Описание</string>
     <string name="movie_sessions_title">Сеансы</string>
 
+    <!-- CinemaFragment -->
+    <string name="cinema_point_on_map">На карте</string>
+    <string name="cinema_no_map_application">Отсутвуют приложния для работы с картой</string>
+
     <!-- LanguageProvider -->
     <string name="language_provider_ending">ий</string>
     <string name="language_provider_format_declinable">На %sом</string>
@@ -30,5 +34,9 @@
 
     <!-- DurationProvider -->
     <string name="duration_provider_format">%1$d ч %2$d мин</string>
+
+    <!-- GeoUri -->
+    <string name="geo_uri">geo:%1$f,%2$f?z=15&amp;q=%3$s</string>
+
 
 </resources>

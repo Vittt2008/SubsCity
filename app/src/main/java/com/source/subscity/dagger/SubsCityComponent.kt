@@ -2,6 +2,7 @@ package com.source.subscity.dagger
 
 import com.source.subscity.providers.metro.MoscowMetroTextProvider
 import com.source.subscity.providers.metro.SpbMetroTextProvider
+import com.source.subscity.ui.cinema.CinemaAdapter
 import com.source.subscity.ui.cinema.CinemaPresenter
 import com.source.subscity.ui.cinemas.CinemasAdapter
 import com.source.subscity.ui.cinemas.CinemasPresenter
@@ -33,6 +34,7 @@ interface SubsCityComponent {
     fun inject(adapter: CinemasAdapter)
     fun inject(adapter: MovieAdapter)
     fun inject(adapter: MoviesAdapter)
+    fun inject(adapter: CinemaAdapter)
 
 
 }
