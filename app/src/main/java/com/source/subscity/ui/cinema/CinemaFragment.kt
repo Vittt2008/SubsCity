@@ -14,6 +14,7 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.source.subscity.R
 import com.source.subscity.api.entities.cinema.Cinema
 import com.source.subscity.dagger.SubsCityDagger
+import com.source.subscity.extensions.setSupportActionBar
 import com.source.subscity.extensions.supportActionBar
 import com.source.subscity.extensions.toast
 
@@ -47,9 +48,11 @@ class CinemaFragment : MvpAppCompatFragment(), CinemaView {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        cinemaInfoList = inflater.inflate(R.layout.fragment_cinema, container, false) as RecyclerView
+        val root = inflater.inflate(R.layout.fragment_cinema, container, false)
+        cinemaInfoList = root.findViewById(R.id.rv_list)
         cinemaInfoList.layoutManager = LinearLayoutManager(activity)
-        return cinemaInfoList
+        activity!!.setSupportActionBar(root.findViewById(R.id.toolbar))
+        return root
     }
 
     override fun showCinema(cinema: Cinema, second: List<CinemaPresenter.MovieScreenings>) {
