@@ -10,32 +10,32 @@
     android:paddingTop="8dp">
 
     <TextView
-        android:id="@+id/tv_cinema_title"
+        android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif"
-        android:text="Родина"
         android:textColor="#000000"
         android:textSize="14sp"
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Родина" />
 
     <TextView
-        android:id="@+id/tv_cinema_metro"
+        android:id="@+id/tv_info"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:ellipsize="end"
         android:fontFamily="sans-serif"
         android:maxLines="1"
-        android:text="Невский проспект / Гостиный Двор"
         android:textColor="@color/subtitle_color"
         android:textSize="12sp"
         android:textStyle="normal"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tv_cinema_title"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_title"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tv_cinema_title" />
+        app:layout_constraintStart_toEndOf="@+id/tv_title"
+        tools:text="Невский проспект / Гостиный Двор" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_list"
@@ -45,7 +45,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_cinema_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"
         app:layout_constraintVertical_bias="0.0" />
 
 </android.support.constraint.ConstraintLayout>

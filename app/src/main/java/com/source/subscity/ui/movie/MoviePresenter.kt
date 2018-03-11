@@ -27,8 +27,6 @@ class MoviePresenter @Inject constructor(private val movieRepository: MovieRepos
     var movieId: Long = 0
 
     override fun onFirstViewAttach() {
-        super.onFirstViewAttach()
-
         val movie = movieRepository.getMovie(movieId)
                 .subscribeOn(Schedulers.io())
                 .toObservable()
@@ -48,15 +46,14 @@ class MoviePresenter @Inject constructor(private val movieRepository: MovieRepos
 
     private fun convert(pair: Pair<List<Screening>, List<Cinema>>): List<CinemaScreenings> {
         val screenings = pair.first
-        val cinemas = pair.second
-        val cinemaScreenings = screenings.groupBy { it.cinemaId }
-                .map { CinemaScreenings(cinemas.first { cinema -> it.key == cinema.id }, it.value.sortedBy { x -> x.dateTime }) }
+        val cinemas = pair.second.associateBy { it.id }
+        val cinemaScreenings = screenings
+                .filter { it.cinemaId != 0L }
+                .groupBy { it.cinemaId }
+                .map { CinemaScreenings(cinemas.getValue(it.key), it.value.sortedBy { x -> x.dateTime }) }
         return cinemaScreenings
     }
 
     class CinemaScreenings(val cinema: Cinema,
                            val screenings: List<Screening>)
-
-    class Aaaa(val date: DateTime,
-               val screenings: List<Screening>)
 }

@@ -1,6 +1,5 @@
 package com.source.subscity.ui.movie
 
-import android.content.Context
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -14,19 +13,18 @@ import com.source.subscity.dagger.SubsCityDagger
 import com.source.subscity.providers.DurationProvider
 import com.source.subscity.providers.MetroProvider
 import com.source.subscity.widgets.divider.ImageGridItemDecoration
-import com.source.subscity.widgets.divider.MarginDivider
 import javax.inject.Inject
 
 /**
  * @author Vitaliy Markus
  */
-class MovieAdapter(private val context: Context,
-                   private val movie: Movie,
+class MovieAdapter(private val movie: Movie,
                    private var cinemaScreenings: List<MoviePresenter.CinemaScreenings>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val MOVIE_INFO_VIEW_TYPE = 0
-    private val MOVIE_DATE_VIEW_TYPE = 1
-    private val MOVIE_SESSION_VIEW_TYPE = 2
+    private val MOVIE_SCREENINGS_TITLE_VIEW_TYPE = 1
+    private val MOVIE_SCREENINGS_VIEW_TYPE = 2
+
     private val SPAN_COUNT = 5
 
     @Inject
@@ -45,13 +43,13 @@ class MovieAdapter(private val context: Context,
                 val view = LayoutInflater.from(parent.context).inflate(R.layout.item_movie_info, parent, false)
                 InfoViewHolder(view)
             }
-            MOVIE_DATE_VIEW_TYPE -> {
-                val view = LayoutInflater.from(parent.context).inflate(R.layout.item_movie_date_picker, parent, false)
-                SessionsViewHolder(view)
+            MOVIE_SCREENINGS_TITLE_VIEW_TYPE -> {
+                val view = LayoutInflater.from(parent.context).inflate(R.layout.item_divider_title, parent, false)
+                TitleDividerViewHolder(view)
             }
             else -> {
-                val view = LayoutInflater.from(parent.context).inflate(R.layout.item_movie_screening, parent, false)
-                CinemaSessionViewHolder(view)
+                val view = LayoutInflater.from(parent.context).inflate(R.layout.item_screenings, parent, false)
+                CinemaScreeningsViewHolder(view)
             }
         }
     }
@@ -61,18 +59,17 @@ class MovieAdapter(private val context: Context,
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when (position) {
-            MOVIE_INFO_VIEW_TYPE -> (holder as InfoViewHolder).bind(movie)
-            MOVIE_DATE_VIEW_TYPE -> (holder as SessionsViewHolder).bind(movie)
-            else -> (holder as CinemaSessionViewHolder).bind(cinemaScreenings[position - 2])
+        when {
+            position == MOVIE_INFO_VIEW_TYPE -> (holder as InfoViewHolder).bind(movie)
+            position != MOVIE_SCREENINGS_TITLE_VIEW_TYPE -> (holder as CinemaScreeningsViewHolder).bind(cinemaScreenings[position - 2])
         }
     }
 
     override fun getItemViewType(position: Int): Int {
         return when (position) {
             MOVIE_INFO_VIEW_TYPE -> MOVIE_INFO_VIEW_TYPE
-            MOVIE_DATE_VIEW_TYPE -> MOVIE_DATE_VIEW_TYPE
-            else -> MOVIE_SESSION_VIEW_TYPE
+            MOVIE_SCREENINGS_TITLE_VIEW_TYPE -> MOVIE_SCREENINGS_TITLE_VIEW_TYPE
+            else -> MOVIE_SCREENINGS_VIEW_TYPE
         }
     }
 
@@ -125,17 +122,16 @@ class MovieAdapter(private val context: Context,
         }
     }
 
-    inner class SessionsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val date = view.findViewById<TextView>(R.id.tv_date_sessions_value)
-
-        fun bind(movie: Movie) {
-            date.text = movie.screenings.next.toString("EEEE, d MMMM").capitalize()
+    inner class TitleDividerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        init {
+            view.findViewById<TextView>(R.id.tv_divider_title)
+                    .setText(R.string.movie_screenings_title)
         }
     }
 
-    inner class CinemaSessionViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val cinemaTitle = view.findViewById<TextView>(R.id.tv_cinema_title)
-        private val cinemaMetro = view.findViewById<TextView>(R.id.tv_cinema_metro)
+    inner class CinemaScreeningsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        private val cinemaTitle = view.findViewById<TextView>(R.id.tv_title)
+        private val cinemaMetro = view.findViewById<TextView>(R.id.tv_info)
         private val screenings = view.findViewById<RecyclerView>(R.id.rv_list)
 
         fun bind(cinemaScreenings: MoviePresenter.CinemaScreenings) {

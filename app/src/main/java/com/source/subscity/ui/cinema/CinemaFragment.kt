@@ -27,6 +27,8 @@ class CinemaFragment : MvpAppCompatFragment(), CinemaView {
 
     private lateinit var cinemaInfoList: RecyclerView
 
+    private var adapter: CinemaAdapter? = null
+
     companion object {
         fun newInstance(cinemaId: Long): CinemaFragment {
             return CinemaFragment().apply {
@@ -46,14 +48,17 @@ class CinemaFragment : MvpAppCompatFragment(), CinemaView {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         cinemaInfoList = inflater.inflate(R.layout.fragment_cinema, container, false) as RecyclerView
+        cinemaInfoList.layoutManager = LinearLayoutManager(activity)
         return cinemaInfoList
     }
 
-    override fun showCinema(cinema: Cinema) {
-        activity!!.supportActionBar.title = cinema.name
-        cinemaInfoList.apply {
-            layoutManager = LinearLayoutManager(activity)
-            adapter = CinemaAdapter(cinema, ::openMap)
+    override fun showCinema(cinema: Cinema, second: List<CinemaPresenter.MovieScreenings>) {
+        if (adapter == null) {
+            activity!!.supportActionBar.title = cinema.name
+            adapter = CinemaAdapter(cinema, second, ::openMap)
+            cinemaInfoList.adapter = adapter
+        } else {
+            adapter!!.updateScreenings(second)
         }
     }
 

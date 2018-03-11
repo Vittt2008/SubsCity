@@ -2,7 +2,6 @@ package com.source.subscity.ui.movie
 
 import android.os.Bundle
 import android.support.design.widget.CollapsingToolbarLayout
-import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -70,7 +69,7 @@ class MovieFragment : MvpAppCompatFragment(), MovieView {
         if (adapter == null) {
             toolbarLayout.title = movie.title.russian
             GlideApp.with(moviePoster).asBitmap().load(movie.poster).transform(PosterCrop()).into(moviePoster)
-            adapter = MovieAdapter(activity!!, movie, cinemaScreenings)
+            adapter = MovieAdapter(movie, cinemaScreenings)
             movieInfoList.adapter = adapter
         } else {
             movieInfoListLayoutManager.isScrollEnabled = false
