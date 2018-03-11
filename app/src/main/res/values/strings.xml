@@ -23,6 +23,9 @@
     <string name="movie_description_title">Описание</string>
     <string name="movie_screenings_title">Сеансы</string>
     <string name="movie_screening_price">%1$d₽</string>
+    <string name="movie_trailer_original">Оригинальный</string>
+    <string name="movie_trailer_russian">Русский</string>
+    <string name="movie_no_trailers">К сожалению у данного фильма нет трейлеров</string>
 
     <!-- CinemaFragment -->
     <string name="cinema_point_on_map">На карте</string>
@@ -30,6 +33,9 @@
 
     <!-- CityFragment -->
     <string name="city_title">Выбор города</string>
+
+    <!-- YouTube -->
+    <string name="youtube_error_player">Ошибка при инициализации YouTube плеера (%1$s)</string>
 
     <!-- LanguageProvider -->
     <string name="language_provider_ending">ий</string>

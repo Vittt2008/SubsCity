@@ -39,10 +39,10 @@
 
             <ImageView
                 android:id="@+id/iv_play"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="79dp"
+                android:layout_height="56dp"
                 android:layout_gravity="center"
-                android:src="@drawable/play_button_bg"
+                android:src="@drawable/youtube_bg"
                 app:layout_collapseMode="parallax"
                 app:layout_collapseParallaxMultiplier="0.35" />
 
@@ -61,8 +61,8 @@
         android:id="@+id/rv_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="8dp"
         android:clipToPadding="false"
+        android:paddingBottom="8dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:listitem="@layout/item_movie_info" />
 

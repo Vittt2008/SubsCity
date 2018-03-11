@@ -10,6 +10,7 @@ import android.widget.ImageView
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
+import com.github.rubensousa.bottomsheetbuilder.BottomSheetBuilder
 import com.source.subscity.R
 import com.source.subscity.api.entities.movie.Movie
 import com.source.subscity.dagger.GlideApp
@@ -17,6 +18,7 @@ import com.source.subscity.dagger.SubsCityDagger
 import com.source.subscity.extensions.buyTicket
 import com.source.subscity.extensions.setSupportActionBar
 import com.source.subscity.extensions.toast
+import com.source.subscity.ui.youtube.YouTubeActivity
 import com.source.subscity.widgets.ScrollableLinearLayoutManager
 import com.source.subscity.widgets.transformations.PosterCrop
 
@@ -62,7 +64,6 @@ class MovieFragment : MvpAppCompatFragment(), MovieView {
         movieInfoListLayoutManager = ScrollableLinearLayoutManager(activity!!)
         movieInfoList.layoutManager = movieInfoListLayoutManager
         activity!!.setSupportActionBar(root.findViewById(R.id.toolbar))
-        trailerButton.setOnClickListener { }
         return root
     }
 
@@ -72,6 +73,7 @@ class MovieFragment : MvpAppCompatFragment(), MovieView {
             GlideApp.with(moviePoster).asBitmap().load(movie.poster).transform(PosterCrop()).into(moviePoster)
             adapter = MovieAdapter(movie, cinemaScreenings, ::buyTicket)
             movieInfoList.adapter = adapter
+            trailerButton.setOnClickListener { showTrailer(movie) }
         } else {
             movieInfoListLayoutManager.isScrollEnabled = false
             adapter!!.updateScreenings(cinemaScreenings)
@@ -82,5 +84,29 @@ class MovieFragment : MvpAppCompatFragment(), MovieView {
 
     override fun onError(throwable: Throwable) {
         toast(throwable.message)
+    }
+
+    private fun showTrailer(movie: Movie) {
+        val trailer = movie.trailer
+        if (trailer.original.isNotEmpty() && trailer.russian.isNotEmpty()) {
+            BottomSheetBuilder(activity)
+                    .setMode(BottomSheetBuilder.MODE_LIST)
+                    .setMenu(R.menu.menu_trailer)
+                    .setItemTextColorResource(R.color.subtitle_color)
+                    .setItemClickListener({ item ->
+                        when (item.itemId) {
+                            R.id.item_original -> YouTubeActivity.start(activity!!, trailer.original)
+                            R.id.item_russian -> YouTubeActivity.start(activity!!, trailer.russian)
+                        }
+                    })
+                    .createDialog()
+                    .show()
+        } else if (trailer.original.isNotEmpty()) {
+            YouTubeActivity.start(activity!!, trailer.original)
+        } else if (trailer.russian.isNotEmpty()) {
+            YouTubeActivity.start(activity!!, trailer.russian)
+        } else {
+            toast(getString(R.string.movie_no_trailers))
+        }
     }
 }

@@ -12,8 +12,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.Observables
 import io.reactivex.rxkotlin.Singles
 import io.reactivex.schedulers.Schedulers
-import org.joda.time.DateTime
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 /**

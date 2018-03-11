@@ -25,11 +25,16 @@
         <activity
             android:name=".ui.movie.MovieActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ui.cinema.CinemaActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".ui.cinema.CinemaActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.city.CityActivity"
             android:label="@string/city_title"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.youtube.YouTubeActivity"
+            android:screenOrientation="sensorLandscape"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
