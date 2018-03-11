@@ -10,11 +10,10 @@ import android.widget.TextView
 import com.source.subscity.R
 import com.source.subscity.api.entities.cinema.Cinema
 import com.source.subscity.api.entities.movie.Movie
+import com.source.subscity.api.entities.screening.Screening
 import com.source.subscity.dagger.SubsCityDagger
 import com.source.subscity.providers.LanguageProvider
 import com.source.subscity.providers.MetroProvider
-import com.source.subscity.ui.movie.MovieAdapter
-import com.source.subscity.ui.movie.MoviePresenter
 import com.source.subscity.ui.movie.MovieScreeningAdapter
 import com.source.subscity.widgets.divider.ImageGridItemDecoration
 import javax.inject.Inject
@@ -24,7 +23,8 @@ import javax.inject.Inject
  */
 class CinemaAdapter(private val cinema: Cinema,
                     private var movieScreenings: List<CinemaPresenter.MovieScreenings>,
-                    private val mapClickListener: (Cinema) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+                    private val mapClickListener: (Cinema) -> Unit,
+                    private val screeningClickListener: (Screening) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val CINEMA_INFO_VIEW_TYPE = 0
     private val CINEMA_MOVIES_TITLE_VIEW_TYPE = 1
@@ -120,7 +120,7 @@ class CinemaAdapter(private val cinema: Cinema,
             movieLanguage.text = movieLanguage(movieScreenings.movie)
             screenings.apply {
                 layoutManager = GridLayoutManager(screenings.context, SPAN_COUNT, LinearLayoutManager.VERTICAL, false)
-                adapter = MovieScreeningAdapter(screenings.context!!, movieScreenings.screenings)
+                adapter = MovieScreeningAdapter(screenings.context!!, movieScreenings.screenings, screeningClickListener)
                 val margin = context.resources.getDimensionPixelSize(R.dimen.screening_margin)
                 addItemDecoration(ImageGridItemDecoration(SPAN_COUNT, margin, false))
             }

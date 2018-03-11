@@ -14,6 +14,7 @@ import com.source.subscity.R
 import com.source.subscity.api.entities.movie.Movie
 import com.source.subscity.dagger.GlideApp
 import com.source.subscity.dagger.SubsCityDagger
+import com.source.subscity.extensions.buyTicket
 import com.source.subscity.extensions.setSupportActionBar
 import com.source.subscity.extensions.toast
 import com.source.subscity.widgets.ScrollableLinearLayoutManager
@@ -69,7 +70,7 @@ class MovieFragment : MvpAppCompatFragment(), MovieView {
         if (adapter == null) {
             toolbarLayout.title = movie.title.russian
             GlideApp.with(moviePoster).asBitmap().load(movie.poster).transform(PosterCrop()).into(moviePoster)
-            adapter = MovieAdapter(movie, cinemaScreenings)
+            adapter = MovieAdapter(movie, cinemaScreenings, ::buyTicket)
             movieInfoList.adapter = adapter
         } else {
             movieInfoListLayoutManager.isScrollEnabled = false

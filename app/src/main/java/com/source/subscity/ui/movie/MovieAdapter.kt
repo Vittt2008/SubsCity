@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.source.subscity.R
 import com.source.subscity.api.entities.movie.Movie
+import com.source.subscity.api.entities.screening.Screening
 import com.source.subscity.dagger.SubsCityDagger
 import com.source.subscity.providers.DurationProvider
 import com.source.subscity.providers.MetroProvider
@@ -19,7 +20,8 @@ import javax.inject.Inject
  * @author Vitaliy Markus
  */
 class MovieAdapter(private val movie: Movie,
-                   private var cinemaScreenings: List<MoviePresenter.CinemaScreenings>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+                   private var cinemaScreenings: List<MoviePresenter.CinemaScreenings>,
+                   private val screeningClickListener: (Screening)->Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val MOVIE_INFO_VIEW_TYPE = 0
     private val MOVIE_SCREENINGS_TITLE_VIEW_TYPE = 1
@@ -139,7 +141,7 @@ class MovieAdapter(private val movie: Movie,
             cinemaMetro.text = metroProvider.currentMetroTextProvider.formatMetroListStation(cinemaScreenings.cinema.location.metro)
             screenings.apply {
                 layoutManager = GridLayoutManager(screenings.context, SPAN_COUNT, LinearLayoutManager.VERTICAL, false)
-                adapter = MovieScreeningAdapter(screenings.context!!, cinemaScreenings.screenings)
+                adapter = MovieScreeningAdapter(screenings.context!!, cinemaScreenings.screenings, screeningClickListener)
                 val margin = context.resources.getDimensionPixelSize(R.dimen.screening_margin)
                 addItemDecoration(ImageGridItemDecoration(SPAN_COUNT, margin, false))
             }

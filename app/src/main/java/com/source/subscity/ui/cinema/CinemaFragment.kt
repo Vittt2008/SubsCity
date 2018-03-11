@@ -14,6 +14,7 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.source.subscity.R
 import com.source.subscity.api.entities.cinema.Cinema
 import com.source.subscity.dagger.SubsCityDagger
+import com.source.subscity.extensions.buyTicket
 import com.source.subscity.extensions.setSupportActionBar
 import com.source.subscity.extensions.supportActionBar
 import com.source.subscity.extensions.toast
@@ -58,7 +59,7 @@ class CinemaFragment : MvpAppCompatFragment(), CinemaView {
     override fun showCinema(cinema: Cinema, second: List<CinemaPresenter.MovieScreenings>) {
         if (adapter == null) {
             activity!!.supportActionBar.title = cinema.name
-            adapter = CinemaAdapter(cinema, second, ::openMap)
+            adapter = CinemaAdapter(cinema, second, ::openMap, ::buyTicket)
             cinemaInfoList.adapter = adapter
         } else {
             adapter!!.updateScreenings(second)
