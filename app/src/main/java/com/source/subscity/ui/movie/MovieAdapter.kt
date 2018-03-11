@@ -1,5 +1,7 @@
 package com.source.subscity.ui.movie
 
+import android.content.Context
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -10,20 +12,28 @@ import com.source.subscity.R
 import com.source.subscity.api.entities.movie.Movie
 import com.source.subscity.dagger.SubsCityDagger
 import com.source.subscity.providers.DurationProvider
+import com.source.subscity.providers.MetroProvider
+import com.source.subscity.widgets.divider.ImageGridItemDecoration
+import com.source.subscity.widgets.divider.MarginDivider
 import javax.inject.Inject
 
 /**
  * @author Vitaliy Markus
  */
-class MovieAdapter(private val movie: Movie,
+class MovieAdapter(private val context: Context,
+                   private val movie: Movie,
                    private var cinemaScreenings: List<MoviePresenter.CinemaScreenings>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val MOVIE_INFO_VIEW_TYPE = 0
     private val MOVIE_DATE_VIEW_TYPE = 1
     private val MOVIE_SESSION_VIEW_TYPE = 2
+    private val SPAN_COUNT = 5
 
     @Inject
     lateinit var durationProvider: DurationProvider
+
+    @Inject
+    lateinit var metroProvider: MetroProvider
 
     init {
         SubsCityDagger.component.inject(this)
@@ -130,9 +140,12 @@ class MovieAdapter(private val movie: Movie,
 
         fun bind(cinemaScreenings: MoviePresenter.CinemaScreenings) {
             cinemaTitle.text = cinemaScreenings.cinema.name
+            cinemaMetro.text = metroProvider.currentMetroTextProvider.formatMetroListStation(cinemaScreenings.cinema.location.metro)
             screenings.apply {
-                layoutManager = LinearLayoutManager(screenings.context, LinearLayoutManager.HORIZONTAL, false)
-                adapter = MovieScreeningAdapter(cinemaScreenings.screenings)
+                layoutManager = GridLayoutManager(screenings.context, SPAN_COUNT, LinearLayoutManager.VERTICAL, false)
+                adapter = MovieScreeningAdapter(screenings.context!!, cinemaScreenings.screenings)
+                val margin = context.resources.getDimensionPixelSize(R.dimen.screening_margin)
+                addItemDecoration(ImageGridItemDecoration(SPAN_COUNT, margin, false))
             }
         }
     }

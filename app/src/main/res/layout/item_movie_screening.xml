@@ -31,7 +31,7 @@
         android:maxLines="1"
         android:text="Невский проспект / Гостиный Двор"
         android:textColor="@color/subtitle_color"
-        android:textSize="10sp"
+        android:textSize="12sp"
         android:textStyle="normal"
         app:layout_constraintBaseline_toBaselineOf="@+id/tv_cinema_title"
         app:layout_constraintEnd_toEndOf="parent"

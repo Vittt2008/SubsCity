@@ -17,6 +17,7 @@ import com.source.subscity.dagger.GlideApp
 import com.source.subscity.dagger.SubsCityDagger
 import com.source.subscity.extensions.setSupportActionBar
 import com.source.subscity.extensions.toast
+import com.source.subscity.widgets.ScrollableLinearLayoutManager
 import com.source.subscity.widgets.transformations.PosterCrop
 
 /**
@@ -31,6 +32,7 @@ class MovieFragment : MvpAppCompatFragment(), MovieView {
     private lateinit var trailerButton: ImageView
     private lateinit var toolbarLayout: CollapsingToolbarLayout
     private lateinit var movieInfoList: RecyclerView
+    private lateinit var movieInfoListLayoutManager: ScrollableLinearLayoutManager
 
     private var adapter: MovieAdapter? = null
 
@@ -57,7 +59,8 @@ class MovieFragment : MvpAppCompatFragment(), MovieView {
         trailerButton = root.findViewById(R.id.iv_play)
         toolbarLayout = root.findViewById(R.id.toolbar_layout)
         movieInfoList = root.findViewById(R.id.rv_list)
-        movieInfoList.layoutManager = LinearLayoutManager(activity)
+        movieInfoListLayoutManager = ScrollableLinearLayoutManager(activity!!)
+        movieInfoList.layoutManager = movieInfoListLayoutManager
         activity!!.setSupportActionBar(root.findViewById(R.id.toolbar))
         trailerButton.setOnClickListener { }
         return root
@@ -67,10 +70,12 @@ class MovieFragment : MvpAppCompatFragment(), MovieView {
         if (adapter == null) {
             toolbarLayout.title = movie.title.russian
             GlideApp.with(moviePoster).asBitmap().load(movie.poster).transform(PosterCrop()).into(moviePoster)
-            adapter = MovieAdapter(movie, cinemaScreenings)
+            adapter = MovieAdapter(activity!!, movie, cinemaScreenings)
             movieInfoList.adapter = adapter
         } else {
+            movieInfoListLayoutManager.isScrollEnabled = false
             adapter!!.updateScreenings(cinemaScreenings)
+            movieInfoList.post { movieInfoListLayoutManager.isScrollEnabled = true }
         }
 
     }

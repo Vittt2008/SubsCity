@@ -51,9 +51,6 @@ class MoviePresenter @Inject constructor(private val movieRepository: MovieRepos
         val cinemas = pair.second
         val cinemaScreenings = screenings.groupBy { it.cinemaId }
                 .map { CinemaScreenings(cinemas.first { cinema -> it.key == cinema.id }, it.value.sortedBy { x -> x.dateTime }) }
-        //
-        val map = screenings.map { it.copy(dateTime = it.dateTime.withTimeAtStartOfDay()) }.groupBy { it.dateTime }
-
         return cinemaScreenings
     }
 

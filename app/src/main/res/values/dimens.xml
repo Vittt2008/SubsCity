@@ -3,4 +3,6 @@
     <dimen name="poster_text_size">24sp</dimen>
     <dimen name="poster_text_size_middle">36sp</dimen>
     <dimen name="poster_text_size_huge">48sp</dimen>
+
+    <dimen name="screening_margin">12dp</dimen>
 </resources>

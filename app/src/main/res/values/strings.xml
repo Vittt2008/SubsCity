@@ -21,7 +21,8 @@
     <string name="movie_rating_kinopoisk_title">КиноПоиск:</string>
     <string name="movie_rating_imdb_title">IMDB:</string>
     <string name="movie_description_title">Описание</string>
-    <string name="movie_sessions_title">Сеансы</string>
+    <string name="movie_sreenings_title">Сеансы</string>
+    <string name="movie_screening_price">%1$d₽</string>
 
     <!-- CinemaFragment -->
     <string name="cinema_point_on_map">На карте</string>

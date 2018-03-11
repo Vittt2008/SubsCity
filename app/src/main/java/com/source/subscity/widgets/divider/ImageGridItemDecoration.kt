@@ -1,4 +1,4 @@
-package com.source.subscity.widgets
+package com.source.subscity.widgets.divider
 
 import android.graphics.Rect
 import android.support.v7.widget.RecyclerView
@@ -11,7 +11,7 @@ import android.view.View
  */
 class ImageGridItemDecoration(private val spanCount: Int, private val spacing: Int, private val includeEdge: Boolean) : RecyclerView.ItemDecoration() {
 
-    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State?) {
+    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
         val position = parent.getChildAdapterPosition(view)
         val column = position % spanCount
 
