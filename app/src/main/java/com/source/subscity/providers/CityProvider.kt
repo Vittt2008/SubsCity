@@ -50,6 +50,10 @@ class CityProvider @Inject constructor(private val context: Context) {
     val asyncCity: Observable<String> = citySubject
 
     fun changeCity(city: String) {
+        if (this.city == city){
+            return
+        }
+
         this.city = city
         this.citySubject.onNext(city)
     }

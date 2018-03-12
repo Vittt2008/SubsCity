@@ -19,7 +19,22 @@
             android:label="@string/main_films">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="spb.subscity.ru"
+                    android:scheme="https" />
+                <data
+                    android:host="msk.subscity.ru"
+                    android:scheme="https" />
+                <data
+                    android:host="subscity.ru"
+                    android:scheme="https" />
+
             </intent-filter>
         </activity>
         <activity
