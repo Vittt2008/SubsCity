@@ -49,8 +49,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.youtube.YouTubeActivity"
-            android:screenOrientation="sensorLandscape"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|keyboard"
+            android:theme="@style/AppTheme.YouTube" />
     </application>
 
 </manifest>
