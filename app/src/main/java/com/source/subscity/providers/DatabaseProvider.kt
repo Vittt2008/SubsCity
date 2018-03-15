@@ -13,22 +13,22 @@ import javax.inject.Singleton
 class DatabaseProvider @Inject constructor(private val context: Context,
                                            private val cityProvider: CityProvider) {
 
-    private var currentCity: String? = null
+    private var currentCityId: String? = null
     private var currentClient: DatabaseClient? = null
 
     val currentDatabaseClient: DatabaseClient
         get() {
-            if (currentCity == cityProvider.city && currentClient != null) {
+            if (currentCityId == cityProvider.cityId && currentClient != null) {
                 return currentClient!!
             }
 
             currentClient?.close()
 
-            currentCity = cityProvider.city
-            currentClient = when (currentCity) {
+            currentCityId = cityProvider.cityId
+            currentClient = when (currentCityId) {
                 CityProvider.SAINT_PETERSBURG -> createDatabaseClient(CityProvider.SAINT_PETERSBURG)
                 CityProvider.MOSCOW -> createDatabaseClient(CityProvider.MOSCOW)
-                else -> throw IllegalArgumentException("Not supported city = $currentCity")
+                else -> throw IllegalArgumentException("Not supported cityId = $currentCityId")
             }
             return currentClient!!
         }

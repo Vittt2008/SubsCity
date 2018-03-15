@@ -13,19 +13,19 @@ import javax.inject.Singleton
 class MetroProvider @Inject constructor(private val cityProvider: CityProvider,
                                         private val defaultMetroTextProvider: DefaultMetroTextProvider) {
 
-    private var currentCity: String? = null
+    private var currentCityId: String? = null
     private var currentProvider: MetroTextProvider = defaultMetroTextProvider
 
     val currentMetroTextProvider: MetroTextProvider
         get() {
-            if (currentCity == cityProvider.city) {
+            if (currentCityId == cityProvider.cityId) {
                 return currentProvider
             }
-            currentCity = cityProvider.city
-            currentProvider = when (currentCity) {
+            currentCityId = cityProvider.cityId
+            currentProvider = when (currentCityId) {
                 CityProvider.SAINT_PETERSBURG -> SubsCityDagger.component.createSpbMetroTextProvider()
                 CityProvider.MOSCOW -> SubsCityDagger.component.createMoscowMetroTextProvider()
-                else -> throw IllegalArgumentException("Not supported city = $currentCity")
+                else -> throw IllegalArgumentException("Not supported cityId = $currentCityId")
             }
             return currentProvider
         }

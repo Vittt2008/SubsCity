@@ -1,18 +1,17 @@
 package com.source.subscity
 
-import android.app.Application
+import android.support.multidex.MultiDexApplication
+import com.crashlytics.android.Crashlytics
 import com.source.subscity.dagger.DaggerSubsCityComponent
 import com.source.subscity.dagger.SubsCityDagger
 import com.source.subscity.dagger.SubsCityModule
-import com.crashlytics.android.Crashlytics
 import io.fabric.sdk.android.Fabric
-
 
 
 /**
  * @author Vitaliy Markus
  */
-class SubsCityApplication : Application() {
+class SubsCityApplication : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()

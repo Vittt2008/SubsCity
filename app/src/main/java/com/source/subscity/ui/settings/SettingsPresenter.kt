@@ -18,4 +18,8 @@ class SettingsPresenter @Inject constructor(private val cityProvider: CityProvid
                 .subscribe { viewState.showSettings(cityProvider.cityName) }
 
     }
+
+    fun showCinemasMap() {
+        viewState.showCinemasMap(cityProvider.city)
+    }
 }

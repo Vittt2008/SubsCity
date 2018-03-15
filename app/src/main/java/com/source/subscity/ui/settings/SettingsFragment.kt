@@ -10,8 +10,10 @@ import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.source.subscity.R
+import com.source.subscity.api.entities.City
 import com.source.subscity.dagger.SubsCityDagger
 import com.source.subscity.extensions.supportActionBar
+import com.source.subscity.ui.cinemasmap.CinemasMapActivity
 import com.source.subscity.ui.city.CityActivity
 
 /**
@@ -41,8 +43,20 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
     override fun showSettings(city: String) {
         settingsList.run {
             layoutManager = LinearLayoutManager(activity)
-            adapter = SettingsAdapter(city) { CityActivity.start(activity!!) }
+            adapter = SettingsAdapter(city) { item ->
+                when (item) {
+                //SettingsAdapter.SOON_AT_BOX_OFFICE -> {}
+                    SettingsAdapter.CINEMA_MAP -> settingsPresenter.showCinemasMap()
+                //SettingsAdapter.SALES -> {}
+                //SettingsAdapter.ABOUT -> {}
+                    SettingsAdapter.CITY -> CityActivity.start(activity!!)
+                }
+            }
         }
+    }
+
+    override fun showCinemasMap(city: City) {
+        CinemasMapActivity.start(activity!!, city.latitude, city.longitude, city.zoom)
     }
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {

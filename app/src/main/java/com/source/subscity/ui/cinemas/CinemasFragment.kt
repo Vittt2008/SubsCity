@@ -1,21 +1,20 @@
 package com.source.subscity.ui.cinemas
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.source.subscity.R
+import com.source.subscity.api.entities.City
 import com.source.subscity.api.entities.cinema.Cinema
 import com.source.subscity.dagger.SubsCityDagger
 import com.source.subscity.extensions.supportActionBar
 import com.source.subscity.ui.cinema.CinemaActivity
+import com.source.subscity.ui.cinemasmap.CinemasMapActivity
 import com.source.subscity.widgets.divider.MarginDivider
 
 /**
@@ -37,16 +36,14 @@ class CinemasFragment : MvpAppCompatFragment(), CinemasView {
         return SubsCityDagger.component.createCinemasPresenter()
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         cinemasList = inflater.inflate(R.layout.fragment_cinemas, container, false) as RecyclerView
         return cinemasList
-    }
-
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        super.setUserVisibleHint(isVisibleToUser)
-        if (isVisibleToUser) {
-            activity?.let { it.supportActionBar.setTitle(R.string.main_cinemas) }
-        }
     }
 
     override fun showCinemas(cinemas: List<Cinema>) {
@@ -57,6 +54,31 @@ class CinemasFragment : MvpAppCompatFragment(), CinemasView {
             addItemDecoration(MarginDivider(activity!!).apply { setDrawable(R.drawable.cinema_divider) })
         }
     }
+
+    override fun showCinemasMap(city: City) {
+        CinemasMapActivity.start(activity!!, city.latitude, city.longitude, city.zoom)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_cinema, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.item_map_cinema) {
+            cinemasPresenter.showCinemasMap()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (isVisibleToUser) {
+            activity?.let { it.supportActionBar.setTitle(R.string.main_cinemas) }
+        }
+    }
+
 
     override fun onError(throwable: Throwable) {
         Toast.makeText(activity, throwable.message, Toast.LENGTH_SHORT).show()

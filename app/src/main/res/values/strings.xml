@@ -27,9 +27,15 @@
     <string name="movie_trailer_russian">Русский</string>
     <string name="movie_no_trailers">К сожалению у данного фильма нет трейлеров</string>
 
+    <!-- CinemasFragment -->
+    <string name="cinemas_map_menu">На карте</string>
+
     <!-- CinemaFragment -->
     <string name="cinema_point_on_map">На карте</string>
     <string name="cinema_no_map_application">Отсутвуют приложния для работы с картой</string>
+
+    <!-- CinemasMapActivity -->
+    <string name="cinemas_map_title">Карта кинотеатров</string>
 
     <!-- CityFragment -->
     <string name="city_title">Выбор города</string>

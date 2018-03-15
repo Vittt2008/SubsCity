@@ -2,7 +2,6 @@ package com.source.subscity.repositories
 
 import com.source.subscity.api.ApiClient
 import com.source.subscity.api.entities.cinema.Cinema
-import com.source.subscity.db.DatabaseClient
 import com.source.subscity.providers.CityProvider
 import com.source.subscity.providers.DatabaseProvider
 import io.reactivex.Single
@@ -45,7 +44,7 @@ class CinemaRepository @Inject constructor(apiClient: ApiClient,
     override fun getCacheLifetime() = TimeUnit.DAYS.toMillis(1)
 
     private fun getCinemaFromApi(): Single<List<Cinema>> {
-        return apiClient.subsCityService.getCinemas(cityProvider.city)
+        return apiClient.subsCityService.getCinemas(cityProvider.cityId)
                 .doOnSuccess { it -> databaseProvider.currentDatabaseClient.cinemaDao.saveCinemas(it) }
                 .doOnSuccess { updateCacheTimestamp() }
     }

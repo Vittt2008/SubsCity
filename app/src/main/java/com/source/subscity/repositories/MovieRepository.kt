@@ -44,7 +44,7 @@ class MovieRepository @Inject constructor(apiClient: ApiClient,
     override fun getCacheLifetime() = TimeUnit.DAYS.toMillis(1)
 
     private fun getMoviesFromApi(): Single<List<Movie>> {
-        return apiClient.subsCityService.getMovies(cityProvider.city)
+        return apiClient.subsCityService.getMovies(cityProvider.cityId)
                 .doOnSuccess { it -> databaseProvider.currentDatabaseClient.movieDao.saveMovies(it) }
                 .doOnSuccess { updateCacheTimestamp() }
     }

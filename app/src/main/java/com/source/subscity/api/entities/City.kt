@@ -3,4 +3,8 @@ package com.source.subscity.api.entities
 /**
  * @author Vitaliy Markus
  */
-data class City(val id: String, val name: String)
+data class City(val id: String,
+                val name: String,
+                val latitude: Double,
+                val longitude: Double,
+                val zoom: Int)

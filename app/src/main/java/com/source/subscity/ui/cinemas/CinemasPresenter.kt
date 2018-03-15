@@ -25,4 +25,8 @@ class CinemasPresenter @Inject constructor(private val cinemaRepository: CinemaR
                         { viewState.onError(it) }
                 )
     }
+
+    fun showCinemasMap() {
+        viewState.showCinemasMap(cityProvider.city)
+    }
 }

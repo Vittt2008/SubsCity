@@ -2,7 +2,6 @@ package com.source.subscity.repositories
 
 import com.source.subscity.api.ApiClient
 import com.source.subscity.api.entities.screening.Screening
-import com.source.subscity.db.DatabaseClient
 import com.source.subscity.providers.CityProvider
 import com.source.subscity.providers.DatabaseProvider
 import io.reactivex.Single
@@ -65,7 +64,7 @@ class ScreeningRepository @Inject constructor(apiClient: ApiClient,
     override fun getCacheLifetime() = TimeUnit.DAYS.toMillis(1)
 
     private fun getMovieScreeningsFromApi(movieId: Long): Single<List<Screening>> {
-        return apiClient.subsCityService.getMovieScreenings(cityProvider.city, movieId)
+        return apiClient.subsCityService.getMovieScreenings(cityProvider.cityId, movieId)
                 .doOnSuccess { it -> databaseProvider.currentDatabaseClient.screeningDao.saveScreening(it) }
                 .doOnSuccess { updateCacheTimestamp(movieScreeningKey) }
     }
@@ -76,7 +75,7 @@ class ScreeningRepository @Inject constructor(apiClient: ApiClient,
     }
 
     private fun getCinemaScreeningsFromApi(cinemaId: Long): Single<List<Screening>> {
-        return apiClient.subsCityService.getCinemaScreenings(cityProvider.city, cinemaId)
+        return apiClient.subsCityService.getCinemaScreenings(cityProvider.cityId, cinemaId)
                 .doOnSuccess { it -> databaseProvider.currentDatabaseClient.screeningDao.saveScreening(it) }
                 .doOnSuccess { updateCacheTimestamp(cinemaScreeningKey) }
     }
@@ -87,7 +86,7 @@ class ScreeningRepository @Inject constructor(apiClient: ApiClient,
     }
 
     private fun getDateScreeningsFromApi(dateTime: DateTime): Single<List<Screening>> {
-        return apiClient.subsCityService.getDateScreenings(cityProvider.city, dateTime)
+        return apiClient.subsCityService.getDateScreenings(cityProvider.cityId, dateTime)
                 .doOnSuccess { it -> databaseProvider.currentDatabaseClient.screeningDao.saveScreening(it) }
                 .doOnSuccess { updateCacheTimestamp(dateScreeningKey) }
     }

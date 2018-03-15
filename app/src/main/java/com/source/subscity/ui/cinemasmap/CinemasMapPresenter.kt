@@ -1,8 +1,8 @@
-package com.source.subscity.ui.city
+package com.source.subscity.ui.cinemasmap
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
-import com.source.subscity.providers.CityProvider
+import com.source.subscity.repositories.CinemaRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
@@ -11,19 +11,15 @@ import javax.inject.Inject
  * @author Vitaliy Markus
  */
 @InjectViewState
-class CityPresenter @Inject constructor(private val cityProvider: CityProvider) : MvpPresenter<CityView>() {
+class CinemasMapPresenter @Inject constructor(private val cinemaRepository: CinemaRepository) : MvpPresenter<CinemasMapView>() {
 
-    override fun onFirstViewAttach() {
-        cityProvider.supportedCities
+    fun getCinemas(googleMap: Any) {
+        cinemaRepository.getCinemas()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        { viewState.showCities(it, cityProvider.cityId) },
+                        { viewState.showCinemas(it, googleMap) },
                         { viewState.onError(it) }
                 )
-    }
-
-    fun updateCity(city: String) {
-        cityProvider.changeCity(city)
     }
 }
