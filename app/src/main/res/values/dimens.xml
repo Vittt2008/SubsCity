@@ -4,5 +4,5 @@
     <dimen name="poster_text_size_middle">36sp</dimen>
     <dimen name="poster_text_size_huge">48sp</dimen>
 
-    <dimen name="screening_margin">12dp</dimen>
+    <dimen name="screening_margin">2dp</dimen>
 </resources>

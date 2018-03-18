@@ -1,8 +1,6 @@
 package com.source.subscity.ui.movies
 
 import android.content.Context
-import android.graphics.drawable.GradientDrawable
-import android.support.v4.content.ContextCompat
 import android.support.v4.widget.TextViewCompat
 import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.RecyclerView

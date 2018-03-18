@@ -15,20 +15,18 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.GoogleMapOptions
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.CameraPosition
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import com.source.subscity.R
 import com.source.subscity.api.entities.cinema.Cinema
 import com.source.subscity.dagger.SubsCityDagger
 import com.source.subscity.extensions.toast
+import com.source.subscity.ui.cinema.CinemaActivity
 
 
 /**
  * @author Vitaliy Markus
  */
-class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView {
+class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnInfoWindowClickListener {
 
     private val FRAGMENT_MAP_TAG = "fragment_map_tag"
 
@@ -36,6 +34,8 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView {
     lateinit var cinemasMapPresenter: CinemasMapPresenter
 
     private lateinit var mapFragment: SupportMapFragment
+
+    private lateinit var markerCinemaMap: Map<String, Long>
 
     companion object {
 
@@ -72,24 +72,31 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView {
             mapFragment = supportFragmentManager.findFragmentByTag(FRAGMENT_MAP_TAG) as SupportMapFragment
         }
 
-        mapFragment.getMapAsync { cinemasMapPresenter.getCinemas(it) }
+        mapFragment.getMapAsync {
+            it.setOnInfoWindowClickListener(this)
+            cinemasMapPresenter.getCinemas(it)
+        }
 
     }
 
     override fun showCinemas(cinemas: List<Cinema>, googleMap: Any) {
         val map = googleMap as GoogleMap
         val icon = AppCompatResources.getDrawable(this, R.drawable.ic_pin)!!.toBitmap()
-        cinemas.forEach {
-            val markerOptions = MarkerOptions()
-                    .position(LatLng(it.location.latitude, it.location.longitude))
-                    .icon(BitmapDescriptorFactory.fromBitmap(icon))
-                    .anchor(0.5f, 1f)
-            map.addMarker(markerOptions)
-        }
+        val markerCinemaMap: Map<String, Long> = cinemas.associateBy({ map.addMarker(createMarkerOptions(it, icon)).id }, { it.id })
+        cinemasMapPresenter.onMarkersAdd(markerCinemaMap)
+    }
+
+    override fun onMarkersAdd(markerCinemaMap: Map<String, Long>) {
+        this.markerCinemaMap = markerCinemaMap
     }
 
     override fun onError(throwable: Throwable) {
         toast(throwable.message)
+    }
+
+    override fun onInfoWindowClick(marker: Marker) {
+        val cinemaId = markerCinemaMap[marker.id]!!
+        CinemaActivity.start(this, cinemaId)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -104,6 +111,16 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView {
         val longitude = intent.getDoubleExtra(EXTRA_LONGITUDE, 0.0)
         val zoom = intent.getIntExtra(EXTRA_ZOOM, 0)
         return CameraPosition.fromLatLngZoom(LatLng(latitude, longitude), zoom.toFloat())
+    }
+
+    private fun createMarkerOptions(it: Cinema, icon: Bitmap): MarkerOptions? {
+        val markerOptions = MarkerOptions()
+                .position(LatLng(it.location.latitude, it.location.longitude))
+                .icon(BitmapDescriptorFactory.fromBitmap(icon))
+                .anchor(0.5f, 1f)
+                .title(it.name)
+                .snippet(it.location.address)
+        return markerOptions
     }
 
     private fun Drawable.toBitmap(): Bitmap {

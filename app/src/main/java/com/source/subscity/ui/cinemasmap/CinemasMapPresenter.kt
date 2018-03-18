@@ -22,4 +22,8 @@ class CinemasMapPresenter @Inject constructor(private val cinemaRepository: Cine
                         { viewState.onError(it) }
                 )
     }
+
+    fun onMarkersAdd(markerCinemaMap: Map<String, Long>) {
+        viewState.onMarkersAdd(markerCinemaMap)
+    }
 }
