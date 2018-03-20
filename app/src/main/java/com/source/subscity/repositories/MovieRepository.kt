@@ -45,6 +45,7 @@ class MovieRepository @Inject constructor(apiClient: ApiClient,
 
     private fun getMoviesFromApi(): Single<List<Movie>> {
         return apiClient.subsCityService.getMovies(cityProvider.cityId)
+                .doOnSuccess { databaseProvider.currentDatabaseClient.movieDao.deleteAllMovies() } //TODO Remove All
                 .doOnSuccess { it -> databaseProvider.currentDatabaseClient.movieDao.saveMovies(it) }
                 .doOnSuccess { updateCacheTimestamp() }
     }

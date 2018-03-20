@@ -13,11 +13,9 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.source.subscity.R
 import com.source.subscity.api.entities.cinema.Cinema
+import com.source.subscity.api.entities.screening.Screening
 import com.source.subscity.dagger.SubsCityDagger
-import com.source.subscity.extensions.buyTicket
-import com.source.subscity.extensions.setSupportActionBar
-import com.source.subscity.extensions.supportActionBar
-import com.source.subscity.extensions.toast
+import com.source.subscity.extensions.*
 
 /**
  * @author Vitaliy Markus
@@ -59,7 +57,7 @@ class CinemaFragment : MvpAppCompatFragment(), CinemaView {
     override fun showCinema(cinema: Cinema, second: List<CinemaPresenter.MovieScreenings>) {
         if (adapter == null) {
             activity!!.supportActionBar.title = cinema.name
-            adapter = CinemaAdapter(cinema, second, ::openMap, ::buyTicket)
+            adapter = CinemaAdapter(cinema, second, ::openMap, ::call, ::openSite, ::buyTicket)
             cinemaInfoList.adapter = adapter
         } else {
             adapter!!.updateScreenings(second)
@@ -79,6 +77,20 @@ class CinemaFragment : MvpAppCompatFragment(), CinemaView {
         } else {
             toast(getString(R.string.cinema_no_map_application))
         }
+    }
+
+    private fun call(cinema: Cinema) {
+        val intent = Intent(Intent.ACTION_DIAL)
+        intent.data = Uri.parse("tel:${cinema.phones.first()}")
+        startActivity(intent)
+    }
+
+    private fun openSite(cinema: Cinema) {
+        openUrl(Uri.parse(cinema.urls.first()))
+    }
+
+    private fun buyTicket(screening: Screening) {
+        openUrl(Uri.parse(screening.ticketsUrl))
     }
 
 }

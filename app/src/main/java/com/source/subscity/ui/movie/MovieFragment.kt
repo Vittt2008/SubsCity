@@ -1,5 +1,6 @@
 package com.source.subscity.ui.movie
 
+import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.CollapsingToolbarLayout
 import android.support.v7.widget.RecyclerView
@@ -13,9 +14,10 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.github.rubensousa.bottomsheetbuilder.BottomSheetBuilder
 import com.source.subscity.R
 import com.source.subscity.api.entities.movie.Movie
+import com.source.subscity.api.entities.screening.Screening
 import com.source.subscity.dagger.GlideApp
 import com.source.subscity.dagger.SubsCityDagger
-import com.source.subscity.extensions.buyTicket
+import com.source.subscity.extensions.openUrl
 import com.source.subscity.extensions.setSupportActionBar
 import com.source.subscity.extensions.toast
 import com.source.subscity.ui.youtube.YouTubeActivity
@@ -108,5 +110,9 @@ class MovieFragment : MvpAppCompatFragment(), MovieView {
         } else {
             toast(getString(R.string.movie_no_trailers))
         }
+    }
+
+    private fun buyTicket(screening: Screening) {
+        openUrl(Uri.parse(screening.ticketsUrl))
     }
 }

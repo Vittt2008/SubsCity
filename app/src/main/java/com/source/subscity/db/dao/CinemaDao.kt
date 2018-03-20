@@ -1,9 +1,6 @@
 package com.source.subscity.db.dao
 
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.OnConflictStrategy
-import android.arch.persistence.room.Query
+import android.arch.persistence.room.*
 import com.source.subscity.api.entities.cinema.Cinema
 import io.reactivex.Flowable
 import io.reactivex.Single
@@ -22,4 +19,7 @@ interface CinemaDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveCinemas(cinemas: List<Cinema>)
+
+    @Query("DELETE FROM Cinema")
+    fun deleteAllCinemas()
 }

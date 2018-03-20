@@ -45,6 +45,7 @@ class CinemaRepository @Inject constructor(apiClient: ApiClient,
 
     private fun getCinemaFromApi(): Single<List<Cinema>> {
         return apiClient.subsCityService.getCinemas(cityProvider.cityId)
+                .doOnSuccess { databaseProvider.currentDatabaseClient.cinemaDao.deleteAllCinemas() } //TODO Remove All
                 .doOnSuccess { it -> databaseProvider.currentDatabaseClient.cinemaDao.saveCinemas(it) }
                 .doOnSuccess { updateCacheTimestamp() }
     }

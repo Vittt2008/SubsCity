@@ -24,6 +24,8 @@ import javax.inject.Inject
 class CinemaAdapter(private val cinema: Cinema,
                     private var movieScreenings: List<CinemaPresenter.MovieScreenings>,
                     private val mapClickListener: (Cinema) -> Unit,
+                    private val phoneClickListener: (Cinema) -> Unit,
+                    private val siteClickListener: (Cinema) -> Unit,
                     private val screeningClickListener: (Screening) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val CINEMA_INFO_VIEW_TYPE = 0
@@ -45,8 +47,10 @@ class CinemaAdapter(private val cinema: Cinema,
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             CINEMA_INFO_VIEW_TYPE -> {
-                val view = LayoutInflater.from(parent.context).inflate(R.layout.item_cinema_info, parent, false)
-                InfoViewHolder(view)
+//                val view = LayoutInflater.from(parent.context).inflate(R.layout.item_cinema_info, parent, false)
+//                InfoViewHolder(view)
+                val view = LayoutInflater.from(parent.context).inflate(R.layout.item_cinema_info_2, parent, false)
+                InfoViewHolder2(view)
             }
             CINEMA_MOVIES_TITLE_VIEW_TYPE -> {
                 val view = LayoutInflater.from(parent.context).inflate(R.layout.item_divider_title, parent, false)
@@ -65,7 +69,7 @@ class CinemaAdapter(private val cinema: Cinema,
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when {
-            position == CINEMA_INFO_VIEW_TYPE -> (holder as InfoViewHolder).bind(cinema)
+            position == CINEMA_INFO_VIEW_TYPE -> (holder as InfoViewHolder2).bind(cinema)
             position != CINEMA_MOVIES_TITLE_VIEW_TYPE -> (holder as MovieScreeningsViewHolder).bind(movieScreenings[position - 2])
         }
     }
@@ -100,6 +104,30 @@ class CinemaAdapter(private val cinema: Cinema,
 
             address.text = cinema.location.address
             metroStation.text = metroProvider.currentMetroTextProvider.formatMetroListStation(cinema.location.metro)
+        }
+    }
+
+    inner class InfoViewHolder2(view: View) : RecyclerView.ViewHolder(view) {
+        private lateinit var cinema: Cinema
+
+        private val address = view.findViewById<TextView>(R.id.tv_cinema_address)
+        private val metroStation = view.findViewById<TextView>(R.id.tv_cinema_metro_station)
+        private val phoneNumber = view.findViewById<TextView>(R.id.tv_phone_number)
+        private val webSite = view.findViewById<TextView>(R.id.tv_web_site)
+
+        init {
+            view.findViewById<View>(R.id.cl_show_on_map).setOnClickListener { mapClickListener.invoke(cinema) }
+            view.findViewById<View>(R.id.cl_call).setOnClickListener { phoneClickListener.invoke(cinema) }
+            view.findViewById<View>(R.id.cl_web).setOnClickListener { siteClickListener.invoke(cinema) }
+        }
+
+        fun bind(cinema: Cinema) {
+            this.cinema = cinema
+
+            address.text = cinema.location.address
+            metroStation.text = metroProvider.currentMetroTextProvider.formatMetroListStation(cinema.location.metro)
+            phoneNumber.text = cinema.phones.joinToString("      ")
+            webSite.text = cinema.urls.firstOrNull()
         }
     }
 
