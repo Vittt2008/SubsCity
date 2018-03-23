@@ -7,7 +7,6 @@ import com.source.subscity.api.entities.movie.Movie
  * @author Vitaliy Markus
  */
 interface MoviesView : MvpView {
-
     fun showMovies(movies:List<Movie>)
     fun onError(throwable: Throwable)
 }
