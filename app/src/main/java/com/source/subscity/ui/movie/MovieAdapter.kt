@@ -21,7 +21,7 @@ import javax.inject.Inject
  */
 class MovieAdapter(private val movie: Movie,
                    private var cinemaScreenings: List<MoviePresenter.CinemaScreenings>,
-                   private val screeningClickListener: (Screening)->Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+                   private val screeningClickListener: (Screening) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val MOVIE_INFO_VIEW_TYPE = 0
     private val MOVIE_SCREENINGS_TITLE_VIEW_TYPE = 1
@@ -89,6 +89,7 @@ class MovieAdapter(private val movie: Movie,
         private val age = view.findViewById<TextView>(R.id.tv_age_value)
         private val ratingTitle = view.findViewById<TextView>(R.id.tv_rating_title)
         private val rating = view.findViewById<TextView>(R.id.tv_rating_value)
+        private val descriptionTitle = view.findViewById<TextView>(R.id.tv_description_title)
         private val description = view.findViewById<TextView>(R.id.tv_description_value)
 
         fun bind(movie: Movie) {
@@ -120,7 +121,15 @@ class MovieAdapter(private val movie: Movie,
                 ratingTitle.visibility = View.GONE
                 rating.visibility = View.GONE
             }
-            description.text = movie.description
+            if (movie.description.isNotEmpty()) {
+                descriptionTitle.visibility = View.VISIBLE
+                description.visibility = View.VISIBLE
+                description.text = movie.description
+            } else {
+                descriptionTitle.visibility = View.GONE
+                description.visibility = View.GONE
+            }
+
         }
     }
 

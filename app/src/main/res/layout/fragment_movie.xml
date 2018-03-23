@@ -43,6 +43,7 @@
                 android:layout_height="56dp"
                 android:layout_gravity="center"
                 android:src="@drawable/youtube_bg"
+                android:visibility="gone"
                 app:layout_collapseMode="parallax"
                 app:layout_collapseParallaxMultiplier="0.35" />
 

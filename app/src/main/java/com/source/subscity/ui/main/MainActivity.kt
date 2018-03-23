@@ -36,6 +36,7 @@ class MainActivity : MvpAppCompatActivity(), DeepLinkView {
         ahBottomView = findViewById(R.id.ahb_bottom)
         styleViewPager()
         styleBottomNavigation()
+        supportActionBar!!.setTitle(R.string.main_films)
 
         if (isFromDeepLink) {
             deepLinkPresenter.performDeepLink(intent.data)

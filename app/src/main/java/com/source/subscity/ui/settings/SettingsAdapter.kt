@@ -24,9 +24,9 @@ class SettingsAdapter(city: String, private val clickListener: (Int) -> Unit) : 
     }
 
     private val settings = listOf(
-            SettingItem(SOON_AT_BOX_OFFICE, R.drawable.ic_menu_soom_at_box_office, R.string.setting_new_in_cinema_title),
+            //SettingItem(SOON_AT_BOX_OFFICE, R.drawable.ic_menu_soom_at_box_office, R.string.setting_new_in_cinema_title),
             SettingItem(CINEMA_MAP, R.drawable.ic_menu_map, R.string.setting_cinema_map_title),
-            SettingItem(SALES, R.drawable.ic_menu_sales, R.string.setting_sale_title),
+            //SettingItem(SALES, R.drawable.ic_menu_sales, R.string.setting_sale_title),
             SettingItem(ABOUT, R.drawable.ic_menu_about, R.string.setting_about_title),
             SettingItem(CITY, R.drawable.ic_menu_city, R.string.setting_city_title, city))
 

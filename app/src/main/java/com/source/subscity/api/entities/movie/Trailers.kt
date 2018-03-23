@@ -12,4 +12,7 @@ data class Trailers(@SerializedName("original") val original: String,
 
     @Ignore
     constructor() : this("", "")
+
+    val hasTrailer: Boolean
+        get() = original.isNotEmpty() || russian.isNotEmpty()
 }

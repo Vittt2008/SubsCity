@@ -3,6 +3,7 @@ package com.source.subscity.ui.movie
 import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.CollapsingToolbarLayout
+import android.support.transition.TransitionManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -66,6 +67,7 @@ class MovieFragment : MvpAppCompatFragment(), MovieView {
         movieInfoListLayoutManager = ScrollableLinearLayoutManager(activity!!)
         movieInfoList.layoutManager = movieInfoListLayoutManager
         activity!!.setSupportActionBar(root.findViewById(R.id.toolbar))
+        toolbarLayout.title = ""
         return root
     }
 
@@ -75,7 +77,9 @@ class MovieFragment : MvpAppCompatFragment(), MovieView {
             GlideApp.with(moviePoster).asBitmap().load(movie.poster).transform(PosterCrop()).into(moviePoster)
             adapter = MovieAdapter(movie, cinemaScreenings, ::buyTicket)
             movieInfoList.adapter = adapter
-            trailerButton.setOnClickListener { showTrailer(movie) }
+            if (movie.trailer.hasTrailer) {
+                showTrailerButton(movie)
+            }
         } else {
             movieInfoListLayoutManager.isScrollEnabled = false
             adapter!!.updateScreenings(cinemaScreenings)
@@ -86,6 +90,21 @@ class MovieFragment : MvpAppCompatFragment(), MovieView {
 
     override fun onError(throwable: Throwable) {
         toast(throwable.message)
+    }
+
+    private fun showTrailerButton(movie: Movie) {
+        TransitionManager.beginDelayedTransition(view!!.findViewById(R.id.toolbar_layout))
+        trailerButton.visibility = View.VISIBLE
+        trailerButton.setOnClickListener { showPreferOriginalTrailer(movie) }
+    }
+
+    private fun showPreferOriginalTrailer(movie: Movie) {
+        val trailer = movie.trailer
+        when {
+            trailer.original.isNotEmpty() -> YouTubeActivity.start(activity!!, trailer.original)
+            trailer.russian.isNotEmpty() -> YouTubeActivity.start(activity!!, trailer.russian)
+            else -> toast(getString(R.string.movie_no_trailers))
+        }
     }
 
     private fun showTrailer(movie: Movie) {
