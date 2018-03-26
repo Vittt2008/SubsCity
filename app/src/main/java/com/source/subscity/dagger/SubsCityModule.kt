@@ -29,6 +29,10 @@ class SubsCityModule(@get:Provides val context: Context) {
                 .addInterceptor(HttpLoggingInterceptor().apply {
                     level = HttpLoggingInterceptor.Level.BODY
                 })
+                .addInterceptor {
+                    Thread.sleep(5000)
+                    it.proceed(it.request())
+                }
                 .build()
     }
 

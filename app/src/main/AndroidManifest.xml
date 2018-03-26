@@ -10,18 +10,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="df22a2da753e542199a3247a4ceec3e927d4522a" />
 
-        <activity
-            android:name=".ui.main.MainActivity"
-            android:label="@string/main_films">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBdMF5C9dMyuE-fopbHlzfqUsJ7Fm6I4BI" />
+
+        <activity android:name=".ui.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
@@ -51,6 +56,9 @@
             android:name=".ui.youtube.YouTubeActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|keyboard"
             android:theme="@style/AppTheme.YouTube" />
+        <activity
+            android:name=".ui.cinemasmap.CinemasMapActivity"
+            android:label="@string/cinemas_map_title" />
     </application>
 
 </manifest>

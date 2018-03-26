@@ -6,6 +6,7 @@ import com.source.subscity.providers.CityProvider
 import com.source.subscity.repositories.MovieRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 /**
@@ -16,13 +17,17 @@ class MoviesPresenter @Inject constructor(private val movieRepository: MovieRepo
                                           private val cityProvider: CityProvider) : MvpPresenter<MoviesView>() {
 
     override fun onFirstViewAttach() {
+        viewState.showProgress()
         cityProvider.asyncCity
                 .flatMapSingle { movieRepository.getMovies() }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        { viewState.showMovies(it) },
-                        { viewState.onError(it) }
-                )
+                .subscribe({
+                    viewState.hideProgress()
+                    viewState.showMovies(it)
+                }, {
+                    viewState.hideProgress()
+                    viewState.onError(it)
+                })
     }
 }

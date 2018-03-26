@@ -14,6 +14,7 @@ import com.source.subscity.R
 import com.source.subscity.dagger.SubsCityDagger
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.source.subscity.api.entities.movie.Movie
+import com.source.subscity.controllers.ContentLoadingController
 import com.source.subscity.extensions.supportActionBar
 import com.source.subscity.ui.movie.MovieActivity
 
@@ -22,6 +23,8 @@ import com.source.subscity.ui.movie.MovieActivity
  * @author Vitaliy Markus
  */
 class MoviesFragment : MvpAppCompatFragment(), MoviesView {
+
+    private lateinit var loadingController: ContentLoadingController
 
     @InjectPresenter
     lateinit var moviesPresenter: MoviesPresenter
@@ -38,9 +41,12 @@ class MoviesFragment : MvpAppCompatFragment(), MoviesView {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        moviesList = inflater.inflate(R.layout.fragment_movies, container, false) as RecyclerView
-        return moviesList
+        val root = inflater.inflate(R.layout.fragment_movies, container, false)
+        moviesList = root.findViewById(R.id.rv_list)
+        loadingController = ContentLoadingController(root, R.id.rv_list, R.id.pb_progress)
+        return root
     }
+
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
@@ -50,6 +56,7 @@ class MoviesFragment : MvpAppCompatFragment(), MoviesView {
     }
 
     override fun showMovies(movies: List<Movie>) {
+        loadingController.switchState(ContentLoadingController.State.CONTENT)
         moviesList.run {
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             adapter = MoviesAdapter(activity!!, movies) { MovieActivity.start(activity!!, it.id) }
@@ -58,5 +65,13 @@ class MoviesFragment : MvpAppCompatFragment(), MoviesView {
 
     override fun onError(throwable: Throwable) {
         Toast.makeText(activity, throwable.message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun showProgress() {
+        loadingController.switchState(ContentLoadingController.State.PROGRESS)
+    }
+
+    override fun hideProgress() {
+        loadingController.switchState(ContentLoadingController.State.CONTENT)
     }
 }

@@ -11,6 +11,7 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.source.subscity.R
 import com.source.subscity.api.entities.City
 import com.source.subscity.api.entities.cinema.Cinema
+import com.source.subscity.controllers.ContentLoadingController
 import com.source.subscity.dagger.SubsCityDagger
 import com.source.subscity.extensions.supportActionBar
 import com.source.subscity.ui.cinema.CinemaActivity
@@ -21,6 +22,8 @@ import com.source.subscity.widgets.divider.MarginDivider
  * @author Vitaliy Markus
  */
 class CinemasFragment : MvpAppCompatFragment(), CinemasView {
+
+    private lateinit var loadingController: ContentLoadingController
 
     @InjectPresenter
     lateinit var cinemasPresenter: CinemasPresenter
@@ -42,8 +45,10 @@ class CinemasFragment : MvpAppCompatFragment(), CinemasView {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        cinemasList = inflater.inflate(R.layout.fragment_cinemas, container, false) as RecyclerView
-        return cinemasList
+        val root = inflater.inflate(R.layout.fragment_cinemas, container, false)
+        cinemasList = root.findViewById(R.id.rv_list)
+        loadingController = ContentLoadingController(root, R.id.rv_list, R.id.pb_progress)
+        return root
     }
 
     override fun showCinemas(cinemas: List<Cinema>) {
@@ -84,5 +89,12 @@ class CinemasFragment : MvpAppCompatFragment(), CinemasView {
         Toast.makeText(activity, throwable.message, Toast.LENGTH_SHORT).show()
     }
 
+    override fun showProgress() {
+        loadingController.switchState(ContentLoadingController.State.PROGRESS)
+    }
+
+    override fun hideProgress() {
+        loadingController.switchState(ContentLoadingController.State.CONTENT)
+    }
 
 }
