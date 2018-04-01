@@ -1,19 +1,18 @@
 package com.source.subscity.dagger
 
-import android.arch.persistence.room.Room
 import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.source.subscity.api.ApiClient
 import com.source.subscity.api.deserializers.DateTimeDeserializer
 import com.source.subscity.api.deserializers.SubsCityTypeAdapterFactory
-import com.source.subscity.db.DatabaseClient
 import dagger.Module
 import dagger.Provides
 import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.joda.time.DateTime
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 /**
@@ -22,6 +21,8 @@ import javax.inject.Singleton
 @Module
 class SubsCityModule(@get:Provides val context: Context) {
 
+    private val TIMEOUT = 10L
+
     @Provides
     @Singleton
     fun okHttpClient(): OkHttpClient {
@@ -29,10 +30,10 @@ class SubsCityModule(@get:Provides val context: Context) {
                 .addInterceptor(HttpLoggingInterceptor().apply {
                     level = HttpLoggingInterceptor.Level.BODY
                 })
-                .addInterceptor {
-                    Thread.sleep(5000)
-                    it.proceed(it.request())
-                }
+                .retryOnConnectionFailure(false)
+                .readTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
+                .connectTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
+                .writeTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
                 .build()
     }
 

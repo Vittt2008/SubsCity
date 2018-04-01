@@ -26,6 +26,7 @@ class MovieAdapter(private val movie: Movie,
     private val MOVIE_INFO_VIEW_TYPE = 0
     private val MOVIE_SCREENINGS_TITLE_VIEW_TYPE = 1
     private val MOVIE_SCREENINGS_VIEW_TYPE = 2
+    private val PROGRESS_VIEW_TYPE = 3
 
     private val SPAN_COUNT = 5
 
@@ -49,6 +50,10 @@ class MovieAdapter(private val movie: Movie,
                 val view = LayoutInflater.from(parent.context).inflate(R.layout.item_divider_title, parent, false)
                 TitleDividerViewHolder(view)
             }
+            PROGRESS_VIEW_TYPE -> {
+                val view = LayoutInflater.from(parent.context).inflate(R.layout.item_progress, parent, false)
+                ProgressViewHolder(view)
+            }
             else -> {
                 val view = LayoutInflater.from(parent.context).inflate(R.layout.item_screenings, parent, false)
                 CinemaScreeningsViewHolder(view)
@@ -68,16 +73,21 @@ class MovieAdapter(private val movie: Movie,
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when (position) {
-            MOVIE_INFO_VIEW_TYPE -> MOVIE_INFO_VIEW_TYPE
-            MOVIE_SCREENINGS_TITLE_VIEW_TYPE -> MOVIE_SCREENINGS_TITLE_VIEW_TYPE
-            else -> MOVIE_SCREENINGS_VIEW_TYPE
+        if (position == 0) {
+            return MOVIE_INFO_VIEW_TYPE
+        } else if (position == 1 && cinemaScreenings.isEmpty()) {
+            return PROGRESS_VIEW_TYPE
+        } else if (position == 1 && cinemaScreenings.isNotEmpty()) {
+            return MOVIE_SCREENINGS_TITLE_VIEW_TYPE
+        } else {
+            return MOVIE_SCREENINGS_VIEW_TYPE
         }
     }
 
     fun updateScreenings(cinemaScreenings: List<MoviePresenter.CinemaScreenings>) {
         val oldSize = itemCount
         this.cinemaScreenings = cinemaScreenings
+        notifyItemChanged(oldSize - 1)
         notifyItemRangeInserted(oldSize, itemCount - oldSize)
     }
 
@@ -135,8 +145,7 @@ class MovieAdapter(private val movie: Movie,
 
     inner class TitleDividerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         init {
-            view.findViewById<TextView>(R.id.tv_divider_title)
-                    .setText(R.string.movie_screenings_title)
+            view.findViewById<TextView>(R.id.tv_divider_title).setText(R.string.movie_screenings_title)
         }
     }
 
@@ -156,4 +165,7 @@ class MovieAdapter(private val movie: Movie,
             }
         }
     }
+
+    class ProgressViewHolder(view: View) : RecyclerView.ViewHolder(view)
+
 }

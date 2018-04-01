@@ -2,6 +2,7 @@ package com.source.subscity.repositories
 
 import com.source.subscity.api.ApiClient
 import com.source.subscity.api.entities.screening.Screening
+import com.source.subscity.extensions.timeout
 import com.source.subscity.providers.CityProvider
 import com.source.subscity.providers.DatabaseProvider
 import io.reactivex.Single
@@ -28,7 +29,7 @@ class ScreeningRepository @Inject constructor(apiClient: ApiClient,
                         getMovieScreeningsFromDb(movieId)
                     } else {
                         getMovieScreeningsFromApi(movieId)
-                                .onErrorResumeNext(getMovieScreeningsFromDb(movieId))
+                                .onErrorResumeNext { getMovieScreeningsFromDb(movieId) }
                     }
                 }
                 .map { movies -> movies.sortedBy { it.dateTime.millis } }
@@ -41,7 +42,7 @@ class ScreeningRepository @Inject constructor(apiClient: ApiClient,
                         getCinemaScreeningsFromDb(cinemaId)
                     } else {
                         getCinemaScreeningsFromApi(cinemaId)
-                                .onErrorResumeNext(getCinemaScreeningsFromDb(cinemaId))
+                                .onErrorResumeNext { getCinemaScreeningsFromDb(cinemaId) }
                     }
                 }
                 .map { movies -> movies.sortedBy { it.dateTime.millis } }
@@ -54,7 +55,7 @@ class ScreeningRepository @Inject constructor(apiClient: ApiClient,
                         getDateScreeningsFromDb(dateTime)
                     } else {
                         getDateScreeningsFromApi(dateTime)
-                                .onErrorResumeNext(getDateScreeningsFromDb(dateTime))
+                                .onErrorResumeNext { getDateScreeningsFromDb(dateTime) }
                     }
                 }
                 .map { movies -> movies.sortedBy { it.dateTime.millis } }
@@ -67,6 +68,7 @@ class ScreeningRepository @Inject constructor(apiClient: ApiClient,
         return apiClient.subsCityService.getMovieScreenings(cityProvider.cityId, movieId)
                 .doOnSuccess { it -> databaseProvider.currentDatabaseClient.screeningDao.saveScreening(it) }
                 .doOnSuccess { updateCacheTimestamp(movieScreeningKey) }
+                .timeout()
     }
 
     private fun getMovieScreeningsFromDb(movieId: Long): Single<List<Screening>> {
@@ -78,6 +80,7 @@ class ScreeningRepository @Inject constructor(apiClient: ApiClient,
         return apiClient.subsCityService.getCinemaScreenings(cityProvider.cityId, cinemaId)
                 .doOnSuccess { it -> databaseProvider.currentDatabaseClient.screeningDao.saveScreening(it) }
                 .doOnSuccess { updateCacheTimestamp(cinemaScreeningKey) }
+                .timeout()
     }
 
     private fun getCinemaScreeningsFromDb(cinemaId: Long): Single<List<Screening>> {
@@ -89,6 +92,7 @@ class ScreeningRepository @Inject constructor(apiClient: ApiClient,
         return apiClient.subsCityService.getDateScreenings(cityProvider.cityId, dateTime)
                 .doOnSuccess { it -> databaseProvider.currentDatabaseClient.screeningDao.saveScreening(it) }
                 .doOnSuccess { updateCacheTimestamp(dateScreeningKey) }
+                .timeout()
     }
 
     private fun getDateScreeningsFromDb(dateTime: DateTime): Single<List<Screening>> {

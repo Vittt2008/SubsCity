@@ -2,6 +2,7 @@ package com.source.subscity.repositories
 
 import com.source.subscity.api.ApiClient
 import com.source.subscity.api.entities.cinema.Cinema
+import com.source.subscity.extensions.timeout
 import com.source.subscity.providers.CityProvider
 import com.source.subscity.providers.DatabaseProvider
 import io.reactivex.Single
@@ -22,7 +23,7 @@ class CinemaRepository @Inject constructor(apiClient: ApiClient,
                         getCinemasFromDb()
                     } else {
                         getCinemaFromApi()
-                                .onErrorResumeNext(getCinemasFromDb())
+                                .onErrorResumeNext { getCinemasFromDb() }
                     }
                 }
                 .map { cinema -> cinema.sortedBy { it.name } }
@@ -48,6 +49,7 @@ class CinemaRepository @Inject constructor(apiClient: ApiClient,
                 .doOnSuccess { databaseProvider.currentDatabaseClient.cinemaDao.deleteAllCinemas() } //TODO Remove All
                 .doOnSuccess { it -> databaseProvider.currentDatabaseClient.cinemaDao.saveCinemas(it) }
                 .doOnSuccess { updateCacheTimestamp() }
+                .timeout()
     }
 
     private fun getCinemasFromDb(): Single<List<Cinema>> {

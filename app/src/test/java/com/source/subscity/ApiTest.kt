@@ -10,7 +10,6 @@ import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.joda.time.DateTime
-import org.joda.time.LocalDate
 import org.junit.Test
 
 /**

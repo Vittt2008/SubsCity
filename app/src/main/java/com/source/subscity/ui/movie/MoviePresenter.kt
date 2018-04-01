@@ -12,6 +12,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.Observables
 import io.reactivex.rxkotlin.Singles
 import io.reactivex.schedulers.Schedulers
+import org.joda.time.DateTime
 import javax.inject.Inject
 
 /**
@@ -43,7 +44,8 @@ class MoviePresenter @Inject constructor(private val movieRepository: MovieRepos
     }
 
     private fun convert(pair: Pair<List<Screening>, List<Cinema>>): List<CinemaScreenings> {
-        val screenings = pair.first
+        val now = DateTime.now()
+        val screenings = pair.first.filter { x -> x.dateTime > now }
         val cinemas = pair.second.associateBy { it.id }
         val cinemaScreenings = screenings
                 .filter { it.cinemaId != 0L }

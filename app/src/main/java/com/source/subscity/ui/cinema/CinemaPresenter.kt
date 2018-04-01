@@ -25,13 +25,6 @@ class CinemaPresenter @Inject constructor(private val cinemaRepository: CinemaRe
     var cinemaId: Long = 0
 
     override fun onFirstViewAttach() {
-//        cinemaRepository.getCinema(cinemaId)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(
-//                        { viewState.showCinema(it) },
-//                        { viewState.onError(it) }
-//                )
         val cinema = cinemaRepository.getCinema(cinemaId)
                 .subscribeOn(Schedulers.io())
                 .toObservable()

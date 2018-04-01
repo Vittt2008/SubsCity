@@ -1,7 +1,6 @@
 package com.source.subscity.ui.movies
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.LayoutInflater
@@ -9,12 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatFragment
+import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.source.subscity.R
-import com.source.subscity.dagger.SubsCityDagger
-import com.arellomobile.mvp.presenter.InjectPresenter
 import com.source.subscity.api.entities.movie.Movie
 import com.source.subscity.controllers.ContentLoadingController
+import com.source.subscity.dagger.SubsCityDagger
 import com.source.subscity.extensions.supportActionBar
 import com.source.subscity.ui.movie.MovieActivity
 

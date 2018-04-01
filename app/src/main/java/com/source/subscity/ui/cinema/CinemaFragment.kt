@@ -15,7 +15,10 @@ import com.source.subscity.R
 import com.source.subscity.api.entities.cinema.Cinema
 import com.source.subscity.api.entities.screening.Screening
 import com.source.subscity.dagger.SubsCityDagger
-import com.source.subscity.extensions.*
+import com.source.subscity.extensions.openUrl
+import com.source.subscity.extensions.setSupportActionBar
+import com.source.subscity.extensions.supportActionBar
+import com.source.subscity.extensions.toast
 
 /**
  * @author Vitaliy Markus

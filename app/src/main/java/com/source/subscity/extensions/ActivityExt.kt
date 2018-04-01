@@ -14,7 +14,6 @@ import android.support.v7.widget.Toolbar
 import android.view.View
 import android.widget.Toast
 import com.source.subscity.R
-import com.source.subscity.api.entities.screening.Screening
 
 /**
  * @author Vitaliy Markus
