@@ -61,7 +61,7 @@ class CinemasFragment : MvpAppCompatFragment(), CinemasView {
     }
 
     override fun showCinemasMap(city: City) {
-        CinemasMapActivity.start(activity!!, city.latitude, city.longitude, city.zoom)
+        CinemasMapActivity.start(activity!!, city.location.latitude, city.location.longitude, city.location.zoom)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

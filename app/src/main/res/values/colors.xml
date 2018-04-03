@@ -21,6 +21,11 @@
     <color name="setting_bg_color">#42642957</color>
     <color name="divider_color">#9e9e9e</color>
 
+    <!-- Social Networks -->
+    <color name="telegram_color">#0D86D7</color>
+    <color name="vkontakte_color">#4A76A8</color>
+    <color name="facebook_color">#4266B2</color>
+
     <!-- St. Petersburg Metro -->
     <color name="metro_spb_line_1">#d51c36</color>
     <color name="metro_spb_line_2">#197dce</color>

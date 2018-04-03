@@ -66,7 +66,7 @@ class MovieFragment : MvpAppCompatFragment(), MovieView {
         movieInfoList = root.findViewById(R.id.rv_list)
         movieInfoListLayoutManager = ScrollableLinearLayoutManager(activity!!)
         movieInfoList.layoutManager = movieInfoListLayoutManager
-        activity!!.setSupportActionBar(root.findViewById(R.id.toolbar))
+        setSupportActionBar(root.findViewById(R.id.toolbar))
         toolbarLayout.title = ""
         return root
     }

@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ResolveInfo
 import android.net.Uri
+import android.support.annotation.IdRes
 import android.support.customtabs.CustomTabsIntent
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
@@ -21,12 +22,12 @@ import com.source.subscity.R
 val FragmentActivity.supportActionBar: ActionBar
     get() = (this as AppCompatActivity).supportActionBar!!
 
-fun FragmentActivity.setSupportActionBar(toolbar: Toolbar) {
-    val appCompatActivity = this as AppCompatActivity
+fun Fragment.setSupportActionBar(toolbar: Toolbar) {
+    val appCompatActivity = activity as AppCompatActivity
     appCompatActivity.setSupportActionBar(toolbar)
     appCompatActivity.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     appCompatActivity.supportActionBar!!.setDisplayShowHomeEnabled(true)
-    toolbar.setNavigationOnClickListener { this.onBackPressed() }
+    toolbar.setNavigationOnClickListener { this.activity!!.onBackPressed() }
 }
 
 fun Context.toast(text: String?) {

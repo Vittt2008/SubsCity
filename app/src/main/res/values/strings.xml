@@ -37,6 +37,15 @@
     <!-- CinemasMapActivity -->
     <string name="cinemas_map_title">Карта кинотеатров</string>
 
+    <!-- AboutActivity -->
+    <string name="about_title">О приложении</string>
+    <string name="about_info">Предоставляем расписания фильмов на оригинальном языке в кинотеатрах вашего города. На всех сеансах есть субститры.\n\nБилеты покупаются через Рамблер / касса.</string>
+    <string name="about_subscribe">Подписывайтесь на нас в Telegram, ВКонтакте и Facebook и не пропустите ни одного нового фильма в кино на языке оригинала!</string>
+    <string name="about_social_networks">Соцсети</string>
+    <string name="about_vkontakte">ВКонтакте</string>
+    <string name="about_telegram">Telegram</string>
+    <string name="about_facebook">Facebook</string>
+
     <!-- CityFragment -->
     <string name="city_title">Выбор города</string>
 

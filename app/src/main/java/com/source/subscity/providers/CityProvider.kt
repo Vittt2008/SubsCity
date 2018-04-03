@@ -3,6 +3,8 @@ package com.source.subscity.providers
 import android.content.Context
 import com.source.subscity.R
 import com.source.subscity.api.entities.City
+import com.source.subscity.api.entities.Location
+import com.source.subscity.api.entities.SocialNetworks
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.subjects.BehaviorSubject
@@ -47,8 +49,19 @@ class CityProvider @Inject constructor(private val context: Context) {
         get() = supportedCities.blockingGet().first { it.id == cityId }
 
     val supportedCities = Single.just(listOf(
-            City(SAINT_PETERSBURG, context.getString(R.string.saint_petersburg), 59.95, 30.31667, 11),
-            City(MOSCOW, context.getString(R.string.moscow), 55.75583,37.61778, 10)))
+            City(
+                    SAINT_PETERSBURG,
+                    context.getString(R.string.saint_petersburg),
+                    Location(59.95, 30.31667, 11),
+                    SocialNetworks("https://t.me/subscity_spb", "https://vk.com/subscity_spb", "https://www.facebook.com/subscity.spb")
+            ),
+            City(
+                    MOSCOW,
+                    context.getString(R.string.moscow),
+                    Location(55.75583, 37.61778, 10),
+                    SocialNetworks("https://t.me/subscity_msk", "https://vk.com/subscity_msk", "https://www.facebook.com/subscity.msk")
+            )
+    ))
 
     val asyncCity: Observable<String> = citySubject
 

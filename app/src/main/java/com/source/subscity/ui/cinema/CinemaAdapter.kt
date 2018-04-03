@@ -14,6 +14,7 @@ import com.source.subscity.api.entities.screening.Screening
 import com.source.subscity.dagger.SubsCityDagger
 import com.source.subscity.providers.LanguageProvider
 import com.source.subscity.providers.MetroProvider
+import com.source.subscity.ui.movie.MovieAdapter
 import com.source.subscity.ui.movie.MovieScreeningAdapter
 import com.source.subscity.widgets.divider.ImageGridItemDecoration
 import javax.inject.Inject
@@ -31,6 +32,7 @@ class CinemaAdapter(private val cinema: Cinema,
     private val CINEMA_INFO_VIEW_TYPE = 0
     private val CINEMA_MOVIES_TITLE_VIEW_TYPE = 1
     private val CINEMA_SCREENING_VIEW_TYPE = 2
+    private val PROGRESS_VIEW_TYPE = 3
 
     private val SPAN_COUNT = 5
 
@@ -47,14 +49,16 @@ class CinemaAdapter(private val cinema: Cinema,
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             CINEMA_INFO_VIEW_TYPE -> {
-//                val view = LayoutInflater.from(parent.context).inflate(R.layout.item_cinema_info, parent, false)
-//                InfoViewHolder(view)
                 val view = LayoutInflater.from(parent.context).inflate(R.layout.item_cinema_info_2, parent, false)
                 InfoViewHolder2(view)
             }
             CINEMA_MOVIES_TITLE_VIEW_TYPE -> {
                 val view = LayoutInflater.from(parent.context).inflate(R.layout.item_divider_title, parent, false)
                 TitleDividerViewHolder(view)
+            }
+            PROGRESS_VIEW_TYPE -> {
+                val view = LayoutInflater.from(parent.context).inflate(R.layout.item_progress, parent, false)
+                ProgressViewHolder(view)
             }
             else -> {
                 val view = LayoutInflater.from(parent.context).inflate(R.layout.item_screenings, parent, false)
@@ -75,9 +79,10 @@ class CinemaAdapter(private val cinema: Cinema,
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when (position) {
-            CINEMA_INFO_VIEW_TYPE -> CINEMA_INFO_VIEW_TYPE
-            CINEMA_MOVIES_TITLE_VIEW_TYPE -> CINEMA_MOVIES_TITLE_VIEW_TYPE
+        return when {
+            position == 0 -> CINEMA_INFO_VIEW_TYPE
+            position == 1 && movieScreenings.isEmpty() -> PROGRESS_VIEW_TYPE
+            position == 1 && movieScreenings.isNotEmpty() -> CINEMA_MOVIES_TITLE_VIEW_TYPE
             else -> CINEMA_SCREENING_VIEW_TYPE
         }
     }
@@ -154,6 +159,8 @@ class CinemaAdapter(private val cinema: Cinema,
             }
         }
     }
+
+    class ProgressViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
     private fun movieLanguage(movie: Movie): String {
         val movieLanguage = languageProvider.languageFormat(movie)

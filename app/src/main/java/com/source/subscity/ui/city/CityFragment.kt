@@ -39,7 +39,7 @@ class CityFragment : MvpAppCompatFragment(), CityView {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root = inflater.inflate(R.layout.fragment_city, container, false)
         cityList = root.findViewById(R.id.rv_list)
-        activity!!.setSupportActionBar(root.findViewById(R.id.toolbar))
+        setSupportActionBar(root.findViewById(R.id.toolbar))
         return root
     }
 

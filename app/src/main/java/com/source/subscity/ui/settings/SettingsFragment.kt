@@ -13,6 +13,7 @@ import com.source.subscity.R
 import com.source.subscity.api.entities.City
 import com.source.subscity.dagger.SubsCityDagger
 import com.source.subscity.extensions.supportActionBar
+import com.source.subscity.ui.about.AboutActivity
 import com.source.subscity.ui.cinemasmap.CinemasMapActivity
 import com.source.subscity.ui.city.CityActivity
 
@@ -48,7 +49,7 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
                 //SettingsAdapter.SOON_AT_BOX_OFFICE -> {}
                     SettingsAdapter.CINEMA_MAP -> settingsPresenter.showCinemasMap()
                 //SettingsAdapter.SALES -> {}
-                //SettingsAdapter.ABOUT -> {}
+                    SettingsAdapter.ABOUT -> AboutActivity.start(activity!!)
                     SettingsAdapter.CITY -> CityActivity.start(activity!!)
                 }
             }
@@ -56,7 +57,7 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
     }
 
     override fun showCinemasMap(city: City) {
-        CinemasMapActivity.start(activity!!, city.latitude, city.longitude, city.zoom)
+        CinemasMapActivity.start(activity!!, city.location.latitude, city.location.longitude, city.location.zoom)
     }
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {

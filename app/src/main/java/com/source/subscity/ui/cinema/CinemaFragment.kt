@@ -53,7 +53,7 @@ class CinemaFragment : MvpAppCompatFragment(), CinemaView {
         val root = inflater.inflate(R.layout.fragment_cinema, container, false)
         cinemaInfoList = root.findViewById(R.id.rv_list)
         cinemaInfoList.layoutManager = LinearLayoutManager(activity)
-        activity!!.setSupportActionBar(root.findViewById(R.id.toolbar))
+        setSupportActionBar(root.findViewById(R.id.toolbar))
         return root
     }
 

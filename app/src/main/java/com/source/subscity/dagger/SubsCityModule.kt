@@ -30,7 +30,7 @@ class SubsCityModule(@get:Provides val context: Context) {
                 .addInterceptor(HttpLoggingInterceptor().apply {
                     level = HttpLoggingInterceptor.Level.BODY
                 })
-                .retryOnConnectionFailure(false)
+                //.retryOnConnectionFailure(false)
                 .readTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
                 .connectTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
                 .writeTimeout(TIMEOUT, TimeUnit.MILLISECONDS)

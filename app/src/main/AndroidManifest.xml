@@ -59,6 +59,10 @@
         <activity
             android:name=".ui.cinemasmap.CinemasMapActivity"
             android:label="@string/cinemas_map_title" />
+        <activity
+            android:name=".ui.about.AboutActivity"
+            android:label="@string/about_title"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

@@ -73,14 +73,11 @@ class MovieAdapter(private val movie: Movie,
     }
 
     override fun getItemViewType(position: Int): Int {
-        if (position == 0) {
-            return MOVIE_INFO_VIEW_TYPE
-        } else if (position == 1 && cinemaScreenings.isEmpty()) {
-            return PROGRESS_VIEW_TYPE
-        } else if (position == 1 && cinemaScreenings.isNotEmpty()) {
-            return MOVIE_SCREENINGS_TITLE_VIEW_TYPE
-        } else {
-            return MOVIE_SCREENINGS_VIEW_TYPE
+        return when {
+            position == 0 -> MOVIE_INFO_VIEW_TYPE
+            position == 1 && cinemaScreenings.isEmpty() -> PROGRESS_VIEW_TYPE
+            position == 1 && cinemaScreenings.isNotEmpty() -> MOVIE_SCREENINGS_TITLE_VIEW_TYPE
+            else -> MOVIE_SCREENINGS_VIEW_TYPE
         }
     }
 
