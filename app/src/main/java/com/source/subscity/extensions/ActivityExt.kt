@@ -42,7 +42,7 @@ fun View.toast(text: String?) {
     Toast.makeText(this.context, text, Toast.LENGTH_SHORT).show()
 }
 
-fun Fragment.openUrl(uri: Uri) {
+fun Fragment.openUrl(uri: Uri, useChromeTabs: Boolean = true) {
     val context = activity!!
 
     val builder = CustomTabsIntent.Builder()
@@ -51,10 +51,12 @@ fun Fragment.openUrl(uri: Uri) {
     //builder.setExitAnimations(context, android.R.anim.slide_in_left, android.R.anim.slide_out_right);
 
     val customTabsIntent = builder.build()
-    val packages = getCustomTabsPackages(context, uri)
-    if (packages.isNotEmpty() && (packages.size == 1 || packages[0].preferredOrder != packages[1].preferredOrder)) {
-        val resolveInfo = packages[0]
-        customTabsIntent.intent.setClassName(resolveInfo.activityInfo.packageName, resolveInfo.activityInfo.name)
+    if (useChromeTabs) {
+        val packages = getCustomTabsPackages(context, uri)
+        if (packages.isNotEmpty() && (packages.size == 1 || packages[0].preferredOrder != packages[1].preferredOrder)) {
+            val resolveInfo = packages[0]
+            customTabsIntent.intent.setClassName(resolveInfo.activityInfo.packageName, resolveInfo.activityInfo.name)
+        }
     }
     customTabsIntent.launchUrl(context, uri)
 }

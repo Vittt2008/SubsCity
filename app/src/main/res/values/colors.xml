@@ -26,6 +26,10 @@
     <color name="vkontakte_color">#4A76A8</color>
     <color name="facebook_color">#4266B2</color>
 
+    <color name="telegram_dark_color">#0E94ED</color> <!-- #0A6BAB -->
+    <color name="vkontakte_dark_color">#5283BA</color> <!-- #3A5D85 -->
+    <color name="facebook_dark_color">#4A72C7</color> <!-- #35528F -->
+
     <!-- St. Petersburg Metro -->
     <color name="metro_spb_line_1">#d51c36</color>
     <color name="metro_spb_line_2">#197dce</color>

@@ -56,7 +56,9 @@
         android:id="@+id/tv_subscribe"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="sans-serif"
         android:text="@string/about_subscribe"
         android:textColor="#000000"
@@ -65,7 +67,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_social_network_title" />
-
 
     <Button
         android:id="@+id/bt_telegram"

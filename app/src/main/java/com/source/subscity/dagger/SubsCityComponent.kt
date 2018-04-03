@@ -2,6 +2,7 @@ package com.source.subscity.dagger
 
 import com.source.subscity.providers.metro.MoscowMetroTextProvider
 import com.source.subscity.providers.metro.SpbMetroTextProvider
+import com.source.subscity.ui.about.AboutPresenter
 import com.source.subscity.ui.cinema.CinemaAdapter
 import com.source.subscity.ui.cinema.CinemaPresenter
 import com.source.subscity.ui.cinemas.CinemasAdapter
@@ -34,6 +35,7 @@ interface SubsCityComponent {
     fun createCityPresenter(): CityPresenter
     fun createDeepLinkPresenter(): DeepLinkPresenter
     fun createCinemasMapPresenter(): CinemasMapPresenter
+    fun createAboutPresenter(): AboutPresenter
 
     fun createSpbMetroTextProvider(): SpbMetroTextProvider
     fun createMoscowMetroTextProvider(): MoscowMetroTextProvider
