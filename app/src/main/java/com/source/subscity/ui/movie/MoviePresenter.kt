@@ -50,6 +50,7 @@ class MoviePresenter @Inject constructor(private val movieRepository: MovieRepos
         val cinemaScreenings = screenings
                 .filter { it.cinemaId != 0L }
                 .groupBy { it.cinemaId }
+                .filter { cinemas.containsKey(it.key) } //TODO Если ключ не найден, то нужно перезапросить все с сервера
                 .map { CinemaScreenings(cinemas.getValue(it.key), it.value.sortedBy { x -> x.dateTime }) }
         return cinemaScreenings
     }

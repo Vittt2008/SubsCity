@@ -20,6 +20,7 @@ import com.source.subscity.dagger.GlideApp
 import com.source.subscity.dagger.SubsCityDagger
 import com.source.subscity.extensions.openUrl
 import com.source.subscity.extensions.setSupportActionBar
+import com.source.subscity.extensions.supportActionBar
 import com.source.subscity.extensions.toast
 import com.source.subscity.ui.youtube.YouTubeActivity
 import com.source.subscity.widgets.ScrollableLinearLayoutManager
@@ -68,6 +69,7 @@ class MovieFragment : MvpAppCompatFragment(), MovieView {
         movieInfoList.layoutManager = movieInfoListLayoutManager
         setSupportActionBar(root.findViewById(R.id.toolbar))
         toolbarLayout.title = ""
+        supportActionBar.title = ""
         return root
     }
 

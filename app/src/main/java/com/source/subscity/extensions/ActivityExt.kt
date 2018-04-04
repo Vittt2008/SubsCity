@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ResolveInfo
 import android.net.Uri
-import android.support.annotation.IdRes
 import android.support.customtabs.CustomTabsIntent
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
@@ -21,6 +20,9 @@ import com.source.subscity.R
  */
 val FragmentActivity.supportActionBar: ActionBar
     get() = (this as AppCompatActivity).supportActionBar!!
+
+val Fragment.supportActionBar: ActionBar
+    get() = (this.activity!! as AppCompatActivity).supportActionBar!!
 
 fun Fragment.setSupportActionBar(toolbar: Toolbar) {
     val appCompatActivity = activity as AppCompatActivity

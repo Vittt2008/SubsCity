@@ -12,6 +12,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.Observables
 import io.reactivex.rxkotlin.Singles
 import io.reactivex.schedulers.Schedulers
+import org.joda.time.DateTime
 import javax.inject.Inject
 
 /**
@@ -43,11 +44,13 @@ class CinemaPresenter @Inject constructor(private val cinemaRepository: CinemaRe
     }
 
     private fun convert(pair: Pair<List<Screening>, List<Movie>>): List<MovieScreenings> {
-        val screenings = pair.first
+        val now = DateTime.now()
+        val screenings = pair.first.filter { x -> x.dateTime > now }
         val movies = pair.second.associateBy { it.id }
         val movieScreenings = screenings
                 .filter { it.movieId != 0L }
                 .groupBy { it.movieId }
+                .filter { movies.containsKey(it.key) } //TODO Если ключ не найден, то нужно перезапросить все с сервера
                 .map { MovieScreenings(movies.getValue(it.key), it.value.sortedBy { x -> x.dateTime }) }
         return movieScreenings
     }

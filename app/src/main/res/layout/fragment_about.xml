@@ -76,6 +76,7 @@
         android:fontFamily="sans-serif"
         android:stateListAnimator="@null"
         android:text="@string/about_telegram"
+        android:textAllCaps="false"
         android:textColor="#ffffff"
         android:textSize="16sp"
         android:textStyle="normal"
@@ -83,7 +84,8 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/bt_vk" />
+        app:layout_constraintTop_toTopOf="@+id/bt_vk"
+        tools:targetApi="lollipop" />
 
     <Button
         android:id="@+id/bt_vk"
@@ -94,13 +96,15 @@
         android:fontFamily="sans-serif"
         android:stateListAnimator="@null"
         android:text="@string/about_vkontakte"
+        android:textAllCaps="false"
         android:textColor="#ffffff"
         android:textSize="16sp"
         android:textStyle="normal"
         app:layout_constraintEnd_toStartOf="@+id/bt_fb"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/bt_telegram"
-        app:layout_constraintTop_toBottomOf="@+id/tv_subscribe" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_subscribe"
+        tools:targetApi="lollipop" />
 
     <Button
         android:id="@+id/bt_fb"
@@ -110,13 +114,15 @@
         android:fontFamily="sans-serif"
         android:stateListAnimator="@null"
         android:text="@string/about_facebook"
+        android:textAllCaps="false"
         android:textColor="#ffffff"
         android:textSize="16sp"
         android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/bt_vk"
-        app:layout_constraintTop_toTopOf="@+id/bt_vk" />
+        app:layout_constraintTop_toTopOf="@+id/bt_vk"
+        tools:targetApi="lollipop" />
 
 
 </android.support.constraint.ConstraintLayout>
