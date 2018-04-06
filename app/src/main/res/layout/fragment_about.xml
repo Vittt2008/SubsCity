@@ -124,5 +124,18 @@
         app:layout_constraintTop_toTopOf="@+id/bt_vk"
         tools:targetApi="lollipop" />
 
+    <Button
+        android:id="@+id/bt_review"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/review_bg"
+        android:stateListAnimator="@null"
+        android:text="@string/about_review"
+        android:textColor="#ffffff"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:targetApi="lollipop" />
+
 
 </android.support.constraint.ConstraintLayout>

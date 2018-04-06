@@ -1,12 +1,12 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
-            <solid android:color="@color/vkontakte_dark_pressed" />
+            <solid android:color="@color/primary_color_pressed" />
         </shape>
     </item>
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="@color/vkontakte_color" />
+            <solid android:color="@color/primary_color" />
         </shape>
     </item>
 </selector>

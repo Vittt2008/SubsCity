@@ -50,5 +50,23 @@ object IntentUtils {
         intent.data = Uri.parse("$PHONE_RES_SCHEME:$phoneNumber")
         return intent
     }
+
+    fun sendEmail(to: String, subject: String?, text: String? = null): Intent {
+        return sendEmail(arrayOf(to), subject, text)
+    }
+
+    fun sendEmail(to: Array<String>, subject: String?, text: String? = null): Intent {
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.type = "plain/text"
+        intent.putExtra(Intent.EXTRA_EMAIL, to)
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject)
+        intent.putExtra(Intent.EXTRA_TEXT, text)
+        return intent
+    }
+
+    fun openPlayStore(context: Context): Intent {
+        val appPackageName = context.packageName
+        return Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$appPackageName"))
+    }
 }
 

@@ -85,7 +85,12 @@ class CinemaFragment : MvpAppCompatFragment(), CinemaView {
     }
 
     private fun call(cinema: Cinema) {
-        startActivity(IntentUtils.createOpenDialerIntent(cinema.phones.first()))
+        val intent = IntentUtils.createOpenDialerIntent(cinema.phones.first())
+        if (intent.resolveActivity(activity!!.packageManager) != null) {
+            startActivity(intent)
+        } else {
+            toast(getString(R.string.cinema_no_phone_application))
+        }
     }
 
     private fun openSite(cinema: Cinema) {

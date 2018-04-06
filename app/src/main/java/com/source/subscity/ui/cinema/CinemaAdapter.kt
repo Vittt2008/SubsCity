@@ -130,11 +130,14 @@ class CinemaAdapter(private val cinema: Cinema,
         private val metroStation = view.findViewById<TextView>(R.id.tv_cinema_metro_station)
         private val phoneNumber = view.findViewById<TextView>(R.id.tv_phone_number)
         private val webSite = view.findViewById<TextView>(R.id.tv_web_site)
+        private val phoneNumberLayout = view.findViewById<View>(R.id.cl_call)
+        private val webSiteLayout = view.findViewById<View>(R.id.cl_web)
+
 
         init {
             view.findViewById<View>(R.id.cl_show_on_map).setOnClickListener { mapClickListener.invoke(cinema) }
-            view.findViewById<View>(R.id.cl_call).setOnClickListener { phoneClickListener.invoke(cinema) }
-            view.findViewById<View>(R.id.cl_web).setOnClickListener { siteClickListener.invoke(cinema) }
+            phoneNumberLayout.setOnClickListener { phoneClickListener.invoke(cinema) }
+            webSiteLayout.setOnClickListener { siteClickListener.invoke(cinema) }
         }
 
         fun bind(cinema: Cinema) {
@@ -142,8 +145,14 @@ class CinemaAdapter(private val cinema: Cinema,
 
             address.text = cinema.location.address
             metroStation.text = metroProvider.currentMetroTextProvider.formatMetroListStation(cinema.location.metro)
-            phoneNumber.text = cinema.phones.joinToString("      ")
-            webSite.text = cinema.urls.firstOrNull()
+
+            val phone = cinema.phones.firstOrNull()
+            phoneNumber.visibility = if (phone != null) View.VISIBLE else View.GONE
+            phoneNumber.text = phone
+
+            val url = cinema.urls.firstOrNull()
+            webSite.visibility = if (phone != null) View.VISIBLE else View.GONE
+            webSite.text = url
         }
     }
 

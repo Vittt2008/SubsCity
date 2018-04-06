@@ -12,23 +12,26 @@
     <color name="primary_color_8">#14642957</color>
     <color name="primary_color_16">#29642957</color>
     <color name="primary_color_24">#3d642957</color>
+    <color name="primary_color_pressed">#7D336D</color>
 
     <color name="primary_dark_color">#4F2045</color>
     <color name="title_color">@color/black_color</color>
     <color name="subtitle_color">#8A000000</color>
     <color name="inactive_color">#a9aeb2</color>
-    <color name="white_color">#FFFFFF</color>
+    <color name="white_color">#ffffff</color>
     <color name="setting_bg_color">#42642957</color>
     <color name="divider_color">#9e9e9e</color>
+
+    <color name="ripple_color">#3dffffff</color>
 
     <!-- Social Networks -->
     <color name="telegram_color">#0D86D7</color>
     <color name="vkontakte_color">#4A76A8</color>
     <color name="facebook_color">#4266B2</color>
 
-    <color name="telegram_dark_color">#0E94ED</color> <!-- #0A6BAB -->
-    <color name="vkontakte_dark_color">#5283BA</color> <!-- #3A5D85 -->
-    <color name="facebook_dark_color">#4A72C7</color> <!-- #35528F -->
+    <color name="telegram_dark_pressed">#0E94ED</color> <!-- #0A6BAB -->
+    <color name="vkontakte_dark_pressed">#5283BA</color> <!-- #3A5D85 -->
+    <color name="facebook_dark_pressed">#4A72C7</color> <!-- #35528F -->
 
     <!-- St. Petersburg Metro -->
     <color name="metro_spb_line_1">#d51c36</color>

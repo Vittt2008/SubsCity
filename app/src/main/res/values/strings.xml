@@ -2,6 +2,8 @@
     <string name="app_name">SubsCity</string>
     <string name="file_export_provider">com.source.subscity.FileProvider</string>
     <string name="send">Отправить</string>
+    <string name="email_address">subscity.info@gmail.com</string>
+    <string name="email_subject">Обратная связь. Приложение SubsCity</string>
 
     <!-- MainActivity -->
     <string name="main_films">Фильмы</string>
@@ -35,7 +37,8 @@
 
     <!-- CinemaFragment -->
     <string name="cinema_point_on_map">На карте</string>
-    <string name="cinema_no_map_application">Отсутвуют приложния для работы с картой</string>
+    <string name="cinema_no_map_application">Отсутвуют приложения для работы с картой</string>
+    <string name="cinema_no_phone_application">Отсутвуют приложения для осуществления звонков</string>
 
     <!-- CinemasMapActivity -->
     <string name="cinemas_map_title">Карта кинотеатров</string>
@@ -48,6 +51,8 @@
     <string name="about_vkontakte">ВКонтакте</string>
     <string name="about_telegram">Telegram</string>
     <string name="about_facebook">Facebook</string>
+    <string name="about_review">Обратная связь</string>
+    <string name="about_no_email_application">Отсутвуют приложения для отправки электронных писем</string>
 
     <!-- DonateActivity -->
     <string name="donate_title">Пожертвовать</string>
