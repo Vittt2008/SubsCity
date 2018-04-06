@@ -10,9 +10,9 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.source.subscity.R
 import com.source.subscity.dagger.SubsCityDagger
+import com.source.subscity.extensions.openIntent
 import com.source.subscity.extensions.openUrl
 import com.source.subscity.extensions.setSupportActionBar
-import com.source.subscity.extensions.toast
 import com.source.subscity.utils.IntentUtils
 
 /**
@@ -50,11 +50,7 @@ class AboutFragment : MvpAppCompatFragment(), AboutView {
 
     private fun openEmailApp() {
         val intent = IntentUtils.sendEmail(getString(R.string.email_address), getString(R.string.email_subject))
-        if (intent.resolveActivity(activity!!.packageManager) != null) {
-            startActivity(intent)
-        } else {
-            toast(getString(R.string.about_no_email_application))
-        }
+        openIntent(intent, R.string.about_no_email_application)
     }
 
 }

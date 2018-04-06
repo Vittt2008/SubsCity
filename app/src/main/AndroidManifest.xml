@@ -42,31 +42,49 @@
 
             </intent-filter>
         </activity>
+
         <activity
             android:name=".ui.movie.MovieActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".ui.cinema.CinemaActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".ui.city.CityActivity"
             android:label="@string/city_title"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".ui.youtube.YouTubeActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|keyboard"
             android:theme="@style/AppTheme.YouTube" />
+
         <activity
             android:name=".ui.cinemasmap.CinemasMapActivity"
             android:label="@string/cinemas_map_title" />
+
         <activity
             android:name=".ui.about.AboutActivity"
             android:label="@string/about_title"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".ui.donate.DonateActivity"
             android:label="@string/donate_title"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="@string/file_export_provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/exported_file_paths" />
+        </provider>
+
     </application>
 
 </manifest>

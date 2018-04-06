@@ -13,13 +13,6 @@ import javax.inject.Inject
 class DeepLinkPresenter @Inject constructor(private val cityProvider: CityProvider) : MvpPresenter<DeepLinkView>() {
 
     companion object {
-        const val MAIN_URL = "https://spb.subscity.ru/" //Главная страница
-        const val MOVIES_URL = "https://spb.subscity.ru/movies" //Страница фильмов
-        const val MOVIE_URL = "https://spb.subscity.ru/movies/58701-the-shape-of-water" //Страница фильма
-        const val CINEMAS_URL = "https://spb.subscity.ru/cinemas" //Страница кинотеатров
-        const val CINEMA_URL = "https://spb.subscity.ru/cinemas/87-angleterre-cinema-lounge" //Страница кинотеатра
-        const val DATES_URL = "https://spb.subscity.ru/dates/2018-03-14" //Страница с датами (их нет)
-
         const val MOVIES = "movies"
         const val CINEMAS = "cinemas"
     }

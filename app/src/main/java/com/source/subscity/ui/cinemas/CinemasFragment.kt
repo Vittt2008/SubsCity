@@ -76,7 +76,6 @@ class CinemasFragment : MvpAppCompatFragment(), CinemasView {
         return super.onOptionsItemSelected(item)
     }
 
-
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
         if (isVisibleToUser) {

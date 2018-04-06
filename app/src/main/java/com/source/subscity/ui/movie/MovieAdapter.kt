@@ -19,7 +19,7 @@ import javax.inject.Inject
 /**
  * @author Vitaliy Markus
  */
-class MovieAdapter(private val movie: Movie,
+class MovieAdapter(val movie: Movie,
                    private var cinemaScreenings: List<MoviePresenter.CinemaScreenings>,
                    private val screeningClickListener: (Screening) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

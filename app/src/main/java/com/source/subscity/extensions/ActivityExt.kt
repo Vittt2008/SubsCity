@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ResolveInfo
 import android.net.Uri
+import android.support.annotation.StringRes
 import android.support.customtabs.CustomTabsIntent
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
@@ -30,6 +31,14 @@ fun Fragment.setSupportActionBar(toolbar: Toolbar) {
     appCompatActivity.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     appCompatActivity.supportActionBar!!.setDisplayShowHomeEnabled(true)
     toolbar.setNavigationOnClickListener { this.activity!!.onBackPressed() }
+}
+
+fun Fragment.openIntent(intent: Intent, @StringRes errorId: Int) {
+    if (intent.resolveActivity(activity!!.packageManager) != null) {
+        startActivity(intent)
+    } else {
+        toast(getString(errorId))
+    }
 }
 
 fun Context.toast(text: String?) {

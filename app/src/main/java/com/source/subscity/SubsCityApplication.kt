@@ -13,6 +13,15 @@ import io.fabric.sdk.android.Fabric
  */
 class SubsCityApplication : MultiDexApplication() {
 
+    companion object {
+        const val MAIN_URL = "https://%s.subscity.ru/" //Главная страница
+        const val MOVIES_URL = "https://%s.subscity.ru/movies" //Страница фильмов
+        const val MOVIE_URL = "https://%s.subscity.ru/movies/%s" //Страница фильма
+        const val CINEMAS_URL = "https://%s.subscity.ru/cinemas" //Страница кинотеатров
+        const val CINEMA_URL = "https://%s.subscity.ru/cinemas/%s" //Страница кинотеатра
+        const val DATES_URL = "https://%s.subscity.ru/dates/%s" //Страница с датами (их нет)
+    }
+
     override fun onCreate() {
         super.onCreate()
         val fabric = Fabric.Builder(this)

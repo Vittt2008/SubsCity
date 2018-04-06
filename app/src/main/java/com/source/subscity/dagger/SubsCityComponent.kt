@@ -11,13 +11,13 @@ import com.source.subscity.ui.cinemasmap.CinemasMapPresenter
 import com.source.subscity.ui.city.CityAdapter
 import com.source.subscity.ui.city.CityPresenter
 import com.source.subscity.ui.deeplink.DeepLinkPresenter
-import com.source.subscity.ui.donate.DonateFragment
 import com.source.subscity.ui.donate.DonatePresenter
 import com.source.subscity.ui.movie.MovieAdapter
 import com.source.subscity.ui.movie.MoviePresenter
 import com.source.subscity.ui.movies.MoviesAdapter
 import com.source.subscity.ui.movies.MoviesPresenter
 import com.source.subscity.ui.settings.SettingsPresenter
+import com.source.subscity.ui.share.SharePresenter
 import dagger.Component
 import javax.inject.Singleton
 
@@ -39,6 +39,7 @@ interface SubsCityComponent {
     fun createCinemasMapPresenter(): CinemasMapPresenter
     fun createAboutPresenter(): AboutPresenter
     fun createDonatePresenter(): DonatePresenter
+    fun createSharePresenter(): SharePresenter
 
     fun createSpbMetroTextProvider(): SpbMetroTextProvider
     fun createMoscowMetroTextProvider(): MoscowMetroTextProvider

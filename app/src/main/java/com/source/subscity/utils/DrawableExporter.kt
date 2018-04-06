@@ -7,14 +7,22 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import java.io.File
 import java.io.FileOutputStream
-import java.io.IOException
+import javax.inject.Inject
 
 /**
  * @author Vitaliy Markus
  */
-object ImageUtils {
+class DrawableExporter @Inject constructor(private val context: Context) {
 
-    fun drawableToBitmap(drawable: Drawable): Bitmap {
+    fun export(drawable: Drawable, fileName: String): File? {
+        return try {
+            saveBitmapForExport(toBitmap(drawable), fileName)
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    private fun toBitmap(drawable: Drawable): Bitmap {
         if (drawable is BitmapDrawable) {
             return drawable.bitmap
         }
@@ -27,8 +35,7 @@ object ImageUtils {
         return bitmap
     }
 
-    @Throws(IOException::class)
-    fun saveBitmapForExport(context: Context, bitmap: Bitmap, fileName: String): File {
+    private fun saveBitmapForExport(bitmap: Bitmap, fileName: String): File {
         val path = FileUtils.getFileExportPath(context)
         if (!path.exists()) {
             path.mkdirs()
@@ -41,6 +48,4 @@ object ImageUtils {
 
         return file
     }
-
 }
-

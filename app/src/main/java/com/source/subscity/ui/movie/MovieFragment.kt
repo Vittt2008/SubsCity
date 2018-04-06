@@ -1,13 +1,13 @@
 package com.source.subscity.ui.movie
 
+import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.CollapsingToolbarLayout
 import android.support.transition.TransitionManager
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageView
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
@@ -18,27 +18,34 @@ import com.source.subscity.api.entities.movie.Movie
 import com.source.subscity.api.entities.screening.Screening
 import com.source.subscity.dagger.GlideApp
 import com.source.subscity.dagger.SubsCityDagger
-import com.source.subscity.extensions.openUrl
-import com.source.subscity.extensions.setSupportActionBar
-import com.source.subscity.extensions.supportActionBar
-import com.source.subscity.extensions.toast
+import com.source.subscity.extensions.*
+import com.source.subscity.ui.share.SharePresenter
+import com.source.subscity.ui.share.ShareView
 import com.source.subscity.ui.youtube.YouTubeActivity
+import com.source.subscity.utils.FileUtils
+import com.source.subscity.utils.IntentUtils
 import com.source.subscity.widgets.ScrollableLinearLayoutManager
 import com.source.subscity.widgets.transformations.PosterCrop
+import java.io.File
 
 /**
  * @author Vitaliy Markus
  */
-class MovieFragment : MvpAppCompatFragment(), MovieView {
+class MovieFragment : MvpAppCompatFragment(), MovieView, ShareView {
 
     @InjectPresenter
     lateinit var moviesPresenter: MoviePresenter
+
+    @InjectPresenter
+    lateinit var sharePresenter: SharePresenter
 
     private lateinit var moviePoster: ImageView
     private lateinit var trailerButton: ImageView
     private lateinit var toolbarLayout: CollapsingToolbarLayout
     private lateinit var movieInfoList: RecyclerView
     private lateinit var movieInfoListLayoutManager: ScrollableLinearLayoutManager
+
+    private lateinit var shareMenuItem: MenuItem
 
     private var adapter: MovieAdapter? = null
 
@@ -59,6 +66,16 @@ class MovieFragment : MvpAppCompatFragment(), MovieView {
         }
     }
 
+    @ProvidePresenter
+    fun sharePresenter(): SharePresenter {
+        return SubsCityDagger.component.createSharePresenter()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root = inflater.inflate(R.layout.fragment_movie, container, false)
         moviePoster = root.findViewById(R.id.iv_movie_poster)
@@ -73,7 +90,25 @@ class MovieFragment : MvpAppCompatFragment(), MovieView {
         return root
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_share, menu)
+        menu.findItem(R.id.item_share).isVisible = false
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.item_share) {
+            sharePresenter.share(moviePoster.drawable, adapter!!.movie)
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        menu.findItem(R.id.item_share).isVisible = adapter != null
+    }
+
     override fun showMovie(movie: Movie, cinemaScreenings: List<MoviePresenter.CinemaScreenings>) {
+        activity!!.invalidateOptionsMenu()
         if (adapter == null) {
             toolbarLayout.title = movie.title.russian
             GlideApp.with(moviePoster).asBitmap().load(movie.poster).transform(PosterCrop()).into(moviePoster)
@@ -93,6 +128,11 @@ class MovieFragment : MvpAppCompatFragment(), MovieView {
     override fun onError(throwable: Throwable) {
         toast(throwable.message)
         adapter?.updateScreenings(emptyList())
+    }
+
+    override fun share(file: File?, title: String, content: String) {
+        val intent = createIntent(activity!!, file, getString(R.string.movie_share_title, title), content)
+        openIntent(intent, R.string.movie_no_share_application)
     }
 
     private fun showTrailerButton(movie: Movie) {
@@ -136,5 +176,14 @@ class MovieFragment : MvpAppCompatFragment(), MovieView {
 
     private fun buyTicket(screening: Screening) {
         openUrl(Uri.parse(screening.ticketsUrl))
+    }
+
+    private fun createIntent(context: Context, file: File?, title: String, content: String): Intent {
+        if (file != null && file.exists()) {
+            val image = FileUtils.getUriForShareFile(context, file)
+            return IntentUtils.createShareTextWithImageIntent(context, title, content, image)
+        } else {
+            return IntentUtils.createShareTextIntent(context, title, content)
+        }
     }
 }

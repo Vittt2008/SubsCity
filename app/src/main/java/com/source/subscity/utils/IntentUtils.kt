@@ -51,17 +51,9 @@ object IntentUtils {
         return intent
     }
 
-    fun sendEmail(to: String, subject: String?, text: String? = null): Intent {
-        return sendEmail(arrayOf(to), subject, text)
-    }
-
-    fun sendEmail(to: Array<String>, subject: String?, text: String? = null): Intent {
-        val intent = Intent(Intent.ACTION_SEND)
-        intent.type = "plain/text"
-        intent.putExtra(Intent.EXTRA_EMAIL, to)
-        intent.putExtra(Intent.EXTRA_SUBJECT, subject)
-        intent.putExtra(Intent.EXTRA_TEXT, text)
-        return intent
+    fun sendEmail(to: String, subject: String?): Intent {
+        val data = Uri.parse("mailto:$to?subject=$subject")
+        return Intent(Intent.ACTION_VIEW, data)
     }
 
     fun openPlayStore(context: Context): Intent {

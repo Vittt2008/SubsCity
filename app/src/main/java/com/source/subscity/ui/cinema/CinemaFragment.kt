@@ -15,10 +15,7 @@ import com.source.subscity.R
 import com.source.subscity.api.entities.cinema.Cinema
 import com.source.subscity.api.entities.screening.Screening
 import com.source.subscity.dagger.SubsCityDagger
-import com.source.subscity.extensions.openUrl
-import com.source.subscity.extensions.setSupportActionBar
-import com.source.subscity.extensions.supportActionBar
-import com.source.subscity.extensions.toast
+import com.source.subscity.extensions.*
 import com.source.subscity.utils.IntentUtils
 
 /**
@@ -77,20 +74,12 @@ class CinemaFragment : MvpAppCompatFragment(), CinemaView {
         val geoUri = getString(R.string.geo_uri, cinema.location.latitude, cinema.location.longitude, Uri.encode(cinema.name))
         val uri = Uri.parse(geoUri)
         val intent = Intent(Intent.ACTION_VIEW, uri)
-        if (intent.resolveActivity(activity!!.packageManager) != null) {
-            startActivity(intent)
-        } else {
-            toast(getString(R.string.cinema_no_map_application))
-        }
+        openIntent(intent, R.string.cinema_no_map_application)
     }
 
     private fun call(cinema: Cinema) {
         val intent = IntentUtils.createOpenDialerIntent(cinema.phones.first())
-        if (intent.resolveActivity(activity!!.packageManager) != null) {
-            startActivity(intent)
-        } else {
-            toast(getString(R.string.cinema_no_phone_application))
-        }
+        openIntent(intent, R.string.cinema_no_phone_application)
     }
 
     private fun openSite(cinema: Cinema) {
