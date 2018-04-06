@@ -70,6 +70,7 @@ class CinemaFragment : MvpAppCompatFragment(), CinemaView {
 
     override fun onError(throwable: Throwable) {
         toast(throwable.message)
+        adapter?.updateScreenings(emptyList())
     }
 
     private fun openMap(cinema: Cinema) {

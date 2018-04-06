@@ -92,6 +92,7 @@ class MovieFragment : MvpAppCompatFragment(), MovieView {
 
     override fun onError(throwable: Throwable) {
         toast(throwable.message)
+        adapter?.updateScreenings(emptyList())
     }
 
     private fun showTrailerButton(movie: Movie) {
