@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">SubsCity</string>
+    <string name="file_export_provider">com.source.subscity.FileProvider</string>
+    <string name="send">Отправить</string>
 
     <!-- MainActivity -->
     <string name="main_films">Фильмы</string>
@@ -12,6 +14,7 @@
     <string name="setting_sale_title">Акции</string>
     <string name="setting_about_title">О приложении</string>
     <string name="setting_city_title">Город</string>
+    <string name="setting_donate_title">Пожертвовать</string>
 
     <!-- MovieFragment -->
     <string name="movie_genre_title">Жанр:</string>
@@ -45,6 +48,9 @@
     <string name="about_vkontakte">ВКонтакте</string>
     <string name="about_telegram">Telegram</string>
     <string name="about_facebook">Facebook</string>
+
+    <!-- DonateActivity -->
+    <string name="donate_title">Пожертвовать</string>
 
     <!-- CityFragment -->
     <string name="city_title">Выбор города</string>

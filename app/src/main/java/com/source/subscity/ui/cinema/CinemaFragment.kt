@@ -19,6 +19,7 @@ import com.source.subscity.extensions.openUrl
 import com.source.subscity.extensions.setSupportActionBar
 import com.source.subscity.extensions.supportActionBar
 import com.source.subscity.extensions.toast
+import com.source.subscity.utils.IntentUtils
 
 /**
  * @author Vitaliy Markus
@@ -83,9 +84,7 @@ class CinemaFragment : MvpAppCompatFragment(), CinemaView {
     }
 
     private fun call(cinema: Cinema) {
-        val intent = Intent(Intent.ACTION_DIAL)
-        intent.data = Uri.parse("tel:${cinema.phones.first()}")
-        startActivity(intent)
+        startActivity(IntentUtils.createOpenDialerIntent(cinema.phones.first()))
     }
 
     private fun openSite(cinema: Cinema) {

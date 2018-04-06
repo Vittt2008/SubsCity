@@ -63,6 +63,10 @@
             android:name=".ui.about.AboutActivity"
             android:label="@string/about_title"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.donate.DonateActivity"
+            android:label="@string/donate_title"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

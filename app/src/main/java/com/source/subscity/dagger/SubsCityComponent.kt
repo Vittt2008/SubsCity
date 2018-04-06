@@ -11,6 +11,8 @@ import com.source.subscity.ui.cinemasmap.CinemasMapPresenter
 import com.source.subscity.ui.city.CityAdapter
 import com.source.subscity.ui.city.CityPresenter
 import com.source.subscity.ui.deeplink.DeepLinkPresenter
+import com.source.subscity.ui.donate.DonateFragment
+import com.source.subscity.ui.donate.DonatePresenter
 import com.source.subscity.ui.movie.MovieAdapter
 import com.source.subscity.ui.movie.MoviePresenter
 import com.source.subscity.ui.movies.MoviesAdapter
@@ -36,6 +38,7 @@ interface SubsCityComponent {
     fun createDeepLinkPresenter(): DeepLinkPresenter
     fun createCinemasMapPresenter(): CinemasMapPresenter
     fun createAboutPresenter(): AboutPresenter
+    fun createDonatePresenter(): DonatePresenter
 
     fun createSpbMetroTextProvider(): SpbMetroTextProvider
     fun createMoscowMetroTextProvider(): MoscowMetroTextProvider

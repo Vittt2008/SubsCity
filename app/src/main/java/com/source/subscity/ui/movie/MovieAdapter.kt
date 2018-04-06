@@ -30,6 +30,8 @@ class MovieAdapter(private val movie: Movie,
 
     private val SPAN_COUNT = 5
 
+    private var isLoadingFinished = cinemaScreenings.isNotEmpty()
+
     @Inject
     lateinit var durationProvider: DurationProvider
 
@@ -62,6 +64,9 @@ class MovieAdapter(private val movie: Movie,
     }
 
     override fun getItemCount(): Int {
+        if (isLoadingFinished && cinemaScreenings.isEmpty()) {
+            return 1
+        }
         return 2 + cinemaScreenings.size
     }
 
@@ -83,9 +88,14 @@ class MovieAdapter(private val movie: Movie,
 
     fun updateScreenings(cinemaScreenings: List<MoviePresenter.CinemaScreenings>) {
         val oldSize = itemCount
-        this.cinemaScreenings = cinemaScreenings
-        notifyItemChanged(oldSize - 1)
-        notifyItemRangeInserted(oldSize, itemCount - oldSize)
+        if (cinemaScreenings.isNotEmpty()) {
+            this.cinemaScreenings = cinemaScreenings
+            notifyItemChanged(oldSize - 1)
+            notifyItemRangeInserted(oldSize, itemCount - oldSize)
+        } else {
+            notifyItemRemoved(oldSize - 1)
+        }
+        isLoadingFinished = true
     }
 
     inner class InfoViewHolder(view: View) : RecyclerView.ViewHolder(view) {

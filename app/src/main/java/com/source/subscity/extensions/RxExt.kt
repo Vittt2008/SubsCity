@@ -7,11 +7,11 @@ import java.util.concurrent.TimeUnit
 /**
  * @author Vitaliy Markus
  */
-const val RX_TIMEOUT = 10L
+const val RX_TIMEOUT = 1L
 
 inline fun <reified T> Single<T>.timeout(): Single<T> {
-    //return this.timeout(RX_TIMEOUT, TimeUnit.SECONDS)
-    return this
+    return this.timeout(RX_TIMEOUT, TimeUnit.SECONDS)
+    //return this
 }
 
 inline fun <reified T> Observable<T>.timeout(): Observable<T> {

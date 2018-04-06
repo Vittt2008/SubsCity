@@ -16,6 +16,7 @@ import com.source.subscity.extensions.supportActionBar
 import com.source.subscity.ui.about.AboutActivity
 import com.source.subscity.ui.cinemasmap.CinemasMapActivity
 import com.source.subscity.ui.city.CityActivity
+import com.source.subscity.ui.donate.DonateActivity
 
 /**
  * @author Vitaliy Markus
@@ -50,6 +51,7 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
                     SettingsAdapter.CINEMA_MAP -> settingsPresenter.showCinemasMap()
                 //SettingsAdapter.SALES -> {}
                     SettingsAdapter.ABOUT -> AboutActivity.start(activity!!)
+                    SettingsAdapter.DONATE -> DonateActivity.start(activity!!)
                     SettingsAdapter.CITY -> CityActivity.start(activity!!)
                 }
             }
