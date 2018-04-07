@@ -19,13 +19,13 @@ interface ScreeningDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveScreening(screenings: List<Screening>)
 
-    @Query("SELECT * FROM Screening WHERE movieId = :arg0")
+    @Query("SELECT * FROM Screening WHERE movieId = :movieId")
     fun getMovieScreenings(movieId: Long): Flowable<List<Screening>>
 
-    @Query("SELECT * FROM Screening WHERE cinemaId = :arg0")
+    @Query("SELECT * FROM Screening WHERE cinemaId = :cinemaId")
     fun getCinemaScreenings(cinemaId: Long): Flowable<List<Screening>>
 
-    @Query("SELECT * FROM Screening WHERE dateTime > :arg0 AND dateTime < :arg1")
+    @Query("SELECT * FROM Screening WHERE dateTime > :from AND dateTime < :to")
     fun getDateScreenings(from: DateTime, to: DateTime): Flowable<List<Screening>>
 
 

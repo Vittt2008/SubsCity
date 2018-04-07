@@ -14,7 +14,7 @@ interface CinemaDao {
     @Query("SELECT * FROM Cinema")
     fun getAllCinemas(): Flowable<List<Cinema>>
 
-    @Query("SELECT * FROM Cinema WHERE id = :arg0 LIMIT 1")
+    @Query("SELECT * FROM Cinema WHERE id = :id LIMIT 1")
     fun getCinema(id: Long): Single<Cinema>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

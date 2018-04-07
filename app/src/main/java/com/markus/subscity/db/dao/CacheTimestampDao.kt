@@ -13,13 +13,13 @@ import io.reactivex.Single
 @Dao
 interface CacheTimestampDao {
 
-    @Query("SELECT * FROM CacheTimestamp WHERE key = :arg0 LIMIT 1")
+    @Query("SELECT * FROM CacheTimestamp WHERE key = :key LIMIT 1")
     fun getCacheTimestamp(key: String): Single<CacheTimestamp>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun updateCacheTimestamp(timestamp: CacheTimestamp)
 
-    @Query("DELETE FROM CacheTimestamp WHERE key = :arg0")
+    @Query("DELETE FROM CacheTimestamp WHERE key = :key")
     fun deleteCacheTimestamp(key: String)
 
 }
