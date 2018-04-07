@@ -17,7 +17,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBdMF5C9dMyuE-fopbHlzfqUsJ7Fm6I4BI" />
+            android:value="AIzaSyAHl2dCBYq39cjJmi-o1lS1vH63vRdNNWg" />
 
         <activity android:name="com.markus.subscity.ui.main.MainActivity">
             <intent-filter>

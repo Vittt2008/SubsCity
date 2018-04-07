@@ -19,7 +19,7 @@ class YouTubeActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedListen
     companion object {
         private const val EXTRA_TRAILER_ID = "trailer_id"
         private const val RECOVERY_DIALOG_REQUEST_CODE = 1
-        private const val YOUTUBE_API_KEY = "AIzaSyCqCqzIErRcvk6-m6uGsuwcDEzN-jULAmQ" //TODO Replace Key
+        private const val YOUTUBE_API_KEY = "AIzaSyAHl2dCBYq39cjJmi-o1lS1vH63vRdNNWg"
 
         fun start(context: Context, trailerId: String) {
             val intent = Intent(context, YouTubeActivity::class.java)

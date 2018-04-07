@@ -30,7 +30,7 @@ task clean(type: Delete) {
 
 ext {
     supportVersion = '27.1.1'
-    playServicesVersion = '12.0.1'
+    playServicesVersion = '11.8.0'
     okHttpVersion = '3.8.1'
     retrofitVersion = '2.3.0'
     jodaTimeVersion = '2.9.9'
