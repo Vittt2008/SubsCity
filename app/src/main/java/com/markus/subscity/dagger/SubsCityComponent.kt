@@ -1,6 +1,7 @@
 package com.markus.subscity.dagger
 
 import com.markus.subscity.providers.CityProvider
+import com.markus.subscity.providers.PreferencesProvider
 import com.markus.subscity.providers.metro.MoscowMetroTextProvider
 import com.markus.subscity.providers.metro.SpbMetroTextProvider
 import com.markus.subscity.ui.about.AboutPresenter
@@ -54,5 +55,6 @@ interface SubsCityComponent {
 
     fun provideAnalytics(): Analytics
     fun provideCityProvider(): CityProvider
+    fun providePreferencesProvider(): PreferencesProvider
 
 }

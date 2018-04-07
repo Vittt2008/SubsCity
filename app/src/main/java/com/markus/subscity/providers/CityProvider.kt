@@ -15,17 +15,17 @@ import javax.inject.Singleton
  * @author Vitaliy Markus
  */
 @Singleton
-class CityProvider @Inject constructor(private val context: Context) {
+class CityProvider @Inject constructor(private val context: Context,
+                                       preferencesProvider: PreferencesProvider) {
 
     companion object {
-        private const val PREFERENCES_NAME = "subs_city.xml"
         private const val CITY_ID_KEY = "city_id"
 
         const val SAINT_PETERSBURG = "spb"
         const val MOSCOW = "msk"
     }
 
-    private val sharedPreferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE)
+    private val sharedPreferences = preferencesProvider.getAppPreferences()
     private val citySubject = BehaviorSubject.create<String>()
 
     var cityId = sharedPreferences.getString(CITY_ID_KEY, SAINT_PETERSBURG)!!
