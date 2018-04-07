@@ -14,6 +14,7 @@ import com.markus.subscity.R
 import com.markus.subscity.api.entities.movie.Movie
 import com.markus.subscity.controllers.ContentLoadingController
 import com.markus.subscity.dagger.SubsCityDagger
+import com.markus.subscity.extensions.analytics
 import com.markus.subscity.extensions.supportActionBar
 import com.markus.subscity.ui.movie.MovieActivity
 
@@ -58,7 +59,7 @@ class MoviesFragment : MvpAppCompatFragment(), MoviesView {
         loadingController.switchState(ContentLoadingController.State.CONTENT)
         moviesList.run {
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-            adapter = MoviesAdapter(activity!!, movies) { MovieActivity.start(activity!!, it.id) }
+            adapter = MoviesAdapter(activity!!, movies, ::openMovie)
         }
     }
 
@@ -72,5 +73,10 @@ class MoviesFragment : MvpAppCompatFragment(), MoviesView {
 
     override fun hideProgress() {
         loadingController.switchState(ContentLoadingController.State.CONTENT)
+    }
+
+    private fun openMovie(movie: Movie) {
+        analytics().logOpenMovie(movie.id, movie.title.russian, false)
+        MovieActivity.start(activity!!, movie.id)
     }
 }

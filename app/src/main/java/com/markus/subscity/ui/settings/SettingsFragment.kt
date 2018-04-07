@@ -12,11 +12,11 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.markus.subscity.R
 import com.markus.subscity.api.entities.City
 import com.markus.subscity.dagger.SubsCityDagger
+import com.markus.subscity.extensions.analytics
 import com.markus.subscity.extensions.supportActionBar
 import com.markus.subscity.ui.about.AboutActivity
 import com.markus.subscity.ui.cinemasmap.CinemasMapActivity
 import com.markus.subscity.ui.city.CityActivity
-import com.markus.subscity.ui.donate.DonateActivity
 
 /**
  * @author Vitaliy Markus
@@ -50,15 +50,16 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
                 //SettingsAdapter.SOON_AT_BOX_OFFICE -> {}
                     SettingsAdapter.CINEMA_MAP -> settingsPresenter.showCinemasMap()
                 //SettingsAdapter.SALES -> {}
-                    SettingsAdapter.ABOUT -> AboutActivity.start(activity!!)
-                    SettingsAdapter.DONATE -> DonateActivity.start(activity!!)
-                    SettingsAdapter.CITY -> CityActivity.start(activity!!)
+                    SettingsAdapter.ABOUT -> openAbout()
+                //SettingsAdapter.DONATE -> DonateActivity.start(activity!!)
+                    SettingsAdapter.CITY -> openCityPicker()
                 }
             }
         }
     }
 
     override fun showCinemasMap(city: City) {
+        analytics().logOpenCinemasMap(city.name, false)
         CinemasMapActivity.start(activity!!, city.location.latitude, city.location.longitude, city.location.zoom)
     }
 
@@ -67,5 +68,15 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
         if (isVisibleToUser) {
             activity?.let { it.supportActionBar.setTitle(R.string.main_settings) }
         }
+    }
+
+    private fun openAbout() {
+        analytics().logOpenAbout()
+        AboutActivity.start(activity!!)
+    }
+
+    private fun openCityPicker() {
+        analytics().logOpenCityPicker()
+        CityActivity.start(activity!!)
     }
 }

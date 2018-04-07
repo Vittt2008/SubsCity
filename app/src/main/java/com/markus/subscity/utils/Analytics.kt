@@ -1,203 +1,222 @@
 package com.markus.subscity.utils
 
+import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import com.google.firebase.analytics.FirebaseAnalytics
+import com.markus.subscity.api.entities.screening.Screening
 import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * @author Vitaliy Markus
  */
+@Singleton
 class Analytics @Inject constructor(context: Context) {
 
     companion object {
 
         // Events
 
-        private val EVENT_APP = "event_app"
+        private const val EVENT_APP = "event_app"
 
-        private val EVENT_MAIN = "event_main"
-        private val EVENT_FILMS = "event_films"
-        private val EVENT_CINEMAS = "event_cinemas"
-        private val EVENT_CINEMAS_MAP = "event_cinemas_map"
-        private val EVENT_SETTINGS = "event_settings"
+        private const val EVENT_MAIN = "event_main"
+        private const val EVENT_FILMS = "event_films"
+        private const val EVENT_CINEMAS = "event_cinemas"
+        private const val EVENT_CINEMAS_MAP = "event_cinemas_map"
+        private const val EVENT_SETTINGS = "event_settings"
 
-        private val EVENT_FILM = "event_film"
-        private val EVENT_YOUTUBE = "event_youtube"
-        private val EVENT_SHARE = "event_share"
+        private const val EVENT_MOVIE = "event_film"
+        private const val EVENT_YOUTUBE = "event_youtube"
+        private const val EVENT_SHARE = "event_share"
 
-        private val EVENT_CINEMA = "event_cinema"
-        private val EVENT_CINEMA_ADDRESS = "event_cinema_address"
-        private val EVENT_CINEMA_DIALER = "event_cinema_dialer"
-        private val EVENT_CINEMA_WEB = "event_cinema_web"
+        private const val EVENT_CINEMA = "event_cinema"
+        private const val EVENT_CINEMA_ADDRESS = "event_cinema_address"
+        private const val EVENT_CINEMA_DIALER = "event_cinema_dialer"
+        private const val EVENT_CINEMA_WEB = "event_cinema_web"
 
-        private val EVENT_ABOUT = "event_about"
-        private val EVENT_TELEGRAM = "event_telegram"
-        private val EVENT_VKONTAKTE = "event_vkontakte"
-        private val EVENT_FACEBOOK = "event_facebook"
-        private val EVENT_EMAIL = "event_email"
-        private val EVENT_CITY_PICKER = "event_city_chooser"
-        private val EVENT_SWITCH_CITY = "event_choose_city"
+        private const val EVENT_ABOUT = "event_about"
+        private const val EVENT_SOCIAL_NETWORK = "event_social_network"
+        private const val EVENT_EMAIL = "event_email"
+        private const val EVENT_CITY_PICKER = "event_city_chooser"
+        private const val EVENT_SWITCH_CITY = "event_choose_city"
 
-        private val EVENT_BUY_TICKET = "event_buy_ticket"
+        private const val EVENT_BUY_TICKET = "event_buy_ticket"
 
         // Keys
 
-        private val KEY_CITY = "city"
-        private val KEY_FROM = "from"
-        private val KEY_FILM_ID = "film_id"
-        private val KEY_FILM_NAME = "film_name"
-        private val KEY_TRAILER_ID = "trailer_id"
-        private val KEY_CINEMA_ID = "cinema_id"
-        private val KEY_CINEMA_NAME = "cinema_name"
-        private val KEY_CINEMA_ADDRESS = "cinema_address"
-        private val KEY_CINEMA_PHONE = "cinema_phone"
-        private val KEY_CINEMA_WEB = "cinema_web"
-        private val KEY_TELEGRAM = "telegram"
-        private val KEY_VKONTAKTE = "vkontakte"
-        private val KEY_FACEBOOK = "facebook"
+        private const val KEY_CITY = "city"
+        private const val KEY_FROM = "from"
+        private const val KEY_MOVIE_ID = "film_id"
+        private const val KEY_MOVIE_NAME = "film_name"
+        private const val KEY_TRAILER_ID = "trailer_id"
+        private const val KEY_CINEMA_ID = "cinema_id"
+        private const val KEY_CINEMA_NAME = "cinema_name"
+        private const val KEY_CINEMA_ADDRESS = "cinema_address"
+        private const val KEY_CINEMA_PHONE = "cinema_phone"
+        private const val KEY_CINEMA_WEB = "cinema_web"
+        private const val KEY_SOCIAL_NETWORK = "social_network"
+        private const val KEY_SOCIAL_NETWORK_URL = "social_network_url"
+        private const val KEY_FROM_DEEP_LINK = "from_deep_link"
+        private const val KEY_LANGUAGE = "language"
+        private const val KEY_SCREENING_ID = "screening_id"
+        private const val KEY_PRICE_MIN = "price_min"
+        private const val KEY_PRICE_MAX = "price_max"
+        private const val KEY_DATETIME = "datetime"
 
         // Params
 
-        private val PARAM_FROM_CINEMAS = "from_cinemas"
-        private val PARAM_FROM_SETTINGS = "from_settings"
+        private const val PARAM_FROM_CINEMAS = "from_cinemas"
+        private const val PARAM_FROM_SETTINGS = "from_settings"
+        private const val PARAM_ORIGINAL = "original"
+        private const val PARAM_RUSSIAN = "russian"
     }
 
     private val analytics = FirebaseAnalytics.getInstance(context)
 
-    fun startApp(city: String) {
+    fun logStartApp(city: String) {
         val bundle = Bundle().apply {
             putString(KEY_CITY, city)
         }
         analytics.logEvent(EVENT_APP, bundle)
     }
 
-    fun openMain() {
+    fun logOpenMain() {
         analytics.logEvent(EVENT_MAIN, Bundle())
     }
 
-    fun openFilms() {
-        analytics.logEvent(EVENT_FILMS, Bundle())
+    fun logOpenMovies(fromDeepLink: Boolean) {
+        val bundle = Bundle().apply {
+            putBoolean(KEY_FROM_DEEP_LINK, fromDeepLink)
+        }
+        analytics.logEvent(EVENT_FILMS, bundle)
     }
 
-    fun openCinemas() {
-        analytics.logEvent(EVENT_CINEMAS, Bundle())
+    fun logOpenCinemas(fromDeepLink: Boolean) {
+        val bundle = Bundle().apply {
+            putBoolean(KEY_FROM_DEEP_LINK, fromDeepLink)
+        }
+        analytics.logEvent(EVENT_CINEMAS, bundle)
     }
 
-    fun openCinemasMap(fromCinemas: Boolean) {
+    fun logOpenCinemasMap(city: String, fromCinemas: Boolean) {
         val fromValue = if (fromCinemas) PARAM_FROM_CINEMAS else PARAM_FROM_SETTINGS
         val bundle = Bundle().apply {
+            putString(KEY_CITY, city)
             putString(KEY_FROM, fromValue)
         }
         analytics.logEvent(EVENT_CINEMAS_MAP, bundle)
     }
 
-    fun openSettings() {
+    fun logOpenSettings() {
         analytics.logEvent(EVENT_SETTINGS, Bundle())
     }
 
-    fun openFilm(filmId: String, filmName: String) {
+    fun logOpenMovie(movieId: Long, movieName: String?, fromDeepLink: Boolean) {
         val bundle = Bundle().apply {
-            putString(KEY_FILM_ID, filmId)
-            putString(KEY_FILM_NAME, filmName)
+            putLong(KEY_MOVIE_ID, movieId)
+            putString(KEY_MOVIE_NAME, movieName)
+            putBoolean(KEY_FROM_DEEP_LINK, fromDeepLink)
         }
-        analytics.logEvent(EVENT_FILM, bundle)
+        analytics.logEvent(EVENT_MOVIE, bundle)
     }
 
-    fun openYouTube(filmId: String, filmName: String, trailerId: String) {
+    fun logOpenYouTube(movieId: Long, movieName: String, trailerId: String, isOriginal: Boolean) {
+        val languageValue = if (isOriginal) PARAM_ORIGINAL else PARAM_RUSSIAN
         val bundle = Bundle().apply {
-            putString(KEY_FILM_ID, filmId)
-            putString(KEY_FILM_NAME, filmName)
+            putLong(KEY_MOVIE_ID, movieId)
+            putString(KEY_MOVIE_NAME, movieName)
             putString(KEY_TRAILER_ID, trailerId)
+            putString(KEY_LANGUAGE, languageValue)
         }
         analytics.logEvent(EVENT_YOUTUBE, bundle)
     }
 
-    fun shareFilm(filmId: String, filmName: String) {
+    fun logShareMovie(filmId: Long, filmName: String) {
         val bundle = Bundle().apply {
-            putString(KEY_FILM_ID, filmId)
-            putString(KEY_FILM_NAME, filmName)
+            putLong(KEY_MOVIE_ID, filmId)
+            putString(KEY_MOVIE_NAME, filmName)
         }
         analytics.logEvent(EVENT_SHARE, bundle)
     }
 
-    fun openCinema(cinemaId: String, cinemaName: String) {
+    fun logOpenCinema(cinemaId: Long, cinemaName: String?, fromDeepLink: Boolean) {
         val bundle = Bundle().apply {
-            putString(KEY_CINEMA_ID, cinemaId)
+            putLong(KEY_CINEMA_ID, cinemaId)
             putString(KEY_CINEMA_NAME, cinemaName)
+            putBoolean(KEY_FROM_DEEP_LINK, fromDeepLink)
         }
         analytics.logEvent(EVENT_CINEMA, bundle)
     }
 
-    fun cinemaAddressClick(cinemaId: String, cinemaName: String, address: String) {
+    fun logCinemaAddressClick(cinemaId: Long, cinemaName: String, address: String) {
         val bundle = Bundle().apply {
-            putString(KEY_CINEMA_ID, cinemaId)
+            putLong(KEY_CINEMA_ID, cinemaId)
             putString(KEY_CINEMA_NAME, cinemaName)
             putString(KEY_CINEMA_ADDRESS, address)
         }
         analytics.logEvent(EVENT_CINEMA_ADDRESS, bundle)
     }
 
-    fun cinemaPhoneClick(cinemaId: String, cinemaName: String, phone: String) {
+    fun logCinemaPhoneClick(cinemaId: Long, cinemaName: String, phone: String) {
         val bundle = Bundle().apply {
-            putString(KEY_CINEMA_ID, cinemaId)
+            putLong(KEY_CINEMA_ID, cinemaId)
             putString(KEY_CINEMA_NAME, cinemaName)
             putString(KEY_CINEMA_PHONE, phone)
         }
         analytics.logEvent(EVENT_CINEMA_DIALER, bundle)
     }
 
-    fun cinemaWebClick(cinemaId: String, cinemaName: String, url: String) {
+    fun logCinemaWebClick(cinemaId: Long, cinemaName: String, url: String) {
         val bundle = Bundle().apply {
-            putString(KEY_CINEMA_ID, cinemaId)
+            putLong(KEY_CINEMA_ID, cinemaId)
             putString(KEY_CINEMA_NAME, cinemaName)
             putString(KEY_CINEMA_WEB, url)
         }
         analytics.logEvent(EVENT_CINEMA_WEB, bundle)
     }
 
-    fun openAbout() {
+    fun logOpenAbout() {
         analytics.logEvent(EVENT_ABOUT, Bundle())
     }
 
-    fun openTelegram(telegram: String) {
+    fun logOpenSocialNetwork(socialNetwork: String, city: String, url: String) {
         val bundle = Bundle().apply {
-            putString(KEY_TELEGRAM, telegram)
+            putString(KEY_SOCIAL_NETWORK, socialNetwork)
+            putString(KEY_CITY, city)
+            putString(KEY_SOCIAL_NETWORK_URL, url)
         }
-        analytics.logEvent(EVENT_TELEGRAM, bundle)
+        analytics.logEvent(EVENT_SOCIAL_NETWORK, bundle)
     }
 
-    fun openVkontakte(vkontakte: String) {
-        val bundle = Bundle().apply {
-            putString(KEY_VKONTAKTE, vkontakte)
-        }
-        analytics.logEvent(EVENT_VKONTAKTE, bundle)
-    }
-
-    fun openFacebook(facebook: String) {
-        val bundle = Bundle().apply {
-            putString(KEY_FACEBOOK, facebook)
-        }
-        analytics.logEvent(EVENT_FACEBOOK, bundle)
-    }
-
-
-    fun openEmail() {
+    fun logOpenEmail() {
         analytics.logEvent(EVENT_EMAIL, Bundle())
     }
 
-    fun openCityPicker() {
+    fun logOpenCityPicker() {
         analytics.logEvent(EVENT_CITY_PICKER, Bundle())
     }
 
-    fun switchCity(city: String) {
+    fun logSwitchCity(city: String) {
         val bundle = Bundle().apply {
             putString(KEY_CITY, city)
         }
         analytics.logEvent(EVENT_SWITCH_CITY, bundle)
     }
 
-    fun buyTicket() {
-        analytics.logEvent(EVENT_BUY_TICKET, Bundle())
+    fun logBuyTicket(screening: Screening) {
+        val bundle = Bundle().apply {
+            putLong(KEY_SCREENING_ID, screening.id)
+            putLong(KEY_CINEMA_ID, screening.cinemaId)
+            putLong(KEY_MOVIE_ID, screening.movieId)
+            putInt(KEY_PRICE_MIN, screening.priceMin)
+            putInt(KEY_PRICE_MAX, screening.priceMax)
+            putString(KEY_DATETIME, screening.dateTime.toString("dd-MM-yyyy HH:mm"))
+        }
+        analytics.logEvent(EVENT_BUY_TICKET, bundle)
+    }
+
+    fun logActivity(activity: Activity) {
+        analytics.setCurrentScreen(activity, activity.javaClass.name.toString(), null)
     }
 }

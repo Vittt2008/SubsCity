@@ -15,6 +15,8 @@ import android.support.v7.widget.Toolbar
 import android.view.View
 import android.widget.Toast
 import com.markus.subscity.R
+import com.markus.subscity.dagger.SubsCityDagger
+import com.markus.subscity.utils.Analytics
 
 /**
  * @author Vitaliy Markus
@@ -51,6 +53,10 @@ fun Fragment.toast(text: String?) {
 
 fun View.toast(text: String?) {
     Toast.makeText(this.context, text, Toast.LENGTH_SHORT).show()
+}
+
+fun analytics(): Analytics {
+    return SubsCityDagger.component.provideAnalytics()
 }
 
 fun Fragment.openUrl(uri: Uri, useChromeTabs: Boolean = true) {

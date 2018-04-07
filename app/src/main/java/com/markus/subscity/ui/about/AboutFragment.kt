@@ -10,6 +10,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.markus.subscity.R
 import com.markus.subscity.dagger.SubsCityDagger
+import com.markus.subscity.extensions.analytics
 import com.markus.subscity.extensions.openIntent
 import com.markus.subscity.extensions.openUrl
 import com.markus.subscity.extensions.setSupportActionBar
@@ -44,11 +45,13 @@ class AboutFragment : MvpAppCompatFragment(), AboutView {
         return root
     }
 
-    override fun openSocialNetwork(url: String) {
+    override fun openSocialNetwork(socialNetwork: AboutView.SocialNetwork, city: String, url: String) {
+        analytics().logOpenSocialNetwork(socialNetwork.toString(), city, url)
         openUrl(Uri.parse(url), false)
     }
 
     private fun openEmailApp() {
+        analytics().logOpenEmail()
         val intent = IntentUtils.sendEmail(getString(R.string.email_address), getString(R.string.email_subject))
         openIntent(intent, R.string.about_no_email_application)
     }

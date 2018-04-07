@@ -71,6 +71,7 @@ class CinemaFragment : MvpAppCompatFragment(), CinemaView {
     }
 
     private fun openMap(cinema: Cinema) {
+        analytics().logCinemaAddressClick(cinema.id, cinema.name, cinema.location.address)
         val geoUri = getString(R.string.geo_uri, cinema.location.latitude, cinema.location.longitude, Uri.encode(cinema.name))
         val uri = Uri.parse(geoUri)
         val intent = Intent(Intent.ACTION_VIEW, uri)
@@ -78,15 +79,20 @@ class CinemaFragment : MvpAppCompatFragment(), CinemaView {
     }
 
     private fun call(cinema: Cinema) {
-        val intent = IntentUtils.createOpenDialerIntent(cinema.phones.first())
+        val phone = cinema.phones.first()
+        analytics().logCinemaPhoneClick(cinema.id, cinema.name, phone)
+        val intent = IntentUtils.createOpenDialerIntent(phone)
         openIntent(intent, R.string.cinema_no_phone_application)
     }
 
     private fun openSite(cinema: Cinema) {
-        openUrl(Uri.parse(cinema.urls.first()))
+        val url = cinema.urls.first()
+        analytics().logCinemaWebClick(cinema.id, cinema.name, url)
+        openUrl(Uri.parse(url))
     }
 
     private fun buyTicket(screening: Screening) {
+        analytics().logBuyTicket(screening)
         openUrl(Uri.parse(screening.ticketsUrl))
     }
 

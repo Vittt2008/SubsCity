@@ -12,14 +12,14 @@ import javax.inject.Inject
 class AboutPresenter @Inject constructor(private val cityProvider: CityProvider) : MvpPresenter<AboutView>() {
 
     fun openTelegram() {
-        viewState.openSocialNetwork(cityProvider.city.socialNetworks.telegram)
+        viewState.openSocialNetwork(AboutView.SocialNetwork.TELEGRAM, cityProvider.cityName, cityProvider.city.socialNetworks.telegram)
     }
 
     fun openVkontakte() {
-        viewState.openSocialNetwork(cityProvider.city.socialNetworks.vkontakte)
+        viewState.openSocialNetwork(AboutView.SocialNetwork.VKONTAKTE, cityProvider.cityName, cityProvider.city.socialNetworks.vkontakte)
     }
 
     fun openFacebook() {
-        viewState.openSocialNetwork(cityProvider.city.socialNetworks.facebook)
+        viewState.openSocialNetwork(AboutView.SocialNetwork.FACEBOOK, cityProvider.cityName, cityProvider.city.socialNetworks.facebook)
     }
 }

@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo
 import android.os.Bundle
 import com.google.android.youtube.player.*
 import com.markus.subscity.R
+import com.markus.subscity.dagger.SubsCityDagger
 import com.markus.subscity.extensions.toast
 
 
@@ -34,6 +35,12 @@ class YouTubeActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedListen
 
         playerView = findViewById(R.id.player)
         playerView.initialize(YOUTUBE_API_KEY, this)
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        SubsCityDagger.component.provideAnalytics().logActivity(this)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

@@ -84,28 +84,6 @@ class MoviesAdapter(private val context: Context,
         private val movieGenre = view.findViewById<TextView>(R.id.tv_movie_genre)
 
         init {
-//            val gradientDrawable = GradientDrawable(
-//                    GradientDrawable.Orientation.TOP_BOTTOM,
-//                    intArrayOf(
-//                            ContextCompat.getColor(context, R.color.black_color),
-//                            ContextCompat.getColor(context, R.color.black_color_16),
-//                            ContextCompat.getColor(context, R.color.black_color_24),
-//                            ContextCompat.getColor(context, R.color.black_color)))
-//            shadow.background = gradientDrawable
-//
-//            val shaderFactory = object : ShapeDrawable.ShaderFactory() {
-//                override fun resize(width: Int, height: Int): Shader {
-//                    return LinearGradient(0f, 0f, width.toFloat(), height.toFloat(),
-//                            intArrayOf(Color.BLACK, Color.RED, Color.BLUE, Color.YELLOW), //substitute the correct colors for these
-//                            floatArrayOf(0f, 0.40f, 0.60f, 1f),
-//                            Shader.TileMode.MIRROR)
-//
-//                }
-//            }
-//            val paint = PaintDrawable()
-//            paint.shape = RectShape()
-//            paint.shaderFactory = shaderFactory
-//            shadow.background = paint
             view.setOnClickListener { clickListener.invoke(movie) }
         }
 

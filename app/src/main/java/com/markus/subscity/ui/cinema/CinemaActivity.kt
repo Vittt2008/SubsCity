@@ -3,12 +3,12 @@ package com.markus.subscity.ui.cinema
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import com.markus.subscity.utils.BaseActivity
 
 /**
  * @author Vitaliy Markus
  */
-class CinemaActivity : AppCompatActivity() {
+class CinemaActivity : BaseActivity() {
 
     companion object {
 

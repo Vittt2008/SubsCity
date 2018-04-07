@@ -97,7 +97,9 @@ class MovieFragment : MvpAppCompatFragment(), MovieView, ShareView {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.item_share) {
-            sharePresenter.share(moviePoster.drawable, adapter!!.movie)
+            val movie = adapter!!.movie
+            analytics().logShareMovie(movie.id, movie.title.russian)
+            sharePresenter.share(moviePoster.drawable, movie)
             return true
         }
         return super.onOptionsItemSelected(item)
@@ -144,11 +146,17 @@ class MovieFragment : MvpAppCompatFragment(), MovieView, ShareView {
     private fun showPreferOriginalTrailer(movie: Movie) {
         val trailer = movie.trailer
         when {
-            trailer.original.isNotEmpty() -> YouTubeActivity.start(activity!!, trailer.original)
-            trailer.russian.isNotEmpty() -> YouTubeActivity.start(activity!!, trailer.russian)
+            trailer.original.isNotEmpty() -> openYoutube(movie, trailer.original, true)
+            trailer.russian.isNotEmpty() -> openYoutube(movie, trailer.russian, false)
             else -> toast(getString(R.string.movie_no_trailers))
         }
     }
+
+    private fun openYoutube(movie: Movie, trailerId: String, isOriginal: Boolean) {
+        analytics().logOpenYouTube(movie.id, movie.title.russian, trailerId, isOriginal)
+        YouTubeActivity.start(activity!!, trailerId)
+    }
+
 
     private fun showTrailer(movie: Movie) {
         val trailer = movie.trailer
@@ -159,22 +167,23 @@ class MovieFragment : MvpAppCompatFragment(), MovieView, ShareView {
                     .setItemTextColorResource(R.color.subtitle_color)
                     .setItemClickListener({ item ->
                         when (item.itemId) {
-                            R.id.item_original -> YouTubeActivity.start(activity!!, trailer.original)
-                            R.id.item_russian -> YouTubeActivity.start(activity!!, trailer.russian)
+                            R.id.item_original -> openYoutube(movie, trailer.original, true)
+                            R.id.item_russian -> openYoutube(movie, trailer.russian, false)
                         }
                     })
                     .createDialog()
                     .show()
         } else if (trailer.original.isNotEmpty()) {
-            YouTubeActivity.start(activity!!, trailer.original)
+            openYoutube(movie, trailer.original, true)
         } else if (trailer.russian.isNotEmpty()) {
-            YouTubeActivity.start(activity!!, trailer.russian)
+            openYoutube(movie, trailer.russian, false)
         } else {
             toast(getString(R.string.movie_no_trailers))
         }
     }
 
     private fun buyTicket(screening: Screening) {
+        analytics().logBuyTicket(screening)
         openUrl(Uri.parse(screening.ticketsUrl))
     }
 

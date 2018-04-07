@@ -1,5 +1,6 @@
 package com.markus.subscity.dagger
 
+import com.markus.subscity.providers.CityProvider
 import com.markus.subscity.providers.metro.MoscowMetroTextProvider
 import com.markus.subscity.providers.metro.SpbMetroTextProvider
 import com.markus.subscity.ui.about.AboutPresenter
@@ -18,6 +19,7 @@ import com.markus.subscity.ui.movies.MoviesAdapter
 import com.markus.subscity.ui.movies.MoviesPresenter
 import com.markus.subscity.ui.settings.SettingsPresenter
 import com.markus.subscity.ui.share.SharePresenter
+import com.markus.subscity.utils.Analytics
 import dagger.Component
 import javax.inject.Singleton
 
@@ -49,5 +51,8 @@ interface SubsCityComponent {
     fun inject(adapter: MoviesAdapter)
     fun inject(adapter: CinemaAdapter)
     fun inject(adapter: CityAdapter)
+
+    fun provideAnalytics(): Analytics
+    fun provideCityProvider(): CityProvider
 
 }

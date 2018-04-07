@@ -10,6 +10,7 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationAdapter
 import com.markus.subscity.R
 import com.markus.subscity.dagger.SubsCityDagger
+import com.markus.subscity.extensions.analytics
 import com.markus.subscity.ui.cinema.CinemaActivity
 import com.markus.subscity.ui.deeplink.DeepLinkPresenter
 import com.markus.subscity.ui.deeplink.DeepLinkView
@@ -41,27 +42,38 @@ class MainActivity : MvpAppCompatActivity(), DeepLinkView {
         if (isFromDeepLink) {
             deepLinkPresenter.performDeepLink(intent.data)
         }
+
+        analytics().logOpenMain()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        SubsCityDagger.component.provideAnalytics().logActivity(this)
     }
 
     override fun showMain() {
-        showMovies()
+        ahBottomView.currentItem = 0
     }
 
     override fun showMovies() {
         ahBottomView.currentItem = 0
+        analytics().logOpenMovies(true)
     }
 
     override fun showCinemas() {
         ahBottomView.currentItem = 1
+        analytics().logOpenCinemas(true)
     }
 
     override fun showMovie(movieId: Long) {
-        showMovies()
+        ahBottomView.currentItem = 0
+        analytics().logOpenMovie(movieId, null,true)
         MovieActivity.start(this, movieId)
     }
 
     override fun showCinema(cinemaId: Long) {
-        showCinemas()
+        ahBottomView.currentItem = 1
+        analytics().logOpenCinema(cinemaId, null, true)
         CinemaActivity.start(this, cinemaId)
     }
 
@@ -79,8 +91,18 @@ class MainActivity : MvpAppCompatActivity(), DeepLinkView {
         ahBottomView.inactiveColor = ContextCompat.getColor(this, R.color.inactive_color)
         ahBottomView.defaultBackgroundColor = ContextCompat.getColor(this, R.color.white_color)
         ahBottomView.titleState = AHBottomNavigation.TitleState.ALWAYS_HIDE
-        ahBottomView.setOnTabSelectedListener { position, wasSelected -> viewPager.setCurrentItem(position, false); true }
+        ahBottomView.setOnTabSelectedListener { position, wasSelected -> selectTab(position) }
         ahBottomView.setUseElevation(true)
+    }
+
+    private fun selectTab(position: Int): Boolean {
+        viewPager.setCurrentItem(position, false)
+        when (position) {
+            0 -> analytics().logOpenMovies(false)
+            1 -> analytics().logOpenCinemas(false)
+            else -> analytics().logOpenSettings()
+        }
+        return true
     }
 
 }

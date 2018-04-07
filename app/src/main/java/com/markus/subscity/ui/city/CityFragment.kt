@@ -12,6 +12,7 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.markus.subscity.R
 import com.markus.subscity.api.entities.City
 import com.markus.subscity.dagger.SubsCityDagger
+import com.markus.subscity.extensions.analytics
 import com.markus.subscity.extensions.setSupportActionBar
 import com.markus.subscity.extensions.toast
 
@@ -46,12 +47,17 @@ class CityFragment : MvpAppCompatFragment(), CityView {
     override fun showCities(cities: List<City>, currentCity: String) {
         cityList.apply {
             layoutManager = LinearLayoutManager(activity)
-            adapter = CityAdapter(activity!!, cities, currentCity) { cityPresenter.updateCity(it) }
+            adapter = CityAdapter(activity!!, cities, currentCity, ::updateCity)
         }
     }
 
     override fun onError(throwable: Throwable) {
         toast(throwable.message)
+    }
+
+    private fun updateCity(city: String) {
+        analytics().logSwitchCity(city)
+        cityPresenter.updateCity(city)
     }
 
 }

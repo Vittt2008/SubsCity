@@ -13,6 +13,7 @@ import com.markus.subscity.api.entities.City
 import com.markus.subscity.api.entities.cinema.Cinema
 import com.markus.subscity.controllers.ContentLoadingController
 import com.markus.subscity.dagger.SubsCityDagger
+import com.markus.subscity.extensions.analytics
 import com.markus.subscity.extensions.supportActionBar
 import com.markus.subscity.ui.cinema.CinemaActivity
 import com.markus.subscity.ui.cinemasmap.CinemasMapActivity
@@ -55,12 +56,13 @@ class CinemasFragment : MvpAppCompatFragment(), CinemasView {
         cinemas.toString().equals("", true)
         cinemasList.run {
             layoutManager = LinearLayoutManager(activity)
-            adapter = CinemasAdapter(cinemas) { CinemaActivity.start(activity!!, it.id) }
+            adapter = CinemasAdapter(cinemas, ::openCinema)
             addItemDecoration(MarginDivider(activity!!).apply { setDrawable(R.drawable.cinema_divider) })
         }
     }
 
     override fun showCinemasMap(city: City) {
+        analytics().logOpenCinemasMap(city.name, true)
         CinemasMapActivity.start(activity!!, city.location.latitude, city.location.longitude, city.location.zoom)
     }
 
@@ -83,7 +85,6 @@ class CinemasFragment : MvpAppCompatFragment(), CinemasView {
         }
     }
 
-
     override fun onError(throwable: Throwable) {
         Toast.makeText(activity, throwable.message, Toast.LENGTH_SHORT).show()
     }
@@ -94,6 +95,11 @@ class CinemasFragment : MvpAppCompatFragment(), CinemasView {
 
     override fun hideProgress() {
         loadingController.switchState(ContentLoadingController.State.CONTENT)
+    }
+
+    private fun openCinema(cinema: Cinema) {
+        analytics().logOpenCinema(cinema.id, cinema.name, false)
+        CinemaActivity.start(activity!!, cinema.id)
     }
 
 }

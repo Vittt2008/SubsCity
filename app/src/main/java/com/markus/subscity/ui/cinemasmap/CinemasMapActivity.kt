@@ -79,6 +79,11 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnI
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        SubsCityDagger.component.provideAnalytics().logActivity(this)
+    }
+
     override fun showCinemas(cinemas: List<Cinema>, googleMap: Any) {
         val map = googleMap as GoogleMap
         val icon = AppCompatResources.getDrawable(this, R.drawable.ic_pin)!!.toBitmap()

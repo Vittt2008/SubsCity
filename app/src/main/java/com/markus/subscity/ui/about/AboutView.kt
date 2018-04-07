@@ -10,5 +10,11 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 interface AboutView : MvpView {
 
     @StateStrategyType(OneExecutionStateStrategy::class)
-    fun openSocialNetwork(url: String)
+    fun openSocialNetwork(socialNetwork: SocialNetwork, city: String, url: String)
+
+    enum class SocialNetwork {
+        TELEGRAM,
+        VKONTAKTE,
+        FACEBOOK
+    }
 }
