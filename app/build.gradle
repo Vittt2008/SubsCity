@@ -9,7 +9,7 @@ apply plugin: 'io.fabric'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.source.subscity"
+        applicationId "com.markus.subscity"
         minSdkVersion 16
         targetSdkVersion 27
         versionCode 7
@@ -19,7 +19,8 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -37,18 +38,19 @@ dependencies {
     }
 
     //ANDROID
-    implementation 'com.android.support:appcompat-v7:27.0.0'
-    implementation 'com.android.support:recyclerview-v7:27.0.0'
-    implementation 'com.android.support:customtabs:27.0.0'
-    implementation 'com.android.support:transition:27.0.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    implementation 'com.android.support:multidex:1.0.3'
+    implementation "com.android.support:appcompat-v7:$supportVersion"
+    implementation "com.android.support:design:$supportVersion"
+    implementation "com.android.support:recyclerview-v7:$supportVersion"
+    implementation "com.android.support:customtabs:$supportVersion"
+    implementation "com.android.support:transition:$supportVersion"
+    implementation "com.android.support.constraint:constraint-layout:1.0.2"
+    implementation "com.android.support:multidex:1.0.3"
 
     //YOUTUBE
     compile files('libs/YouTubeAndroidPlayerApi.jar')
 
     //PLAY SERVICES
-    implementation "com.google.android.gms:play-services-maps:11.8.0"
+    implementation "com.google.android.gms:play-services-maps:$playServicesVersion"
 
     //RX
     implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"

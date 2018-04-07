@@ -23,7 +23,7 @@ import java.util.concurrent.locks.ReentrantLock
 class PosterCrop : BitmapTransformation() {
 
     companion object {
-        private const val ID = "com.source.subscity.widgets.transformations.PosterCrop"
+        private const val ID = "com.markus.subscity.widgets.transformations.PosterCrop"
         private val ID_BYTES = ID.toByteArray(CHARSET)
         private val DEFAULT_PAINT = Paint(PAINT_FLAGS)
         private val MODELS_REQUIRING_BITMAP_LOCK = HashSet(

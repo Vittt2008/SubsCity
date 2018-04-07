@@ -12,7 +12,7 @@
         android:layout_height="384dp"
         android:fitsSystemWindows="true"
         android:theme="@style/AppTheme.AppBarOverlay"
-        app:layout_behavior="com.source.subscity.widgets.RecyclerViewAppBarBehavior">
+        app:layout_behavior="com.markus.subscity.widgets.RecyclerViewAppBarBehavior">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/toolbar_layout"
