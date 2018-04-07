@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.source.subscity">
+    package="com.markus.subscity">
 
     <application
-        android:name=".SubsCityApplication"
+        android:name="com.markus.subscity.SubsCityApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -19,7 +19,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBdMF5C9dMyuE-fopbHlzfqUsJ7Fm6I4BI" />
 
-        <activity android:name=".ui.main.MainActivity">
+        <activity android:name="com.markus.subscity.ui.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -44,34 +44,34 @@
         </activity>
 
         <activity
-            android:name=".ui.movie.MovieActivity"
+            android:name="com.markus.subscity.ui.movie.MovieActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".ui.cinema.CinemaActivity"
+            android:name="com.markus.subscity.ui.cinema.CinemaActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".ui.city.CityActivity"
+            android:name="com.markus.subscity.ui.city.CityActivity"
             android:label="@string/city_title"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".ui.youtube.YouTubeActivity"
+            android:name="com.markus.subscity.ui.youtube.YouTubeActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|keyboard"
             android:theme="@style/AppTheme.YouTube" />
 
         <activity
-            android:name=".ui.cinemasmap.CinemasMapActivity"
+            android:name="com.markus.subscity.ui.cinemasmap.CinemasMapActivity"
             android:label="@string/cinemas_map_title" />
 
         <activity
-            android:name=".ui.about.AboutActivity"
+            android:name="com.markus.subscity.ui.about.AboutActivity"
             android:label="@string/about_title"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".ui.donate.DonateActivity"
+            android:name="com.markus.subscity.ui.donate.DonateActivity"
             android:label="@string/donate_title"
             android:theme="@style/AppTheme.NoActionBar" />
 
