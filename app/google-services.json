@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "584568191229",
+    "firebase_url": "https://subscity-diagram-200409.firebaseio.com",
+    "project_id": "subscity-diagram-200409",
+    "storage_bucket": "subscity-diagram-200409.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:584568191229:android:895bdecc9968fa2a",
+        "android_client_info": {
+          "package_name": "com.markus.subscity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "584568191229-dusimuj3emd05v61odd0r3rr16pgo12b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZVuEguPsCpvW0AafK1EIfFjI_mLMlh_g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

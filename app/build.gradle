@@ -51,6 +51,7 @@ dependencies {
 
     //PLAY SERVICES
     implementation "com.google.android.gms:play-services-maps:$playServicesVersion"
+    implementation "com.google.firebase:firebase-core:$playServicesVersion"
 
     //RX
     implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
@@ -100,3 +101,5 @@ dependencies {
 kapt {
     generateStubs = true
 }
+
+apply plugin: 'com.google.gms.google-services'
