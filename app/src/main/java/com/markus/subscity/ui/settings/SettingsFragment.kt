@@ -77,6 +77,6 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
 
     private fun openCityPicker() {
         analytics().logOpenCityPicker()
-        CityActivity.start(activity!!)
+        CityActivity.start(activity!!, false)
     }
 }

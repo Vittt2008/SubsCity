@@ -35,6 +35,11 @@ fun Fragment.setSupportActionBar(toolbar: Toolbar) {
     toolbar.setNavigationOnClickListener { this.activity!!.onBackPressed() }
 }
 
+fun Fragment.setSupportActionBarWithoutBackButton(toolbar: Toolbar) {
+    val appCompatActivity = activity as AppCompatActivity
+    appCompatActivity.setSupportActionBar(toolbar)
+}
+
 fun Fragment.openIntent(intent: Intent, @StringRes errorId: Int) {
     if (intent.resolveActivity(activity!!.packageManager) != null) {
         startActivity(intent)

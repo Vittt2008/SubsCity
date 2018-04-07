@@ -1,5 +1,7 @@
 package com.markus.subscity.ui.main
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
@@ -12,6 +14,7 @@ import com.markus.subscity.R
 import com.markus.subscity.dagger.SubsCityDagger
 import com.markus.subscity.extensions.analytics
 import com.markus.subscity.ui.cinema.CinemaActivity
+import com.markus.subscity.ui.city.CityActivity
 import com.markus.subscity.ui.deeplink.DeepLinkPresenter
 import com.markus.subscity.ui.deeplink.DeepLinkView
 import com.markus.subscity.ui.deeplink.isFromDeepLink
@@ -25,6 +28,13 @@ class MainActivity : MvpAppCompatActivity(), DeepLinkView {
     @InjectPresenter
     lateinit var deepLinkPresenter: DeepLinkPresenter
 
+    companion object {
+        fun start(context: Context) {
+            val intent = Intent(context, MainActivity::class.java)
+            context.startActivity(intent)
+        }
+    }
+
     @ProvidePresenter
     fun deepLinkPresenter(): DeepLinkPresenter {
         return SubsCityDagger.component.createDeepLinkPresenter()
@@ -32,6 +42,9 @@ class MainActivity : MvpAppCompatActivity(), DeepLinkView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        deepLinkPresenter.checkFirstLaunch()
+
         setContentView(R.layout.activity_main)
         viewPager = findViewById(R.id.ahb_pager)
         ahBottomView = findViewById(R.id.ahb_bottom)
@@ -51,6 +64,11 @@ class MainActivity : MvpAppCompatActivity(), DeepLinkView {
         SubsCityDagger.component.provideAnalytics().logActivity(this)
     }
 
+    override fun showCityPicker() {
+        CityActivity.start(this, true)
+        finish()
+    }
+
     override fun showMain() {
         ahBottomView.currentItem = 0
     }
@@ -67,7 +85,7 @@ class MainActivity : MvpAppCompatActivity(), DeepLinkView {
 
     override fun showMovie(movieId: Long) {
         ahBottomView.currentItem = 0
-        analytics().logOpenMovie(movieId, null,true)
+        analytics().logOpenMovie(movieId, null, true)
         MovieActivity.start(this, movieId)
     }
 

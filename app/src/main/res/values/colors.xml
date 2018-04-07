@@ -24,6 +24,8 @@
 
     <color name="ripple_color">#3dffffff</color>
 
+    <color name="yellow_color">#EEC689</color>
+
     <!-- Social Networks -->
     <color name="telegram_color">#0D86D7</color>
     <color name="vkontakte_color">#4A76A8</color>

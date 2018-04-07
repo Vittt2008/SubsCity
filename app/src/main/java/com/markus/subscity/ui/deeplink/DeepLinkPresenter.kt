@@ -4,17 +4,26 @@ import android.net.Uri
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.markus.subscity.providers.CityProvider
+import com.markus.subscity.providers.PreferencesProvider
 import javax.inject.Inject
 
 /**
  * @author Vitaliy Markus
  */
 @InjectViewState
-class DeepLinkPresenter @Inject constructor(private val cityProvider: CityProvider) : MvpPresenter<DeepLinkView>() {
+class DeepLinkPresenter @Inject constructor(private val cityProvider: CityProvider,
+                                            private val preferencesProvider: PreferencesProvider) : MvpPresenter<DeepLinkView>() {
 
     companion object {
         const val MOVIES = "movies"
         const val CINEMAS = "cinemas"
+    }
+
+    fun checkFirstLaunch() {
+        val cityId = preferencesProvider.getAppPreferences().getString(PreferencesProvider.CITY_ID_KEY, null)
+        if (cityId == null) {
+            viewState.showCityPicker()
+        }
     }
 
     fun performDeepLink(data: Uri) {

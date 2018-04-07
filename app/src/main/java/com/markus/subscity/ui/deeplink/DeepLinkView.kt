@@ -11,4 +11,5 @@ interface DeepLinkView : MvpView {
     fun showCinemas()
     fun showMovie(movieId: Long)
     fun showCinema(cinemaId: Long)
+    fun showCityPicker()
 }

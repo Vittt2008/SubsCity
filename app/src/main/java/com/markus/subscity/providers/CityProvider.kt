@@ -19,8 +19,6 @@ class CityProvider @Inject constructor(private val context: Context,
                                        preferencesProvider: PreferencesProvider) {
 
     companion object {
-        private const val CITY_ID_KEY = "city_id"
-
         const val SAINT_PETERSBURG = "spb"
         const val MOSCOW = "msk"
     }
@@ -28,10 +26,10 @@ class CityProvider @Inject constructor(private val context: Context,
     private val sharedPreferences = preferencesProvider.getAppPreferences()
     private val citySubject = BehaviorSubject.create<String>()
 
-    var cityId = sharedPreferences.getString(CITY_ID_KEY, SAINT_PETERSBURG)!!
+    var cityId = sharedPreferences.getString(PreferencesProvider.CITY_ID_KEY, SAINT_PETERSBURG)!!
         private set(value) {
             field = value
-            sharedPreferences.edit().putString(CITY_ID_KEY, value).apply()
+            sharedPreferences.edit().putString(PreferencesProvider.CITY_ID_KEY, value).apply()
         }
 
     init {
@@ -63,13 +61,9 @@ class CityProvider @Inject constructor(private val context: Context,
             )
     ))
 
-    val asyncCity: Observable<String> = citySubject
+    val asyncCity: Observable<String> = citySubject.distinctUntilChanged()
 
     fun changeCity(city: String) {
-        if (this.cityId == city) {
-            return
-        }
-
         this.cityId = city
         this.citySubject.onNext(city)
     }

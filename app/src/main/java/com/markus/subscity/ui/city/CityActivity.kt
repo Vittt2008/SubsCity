@@ -11,8 +11,11 @@ import com.markus.subscity.utils.BaseActivity
 class CityActivity : BaseActivity() {
 
     companion object {
-        fun start(context: Context) {
+        const val EXTRA_FIRST_PICK = "first_pick"
+
+        fun start(context: Context, firstPick: Boolean) {
             val intent = Intent(context, CityActivity::class.java)
+                    .putExtra(EXTRA_FIRST_PICK, firstPick)
             context.startActivity(intent)
         }
     }
@@ -22,7 +25,7 @@ class CityActivity : BaseActivity() {
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                    .add(android.R.id.content, CityFragment.newInstance())
+                    .add(android.R.id.content, CityFragment.newInstance(intent.getBooleanExtra(EXTRA_FIRST_PICK, false)))
                     .commit()
         }
     }

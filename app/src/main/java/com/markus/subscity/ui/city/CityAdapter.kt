@@ -11,19 +11,15 @@ import android.widget.TextView
 import com.markus.subscity.R
 import com.markus.subscity.api.entities.City
 import com.markus.subscity.dagger.SubsCityDagger
-import com.markus.subscity.providers.CityProvider
-import javax.inject.Inject
 
 /**
  * @author Vitaliy Markus
  */
 class CityAdapter(private val context: Context,
                   cities: List<City>,
-                  city: String,
+                  city: String?,
                   private val clickListener: (String) -> Unit) : RecyclerView.Adapter<CityAdapter.ViewHolder>() {
 
-    @Inject
-    lateinit var cityProvider: CityProvider
     private val selectableCities: List<SelectableCity>
 
     init {
