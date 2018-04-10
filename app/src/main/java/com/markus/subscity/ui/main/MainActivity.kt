@@ -5,45 +5,42 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
-import com.arellomobile.mvp.MvpAppCompatActivity
-import com.arellomobile.mvp.presenter.InjectPresenter
-import com.arellomobile.mvp.presenter.ProvidePresenter
+import android.support.v7.app.AppCompatActivity
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationAdapter
 import com.markus.subscity.R
 import com.markus.subscity.dagger.SubsCityDagger
 import com.markus.subscity.extensions.analytics
-import com.markus.subscity.ui.cinema.CinemaActivity
-import com.markus.subscity.ui.city.CityActivity
-import com.markus.subscity.ui.deeplink.DeepLinkPresenter
-import com.markus.subscity.ui.deeplink.DeepLinkView
-import com.markus.subscity.ui.deeplink.isFromDeepLink
-import com.markus.subscity.ui.movie.MovieActivity
+import com.markus.subscity.ui.main.MainActivity.Companion.Mode.*
 
-class MainActivity : MvpAppCompatActivity(), DeepLinkView {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var viewPager: ViewPager
     private lateinit var ahBottomView: AHBottomNavigation
 
-    @InjectPresenter
-    lateinit var deepLinkPresenter: DeepLinkPresenter
-
     companion object {
+
+        private const val EXTRA_MODE = "mode"
+
         fun start(context: Context) {
+            start(context, MOVIES)
+        }
+
+        fun start(context: Context, mode: Mode) {
             val intent = Intent(context, MainActivity::class.java)
+                    .putExtra(EXTRA_MODE, mode)
             context.startActivity(intent)
         }
-    }
 
-    @ProvidePresenter
-    fun deepLinkPresenter(): DeepLinkPresenter {
-        return SubsCityDagger.component.createDeepLinkPresenter()
+        enum class Mode {
+            MOVIES,
+            CINEMAS,
+            SETTINGS
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        deepLinkPresenter.checkFirstLaunch()
 
         setContentView(R.layout.activity_main)
         viewPager = findViewById(R.id.ahb_pager)
@@ -51,48 +48,12 @@ class MainActivity : MvpAppCompatActivity(), DeepLinkView {
         styleViewPager()
         styleBottomNavigation()
         supportActionBar!!.setTitle(R.string.main_films)
-
-        if (isFromDeepLink) {
-            deepLinkPresenter.performDeepLink(intent.data)
-        }
-
         analytics().logOpenMain()
     }
 
     override fun onResume() {
         super.onResume()
         SubsCityDagger.component.provideAnalytics().logActivity(this)
-    }
-
-    override fun showCityPicker() {
-        CityActivity.start(this, true)
-        finish()
-    }
-
-    override fun showMain() {
-        ahBottomView.currentItem = 0
-    }
-
-    override fun showMovies() {
-        ahBottomView.currentItem = 0
-        analytics().logOpenMovies(true)
-    }
-
-    override fun showCinemas() {
-        ahBottomView.currentItem = 1
-        analytics().logOpenCinemas(true)
-    }
-
-    override fun showMovie(movieId: Long) {
-        ahBottomView.currentItem = 0
-        analytics().logOpenMovie(movieId, null, true)
-        MovieActivity.start(this, movieId)
-    }
-
-    override fun showCinema(cinemaId: Long) {
-        ahBottomView.currentItem = 1
-        analytics().logOpenCinema(cinemaId, null, true)
-        CinemaActivity.start(this, cinemaId)
     }
 
     private fun styleViewPager() {
@@ -111,6 +72,13 @@ class MainActivity : MvpAppCompatActivity(), DeepLinkView {
         ahBottomView.titleState = AHBottomNavigation.TitleState.ALWAYS_HIDE
         ahBottomView.setOnTabSelectedListener { position, wasSelected -> selectTab(position) }
         ahBottomView.setUseElevation(true)
+
+        val mode = intent.getSerializableExtra(EXTRA_MODE) as Mode
+        when (mode) {
+            MOVIES -> ahBottomView.currentItem = 0
+            CINEMAS -> ahBottomView.currentItem = 1
+            SETTINGS -> ahBottomView.currentItem = 2
+        }
     }
 
     private fun selectTab(position: Int): Boolean {
