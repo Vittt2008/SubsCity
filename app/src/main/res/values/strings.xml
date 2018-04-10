@@ -48,7 +48,8 @@
 
     <!-- AboutActivity -->
     <string name="about_title">О приложении</string>
-    <string name="about_info">Предоставляем расписания фильмов на оригинальном языке в кинотеатрах вашего города. На всех сеансах есть субтитры.\n\nБилеты покупаются через Рамблер/касса.</string>
+    <string name="about_info">Предоставляем расписания фильмов на оригинальном языке в кинотеатрах вашего города. На всех сеансах есть субтитры.</string>
+    <string name="about_info_tickets">Билеты покупаются через Рамблер/касса.</string>
     <string name="about_subscribe">Подписывайтесь на нас в Telegram, ВКонтакте и Facebook и не пропустите ни одного нового фильма в кино на языке оригинала!</string>
     <string name="about_social_networks">Соцсети</string>
     <string name="about_vkontakte">ВКонтакте</string>
