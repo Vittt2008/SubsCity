@@ -21,6 +21,7 @@
 
         <activity
             android:name=".ui.splash.SplashActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -47,19 +48,23 @@
 
         <activity
             android:name="com.markus.subscity.ui.main.MainActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Activity" />
 
         <activity
             android:name="com.markus.subscity.ui.movie.MovieActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name="com.markus.subscity.ui.cinema.CinemaActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name="com.markus.subscity.ui.city.CityActivity"
             android:label="@string/city_title"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
@@ -70,16 +75,19 @@
         <activity
             android:name="com.markus.subscity.ui.cinemasmap.CinemasMapActivity"
             android:label="@string/cinemas_map_title"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Activity" />
 
         <activity
             android:name="com.markus.subscity.ui.about.AboutActivity"
             android:label="@string/about_title"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name="com.markus.subscity.ui.donate.DonateActivity"
             android:label="@string/donate_title"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <provider
