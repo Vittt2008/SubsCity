@@ -1,6 +1,7 @@
 package com.markus.subscity.ui.splash
 
 import android.os.Bundle
+import android.support.v4.app.TaskStackBuilder
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
@@ -51,27 +52,30 @@ class SplashActivity : MvpAppCompatActivity(), SplashView, DeepLinkView {
     }
 
     override fun showMovies() {
-        MainActivity.start(this, MainActivity.Companion.Mode.MOVIES)
         analytics().logOpenMovies(true)
+        MainActivity.start(this, MainActivity.Companion.Mode.MOVIES)
         finish()
     }
 
     override fun showCinemas() {
-        MainActivity.start(this, MainActivity.Companion.Mode.CINEMAS)
         analytics().logOpenCinemas(true)
+        MainActivity.start(this, MainActivity.Companion.Mode.CINEMAS)
         finish()
     }
 
     override fun showMovie(movieId: Long) {
         analytics().logOpenMovie(movieId, null, true)
-        MainActivity.start(this, MainActivity.Companion.Mode.MOVIES)
-        MovieActivity.start(this, movieId)
+//        MovieActivity.start(this, movieId)
+        TaskStackBuilder.create(this)
+                .addNextIntent(MainActivity.createIntent(this, MainActivity.Companion.Mode.MOVIES))
+                .addNextIntent(MovieActivity.createIntent(this, movieId))
+                .startActivities()
+        //startActivities(arrayOf(MainActivity.createIntent(this, MainActivity.Companion.Mode.MOVIES), MovieActivity.createIntent(this, movieId)))
         finish()
     }
 
     override fun showCinema(cinemaId: Long) {
         analytics().logOpenCinema(cinemaId, null, true)
-        MainActivity.start(this, MainActivity.Companion.Mode.CINEMAS)
         CinemaActivity.start(this, cinemaId)
         finish()
     }

@@ -32,6 +32,11 @@ class MainActivity : AppCompatActivity() {
             context.startActivity(intent)
         }
 
+        fun createIntent(context: Context, mode: Mode): Intent {
+            return Intent(context, MainActivity::class.java)
+                    .putExtra(EXTRA_MODE, mode)
+        }
+
         enum class Mode {
             MOVIES,
             CINEMAS,

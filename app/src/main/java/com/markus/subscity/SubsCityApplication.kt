@@ -26,11 +26,11 @@ class SubsCityApplication : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()
-        val fabric = Fabric.Builder(this)
-                .kits(Crashlytics())
-                .debuggable(true)
-                .build()
-        Fabric.with(fabric)
+//        val fabric = Fabric.Builder(this)
+//                .kits(Crashlytics())
+//                .debuggable(true)
+//                .build()
+//        Fabric.with(fabric)
 
         val subsCityComponent = DaggerSubsCityComponent.builder()
                 .subsCityModule(SubsCityModule(this))

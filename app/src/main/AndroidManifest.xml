@@ -45,7 +45,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.markus.subscity.ui.main.MainActivity" />
+        <activity
+            android:name="com.markus.subscity.ui.main.MainActivity"
+            android:theme="@style/AppTheme.Activity" />
 
         <activity
             android:name="com.markus.subscity.ui.movie.MovieActivity"
@@ -67,7 +69,8 @@
 
         <activity
             android:name="com.markus.subscity.ui.cinemasmap.CinemasMapActivity"
-            android:label="@string/cinemas_map_title" />
+            android:label="@string/cinemas_map_title"
+            android:theme="@style/AppTheme.Activity" />
 
         <activity
             android:name="com.markus.subscity.ui.about.AboutActivity"
