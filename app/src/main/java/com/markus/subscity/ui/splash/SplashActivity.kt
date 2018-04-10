@@ -65,11 +65,11 @@ class SplashActivity : MvpAppCompatActivity(), SplashView, DeepLinkView {
 
     override fun showMovie(movieId: Long) {
         analytics().logOpenMovie(movieId, null, true)
-//        MovieActivity.start(this, movieId)
-        TaskStackBuilder.create(this)
-                .addNextIntent(MainActivity.createIntent(this, MainActivity.Companion.Mode.MOVIES))
-                .addNextIntent(MovieActivity.createIntent(this, movieId))
-                .startActivities()
+        MovieActivity.start(this, movieId)
+//        TaskStackBuilder.create(this)
+//                .addNextIntent(MainActivity.createIntent(this, MainActivity.Companion.Mode.MOVIES))
+//                .addNextIntent(MovieActivity.createIntent(this, movieId))
+//                .startActivities()
         //startActivities(arrayOf(MainActivity.createIntent(this, MainActivity.Companion.Mode.MOVIES), MovieActivity.createIntent(this, movieId)))
         finish()
     }
