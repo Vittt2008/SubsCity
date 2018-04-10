@@ -19,11 +19,16 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAHl2dCBYq39cjJmi-o1lS1vH63vRdNNWg" />
 
-        <activity android:name="com.markus.subscity.ui.main.MainActivity">
+        <activity
+            android:name=".ui.splash.SplashActivity"
+            android:theme="@style/AppTheme.SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity android:name="com.markus.subscity.ui.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
