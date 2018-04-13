@@ -19,13 +19,6 @@ class DeepLinkPresenter @Inject constructor(private val cityProvider: CityProvid
         const val CINEMAS = "cinemas"
     }
 
-    fun checkFirstLaunch() {
-        val cityId = preferencesProvider.getAppPreferences().getString(PreferencesProvider.CITY_ID_KEY, null)
-        if (cityId == null) {
-            viewState.showCityPicker()
-        }
-    }
-
     fun performDeepLink(data: Uri) {
         val hosts = data.host.split('.')
         if (hosts.size == 3) {
@@ -60,12 +53,5 @@ class DeepLinkPresenter @Inject constructor(private val cityProvider: CityProvid
         } else {
             viewState.showMain()
         }
-    }
-
-    private fun <T> List<T>.secondOrNull(): T? {
-        if (this.size >= 2) {
-            return this[1]
-        }
-        return null
     }
 }

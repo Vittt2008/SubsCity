@@ -9,11 +9,22 @@
         <item name="colorControlHighlight">@color/colorPrimary</item>
     </style>
 
+    <style name="AppTheme.Activity">
+        <item name="android:windowDisablePreview">true</item>
+    </style>
+
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="AppTheme.NoActionBar">
+    <style name="AppTheme.NoActionBar" parent="AppTheme.Activity">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.SplashTheme" parent="AppTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">@drawable/splash_bg</item>
+        <item name="android:navigationBarColor" tools:targetApi="lollipop">@color/colorPrimary</item>
     </style>
 
     <style name="AppTheme.YouTube" parent="AppTheme.NoActionBar">

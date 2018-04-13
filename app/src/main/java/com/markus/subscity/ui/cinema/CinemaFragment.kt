@@ -28,7 +28,7 @@ class CinemaFragment : MvpAppCompatFragment(), CinemaView {
 
     private lateinit var cinemaInfoList: RecyclerView
 
-    private var adapter: CinemaAdapter? = null
+    private var adapter: CinemaAdapterDelegates? = null
 
     companion object {
         fun newInstance(cinemaId: Long): CinemaFragment {
@@ -58,7 +58,7 @@ class CinemaFragment : MvpAppCompatFragment(), CinemaView {
     override fun showCinema(cinema: Cinema, second: List<CinemaPresenter.MovieScreenings>) {
         if (adapter == null) {
             activity!!.supportActionBar.title = cinema.name
-            adapter = CinemaAdapter(cinema, second, ::openMap, ::call, ::openSite, ::buyTicket)
+            adapter = CinemaAdapterDelegates(cinema, second, ::openMap, ::call, ::openSite, ::buyTicket)
             cinemaInfoList.adapter = adapter
         } else {
             adapter!!.updateScreenings(second)

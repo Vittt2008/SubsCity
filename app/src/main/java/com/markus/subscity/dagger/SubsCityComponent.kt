@@ -6,6 +6,7 @@ import com.markus.subscity.providers.metro.MoscowMetroTextProvider
 import com.markus.subscity.providers.metro.SpbMetroTextProvider
 import com.markus.subscity.ui.about.AboutPresenter
 import com.markus.subscity.ui.cinema.CinemaAdapter
+import com.markus.subscity.ui.cinema.CinemaAdapterDelegates
 import com.markus.subscity.ui.cinema.CinemaPresenter
 import com.markus.subscity.ui.cinemas.CinemasAdapter
 import com.markus.subscity.ui.cinemas.CinemasPresenter
@@ -20,6 +21,7 @@ import com.markus.subscity.ui.movies.MoviesAdapter
 import com.markus.subscity.ui.movies.MoviesPresenter
 import com.markus.subscity.ui.settings.SettingsPresenter
 import com.markus.subscity.ui.share.SharePresenter
+import com.markus.subscity.ui.splash.SplashPresenter
 import com.markus.subscity.utils.Analytics
 import dagger.Component
 import javax.inject.Singleton
@@ -43,6 +45,7 @@ interface SubsCityComponent {
     fun createAboutPresenter(): AboutPresenter
     fun createDonatePresenter(): DonatePresenter
     fun createSharePresenter(): SharePresenter
+    fun createSplashPresenter(): SplashPresenter
 
     fun createSpbMetroTextProvider(): SpbMetroTextProvider
     fun createMoscowMetroTextProvider(): MoscowMetroTextProvider
@@ -51,6 +54,7 @@ interface SubsCityComponent {
     fun inject(adapter: MovieAdapter)
     fun inject(adapter: MoviesAdapter)
     fun inject(adapter: CinemaAdapter)
+    fun inject(adapter: CinemaAdapterDelegates)
     fun inject(adapter: CityAdapter)
 
     fun provideAnalytics(): Analytics

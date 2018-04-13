@@ -19,6 +19,11 @@ class MovieActivity : BaseActivity() {
                     .putExtra(EXTRA_MOVIE_ID, movieId)
             context.startActivity(intent)
         }
+
+        fun createIntent(context: Context, movieId: Long): Intent {
+            return Intent(context, MovieActivity::class.java)
+                    .putExtra(EXTRA_MOVIE_ID, movieId)
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

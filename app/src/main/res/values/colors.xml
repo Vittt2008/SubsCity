@@ -19,6 +19,7 @@
     <color name="subtitle_color">#8A000000</color>
     <color name="inactive_color">#a9aeb2</color>
     <color name="white_color">#ffffff</color>
+    <color name="white_background_color">#FAFAFA</color>
     <color name="setting_bg_color">#42642957</color>
     <color name="divider_color">#9e9e9e</color>
 
