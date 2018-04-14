@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import com.google.firebase.analytics.FirebaseAnalytics
+import com.markus.subscity.BuildConfig
 import com.markus.subscity.api.entities.screening.Screening
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -73,6 +74,10 @@ class Analytics @Inject constructor(context: Context) {
     }
 
     private val analytics = FirebaseAnalytics.getInstance(context)
+
+    init {
+        analytics.setAnalyticsCollectionEnabled(!BuildConfig.DEBUG)
+    }
 
     fun logStartApp(city: String) {
         val bundle = Bundle().apply {

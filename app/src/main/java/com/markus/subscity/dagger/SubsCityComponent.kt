@@ -5,9 +5,10 @@ import com.markus.subscity.providers.PreferencesProvider
 import com.markus.subscity.providers.metro.MoscowMetroTextProvider
 import com.markus.subscity.providers.metro.SpbMetroTextProvider
 import com.markus.subscity.ui.about.AboutPresenter
-import com.markus.subscity.ui.cinema.CinemaAdapter
 import com.markus.subscity.ui.cinema.CinemaAdapterDelegates
 import com.markus.subscity.ui.cinema.CinemaPresenter
+import com.markus.subscity.ui.cinema.delegates.InfoDelegate
+import com.markus.subscity.ui.cinema.delegates.MovieScreeningsDelegate
 import com.markus.subscity.ui.cinemas.CinemasAdapter
 import com.markus.subscity.ui.cinemas.CinemasPresenter
 import com.markus.subscity.ui.cinemasmap.CinemasMapPresenter
@@ -53,9 +54,11 @@ interface SubsCityComponent {
     fun inject(adapter: CinemasAdapter)
     fun inject(adapter: MovieAdapter)
     fun inject(adapter: MoviesAdapter)
-    fun inject(adapter: CinemaAdapter)
     fun inject(adapter: CinemaAdapterDelegates)
     fun inject(adapter: CityAdapter)
+
+    fun inject(delegate: InfoDelegate)
+    fun inject(delegate: MovieScreeningsDelegate)
 
     fun provideAnalytics(): Analytics
     fun provideCityProvider(): CityProvider
