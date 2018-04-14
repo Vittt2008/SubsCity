@@ -19,6 +19,7 @@ import com.google.android.gms.maps.model.*
 import com.markus.subscity.R
 import com.markus.subscity.api.entities.cinema.Cinema
 import com.markus.subscity.dagger.SubsCityDagger
+import com.markus.subscity.extensions.analytics
 import com.markus.subscity.extensions.toast
 import com.markus.subscity.ui.cinema.CinemaActivity
 
@@ -101,6 +102,7 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnI
 
     override fun onInfoWindowClick(marker: Marker) {
         val cinemaId = markerCinemaMap[marker.id]!!
+        analytics().logOpenCinemaFromMap(cinemaId)
         CinemaActivity.start(this, cinemaId)
     }
 

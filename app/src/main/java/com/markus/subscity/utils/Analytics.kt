@@ -32,6 +32,7 @@ class Analytics @Inject constructor(context: Context) {
         private const val EVENT_SHARE = "event_share"
 
         private const val EVENT_CINEMA = "event_cinema"
+        private const val EVENT_CINEMA_FROM_MAP = "event_cinema_from_map"
         private const val EVENT_CINEMA_ADDRESS = "event_cinema_address"
         private const val EVENT_CINEMA_DIALER = "event_cinema_dialer"
         private const val EVENT_CINEMA_WEB = "event_cinema_web"
@@ -152,6 +153,13 @@ class Analytics @Inject constructor(context: Context) {
             putBoolean(KEY_FROM_DEEP_LINK, fromDeepLink)
         }
         analytics.logEvent(EVENT_CINEMA, bundle)
+    }
+
+    fun logOpenCinemaFromMap(cinemaId: Long) {
+        val bundle = Bundle().apply {
+            putLong(KEY_CINEMA_ID, cinemaId)
+        }
+        analytics.logEvent(EVENT_CINEMA_FROM_MAP, bundle)
     }
 
     fun logCinemaAddressClick(cinemaId: Long, cinemaName: String, address: String) {
