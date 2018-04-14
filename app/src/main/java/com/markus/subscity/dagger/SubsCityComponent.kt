@@ -5,7 +5,6 @@ import com.markus.subscity.providers.PreferencesProvider
 import com.markus.subscity.providers.metro.MoscowMetroTextProvider
 import com.markus.subscity.providers.metro.SpbMetroTextProvider
 import com.markus.subscity.ui.about.AboutPresenter
-import com.markus.subscity.ui.cinema.CinemaAdapterDelegates
 import com.markus.subscity.ui.cinema.CinemaPresenter
 import com.markus.subscity.ui.cinema.delegates.CinemaInfoDelegate
 import com.markus.subscity.ui.cinema.delegates.MovieScreeningsDelegate
@@ -16,7 +15,6 @@ import com.markus.subscity.ui.city.CityAdapter
 import com.markus.subscity.ui.city.CityPresenter
 import com.markus.subscity.ui.deeplink.DeepLinkPresenter
 import com.markus.subscity.ui.donate.DonatePresenter
-import com.markus.subscity.ui.movie.MovieAdapter
 import com.markus.subscity.ui.movie.MoviePresenter
 import com.markus.subscity.ui.movie.delegates.CinemaScreeningsDelegate
 import com.markus.subscity.ui.movie.delegates.MovieInfoDelegate
@@ -54,9 +52,7 @@ interface SubsCityComponent {
     fun createMoscowMetroTextProvider(): MoscowMetroTextProvider
 
     fun inject(adapter: CinemasAdapter)
-    fun inject(adapter: MovieAdapter)
     fun inject(adapter: MoviesAdapter)
-    fun inject(adapter: CinemaAdapterDelegates)
     fun inject(adapter: CityAdapter)
 
     fun inject(delegate: CinemaInfoDelegate)
