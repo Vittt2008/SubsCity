@@ -15,9 +15,9 @@ import javax.inject.Inject
 /**
  * @author Vitaliy Markus
  */
-class InfoDelegate(private val mapClickListener: (Cinema) -> Unit,
-                   private val phoneClickListener: (Cinema) -> Unit,
-                   private val siteClickListener: (Cinema) -> Unit) : AbsListItemAdapterDelegate<Cinema, Any, InfoDelegate.InfoViewHolder>() {
+class CinemaInfoDelegate(private val mapClickListener: (Cinema) -> Unit,
+                         private val phoneClickListener: (Cinema) -> Unit,
+                         private val siteClickListener: (Cinema) -> Unit) : AbsListItemAdapterDelegate<Cinema, Any, CinemaInfoDelegate.InfoViewHolder>() {
 
     @Inject
     lateinit var metroProvider: MetroProvider
@@ -35,7 +35,7 @@ class InfoDelegate(private val mapClickListener: (Cinema) -> Unit,
         return position == 0
     }
 
-    override fun onBindViewHolder(item: Cinema, viewHolder: InfoDelegate.InfoViewHolder, payloads: List<Any>) {
+    override fun onBindViewHolder(item: Cinema, viewHolder: CinemaInfoDelegate.InfoViewHolder, payloads: List<Any>) {
         viewHolder.bind(item)
     }
 

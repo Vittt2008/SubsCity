@@ -47,7 +47,7 @@ class MovieFragment : MvpAppCompatFragment(), MovieView, ShareView {
 
     private lateinit var shareMenuItem: MenuItem
 
-    private var adapter: MovieAdapter? = null
+    private var adapter: MovieAdapterDelegates? = null
 
     companion object {
         fun newInstance(movieId: Long): MovieFragment {
@@ -114,7 +114,7 @@ class MovieFragment : MvpAppCompatFragment(), MovieView, ShareView {
         if (adapter == null) {
             toolbarLayout.title = movie.title.russian
             GlideApp.with(moviePoster).asBitmap().load(movie.poster).transform(PosterCrop()).into(moviePoster)
-            adapter = MovieAdapter(movie, cinemaScreenings, ::buyTicket)
+            adapter = MovieAdapterDelegates(movie, cinemaScreenings, ::buyTicket)
             movieInfoList.adapter = adapter
             if (movie.trailer.hasTrailer) {
                 showTrailerButton(movie)

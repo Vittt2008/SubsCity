@@ -7,7 +7,7 @@ import com.markus.subscity.providers.metro.SpbMetroTextProvider
 import com.markus.subscity.ui.about.AboutPresenter
 import com.markus.subscity.ui.cinema.CinemaAdapterDelegates
 import com.markus.subscity.ui.cinema.CinemaPresenter
-import com.markus.subscity.ui.cinema.delegates.InfoDelegate
+import com.markus.subscity.ui.cinema.delegates.CinemaInfoDelegate
 import com.markus.subscity.ui.cinema.delegates.MovieScreeningsDelegate
 import com.markus.subscity.ui.cinemas.CinemasAdapter
 import com.markus.subscity.ui.cinemas.CinemasPresenter
@@ -18,6 +18,8 @@ import com.markus.subscity.ui.deeplink.DeepLinkPresenter
 import com.markus.subscity.ui.donate.DonatePresenter
 import com.markus.subscity.ui.movie.MovieAdapter
 import com.markus.subscity.ui.movie.MoviePresenter
+import com.markus.subscity.ui.movie.delegates.CinemaScreeningsDelegate
+import com.markus.subscity.ui.movie.delegates.MovieInfoDelegate
 import com.markus.subscity.ui.movies.MoviesAdapter
 import com.markus.subscity.ui.movies.MoviesPresenter
 import com.markus.subscity.ui.settings.SettingsPresenter
@@ -57,8 +59,10 @@ interface SubsCityComponent {
     fun inject(adapter: CinemaAdapterDelegates)
     fun inject(adapter: CityAdapter)
 
-    fun inject(delegate: InfoDelegate)
+    fun inject(delegate: CinemaInfoDelegate)
     fun inject(delegate: MovieScreeningsDelegate)
+    fun inject(delegate: MovieInfoDelegate)
+    fun inject(delegate: CinemaScreeningsDelegate)
 
     fun provideAnalytics(): Analytics
     fun provideCityProvider(): CityProvider
