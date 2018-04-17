@@ -1,5 +1,6 @@
 package com.markus.subscity.extensions
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ResolveInfo
@@ -42,6 +43,14 @@ fun Fragment.setSupportActionBarWithoutBackButton(toolbar: Toolbar) {
 
 fun Fragment.openIntent(intent: Intent, @StringRes errorId: Int) {
     if (intent.resolveActivity(activity!!.packageManager) != null) {
+        startActivity(intent)
+    } else {
+        toast(getString(errorId))
+    }
+}
+
+fun Activity.openIntent(intent: Intent, @StringRes errorId: Int) {
+    if (intent.resolveActivity(packageManager) != null) {
         startActivity(intent)
     } else {
         toast(getString(errorId))

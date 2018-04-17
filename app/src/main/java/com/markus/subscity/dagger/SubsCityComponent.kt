@@ -20,6 +20,7 @@ import com.markus.subscity.ui.movie.delegates.CinemaScreeningsDelegate
 import com.markus.subscity.ui.movie.delegates.MovieInfoDelegate
 import com.markus.subscity.ui.movies.MoviesAdapter
 import com.markus.subscity.ui.movies.MoviesPresenter
+import com.markus.subscity.ui.offer.OfferPresenter
 import com.markus.subscity.ui.settings.SettingsPresenter
 import com.markus.subscity.ui.share.SharePresenter
 import com.markus.subscity.ui.splash.SplashPresenter
@@ -47,6 +48,7 @@ interface SubsCityComponent {
     fun createDonatePresenter(): DonatePresenter
     fun createSharePresenter(): SharePresenter
     fun createSplashPresenter(): SplashPresenter
+    fun createOfferPresenter(): OfferPresenter
 
     fun createSpbMetroTextProvider(): SpbMetroTextProvider
     fun createMoscowMetroTextProvider(): MoscowMetroTextProvider

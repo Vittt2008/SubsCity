@@ -21,6 +21,8 @@ class Analytics @Inject constructor(context: Context) {
 
         private const val EVENT_APP = "event_app"
 
+        private const val EVENT_OFFER = "event_app"
+
         private const val EVENT_MAIN = "event_main"
         private const val EVENT_FILMS = "event_films"
         private const val EVENT_CINEMAS = "event_cinemas"
@@ -85,6 +87,10 @@ class Analytics @Inject constructor(context: Context) {
             putString(KEY_CITY, city)
         }
         analytics.logEvent(EVENT_APP, bundle)
+    }
+
+    fun logOpenOffer() {
+        analytics.logEvent(EVENT_OFFER, Bundle())
     }
 
     fun logOpenMain() {

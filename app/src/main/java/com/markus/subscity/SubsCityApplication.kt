@@ -26,11 +26,13 @@ class SubsCityApplication : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()
-        val fabric = Fabric.Builder(this)
-                .kits(Crashlytics())
-                .debuggable(true)
-                .build()
-        Fabric.with(fabric)
+        if (!BuildConfig.DEBUG) {
+            val fabric = Fabric.Builder(this)
+                    .kits(Crashlytics())
+                    .debuggable(true)
+                    .build()
+            Fabric.with(fabric)
+        }
 
         val subsCityComponent = DaggerSubsCityComponent.builder()
                 .subsCityModule(SubsCityModule(this))
@@ -38,6 +40,10 @@ class SubsCityApplication : MultiDexApplication() {
         SubsCityDagger.init(subsCityComponent)
 
         val preferences = SubsCityDagger.component.providePreferencesProvider().getAppPreferences()
+
+        val launchCount = preferences.getInt(PreferencesProvider.LAUNCH_COUNT, 0)
+        preferences.edit().putInt(PreferencesProvider.LAUNCH_COUNT, launchCount + 1).apply()
+
         val cityId = preferences.getString(PreferencesProvider.CITY_ID_KEY, null)
         if (cityId != null) {
             val cityProvider = SubsCityDagger.component.provideCityProvider()

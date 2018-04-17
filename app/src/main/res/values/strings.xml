@@ -61,6 +61,11 @@
     <!-- DonateActivity -->
     <string name="donate_title">Пожертвовать</string>
 
+    <!-- OfferActivity -->
+    <string name="offer_go_to_store">Оценить в Play Store</string>
+    <string name="offer_go_to_main">Продолжить использование</string>
+    <string name="offer_no_play_store">На устройстве отсутсвует Play Store</string>
+
     <!-- CityFragment -->
     <string name="city_title">Выбор города</string>
 

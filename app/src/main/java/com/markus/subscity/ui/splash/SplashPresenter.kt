@@ -11,11 +11,18 @@ import javax.inject.Inject
 @InjectViewState
 class SplashPresenter @Inject constructor(private val preferencesProvider: PreferencesProvider) : MvpPresenter<SplashView>() {
 
+    private val LAUNCH_COUNT_MOD = 5
+
     fun checkFirstLaunch() {
-        val cityId = preferencesProvider.getAppPreferences().getString(PreferencesProvider.CITY_ID_KEY, null)
+        val preferences = preferencesProvider.getAppPreferences()
+        val cityId = preferences.getString(PreferencesProvider.CITY_ID_KEY, null)
+        val launchCount = preferences.getInt(PreferencesProvider.LAUNCH_COUNT, 0)
+        val wasRanked = preferences.getBoolean(PreferencesProvider.WAS_RANKED, false)
         if (cityId == null) {
             viewState.showCityPicker()
-        } else{
+        } else if (!wasRanked && launchCount % LAUNCH_COUNT_MOD == 0) {
+            viewState.showOffer()
+        } else {
             viewState.showMain()
         }
     }

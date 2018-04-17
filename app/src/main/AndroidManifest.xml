@@ -90,6 +90,8 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
+        <activity android:name=".ui.offer.OfferActivity" />
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="@string/file_export_provider"

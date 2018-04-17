@@ -14,6 +14,7 @@ import com.markus.subscity.ui.deeplink.DeepLinkView
 import com.markus.subscity.ui.deeplink.isFromDeepLink
 import com.markus.subscity.ui.main.MainActivity
 import com.markus.subscity.ui.movie.MovieActivity
+import com.markus.subscity.ui.offer.OfferActivity
 
 /**
  * @author Vitaliy Markus
@@ -54,6 +55,12 @@ class SplashActivity : MvpAppCompatActivity(), SplashView, DeepLinkView {
     override fun showMovies() {
         analytics().logOpenMovies(true)
         MainActivity.start(this, MainActivity.Companion.Mode.MOVIES)
+        finish()
+    }
+
+    override fun showOffer() {
+        analytics().logOpenOffer()
+        OfferActivity.start(this)
         finish()
     }
 
