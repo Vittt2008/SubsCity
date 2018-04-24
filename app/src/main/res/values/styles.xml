@@ -63,8 +63,12 @@
         <item name="android:textSize">16sp</item>
     </style>
 
-    <style name="AppTheme.TextView.ExtraLarge">
+    <style name="AppTheme.TextView.Huge">
         <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="AppTheme.TextView.ExtraHuge">
+        <item name="android:textSize">24sp</item>
     </style>
 
     <style name="AppTheme.TextView.Medium.Black">
@@ -79,11 +83,15 @@
         <item name="android:textColor">@color/black_color</item>
     </style>
 
-    <style name="AppTheme.TextView.ExtraLarge.Black">
+    <style name="AppTheme.TextView.Huge.Black">
         <item name="android:textColor">@color/black_color</item>
     </style>
 
-    <style name="AppTheme.TextView.ExtraLarge.Black.Bold">
+    <style name="AppTheme.TextView.ExtraHuge.Black">
+        <item name="android:textColor">@color/black_color</item>
+    </style>
+
+    <style name="AppTheme.TextView.Huge.Black.Bold">
         <item name="android:fontFamily">sans-serif-medium</item>
     </style>
 

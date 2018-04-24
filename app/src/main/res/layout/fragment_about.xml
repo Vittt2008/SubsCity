@@ -51,7 +51,7 @@
 
     <TextView
         android:id="@+id/tv_social_network_title"
-        style="@style/AppTheme.TextView.ExtraLarge.Black.Bold"
+        style="@style/AppTheme.TextView.Huge.Black.Bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -63,20 +63,17 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_about_tickets" />
 
     <!--<TextView-->
-    <!--android:id="@+id/tv_subscribe"-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginLeft="16dp"-->
-    <!--android:layout_marginRight="16dp"-->
-    <!--android:layout_marginTop="8dp"-->
-    <!--android:fontFamily="sans-serif"-->
-    <!--android:text="@string/about_subscribe"-->
-    <!--android:textColor="#000000"-->
-    <!--android:textSize="14sp"-->
-    <!--android:textStyle="normal"-->
-    <!--app:layout_constraintEnd_toEndOf="parent"-->
-    <!--app:layout_constraintStart_toStartOf="parent"-->
-    <!--app:layout_constraintTop_toBottomOf="@+id/tv_social_network_title" />-->
+        <!--android:id="@+id/tv_subscribe"-->
+        <!--style="@style/AppTheme.TextView.Large.Black"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="16dp"-->
+        <!--android:layout_marginRight="16dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:text="@string/about_subscribe"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/tv_social_network_title" />-->
 
     <Button
         android:id="@+id/bt_telegram"
