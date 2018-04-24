@@ -87,5 +87,4 @@
     <!-- GeoUri -->
     <string name="geo_uri">geo:%1$f,%2$f?z=15&amp;q=%3$s</string>
 
-
 </resources>

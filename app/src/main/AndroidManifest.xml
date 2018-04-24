@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.markus.subscity">
 
+    <uses-permission android:name="com.android.vending.BILLING" />
+
     <application
         android:name="com.markus.subscity.SubsCityApplication"
         android:allowBackup="true"

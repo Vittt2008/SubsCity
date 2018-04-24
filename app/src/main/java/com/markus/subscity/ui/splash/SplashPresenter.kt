@@ -20,8 +20,8 @@ class SplashPresenter @Inject constructor(private val preferencesProvider: Prefe
         val wasRanked = preferences.getBoolean(PreferencesProvider.WAS_RANKED, false)
         if (cityId == null) {
             viewState.showCityPicker()
-        } else if (!wasRanked && launchCount % LAUNCH_COUNT_MOD == 0) {
-            viewState.showOffer()
+//        } else if (!wasRanked && launchCount % LAUNCH_COUNT_MOD == 0) { // TODO Splash Screen
+//            viewState.showOffer()
         } else {
             viewState.showMain()
         }
