@@ -11,27 +11,22 @@
 
     <TextView
         android:id="@+id/tv_title"
+        style="@style/AppTheme.TextView.Large.Black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
-        android:textColor="#000000"
-        android:textSize="16sp"
-        android:textStyle="normal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Родина" />
 
     <TextView
         android:id="@+id/tv_info"
+        style="@style/AppTheme.TextView.Medium.Black.Subtitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:ellipsize="end"
-        android:fontFamily="sans-serif"
         android:maxLines="1"
-        android:textColor="@color/subtitle_color"
         android:textSize="13sp"
-        android:textStyle="normal"
         app:layout_constraintBaseline_toBaselineOf="@+id/tv_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_title"

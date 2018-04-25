@@ -103,6 +103,10 @@
         <item name="android:textColor">@color/black_color</item>
     </style>
 
+    <style name="AppTheme.TextView.Large.Black.Subtitle">
+        <item name="android:textColor">@color/subtitle_color</item>
+    </style>
+
     <style name="AppTheme.TextView.Large.Black.Bold">
         <item name="android:fontFamily">sans-serif-medium</item>
     </style>
@@ -117,6 +121,18 @@
 
     <style name="AppTheme.TextView.ExtraHuge.Black">
         <item name="android:textColor">@color/black_color</item>
+    </style>
+
+    <style name="AppTheme.TextView.Screening">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/screening_text_color</item>
+        <item name="android:alpha">0.87</item>
+    </style>
+
+    <style name="AppTheme.TextView.Screening.Price">
+        <item name="android:textSize">12sp</item>
+        <item name="android:alpha">0.54</item>
+        <item name="android:fontFamily">sans-serif-light</item>
     </style>
 
 

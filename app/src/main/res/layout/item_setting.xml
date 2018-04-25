@@ -20,15 +20,13 @@
 
     <TextView
         android:id="@+id/tv_setting_title"
+        style="@style/AppTheme.TextView.Large.Black.Subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:ellipsize="end"
         android:fontFamily="sans-serif-medium"
         android:lines="1"
-        android:textColor="@color/subtitle_color"
-        android:textSize="16sp"
-        android:textStyle="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_setting_icon"
         app:layout_constraintTop_toTopOf="parent"
