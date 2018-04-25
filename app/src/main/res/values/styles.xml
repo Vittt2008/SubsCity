@@ -55,6 +55,10 @@
         <item name="android:textStyle">normal</item>
     </style>
 
+    <style name="AppTheme.TextView.Small">
+        <item name="android:textSize">12sp</item>
+    </style>
+
     <style name="AppTheme.TextView.Medium">
         <item name="android:textSize">14sp</item>
     </style>
@@ -71,6 +75,18 @@
         <item name="android:textSize">24sp</item>
     </style>
 
+    <style name="AppTheme.TextView.Small.Black">
+        <item name="android:textColor">@color/black_color</item>
+    </style>
+
+    <style name="AppTheme.TextView.Small.White">
+        <item name="android:textColor">@color/white_color</item>
+    </style>
+
+    <style name="AppTheme.TextView.Small.Black.Subtitle">
+        <item name="android:textColor">@color/subtitle_color</item>
+    </style>
+
     <style name="AppTheme.TextView.Medium.Black">
         <item name="android:textColor">@color/black_color</item>
     </style>
@@ -79,20 +95,28 @@
         <item name="android:textColor">@color/subtitle_color</item>
     </style>
 
+    <style name="AppTheme.TextView.Medium.Black.Bold">
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
     <style name="AppTheme.TextView.Large.Black">
         <item name="android:textColor">@color/black_color</item>
+    </style>
+
+    <style name="AppTheme.TextView.Large.Black.Bold">
+        <item name="android:fontFamily">sans-serif-medium</item>
     </style>
 
     <style name="AppTheme.TextView.Huge.Black">
         <item name="android:textColor">@color/black_color</item>
     </style>
 
-    <style name="AppTheme.TextView.ExtraHuge.Black">
-        <item name="android:textColor">@color/black_color</item>
-    </style>
-
     <style name="AppTheme.TextView.Huge.Black.Bold">
         <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="AppTheme.TextView.ExtraHuge.Black">
+        <item name="android:textColor">@color/black_color</item>
     </style>
 
 

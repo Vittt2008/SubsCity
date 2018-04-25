@@ -26,13 +26,10 @@
 
         <TextView
             android:id="@+id/tv_cinema_address"
+            style="@style/AppTheme.TextView.Medium.Black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="56dp"
-            android:fontFamily="sans-serif"
-            android:textColor="#000000"
-            android:textSize="14sp"
-            android:textStyle="normal"
             app:layout_constraintBottom_toTopOf="@+id/tv_cinema_metro_station"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -41,12 +38,9 @@
 
         <TextView
             android:id="@+id/tv_cinema_metro_station"
+            style="@style/AppTheme.TextView.Small.Black.Subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:textColor="@color/subtitle_color"
-            android:textSize="12sp"
-            android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tv_cinema_address"
             app:layout_constraintTop_toBottomOf="@+id/tv_cinema_address"
@@ -73,13 +67,10 @@
 
         <TextView
             android:id="@+id/tv_phone_number"
+            style="@style/AppTheme.TextView.Medium.Black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="56dp"
-            android:fontFamily="sans-serif"
-            android:textColor="#000000"
-            android:textSize="14sp"
-            android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -106,13 +97,10 @@
 
         <TextView
             android:id="@+id/tv_web_site"
+            style="@style/AppTheme.TextView.Medium.Black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="56dp"
-            android:fontFamily="sans-serif"
-            android:textColor="#000000"
-            android:textSize="14sp"
-            android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

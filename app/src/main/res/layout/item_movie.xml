@@ -18,14 +18,11 @@
 
     <TextView
         android:id="@+id/tv_movie_language"
+        style="@style/AppTheme.TextView.Small.White"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:fontFamily="sans-serif"
-        android:textColor="#ffffff"
-        android:textSize="12sp"
-        android:textStyle="normal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="На английском, 18+" />
@@ -42,7 +39,7 @@
         android:fontFamily="sans-serif-medium"
         android:gravity="left|bottom"
         android:maxLines="3"
-        android:textColor="#ffffff"
+        android:textColor="@color/white_color"
         android:textStyle="normal"
         app:layout_constraintBottom_toTopOf="@+id/tv_movie_genre"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,16 +50,14 @@
 
     <TextView
         android:id="@+id/tv_movie_genre"
+        style="@style/AppTheme.TextView.Small.White"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:ellipsize="marquee"
-        android:fontFamily="sans-serif"
         android:singleLine="true"
-        android:textColor="#ffffff"
-        android:textSize="12sp"
         android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="@+id/shadow"
         app:layout_constraintEnd_toEndOf="parent"

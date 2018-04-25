@@ -18,14 +18,11 @@
 
     <TextView
         android:id="@+id/tv_city"
+        style="@style/AppTheme.TextView.Large.Black.Bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="48dp"
         android:clickable="false"
-        android:fontFamily="sans-serif-medium"
-        android:textColor="#000000"
-        android:textSize="16sp"
-        android:textStyle="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

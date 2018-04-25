@@ -11,25 +11,19 @@
 
     <TextView
         android:id="@+id/tv_genre_title"
+        style="@style/AppTheme.TextView.Medium.Black.Bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-medium"
         android:text="@string/movie_genre_title"
-        android:textColor="#000000"
-        android:textSize="14sp"
-        android:textStyle="normal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_genre_value"
+        style="@style/AppTheme.TextView.Medium.Black"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="2dp"
-        android:fontFamily="sans-serif"
-        android:textColor="#000000"
-        android:textSize="14sp"
-        android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_genre_title"
         app:layout_constraintTop_toTopOf="@+id/tv_genre_title"
@@ -37,130 +31,100 @@
 
     <TextView
         android:id="@+id/tv_language_title"
+        style="@style/AppTheme.TextView.Medium.Black.Bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:fontFamily="sans-serif-medium"
         android:text="@string/movie_language_title"
-        android:textColor="#000000"
-        android:textSize="14sp"
-        android:textStyle="normal"
         app:layout_constraintStart_toStartOf="@+id/tv_genre_title"
         app:layout_constraintTop_toBottomOf="@+id/tv_genre_value" />
 
     <TextView
         android:id="@+id/tv_language_value"
+        style="@style/AppTheme.TextView.Medium.Black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="2dp"
-        android:fontFamily="sans-serif"
-        android:textColor="#000000"
-        android:textSize="14sp"
-        android:textStyle="normal"
         app:layout_constraintStart_toEndOf="@+id/tv_language_title"
         app:layout_constraintTop_toTopOf="@+id/tv_language_title"
         tools:text="Английский" />
 
     <TextView
         android:id="@+id/tv_durability_title"
+        style="@style/AppTheme.TextView.Medium.Black.Bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:fontFamily="sans-serif-medium"
         android:text="@string/movie_durability_title"
-        android:textColor="#000000"
-        android:textSize="14sp"
-        android:textStyle="normal"
         app:layout_constraintStart_toStartOf="@+id/tv_language_title"
         app:layout_constraintTop_toBottomOf="@+id/tv_language_value" />
 
     <TextView
         android:id="@+id/tv_durability_value"
+        style="@style/AppTheme.TextView.Medium.Black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="2dp"
-        android:fontFamily="sans-serif"
-        android:textColor="#000000"
-        android:textSize="14sp"
-        android:textStyle="normal"
         app:layout_constraintStart_toEndOf="@+id/tv_durability_title"
         app:layout_constraintTop_toTopOf="@+id/tv_durability_title"
         tools:text="2 ч 5 мин" />
 
     <TextView
         android:id="@+id/tv_age_title"
+        style="@style/AppTheme.TextView.Medium.Black.Bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:fontFamily="sans-serif-medium"
         android:text="@string/movie_age_title"
-        android:textColor="#000000"
-        android:textSize="14sp"
-        android:textStyle="normal"
         app:layout_constraintStart_toStartOf="@+id/tv_durability_title"
         app:layout_constraintTop_toBottomOf="@+id/tv_durability_title" />
 
     <TextView
         android:id="@+id/tv_age_value"
+        style="@style/AppTheme.TextView.Medium.Black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="2dp"
-        android:fontFamily="sans-serif"
-        android:textColor="#000000"
-        android:textSize="14sp"
-        android:textStyle="normal"
         app:layout_constraintStart_toEndOf="@+id/tv_age_title"
         app:layout_constraintTop_toTopOf="@+id/tv_age_title"
         tools:text="16+" />
 
     <TextView
         android:id="@+id/tv_rating_title"
+        style="@style/AppTheme.TextView.Medium.Black.Bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:fontFamily="sans-serif-medium"
         android:text="@string/movie_rating_kinopoisk_title"
-        android:textColor="#000000"
-        android:textSize="14sp"
-        android:textStyle="normal"
         app:layout_constraintStart_toStartOf="@+id/tv_age_title"
         app:layout_constraintTop_toBottomOf="@+id/tv_age_title" />
 
     <TextView
         android:id="@+id/tv_rating_value"
+        style="@style/AppTheme.TextView.Medium.Black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="2dp"
-        android:fontFamily="sans-serif"
-        android:textColor="#000000"
-        android:textSize="14sp"
-        android:textStyle="normal"
         app:layout_constraintStart_toEndOf="@+id/tv_rating_title"
         app:layout_constraintTop_toTopOf="@+id/tv_rating_title"
         tools:text="7.5" />
 
     <TextView
         android:id="@+id/tv_description_title"
+        style="@style/AppTheme.TextView.Huge.Black.Bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:fontFamily="sans-serif-medium"
         android:text="@string/movie_description_title"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        android:textStyle="normal"
         app:layout_constraintStart_toStartOf="@+id/tv_rating_title"
         app:layout_constraintTop_toBottomOf="@+id/tv_rating_title" />
 
     <TextView
         android:id="@+id/tv_description_value"
+        style="@style/AppTheme.TextView.Medium.Black"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:fontFamily="sans-serif"
-        android:textColor="#000000"
-        android:textSize="14sp"
-        android:textStyle="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tv_description_title"
