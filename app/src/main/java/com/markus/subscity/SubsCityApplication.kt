@@ -8,6 +8,7 @@ import com.markus.subscity.dagger.SubsCityModule
 import com.markus.subscity.extensions.analytics
 import com.markus.subscity.providers.PreferencesProvider
 import io.fabric.sdk.android.Fabric
+import net.danlew.android.joda.JodaTimeAndroid
 
 
 /**
@@ -33,6 +34,8 @@ class SubsCityApplication : MultiDexApplication() {
                     .build()
             Fabric.with(fabric)
         }
+
+        JodaTimeAndroid.init(this)
 
         val subsCityComponent = DaggerSubsCityComponent.builder()
                 .subsCityModule(SubsCityModule(this))

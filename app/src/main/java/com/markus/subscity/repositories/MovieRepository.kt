@@ -6,7 +6,6 @@ import com.markus.subscity.extensions.timeout
 import com.markus.subscity.providers.CityProvider
 import com.markus.subscity.providers.DatabaseProvider
 import io.reactivex.Single
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 /**
@@ -42,7 +41,7 @@ class MovieRepository @Inject constructor(apiClient: ApiClient,
 
     override fun getDefaultCacheKey() = "movie"
 
-    override fun getCacheLifetime() = TimeUnit.DAYS.toMillis(1)
+    override fun getSyncTime() = arrayOf("05:55", "10:05", "14:05", "19:00", "23:00")
 
     private fun getMoviesFromApi(): Single<List<Movie>> {
         return apiClient.subsCityService.getMovies(cityProvider.cityId)

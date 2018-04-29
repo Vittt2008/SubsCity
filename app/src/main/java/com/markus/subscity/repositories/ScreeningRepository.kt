@@ -7,7 +7,6 @@ import com.markus.subscity.providers.CityProvider
 import com.markus.subscity.providers.DatabaseProvider
 import io.reactivex.Single
 import org.joda.time.DateTime
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 /**
@@ -62,7 +61,7 @@ class ScreeningRepository @Inject constructor(apiClient: ApiClient,
     }
 
 
-    override fun getCacheLifetime() = TimeUnit.DAYS.toMillis(1)
+    override fun getSyncTime() = arrayOf("07:05", "11:20", "14:50", "17:40", "20:40", "00:05")
 
     private fun getMovieScreeningsFromApi(movieId: Long): Single<List<Screening>> {
         return apiClient.subsCityService.getMovieScreenings(cityProvider.cityId, movieId)
