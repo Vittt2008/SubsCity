@@ -6,6 +6,8 @@ import com.google.gson.GsonBuilder
 import com.markus.subscity.api.ApiClient
 import com.markus.subscity.api.deserializers.DateTimeDeserializer
 import com.markus.subscity.api.deserializers.SubsCityTypeAdapterFactory
+import com.markus.subscity.providers.DateTimeProvider
+import com.markus.subscity.providers.DateTimeProviderImpl
 import dagger.Module
 import dagger.Provides
 import io.reactivex.schedulers.Schedulers
@@ -50,5 +52,11 @@ class SubsCityModule(@get:Provides val context: Context) {
     @Singleton
     fun apiClient(okHttpClient: OkHttpClient, gson: Gson): ApiClient {
         return ApiClient(okHttpClient, gson, Schedulers.io())
+    }
+
+    @Provides
+    @Singleton
+    fun dateTimeProvider(dateTimeProvider: DateTimeProviderImpl): DateTimeProvider {
+        return dateTimeProvider
     }
 }

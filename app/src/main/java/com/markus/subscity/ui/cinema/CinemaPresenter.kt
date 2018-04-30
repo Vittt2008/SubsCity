@@ -5,6 +5,7 @@ import com.arellomobile.mvp.MvpPresenter
 import com.markus.subscity.api.entities.movie.Movie
 import com.markus.subscity.api.entities.screening.Screening
 import com.markus.subscity.repositories.CinemaRepository
+import com.markus.subscity.providers.DateTimeProvider
 import com.markus.subscity.repositories.MovieRepository
 import com.markus.subscity.repositories.ScreeningRepository
 import io.reactivex.Observable
@@ -12,7 +13,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.Observables
 import io.reactivex.rxkotlin.Singles
 import io.reactivex.schedulers.Schedulers
-import org.joda.time.DateTime
 import javax.inject.Inject
 
 /**
@@ -21,7 +21,8 @@ import javax.inject.Inject
 @InjectViewState
 class CinemaPresenter @Inject constructor(private val cinemaRepository: CinemaRepository,
                                           private val movieRepository: MovieRepository,
-                                          private val screeningRepository: ScreeningRepository) : MvpPresenter<CinemaView>() {
+                                          private val screeningRepository: ScreeningRepository,
+                                          private val dateTimeProvider: DateTimeProvider) : MvpPresenter<CinemaView>() {
 
     var cinemaId: Long = 0
 
@@ -44,7 +45,7 @@ class CinemaPresenter @Inject constructor(private val cinemaRepository: CinemaRe
     }
 
     private fun convert(pair: Pair<List<Screening>, List<Movie>>): List<MovieScreenings> {
-        val now = DateTime.now()
+        val now = dateTimeProvider.now()
         val screenings = pair.first.filter { x -> x.dateTime > now }
         val movies = pair.second.associateBy { it.id }
         val movieScreenings = screenings

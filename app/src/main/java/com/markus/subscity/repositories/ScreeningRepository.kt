@@ -5,6 +5,7 @@ import com.markus.subscity.api.entities.screening.Screening
 import com.markus.subscity.extensions.timeout
 import com.markus.subscity.providers.CityProvider
 import com.markus.subscity.providers.DatabaseProvider
+import com.markus.subscity.providers.DateTimeProvider
 import io.reactivex.Single
 import org.joda.time.DateTime
 import javax.inject.Inject
@@ -12,10 +13,10 @@ import javax.inject.Inject
 /**
  * @author Vitaliy Markus
  */
-class ScreeningRepository @Inject constructor(apiClient: ApiClient,
+class ScreeningRepository @Inject constructor(private val apiClient: ApiClient,
                                               databaseProvider: DatabaseProvider,
-                                              private val cityProvider: CityProvider) : CachedRepository(apiClient, databaseProvider) {
-
+                                              private val cityProvider: CityProvider,
+                                              dateTimeProvider: DateTimeProvider) : CachedRepository(databaseProvider, dateTimeProvider) {
 
     private val movieScreeningKey = "movie_screening_"
     private val cinemaScreeningKey = "cinema_screening_"

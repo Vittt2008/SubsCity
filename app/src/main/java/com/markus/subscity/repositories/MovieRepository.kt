@@ -5,15 +5,17 @@ import com.markus.subscity.api.entities.movie.Movie
 import com.markus.subscity.extensions.timeout
 import com.markus.subscity.providers.CityProvider
 import com.markus.subscity.providers.DatabaseProvider
+import com.markus.subscity.providers.DateTimeProvider
 import io.reactivex.Single
 import javax.inject.Inject
 
 /**
  * @author Vitaliy Markus
  */
-class MovieRepository @Inject constructor(apiClient: ApiClient,
+class MovieRepository @Inject constructor(private val apiClient: ApiClient,
                                           databaseProvider: DatabaseProvider,
-                                          private val cityProvider: CityProvider) : CachedRepository(apiClient, databaseProvider) {
+                                          private val cityProvider: CityProvider,
+                                          dateTimeProvider: DateTimeProvider) : CachedRepository(databaseProvider, dateTimeProvider) {
 
     fun getMovies(): Single<List<Movie>> {
         return isCacheActual()

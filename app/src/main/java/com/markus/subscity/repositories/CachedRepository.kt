@@ -1,8 +1,8 @@
 package com.markus.subscity.repositories
 
-import com.markus.subscity.api.ApiClient
 import com.markus.subscity.db.entity.CacheTimestamp
 import com.markus.subscity.providers.DatabaseProvider
+import com.markus.subscity.providers.DateTimeProvider
 import io.reactivex.Single
 import org.joda.time.DateTime
 import org.joda.time.Period
@@ -11,7 +11,8 @@ import org.joda.time.format.PeriodFormatterBuilder
 /**
  * @author Vitaliy Markus
  */
-abstract class CachedRepository(protected val apiClient: ApiClient, protected val databaseProvider: DatabaseProvider) {
+abstract class CachedRepository(protected val databaseProvider: DatabaseProvider,
+                                private val dateTimeProvider: DateTimeProvider) {
 
     private val periodParser = PeriodFormatterBuilder().appendHours().appendLiteral(":").appendMinutes().toFormatter()
     private val syncTimes by lazy { calculateSyncTime() }
@@ -21,7 +22,7 @@ abstract class CachedRepository(protected val apiClient: ApiClient, protected va
     }
 
     protected fun updateCacheTimestamp(key: String) {
-        val timestamp = CacheTimestamp(key, DateTime.now().millis)
+        val timestamp = CacheTimestamp(key, dateTimeProvider.now().millis)
         databaseProvider.currentDatabaseClient.cacheTimestampDao.updateCacheTimestamp(timestamp)
     }
 
@@ -46,7 +47,7 @@ abstract class CachedRepository(protected val apiClient: ApiClient, protected va
     protected open fun getSyncTime() = emptyArray<String>()
 
     private fun isCacheActual(key: String, syncTimes: List<DateTime>): Single<Boolean> {
-        val now = DateTime.now()
+        val now = dateTimeProvider.now()
         val syncTime = syncTimes.last { it < now }
         return databaseProvider.currentDatabaseClient.cacheTimestampDao.getCacheTimestamp(key)
                 .map { it.timestamp > syncTime.millis }
@@ -60,7 +61,7 @@ abstract class CachedRepository(protected val apiClient: ApiClient, protected va
     }
 
     private fun calculateSyncTime(): List<DateTime> {
-        val now = DateTime.now().withTimeAtStartOfDay()
+        val now = dateTimeProvider.now().withTimeAtStartOfDay()
         var times = getSyncTime().map { now.plus(Period.parse(it, periodParser)) }
         times = mutableListOf(times.last().minusDays(1)).apply { addAll(times) }
         return times
