@@ -17,6 +17,7 @@ import com.markus.subscity.extensions.supportActionBar
 import com.markus.subscity.ui.about.AboutActivity
 import com.markus.subscity.ui.cinemasmap.CinemasMapActivity
 import com.markus.subscity.ui.city.CityActivity
+import com.markus.subscity.ui.donate.DonateActivity
 
 /**
  * @author Vitaliy Markus
@@ -51,7 +52,7 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
                     SettingsAdapter.CINEMA_MAP -> settingsPresenter.showCinemasMap()
                 //SettingsAdapter.SALES -> {}
                     SettingsAdapter.ABOUT -> openAbout()
-                //SettingsAdapter.DONATE -> DonateActivity.start(activity!!)
+                    SettingsAdapter.DONATE -> DonateActivity.start(activity!!)
                     SettingsAdapter.CITY -> openCityPicker()
                 }
             }

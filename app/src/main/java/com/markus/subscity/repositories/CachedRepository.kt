@@ -5,11 +5,16 @@ import com.markus.subscity.db.entity.CacheTimestamp
 import com.markus.subscity.providers.DatabaseProvider
 import io.reactivex.Single
 import org.joda.time.DateTime
+import org.joda.time.Period
+import org.joda.time.format.PeriodFormatterBuilder
 
 /**
  * @author Vitaliy Markus
  */
 abstract class CachedRepository(protected val apiClient: ApiClient, protected val databaseProvider: DatabaseProvider) {
+
+    private val periodParser = PeriodFormatterBuilder().appendHours().appendLiteral(":").appendMinutes().toFormatter()
+    private val syncTimes by lazy { calculateSyncTime() }
 
     protected fun updateCacheTimestamp() {
         updateCacheTimestamp(checkAndGetDefaultKey())
@@ -21,11 +26,11 @@ abstract class CachedRepository(protected val apiClient: ApiClient, protected va
     }
 
     protected fun isCacheActual(): Single<Boolean> {
-        return isCacheActual(checkAndGetDefaultKey(), getCacheLifetime())
+        return isCacheActual(checkAndGetDefaultKey(), syncTimes)
     }
 
     protected fun isCacheActual(key: String): Single<Boolean> {
-        return isCacheActual(key, getCacheLifetime(key))
+        return isCacheActual(key, syncTimes)
     }
 
     protected fun deleteCacheStamp() {
@@ -38,23 +43,26 @@ abstract class CachedRepository(protected val apiClient: ApiClient, protected va
 
     protected open fun getDefaultCacheKey(): String? = null
 
-    protected open fun getCacheLifetime() = 0L
+    protected open fun getSyncTime() = emptyArray<String>()
 
-    protected open fun getCacheLifetime(key: String) = getCacheLifetime()
-
-    private fun isCacheActual(key: String, lifetime: Long): Single<Boolean> {
-        val current = DateTime.now().millis
-        val start = current - lifetime
+    private fun isCacheActual(key: String, syncTimes: List<DateTime>): Single<Boolean> {
+        val now = DateTime.now()
+        val syncTime = syncTimes.last { it < now }
         return databaseProvider.currentDatabaseClient.cacheTimestampDao.getCacheTimestamp(key)
-                .map { it.timestamp in start..current }
+                .map { it.timestamp > syncTime.millis }
                 .onErrorReturnItem(false)
     }
 
     private fun checkAndGetDefaultKey(): String {
         val key = getDefaultCacheKey()
-        if (key.isNullOrEmpty()) {
-            throw IllegalStateException("To use this method without key, getDefaultCacheKey must return not empty value")
-        }
-        return key!!
+        return key
+                ?: throw IllegalStateException("To use this method without key, getDefaultCacheKey must return not empty value")
+    }
+
+    private fun calculateSyncTime(): List<DateTime> {
+        val now = DateTime.now().withTimeAtStartOfDay()
+        var times = getSyncTime().map { now.plus(Period.parse(it, periodParser)) }
+        times = mutableListOf(times.last().minusDays(1)).apply { addAll(times) }
+        return times
     }
 }

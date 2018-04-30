@@ -29,7 +29,7 @@ class SettingsAdapter(city: String, private val clickListener: (Int) -> Unit) : 
             SettingItem(CINEMA_MAP, R.drawable.ic_menu_map, R.string.setting_cinema_map_title),
             //SettingItem(SALES, R.drawable.ic_menu_sales, R.string.setting_sale_title),
             SettingItem(ABOUT, R.drawable.ic_menu_about, R.string.setting_about_title),
-            //SettingItem(DONATE, R.drawable.ic_menu_donate, R.string.setting_donate_title),
+            SettingItem(DONATE, R.drawable.ic_menu_donate, R.string.setting_donate_title),
             SettingItem(CITY, R.drawable.ic_menu_city, R.string.setting_city_title, city))
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
