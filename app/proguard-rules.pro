@@ -26,4 +26,5 @@
 -dontwarn okhttp3.**
 -dontwarn retrofit2.Platform$Java8
 -dontwarn com.bumptech.glide.load.resource.bitmap.VideoDecoder
+-keep class com.android.vending.billing.**
 
