@@ -59,6 +59,7 @@ class MainActivity : AppCompatActivity() {
         analytics().logOpenMain()
 
         val appBar = findViewById<View>(R.id.dialog_rate)
+        appBar.setOnClickListener{}
         val bottomSheetBehavior = BottomSheetBehavior.from(appBar)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
 
