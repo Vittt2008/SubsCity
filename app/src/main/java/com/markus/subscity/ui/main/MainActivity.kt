@@ -6,12 +6,15 @@ import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationAdapter
 import com.markus.subscity.R
 import com.markus.subscity.dagger.SubsCityDagger
 import com.markus.subscity.extensions.analytics
 import com.markus.subscity.ui.main.MainActivity.Companion.Mode.*
+import android.support.design.widget.BottomSheetBehavior
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -54,6 +57,14 @@ class MainActivity : AppCompatActivity() {
         styleBottomNavigation()
         supportActionBar!!.setTitle(R.string.main_films)
         analytics().logOpenMain()
+
+        val appBar = findViewById<View>(R.id.dialog_rate)
+        val bottomSheetBehavior = BottomSheetBehavior.from(appBar)
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+
+        viewPager.postDelayed({
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        }, 3000)
     }
 
     override fun onResume() {

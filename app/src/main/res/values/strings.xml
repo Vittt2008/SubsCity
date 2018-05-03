@@ -4,6 +4,9 @@
     <string name="send">Отправить</string>
     <string name="email_address">subscity.info@gmail.com</string>
     <string name="email_subject">Обратная связь. Приложение SubsCity</string>
+    <string name="rate_title">Вы уже долгое время используете SubCity</string>
+    <string name="rate_subtitle">Мы будем рады, если вы сможете рассказать нам ваши мысли о приложении.</string>
+    <string name="rate_button">Оценить приложение</string>
 
     <!-- MainActivity -->
     <string name="main_films">Фильмы</string>
