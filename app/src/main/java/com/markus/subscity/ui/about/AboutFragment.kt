@@ -41,7 +41,7 @@ class AboutFragment : MvpAppCompatFragment(), AboutView {
         root.findViewById<View>(R.id.bt_telegram).setOnClickListener { aboutPresenter.openTelegram() }
         root.findViewById<View>(R.id.bt_vk).setOnClickListener { aboutPresenter.openVkontakte() }
         root.findViewById<View>(R.id.bt_fb).setOnClickListener { aboutPresenter.openFacebook() }
-        root.findViewById<View>(R.id.bt_review).setOnClickListener { openEmailApp() }
+        root.findViewById<View>(R.id.bt_rate_app).setOnClickListener { openEmailApp() }
         return root
     }
 
@@ -52,7 +52,7 @@ class AboutFragment : MvpAppCompatFragment(), AboutView {
 
     private fun openEmailApp() {
         analytics().logOpenEmail()
-        val intent = IntentUtils.sendEmail(getString(R.string.email_address), getString(R.string.email_subject))
+        val intent = IntentUtils.createSendEmailIntent(getString(R.string.email_address), getString(R.string.email_subject))
         openIntent(intent, R.string.about_no_email_application)
     }
 

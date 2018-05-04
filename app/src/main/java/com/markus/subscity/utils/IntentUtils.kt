@@ -51,12 +51,12 @@ object IntentUtils {
         return intent
     }
 
-    fun sendEmail(to: String, subject: String?): Intent {
+    fun createSendEmailIntent(to: String, subject: String?): Intent {
         val data = Uri.parse("mailto:$to?subject=$subject")
         return Intent(Intent.ACTION_VIEW, data)
     }
 
-    fun openPlayStore(context: Context): Intent {
+    fun createOpenPlayStoreIntent(context: Context): Intent {
         val appPackageName = context.packageName
         return Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$appPackageName"))
     }

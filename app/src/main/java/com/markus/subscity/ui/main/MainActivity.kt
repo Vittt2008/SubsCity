@@ -3,27 +3,36 @@ package com.markus.subscity.ui.main
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
-import android.support.v7.app.AppCompatActivity
 import android.view.View
+import com.arellomobile.mvp.MvpAppCompatActivity
+import com.arellomobile.mvp.presenter.InjectPresenter
+import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationAdapter
 import com.markus.subscity.R
 import com.markus.subscity.dagger.SubsCityDagger
 import com.markus.subscity.extensions.analytics
+import com.markus.subscity.extensions.openIntent
 import com.markus.subscity.ui.main.MainActivity.Companion.Mode.*
-import android.support.design.widget.BottomSheetBehavior
+import com.markus.subscity.utils.IntentUtils
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : MvpAppCompatActivity(), MainView {
 
+    @InjectPresenter
+    lateinit var mainPresenter: MainPresenter
+
+    private lateinit var dialogRateBehavior: BottomSheetBehavior<View>
     private lateinit var viewPager: ViewPager
     private lateinit var ahBottomView: AHBottomNavigation
 
     companion object {
 
         private const val EXTRA_MODE = "mode"
+        private const val DELAY = 3000L
 
         fun start(context: Context) {
             start(context, MOVIES)
@@ -47,6 +56,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @ProvidePresenter
+    fun mainPresenter(): MainPresenter {
+        return SubsCityDagger.component.createMainPresenter()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -55,17 +69,22 @@ class MainActivity : AppCompatActivity() {
         ahBottomView = findViewById(R.id.ahb_bottom)
         styleViewPager()
         styleBottomNavigation()
+        initRateDialog()
         supportActionBar!!.setTitle(R.string.main_films)
         analytics().logOpenMain()
+    }
 
-        val appBar = findViewById<View>(R.id.dialog_rate)
-        appBar.setOnClickListener{}
-        val bottomSheetBehavior = BottomSheetBehavior.from(appBar)
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-
+    override fun showRateDialog() {
         viewPager.postDelayed({
-            bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-        }, 3000)
+            dialogRateBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        }, DELAY)
+    }
+
+    override fun openPlayStore() {
+        dialogRateBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+        val intent = IntentUtils.createOpenPlayStoreIntent(this)
+        openIntent(intent, R.string.rate_no_play_store)
+        analytics().logOpenPlayStore(true)
     }
 
     override fun onResume() {
@@ -96,6 +115,14 @@ class MainActivity : AppCompatActivity() {
             CINEMAS -> ahBottomView.currentItem = 1
             SETTINGS -> ahBottomView.currentItem = 2
         }
+    }
+
+    private fun initRateDialog() {
+        val dialogRate = findViewById<View>(R.id.dialog_rate)
+        dialogRate.setOnClickListener {}
+        dialogRateBehavior = BottomSheetBehavior.from(dialogRate)
+        dialogRateBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+        findViewById<View>(R.id.bt_rate_app).setOnClickListener { mainPresenter.openPlayStore() }
     }
 
     private fun selectTab(position: Int): Boolean {

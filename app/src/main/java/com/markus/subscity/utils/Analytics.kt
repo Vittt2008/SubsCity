@@ -47,6 +47,8 @@ class Analytics @Inject constructor(context: Context) {
 
         private const val EVENT_BUY_TICKET = "event_buy_ticket"
 
+        private const val EVENT_OPEN_PLAY_STORE = "event_open_play_store"
+
         // Keys
 
         private const val KEY_CITY = "city"
@@ -72,6 +74,7 @@ class Analytics @Inject constructor(context: Context) {
 
         private const val PARAM_FROM_CINEMAS = "from_cinemas"
         private const val PARAM_FROM_SETTINGS = "from_settings"
+        private const val PARAM_FROM_RATE_DIALOG = "from_rate_dialog"
         private const val PARAM_ORIGINAL = "original"
         private const val PARAM_RUSSIAN = "russian"
     }
@@ -233,6 +236,13 @@ class Analytics @Inject constructor(context: Context) {
             putString(KEY_DATETIME, screening.dateTime.toString("dd-MM-yyyy HH:mm"))
         }
         analytics.logEvent(EVENT_BUY_TICKET, bundle)
+    }
+
+    fun logOpenPlayStore(fromRateDialog:Boolean){
+        val bundle = Bundle().apply {
+            putString(KEY_FROM, if (fromRateDialog) PARAM_FROM_RATE_DIALOG else PARAM_FROM_SETTINGS)
+        }
+        analytics.logEvent(EVENT_OPEN_PLAY_STORE, bundle)
     }
 
     fun logActivity(activity: Activity) {

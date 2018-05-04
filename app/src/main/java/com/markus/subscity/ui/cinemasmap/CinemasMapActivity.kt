@@ -82,7 +82,7 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnI
 
     override fun onResume() {
         super.onResume()
-        SubsCityDagger.component.provideAnalytics().logActivity(this)
+        analytics().logActivity(this)
     }
 
     override fun showCinemas(cinemas: List<Cinema>, googleMap: Any) {
