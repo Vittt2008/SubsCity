@@ -21,7 +21,7 @@ class Analytics @Inject constructor(context: Context) {
 
         private const val EVENT_APP = "event_app"
 
-        private const val EVENT_OFFER = "event_app"
+        private const val EVENT_RATE_DIALOG = "event_rate_dialog"
 
         private const val EVENT_MAIN = "event_main"
         private const val EVENT_FILMS = "event_films"
@@ -92,8 +92,8 @@ class Analytics @Inject constructor(context: Context) {
         analytics.logEvent(EVENT_APP, bundle)
     }
 
-    fun logOpenOffer() {
-        analytics.logEvent(EVENT_OFFER, Bundle())
+    fun logOpenRateDialog() {
+        analytics.logEvent(EVENT_RATE_DIALOG, Bundle())
     }
 
     fun logOpenMain() {

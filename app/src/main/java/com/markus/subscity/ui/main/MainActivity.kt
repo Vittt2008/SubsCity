@@ -75,6 +75,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     }
 
     override fun showRateDialog() {
+        analytics().logOpenRateDialog()
         viewPager.postDelayed({
             dialogRateBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         }, DELAY)

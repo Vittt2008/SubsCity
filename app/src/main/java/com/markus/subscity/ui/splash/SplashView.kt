@@ -12,5 +12,4 @@ interface SplashView : MvpView {
 
     fun showMain()
     fun showCityPicker()
-    fun showOffer()
 }
