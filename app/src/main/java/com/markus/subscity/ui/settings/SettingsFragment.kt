@@ -13,6 +13,7 @@ import com.markus.subscity.R
 import com.markus.subscity.api.entities.City
 import com.markus.subscity.dagger.SubsCityDagger
 import com.markus.subscity.extensions.analytics
+import com.markus.subscity.extensions.rateApp
 import com.markus.subscity.extensions.supportActionBar
 import com.markus.subscity.ui.about.AboutActivity
 import com.markus.subscity.ui.cinemasmap.CinemasMapActivity
@@ -49,8 +50,9 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
             adapter = SettingsAdapter(city) { item ->
                 when (item) {
                 //SettingsAdapter.SOON_AT_BOX_OFFICE -> {}
-                    SettingsAdapter.CINEMA_MAP -> settingsPresenter.showCinemasMap()
                 //SettingsAdapter.SALES -> {}
+                    SettingsAdapter.CINEMA_MAP -> settingsPresenter.showCinemasMap()
+                    SettingsAdapter.RATE_APP -> rateApp()
                     SettingsAdapter.ABOUT -> openAbout()
                     SettingsAdapter.DONATE -> DonateActivity.start(activity!!)
                     SettingsAdapter.CITY -> openCityPicker()

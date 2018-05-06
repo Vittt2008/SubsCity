@@ -15,9 +15,8 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigationAdapter
 import com.markus.subscity.R
 import com.markus.subscity.dagger.SubsCityDagger
 import com.markus.subscity.extensions.analytics
-import com.markus.subscity.extensions.openIntent
+import com.markus.subscity.extensions.rateApp
 import com.markus.subscity.ui.main.MainActivity.Companion.Mode.*
-import com.markus.subscity.utils.IntentUtils
 
 
 class MainActivity : MvpAppCompatActivity(), MainView {
@@ -83,9 +82,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     override fun openPlayStore() {
         dialogRateBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-        val intent = IntentUtils.createOpenPlayStoreIntent(this)
-        openIntent(intent, R.string.rate_no_play_store)
-        analytics().logOpenPlayStore(true)
+        rateApp()
     }
 
     override fun onResume() {

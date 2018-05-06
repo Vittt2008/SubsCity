@@ -22,15 +22,17 @@ class SettingsAdapter(city: String, private val clickListener: (Int) -> Unit) : 
         const val ABOUT = 3
         const val CITY = 4
         const val DONATE = 5
+        const val RATE_APP = 6
     }
 
     private val settings = listOf(
             //SettingItem(SOON_AT_BOX_OFFICE, R.drawable.ic_menu_soom_at_box_office, R.string.setting_new_in_cinema_title),
-            SettingItem(CINEMA_MAP, R.drawable.ic_menu_map, R.string.setting_cinema_map_title),
             //SettingItem(SALES, R.drawable.ic_menu_sales, R.string.setting_sale_title),
+            SettingItem(CINEMA_MAP, R.drawable.ic_menu_map, R.string.setting_cinema_map_title),
+            SettingItem(RATE_APP, R.drawable.ic_menu_rate_app, R.string.setting_rate_app),
             SettingItem(ABOUT, R.drawable.ic_menu_about, R.string.setting_about_title),
-            SettingItem(DONATE, R.drawable.ic_menu_donate, R.string.setting_donate_title),
-            SettingItem(CITY, R.drawable.ic_menu_city, R.string.setting_city_title, city))
+            SettingItem(CITY, R.drawable.ic_menu_city, R.string.setting_city_title, city),
+            SettingItem(DONATE, R.drawable.ic_menu_donate, R.string.setting_donate_title))
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val item = LayoutInflater.from(parent.context).inflate(R.layout.item_setting, parent, false)

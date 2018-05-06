@@ -5,6 +5,7 @@
 
     <string name="email_address">subscity.info@gmail.com</string>
     <string name="email_subject">Обратная связь. Приложение SubsCity</string>
+    <string name="email_rate_app">Отзыв. Приложение SubsCity</string>
 
     <string name="rate_title">Вы уже долгое время используете SubCity</string>
     <string name="rate_subtitle">Мы будем рады, если вы сможете рассказать нам ваши мысли о приложении.</string>
@@ -22,7 +23,8 @@
     <string name="setting_sale_title">Акции</string>
     <string name="setting_about_title">О приложении</string>
     <string name="setting_city_title">Город</string>
-    <string name="setting_donate_title">Пожертвовать</string>
+    <string name="setting_donate_title">Пожертвования</string>
+    <string name="setting_rate_app">Оценить приложение</string>
 
     <!-- MovieFragment -->
     <string name="movie_genre_title">Жанр:</string>

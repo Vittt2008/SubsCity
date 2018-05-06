@@ -18,6 +18,7 @@ import android.widget.Toast
 import com.markus.subscity.R
 import com.markus.subscity.dagger.SubsCityDagger
 import com.markus.subscity.utils.Analytics
+import com.markus.subscity.utils.IntentUtils
 
 /**
  * @author Vitaliy Markus
@@ -73,7 +74,7 @@ fun analytics(): Analytics {
     return SubsCityDagger.component.provideAnalytics()
 }
 
-fun Fragment.openUrl(uri: Uri, useChromeTabs: Boolean = true) {
+fun Fragment.openUrl(uri: Uri, useChromeTabsForce: Boolean = true) {
     val context = activity!!
 
     val builder = CustomTabsIntent.Builder()
@@ -82,7 +83,7 @@ fun Fragment.openUrl(uri: Uri, useChromeTabs: Boolean = true) {
     //builder.setExitAnimations(context, android.R.anim.slide_in_left, android.R.anim.slide_out_right);
 
     val customTabsIntent = builder.build()
-    if (useChromeTabs) {
+    if (useChromeTabsForce) {
         val packages = getCustomTabsPackages(context, uri)
         if (packages.isNotEmpty() && (packages.size == 1 || packages[0].preferredOrder != packages[1].preferredOrder)) {
             val resolveInfo = packages[0]
@@ -90,6 +91,22 @@ fun Fragment.openUrl(uri: Uri, useChromeTabs: Boolean = true) {
         }
     }
     customTabsIntent.launchUrl(context, uri)
+}
+
+fun Activity.rateApp() {
+    val intent = IntentUtils.createOpenPlayStoreIntent(this)
+    if (intent.resolveActivity(this.packageManager) != null) {
+        analytics().logOpenPlayStore(true)
+        startActivity(intent)
+    } else {
+        val emailIntent = IntentUtils.createSendEmailIntent(getString(R.string.email_address), getString(R.string.email_rate_app))
+        analytics().logOpenEmail()
+        openIntent(emailIntent, R.string.about_no_email_application)
+    }
+}
+
+fun Fragment.rateApp(){
+    activity!!.rateApp()
 }
 
 private const val ACTION_CUSTOM_TABS_CONNECTION = "android.support.customtabs.action.CustomTabsService"

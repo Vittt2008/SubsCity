@@ -17,6 +17,7 @@
     <color name="primary_dark_color">#4F2045</color>
     <color name="title_color">@color/black_color</color>
     <color name="subtitle_color">#8A000000</color>
+    <color name="settings_color">#60565e</color>
     <color name="inactive_color">#a9aeb2</color>
     <color name="white_color">#ffffff</color>
     <color name="white_background_color">#FAFAFA</color>
