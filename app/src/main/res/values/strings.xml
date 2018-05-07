@@ -68,6 +68,8 @@
 
     <!-- DonateActivity -->
     <string name="donate_title">Пожертвовать</string>
+    <string name="donate_message">SubCity является некоммерческим проектом. Если вы хотите поблагодарить нас за работу, то можно это сделать с помощью пожертвований.</string>
+    <string name="donate_types">Можно пожертвовать следующие суммы:</string>
     <string name="donate_success">Спасибо. Ваши пожертвование позволяют нам успешно развивать приложение.</string>
     <string name="donate_error">При транзации произошла ошибка. Попробуйте еще раз.</string>
 
