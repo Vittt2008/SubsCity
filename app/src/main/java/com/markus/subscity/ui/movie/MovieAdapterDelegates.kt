@@ -2,6 +2,7 @@ package com.markus.subscity.ui.movie
 
 import com.hannesdorfmann.adapterdelegates3.ListDelegationAdapter
 import com.markus.subscity.R
+import com.markus.subscity.api.entities.cinema.Cinema
 import com.markus.subscity.api.entities.movie.Movie
 import com.markus.subscity.api.entities.screening.Screening
 import com.markus.subscity.ui.cinema.delegates.ProgressDelegate
@@ -14,7 +15,8 @@ import com.markus.subscity.ui.movie.delegates.MovieInfoDelegate
  */
 class MovieAdapterDelegates(val movie: Movie,
                             cinemaScreenings: List<MoviePresenter.CinemaScreenings>,
-                            screeningClickListener: (Screening) -> Unit) : ListDelegationAdapter<List<Any>>() {
+                            screeningClickListener: (Screening) -> Unit,
+                            cinemaTitleClickListener: (Cinema) -> Unit) : ListDelegationAdapter<List<Any>>() {
 
     private val data: MutableList<Any> = ArrayList()
 
@@ -22,7 +24,7 @@ class MovieAdapterDelegates(val movie: Movie,
         delegatesManager.addDelegate(MovieInfoDelegate())
                 .addDelegate(TitleDelegate())
                 .addDelegate(ProgressDelegate())
-                .addDelegate(CinemaScreeningsDelegate(screeningClickListener))
+                .addDelegate(CinemaScreeningsDelegate(screeningClickListener, cinemaTitleClickListener))
 
         data.add(movie)
         if (cinemaScreenings.isNotEmpty()) {

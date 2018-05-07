@@ -13,9 +13,11 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.markus.subscity.R
 import com.markus.subscity.api.entities.cinema.Cinema
+import com.markus.subscity.api.entities.movie.Movie
 import com.markus.subscity.api.entities.screening.Screening
 import com.markus.subscity.dagger.SubsCityDagger
 import com.markus.subscity.extensions.*
+import com.markus.subscity.ui.movie.MovieActivity
 import com.markus.subscity.utils.IntentUtils
 
 /**
@@ -58,7 +60,7 @@ class CinemaFragment : MvpAppCompatFragment(), CinemaView {
     override fun showCinema(cinema: Cinema, second: List<CinemaPresenter.MovieScreenings>) {
         if (adapter == null) {
             activity!!.supportActionBar.title = cinema.name
-            adapter = CinemaAdapterDelegates(cinema, second, ::openMap, ::call, ::openSite, ::buyTicket)
+            adapter = CinemaAdapterDelegates(cinema, second, ::openMap, ::call, ::openSite, ::buyTicket, ::openMovie)
             cinemaInfoList.adapter = adapter
         } else {
             adapter!!.updateScreenings(second)
@@ -68,6 +70,11 @@ class CinemaFragment : MvpAppCompatFragment(), CinemaView {
     override fun onError(throwable: Throwable) {
         toast(throwable.message)
         adapter?.updateScreenings(emptyList())
+    }
+
+    override fun openMovie(movie: Movie) {
+        analytics().logOpenMovie(movie.id, movie.title.russian, false)
+        MovieActivity.start(activity!!, movie.id)
     }
 
     private fun openMap(cinema: Cinema) {

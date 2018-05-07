@@ -14,7 +14,10 @@ import javax.inject.Inject
  */
 class DrawableExporter @Inject constructor(private val context: Context) {
 
-    fun export(drawable: Drawable, fileName: String): File? {
+    fun export(drawable: Drawable?, fileName: String): File? {
+        if (drawable == null) {
+            return null
+        }
         return try {
             saveBitmapForExport(toBitmap(drawable), fileName)
         } catch (e: Exception) {

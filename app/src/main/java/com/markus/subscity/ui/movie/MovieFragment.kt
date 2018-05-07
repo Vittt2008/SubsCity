@@ -14,11 +14,13 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.github.rubensousa.bottomsheetbuilder.BottomSheetBuilder
 import com.markus.subscity.R
+import com.markus.subscity.api.entities.cinema.Cinema
 import com.markus.subscity.api.entities.movie.Movie
 import com.markus.subscity.api.entities.screening.Screening
 import com.markus.subscity.dagger.GlideApp
 import com.markus.subscity.dagger.SubsCityDagger
 import com.markus.subscity.extensions.*
+import com.markus.subscity.ui.cinema.CinemaActivity
 import com.markus.subscity.ui.share.SharePresenter
 import com.markus.subscity.ui.share.ShareView
 import com.markus.subscity.ui.youtube.YouTubeActivity
@@ -114,7 +116,7 @@ class MovieFragment : MvpAppCompatFragment(), MovieView, ShareView {
         if (adapter == null) {
             toolbarLayout.title = movie.title.russian
             GlideApp.with(moviePoster).asBitmap().load(movie.poster).transform(PosterCrop()).into(moviePoster)
-            adapter = MovieAdapterDelegates(movie, cinemaScreenings, ::buyTicket)
+            adapter = MovieAdapterDelegates(movie, cinemaScreenings, ::buyTicket, ::openCinema)
             movieInfoList.adapter = adapter
             if (movie.trailer.hasTrailer) {
                 showTrailerButton(movie)
@@ -132,9 +134,18 @@ class MovieFragment : MvpAppCompatFragment(), MovieView, ShareView {
         adapter?.updateScreenings(emptyList())
     }
 
+    override fun openCinema(cinema: Cinema) {
+        analytics().logOpenCinema(cinema.id, cinema.name, false)
+        CinemaActivity.start(activity!!, cinema.id)
+    }
+
     override fun share(file: File?, title: String, content: String) {
         val intent = createIntent(activity!!, file, getString(R.string.movie_share_title, title), content)
         openIntent(intent, R.string.movie_no_share_application)
+    }
+
+    override fun onShareError() {
+        toast(getString(R.string.movie_share_error))
     }
 
     private fun showTrailerButton(movie: Movie) {

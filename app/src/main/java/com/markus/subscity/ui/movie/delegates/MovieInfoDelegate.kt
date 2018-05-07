@@ -42,6 +42,7 @@ class MovieInfoDelegate : AbsListItemAdapterDelegate<Movie, Any, MovieInfoDelega
         private val genre = view.findViewById<TextView>(R.id.tv_genre_value)
         private val languageTitle = view.findViewById<TextView>(R.id.tv_language_title)
         private val language = view.findViewById<TextView>(R.id.tv_language_value)
+        private val durationTitle = view.findViewById<TextView>(R.id.tv_durability_title)
         private val duration = view.findViewById<TextView>(R.id.tv_durability_value)
         private val age = view.findViewById<TextView>(R.id.tv_age_value)
         private val ratingTitle = view.findViewById<TextView>(R.id.tv_rating_title)
@@ -61,6 +62,14 @@ class MovieInfoDelegate : AbsListItemAdapterDelegate<Movie, Any, MovieInfoDelega
                 language.text = languageValue
             }
 
+            if (movie.duration == 0) {
+                durationTitle.visibility = View.GONE
+                duration.visibility = View.GONE
+            } else {
+                durationTitle.visibility = View.VISIBLE
+                duration.visibility = View.VISIBLE
+                duration.text = durationProvider.format(movie.duration)
+            }
             duration.text = durationProvider.format(movie.duration)
             age.text = "${movie.ageRestriction}+"
             val ratingValue = movie.rating

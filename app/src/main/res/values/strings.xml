@@ -2,6 +2,7 @@
     <string name="app_name">SubsCity</string>
     <string name="file_export_provider">com.markus.subscity.FileProvider</string>
     <string name="send">Отправить</string>
+    <string name="empty_title"/>
 
     <string name="email_address">subscity.info@gmail.com</string>
     <string name="email_subject">Обратная связь. Приложение SubsCity</string>
@@ -42,6 +43,7 @@
     <string name="movie_share">Поделиться</string>
     <string name="movie_no_share_application">Отсутвуют приложения для функционала "Полелиться"</string>
     <string name="movie_share_title">Фильм %s на языке оригинала в кино</string>
+    <string name="movie_share_error">Произошла ошибка при попытке поделиться фильмом</string>
 
     <!-- CinemasFragment -->
     <string name="cinemas_map_menu">На карте</string>

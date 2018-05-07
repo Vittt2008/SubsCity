@@ -50,16 +50,19 @@
 
         <activity
             android:name="com.markus.subscity.ui.main.MainActivity"
+            android:label="@string/empty_title"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Activity" />
 
         <activity
             android:name="com.markus.subscity.ui.movie.MovieActivity"
+            android:label="@string/empty_title"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name="com.markus.subscity.ui.cinema.CinemaActivity"
+            android:label="@string/empty_title"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
@@ -72,6 +75,7 @@
         <activity
             android:name="com.markus.subscity.ui.youtube.YouTubeActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|keyboard"
+            android:label="@string/empty_title"
             android:theme="@style/AppTheme.YouTube" />
 
         <activity
@@ -91,8 +95,6 @@
             android:label="@string/donate_title"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity android:name=".ui.offer.OfferActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

@@ -8,4 +8,5 @@ import java.io.File
  */
 interface ShareView : MvpView {
     fun share(file: File?, title: String, content: String)
+    fun onShareError()
 }

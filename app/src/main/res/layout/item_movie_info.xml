@@ -77,7 +77,7 @@
         android:layout_marginTop="4dp"
         android:text="@string/movie_age_title"
         app:layout_constraintStart_toStartOf="@+id/tv_durability_title"
-        app:layout_constraintTop_toBottomOf="@+id/tv_durability_title" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_durability_value" />
 
     <TextView
         android:id="@+id/tv_age_value"
@@ -97,7 +97,7 @@
         android:layout_marginTop="4dp"
         android:text="@string/movie_rating_kinopoisk_title"
         app:layout_constraintStart_toStartOf="@+id/tv_age_title"
-        app:layout_constraintTop_toBottomOf="@+id/tv_age_title" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_age_value" />
 
     <TextView
         android:id="@+id/tv_rating_value"

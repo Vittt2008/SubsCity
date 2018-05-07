@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.hannesdorfmann.adapterdelegates3.AbsListItemAdapterDelegate
 import com.markus.subscity.R
+import com.markus.subscity.api.entities.cinema.Cinema
 import com.markus.subscity.api.entities.movie.Movie
 import com.markus.subscity.api.entities.screening.Screening
 import com.markus.subscity.dagger.SubsCityDagger
@@ -23,8 +24,8 @@ import javax.inject.Inject
 /**
  * @author Vitaliy Markus
  */
-class CinemaScreeningsDelegate(private val screeningClickListener: (Screening) -> Unit) : AbsListItemAdapterDelegate<MoviePresenter.CinemaScreenings, Any, CinemaScreeningsDelegate.CinemaScreeningsViewHolder>() {
-
+class CinemaScreeningsDelegate(private val screeningClickListener: (Screening) -> Unit,
+                               private val cinemaTitleClickListener: (Cinema) -> Unit) : AbsListItemAdapterDelegate<MoviePresenter.CinemaScreenings, Any, CinemaScreeningsDelegate.CinemaScreeningsViewHolder>() {
 
     @Inject
     lateinit var metroProvider: MetroProvider
@@ -48,13 +49,20 @@ class CinemaScreeningsDelegate(private val screeningClickListener: (Screening) -
 
     inner class CinemaScreeningsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val SPAN_COUNT = 5
+        private lateinit var cinema: Cinema
+        private val titleLayout = view.findViewById<View>(R.id.title_layout)
         private val cinemaTitle = view.findViewById<TextView>(R.id.tv_title)
         private val cinemaMetro = view.findViewById<TextView>(R.id.tv_info)
         private val screenings = view.findViewById<RecyclerView>(R.id.rv_list)
 
+        init {
+            titleLayout.setOnClickListener { cinemaTitleClickListener.invoke(cinema) }
+        }
+
         fun bind(cinemaScreenings: MoviePresenter.CinemaScreenings) {
-            cinemaTitle.text = cinemaScreenings.cinema.name
-            cinemaMetro.text = metroProvider.currentMetroTextProvider.formatMetroListStation(cinemaScreenings.cinema.location.metro)
+            cinema = cinemaScreenings.cinema
+            cinemaTitle.text = cinema.name
+            cinemaMetro.text = metroProvider.currentMetroTextProvider.formatMetroListStation(cinema.location.metro)
             screenings.apply {
                 layoutManager = GridLayoutManager(screenings.context, SPAN_COUNT, LinearLayoutManager.VERTICAL, false)
                 adapter = MovieScreeningAdapter(screenings.context!!, cinemaScreenings.screenings, screeningClickListener)
