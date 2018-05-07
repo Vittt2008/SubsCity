@@ -68,6 +68,8 @@
 
     <!-- DonateActivity -->
     <string name="donate_title">Пожертвовать</string>
+    <string name="donate_success">Спасибо. Ваши пожертвование позволяют нам успешно развивать приложение.</string>
+    <string name="donate_error">При транзации произошла ошибка. Попробуйте еще раз.</string>
 
     <!-- OfferActivity -->
     <string name="offer_go_to_store">Оценить в Play Store</string>

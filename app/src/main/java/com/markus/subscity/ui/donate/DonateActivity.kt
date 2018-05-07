@@ -8,11 +8,15 @@ import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.util.Log
 import com.anjlab.android.iab.v3.BillingProcessor
+import com.anjlab.android.iab.v3.Constants.BILLING_RESPONSE_RESULT_DEVELOPER_ERROR
+import com.anjlab.android.iab.v3.Constants.BILLING_RESPONSE_RESULT_USER_CANCELED
 import com.anjlab.android.iab.v3.TransactionDetails
+import com.crashlytics.android.Crashlytics
 import com.markus.subscity.R
 import com.markus.subscity.controllers.ContentLoadingController
 import com.markus.subscity.extensions.toast
 import com.markus.subscity.utils.BaseActivity
+import io.fabric.sdk.android.Fabric
 
 /**
  * @author Vitaliy Markus
@@ -44,7 +48,7 @@ class DonateActivity : BaseActivity(), BillingProcessor.IBillingHandler {
         donatesList = findViewById(R.id.rv_list)
         loadingController = ContentLoadingController(this, R.id.rv_list, R.id.pb_progress)
         billingProcessor = BillingProcessor(this, LICENSE_KEY, this)
-        loadingController.setContentState(ContentLoadingController.State.PROGRESS)
+        loadingController.switchState(ContentLoadingController.State.PROGRESS)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -61,19 +65,23 @@ class DonateActivity : BaseActivity(), BillingProcessor.IBillingHandler {
     }
 
     override fun onPurchaseHistoryRestored() {
-        toast("RESTORED")
+        // empty
     }
 
     override fun onProductPurchased(productId: String, details: TransactionDetails?) {
-        val string = "ProductId = $productId; Details = ${details?.toString()}"
-        Log.e("PURCHASED", string)
-        toast("PURCHASED __ $string")
+        logProductPurchased(productId, details)
+        toast(getString(R.string.donate_success))
+        if (productId.isNotEmpty()) {
+            billingProcessor.consumePurchase(productId)
+        }
     }
 
     override fun onBillingError(errorCode: Int, error: Throwable?) {
-        val string = "ErrorCode = $errorCode; Error = ${error?.toString()}"
-        Log.e("ERROR", string)
-        toast("ERROR __ $string")
+        if (errorCode != BILLING_RESPONSE_RESULT_USER_CANCELED && errorCode != BILLING_RESPONSE_RESULT_DEVELOPER_ERROR) {
+            val exception = BillingException(errorCode, error)
+            logBillingError(exception)
+            toast(getString(R.string.donate_error))
+        }
     }
 
     private fun initToolbar() {
@@ -82,5 +90,23 @@ class DonateActivity : BaseActivity(), BillingProcessor.IBillingHandler {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
         toolbar.setNavigationOnClickListener { onBackPressed() }
+    }
+
+    private fun logProductPurchased(productId: String, details: TransactionDetails?) {
+        val string = "ProductId = $productId; Details = ${details?.toString()}"
+        Log.e("PURCHASED", string)
+    }
+
+    private fun logBillingError(exception: BillingException) {
+        Log.e("ERROR", exception.toString())
+        if (Fabric.isInitialized()) {
+            Crashlytics.logException(exception)
+        }
+    }
+
+    class BillingException(private val errorCode: Int, error: Throwable?) : RuntimeException(error) {
+        override fun toString(): String {
+            return "BillingException (errorCode = $errorCode; error = ${cause?.toString()})"
+        }
     }
 }
