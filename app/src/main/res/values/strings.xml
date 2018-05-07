@@ -2,6 +2,7 @@
     <string name="app_name">SubsCity</string>
     <string name="file_export_provider">com.markus.subscity.FileProvider</string>
     <string name="send">Отправить</string>
+    <string name="github_url">https://github.com/Vittt2008/SubsCity</string>
     <string name="empty_title"/>
 
     <string name="email_address">subscity.info@gmail.com</string>
@@ -67,6 +68,8 @@
     <string name="about_facebook">Facebook</string>
     <string name="about_review">Обратная связь</string>
     <string name="about_no_email_application">Отсутвуют приложения для отправки электронных писем</string>
+    <string name="about_github">SubCity является некоммерческим проектом. Все предложения по улучшению можете оставлять по почте или на GitHub:</string>
+
 
     <!-- DonateActivity -->
     <string name="donate_title">Пожертвовать</string>

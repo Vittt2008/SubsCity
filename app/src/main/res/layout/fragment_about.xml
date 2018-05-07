@@ -5,127 +5,157 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/app_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay"
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/bt_rate_app"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:layout_collapseMode="pin"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp">
 
-    </android.support.design.widget.AppBarLayout>
+            <android.support.design.widget.AppBarLayout
+                android:id="@+id/app_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/AppTheme.AppBarOverlay"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/tv_about"
-        style="@style/AppTheme.TextView.Large.Black"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/about_info"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/app_bar" />
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_collapseMode="pin"
+                    app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-    <TextView
-        android:id="@+id/tv_about_tickets"
-        style="@style/AppTheme.TextView.Large.Black"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="10dp"
-        android:text="@string/about_info_tickets"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_about" />
+            </android.support.design.widget.AppBarLayout>
 
-    <TextView
-        android:id="@+id/tv_social_network_title"
-        style="@style/AppTheme.TextView.Huge.Black.Bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/about_social_networks"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_about_tickets" />
+            <TextView
+                android:id="@+id/tv_about"
+                style="@style/AppTheme.TextView.Large.Black"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/about_info"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/app_bar" />
 
-    <!--<TextView-->
-        <!--android:id="@+id/tv_subscribe"-->
-        <!--style="@style/AppTheme.TextView.Large.Black"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginLeft="16dp"-->
-        <!--android:layout_marginRight="16dp"-->
-        <!--android:layout_marginTop="8dp"-->
-        <!--android:text="@string/about_subscribe"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/tv_social_network_title" />-->
+            <TextView
+                android:id="@+id/tv_about_tickets"
+                style="@style/AppTheme.TextView.Large.Black"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/about_info_tickets"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_about" />
 
-    <Button
-        android:id="@+id/bt_telegram"
-        style="@style/AppTheme.Button.SocialNetwork"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/telegram_bg"
-        android:text="@string/about_telegram"
-        app:layout_constraintEnd_toStartOf="@+id/bt_vk"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/bt_vk"
-        tools:targetApi="lollipop" />
+            <TextView
+                android:id="@+id/tv_social_network_title"
+                style="@style/AppTheme.TextView.Huge.Black.Bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/about_social_networks"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_about_tickets" />
 
-    <Button
-        android:id="@+id/bt_vk"
-        style="@style/AppTheme.Button.SocialNetwork"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/vkontakte_bg"
-        android:text="@string/about_vkontakte"
-        app:layout_constraintEnd_toStartOf="@+id/bt_fb"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/bt_telegram"
-        app:layout_constraintTop_toBottomOf="@+id/tv_social_network_title"
-        tools:targetApi="lollipop" />
+            <Button
+                android:id="@+id/bt_telegram"
+                style="@style/AppTheme.Button.SocialNetwork"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/telegram_bg"
+                android:text="@string/about_telegram"
+                app:layout_constraintEnd_toStartOf="@+id/bt_vk"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/bt_vk"
+                tools:targetApi="lollipop" />
 
-    <Button
-        android:id="@+id/bt_fb"
-        style="@style/AppTheme.Button.SocialNetwork"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/facebook_bg"
-        android:text="@string/about_facebook"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/bt_vk"
-        app:layout_constraintTop_toTopOf="@+id/bt_vk"
-        tools:targetApi="lollipop" />
+            <Button
+                android:id="@+id/bt_vk"
+                style="@style/AppTheme.Button.SocialNetwork"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/vkontakte_bg"
+                android:text="@string/about_vkontakte"
+                app:layout_constraintEnd_toStartOf="@+id/bt_fb"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/bt_telegram"
+                app:layout_constraintTop_toBottomOf="@+id/tv_social_network_title"
+                tools:targetApi="lollipop" />
+
+            <Button
+                android:id="@+id/bt_fb"
+                style="@style/AppTheme.Button.SocialNetwork"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/facebook_bg"
+                android:text="@string/about_facebook"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/bt_vk"
+                app:layout_constraintTop_toTopOf="@+id/bt_vk"
+                tools:targetApi="lollipop" />
+
+            <TextView
+                android:id="@+id/tv_github"
+                style="@style/AppTheme.TextView.Large.Black"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/about_github"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bt_vk" />
+
+            <Button
+                android:id="@+id/bt_github"
+                android:layout_width="155dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/github_bg"
+                android:stateListAnimator="@null"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_github"
+                tools:targetApi="lollipop" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </ScrollView>
 
     <Button
         android:id="@+id/bt_rate_app"
         style="@style/AppTheme.Button.Accent"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
         android:text="@string/about_review"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:targetApi="lollipop" />
-
 
 </android.support.constraint.ConstraintLayout>

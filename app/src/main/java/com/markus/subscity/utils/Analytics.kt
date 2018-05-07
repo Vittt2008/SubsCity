@@ -48,6 +48,7 @@ class Analytics @Inject constructor(context: Context) {
         private const val EVENT_BUY_TICKET = "event_buy_ticket"
 
         private const val EVENT_OPEN_PLAY_STORE = "event_open_play_store"
+        private const val EVENT_OPEN_GIT_HUB = "event_open_git_hub"
 
         // Keys
 
@@ -243,6 +244,10 @@ class Analytics @Inject constructor(context: Context) {
             putString(KEY_FROM, if (fromRateDialog) PARAM_FROM_RATE_DIALOG else PARAM_FROM_SETTINGS)
         }
         analytics.logEvent(EVENT_OPEN_PLAY_STORE, bundle)
+    }
+
+    fun logOpenGitHub(){
+        analytics.logEvent(EVENT_OPEN_GIT_HUB, Bundle())
     }
 
     fun logActivity(activity: Activity) {

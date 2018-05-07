@@ -42,6 +42,7 @@ class AboutFragment : MvpAppCompatFragment(), AboutView {
         root.findViewById<View>(R.id.bt_vk).setOnClickListener { aboutPresenter.openVkontakte() }
         root.findViewById<View>(R.id.bt_fb).setOnClickListener { aboutPresenter.openFacebook() }
         root.findViewById<View>(R.id.bt_rate_app).setOnClickListener { openEmailApp() }
+        root.findViewById<View>(R.id.bt_github).setOnClickListener { openGitHub() }
         return root
     }
 
@@ -54,6 +55,11 @@ class AboutFragment : MvpAppCompatFragment(), AboutView {
         analytics().logOpenEmail()
         val intent = IntentUtils.createSendEmailIntent(getString(R.string.email_address), getString(R.string.email_subject))
         openIntent(intent, R.string.about_no_email_application)
+    }
+
+    private fun openGitHub() {
+        analytics().logOpenGitHub()
+        openUrl(Uri.parse(getString(R.string.github_url)), false)
     }
 
 }
