@@ -3,7 +3,9 @@
     <string name="file_export_provider">com.markus.subscity.FileProvider</string>
     <string name="send">Отправить</string>
     <string name="github_url">https://github.com/Vittt2008/SubsCity</string>
-    <string name="empty_title"/>
+    <string name="developer_email">vitalii.markus@gmail.com</string>
+    <string name="designer_email">shelmoon518@gmail.com</string>
+    <string name="empty_title" />
 
     <string name="email_address">subscity.info@gmail.com</string>
     <string name="email_subject">Обратная связь. Приложение SubsCity</string>
@@ -69,6 +71,11 @@
     <string name="about_review">Обратная связь</string>
     <string name="about_no_email_application">Отсутвуют приложения для отправки электронных писем</string>
     <string name="about_github">SubCity является некоммерческим проектом. Все предложения по улучшению можете оставлять по почте или на GitHub:</string>
+    <string name="about_team">Команда</string>
+    <string name="about_team_members">Разработчик: Виталий Маркус\nUX-дизайнер: Николай Каврецкий\nСсылка на GitHub: Subscity</string>
+    <string name="about_team_developer">Виталий Маркус</string>
+    <string name="about_team_designer">Николай Каврецкий</string>
+    <string name="about_team_github">Subscity</string>
 
 
     <!-- DonateActivity -->

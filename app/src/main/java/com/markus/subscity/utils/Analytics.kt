@@ -70,6 +70,7 @@ class Analytics @Inject constructor(context: Context) {
         private const val KEY_PRICE_MIN = "price_min"
         private const val KEY_PRICE_MAX = "price_max"
         private const val KEY_DATETIME = "datetime"
+        private const val KEY_EMAIL = "email"
 
         // Params
 
@@ -212,8 +213,11 @@ class Analytics @Inject constructor(context: Context) {
         analytics.logEvent(EVENT_SOCIAL_NETWORK, bundle)
     }
 
-    fun logOpenEmail() {
-        analytics.logEvent(EVENT_EMAIL, Bundle())
+    fun logOpenEmail(email: String) {
+        val bundle = Bundle().apply {
+            putString(KEY_EMAIL, email)
+        }
+        analytics.logEvent(EVENT_EMAIL, bundle)
     }
 
     fun logOpenCityPicker() {
@@ -239,14 +243,14 @@ class Analytics @Inject constructor(context: Context) {
         analytics.logEvent(EVENT_BUY_TICKET, bundle)
     }
 
-    fun logOpenPlayStore(fromRateDialog:Boolean){
+    fun logOpenPlayStore(fromRateDialog: Boolean) {
         val bundle = Bundle().apply {
             putString(KEY_FROM, if (fromRateDialog) PARAM_FROM_RATE_DIALOG else PARAM_FROM_SETTINGS)
         }
         analytics.logEvent(EVENT_OPEN_PLAY_STORE, bundle)
     }
 
-    fun logOpenGitHub(){
+    fun logOpenGitHub() {
         analytics.logEvent(EVENT_OPEN_GIT_HUB, Bundle())
     }
 

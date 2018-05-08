@@ -14,6 +14,7 @@ import com.anjlab.android.iab.v3.TransactionDetails
 import com.crashlytics.android.Crashlytics
 import com.markus.subscity.R
 import com.markus.subscity.controllers.ContentLoadingController
+import com.markus.subscity.extensions.longToast
 import com.markus.subscity.extensions.toast
 import com.markus.subscity.utils.BaseActivity
 import io.fabric.sdk.android.Fabric
@@ -70,7 +71,7 @@ class DonateActivity : BaseActivity(), BillingProcessor.IBillingHandler {
 
     override fun onProductPurchased(productId: String, details: TransactionDetails?) {
         logProductPurchased(productId, details)
-        toast(getString(R.string.donate_success))
+        longToast(getString(R.string.donate_success))
         if (productId.isNotEmpty()) {
             billingProcessor.consumePurchase(productId)
         }

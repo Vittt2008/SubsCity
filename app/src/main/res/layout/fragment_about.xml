@@ -118,29 +118,30 @@
                 tools:targetApi="lollipop" />
 
             <TextView
-                android:id="@+id/tv_github"
+                android:id="@+id/tv_team"
+                style="@style/AppTheme.TextView.Huge.Black.Bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/about_team"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bt_vk" />
+
+            <TextView
+                android:id="@+id/tv_team_members"
                 style="@style/AppTheme.TextView.Large.Black"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/about_github"
+                android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/bt_vk" />
-
-            <Button
-                android:id="@+id/bt_github"
-                android:layout_width="155dp"
-                android:layout_height="45dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/github_bg"
-                android:stateListAnimator="@null"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_github"
-                tools:targetApi="lollipop" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_team"
+                tools:text="@string/about_team_members" />
 
         </android.support.constraint.ConstraintLayout>
 
@@ -153,6 +154,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:text="@string/about_review"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

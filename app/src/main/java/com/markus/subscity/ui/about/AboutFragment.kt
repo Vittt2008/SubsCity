@@ -2,9 +2,12 @@ package com.markus.subscity.ui.about
 
 import android.net.Uri
 import android.os.Bundle
+import android.support.annotation.StringRes
+import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
@@ -14,6 +17,7 @@ import com.markus.subscity.extensions.analytics
 import com.markus.subscity.extensions.openIntent
 import com.markus.subscity.extensions.openUrl
 import com.markus.subscity.extensions.setSupportActionBar
+import com.markus.subscity.utils.ClickableSpanBuilder
 import com.markus.subscity.utils.IntentUtils
 
 /**
@@ -41,8 +45,8 @@ class AboutFragment : MvpAppCompatFragment(), AboutView {
         root.findViewById<View>(R.id.bt_telegram).setOnClickListener { aboutPresenter.openTelegram() }
         root.findViewById<View>(R.id.bt_vk).setOnClickListener { aboutPresenter.openVkontakte() }
         root.findViewById<View>(R.id.bt_fb).setOnClickListener { aboutPresenter.openFacebook() }
-        root.findViewById<View>(R.id.bt_rate_app).setOnClickListener { openEmailApp() }
-        root.findViewById<View>(R.id.bt_github).setOnClickListener { openGitHub() }
+        root.findViewById<View>(R.id.bt_rate_app).setOnClickListener { openEmailApp(R.string.email_address) }
+        initTeamMembers(root)
         return root
     }
 
@@ -51,9 +55,21 @@ class AboutFragment : MvpAppCompatFragment(), AboutView {
         openUrl(Uri.parse(url), false)
     }
 
-    private fun openEmailApp() {
-        analytics().logOpenEmail()
-        val intent = IntentUtils.createSendEmailIntent(getString(R.string.email_address), getString(R.string.email_subject))
+    private fun initTeamMembers(root: View) {
+        val members = root.findViewById<TextView>(R.id.tv_team_members)
+        members.movementMethod = LinkMovementMethod.getInstance()
+        val text = ClickableSpanBuilder(activity!!, R.string.about_team_members)
+                .addLink(R.string.about_team_developer) { openEmailApp(R.string.developer_email) }
+                .addLink(R.string.about_team_designer) { openEmailApp(R.string.designer_email) }
+                .addLink(R.string.about_team_github) { openGitHub() }
+                .build()
+        members.text = text
+    }
+
+    private fun openEmailApp(@StringRes emailId: Int) {
+        val email = getString(emailId)
+        analytics().logOpenEmail(email)
+        val intent = IntentUtils.createSendEmailIntent(email, getString(R.string.email_subject))
         openIntent(intent, R.string.about_no_email_application)
     }
 

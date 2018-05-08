@@ -12,7 +12,7 @@ android {
         applicationId "com.markus.subscity"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 12
+        versionCode 13
         versionName "1.1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
