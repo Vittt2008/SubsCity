@@ -19,6 +19,11 @@ import com.markus.subscity.ui.about.AboutActivity
 import com.markus.subscity.ui.cinemasmap.CinemasMapActivity
 import com.markus.subscity.ui.city.CityActivity
 import com.markus.subscity.ui.donate.DonateActivity
+import com.markus.subscity.ui.settings.SettingsView.Companion.ABOUT
+import com.markus.subscity.ui.settings.SettingsView.Companion.CINEMA_MAP
+import com.markus.subscity.ui.settings.SettingsView.Companion.CITY
+import com.markus.subscity.ui.settings.SettingsView.Companion.DONATE
+import com.markus.subscity.ui.settings.SettingsView.Companion.RATE_APP
 
 /**
  * @author Vitaliy Markus
@@ -44,18 +49,16 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
         return settingsList
     }
 
-    override fun showSettings(city: String) {
+    override fun showSettings(settings: List<SettingsView.SettingItem>) {
         settingsList.run {
             layoutManager = LinearLayoutManager(activity)
-            adapter = SettingsAdapter(city) { item ->
+            adapter = SettingsAdapter(settings) { item ->
                 when (item) {
-                //SettingsAdapter.SOON_AT_BOX_OFFICE -> {}
-                //SettingsAdapter.SALES -> {}
-                    SettingsAdapter.CINEMA_MAP -> settingsPresenter.showCinemasMap()
-                    SettingsAdapter.RATE_APP -> rateApp()
-                    SettingsAdapter.ABOUT -> openAbout()
-                    SettingsAdapter.DONATE -> DonateActivity.start(activity!!)
-                    SettingsAdapter.CITY -> openCityPicker()
+                    CINEMA_MAP -> settingsPresenter.showCinemasMap()
+                    RATE_APP -> settingsPresenter.openPlayStore()
+                    ABOUT -> openAbout()
+                    DONATE -> DonateActivity.start(activity!!)
+                    CITY -> openCityPicker()
                 }
             }
         }
@@ -64,6 +67,10 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
     override fun showCinemasMap(city: City) {
         analytics().logOpenCinemasMap(city.name, false)
         CinemasMapActivity.start(activity!!, city.location.latitude, city.location.longitude, city.location.zoom)
+    }
+
+    override fun openPlayStore() {
+        rateApp()
     }
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
