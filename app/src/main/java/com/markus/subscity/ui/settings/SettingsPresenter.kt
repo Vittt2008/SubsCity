@@ -40,13 +40,13 @@ class SettingsPresenter @Inject constructor(private val cityProvider: CityProvid
     }
 
     private fun createSettings(cityName: String): List<SettingsView.SettingItem> {
-        val settings = listOf(
+        val settings = mutableListOf(
                 SettingsView.SettingItem(CINEMA_MAP, R.drawable.ic_menu_map, R.string.setting_cinema_map_title),
                 SettingsView.SettingItem(RATE_APP, R.drawable.ic_menu_rate_app, R.string.setting_rate_app),
                 SettingsView.SettingItem(ABOUT, R.drawable.ic_menu_about, R.string.setting_about_title),
                 SettingsView.SettingItem(CITY, R.drawable.ic_menu_city, R.string.setting_city_title, cityName))
         if (billingProvider.isBillingAvailable) {
-            settings.plus(SettingsView.SettingItem(DONATE, R.drawable.ic_menu_donate, R.string.setting_donate_title))
+            settings.add(SettingsView.SettingItem(DONATE, R.drawable.ic_menu_donate, R.string.setting_donate_title))
         }
         return settings
     }
