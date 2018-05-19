@@ -83,6 +83,8 @@ fun Fragment.openUrl(uri: Uri, useChromeTabsForce: Boolean = true) {
 
     builder.setStartAnimations(context, R.anim.events_right_in, R.anim.activity_open_exit)
     builder.setExitAnimations(context, R.anim.activity_close_enter, R.anim.events_left_out)
+//    builder.setStartAnimations(context, R.anim.events_right_in, R.anim.activity_close_exit)
+//    builder.setExitAnimations(context, R.anim.activity_close_enter, R.anim.activity_open_exit)
 
 
     val customTabsIntent = builder.build()
