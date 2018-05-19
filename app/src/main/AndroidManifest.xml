@@ -52,7 +52,7 @@
             android:name="com.markus.subscity.ui.main.MainActivity"
             android:label="@string/empty_title"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.Activity" />
+            android:theme="@style/AppTheme.MainActivity" />
 
         <activity
             android:name="com.markus.subscity.ui.movie.MovieActivity"
@@ -71,6 +71,12 @@
             android:label="@string/city_title"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name="com.markus.subscity.ui.city.FirstPickCityActivity"
+            android:label="@string/city_title"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.FirstPickCityActivity" />
 
         <activity
             android:name="com.markus.subscity.ui.youtube.YouTubeActivity"

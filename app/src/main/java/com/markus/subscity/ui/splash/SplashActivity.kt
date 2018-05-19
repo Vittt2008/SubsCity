@@ -1,14 +1,13 @@
 package com.markus.subscity.ui.splash
 
 import android.os.Bundle
-import android.support.v4.app.TaskStackBuilder
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.markus.subscity.dagger.SubsCityDagger
 import com.markus.subscity.extensions.analytics
 import com.markus.subscity.ui.cinema.CinemaActivity
-import com.markus.subscity.ui.city.CityActivity
+import com.markus.subscity.ui.city.FirstPickCityActivity
 import com.markus.subscity.ui.deeplink.DeepLinkPresenter
 import com.markus.subscity.ui.deeplink.DeepLinkView
 import com.markus.subscity.ui.deeplink.isFromDeepLink
@@ -81,7 +80,7 @@ class SplashActivity : MvpAppCompatActivity(), SplashView, DeepLinkView {
     }
 
     override fun showCityPicker() {
-        CityActivity.start(this, true)
+        FirstPickCityActivity.start(this)
         finish()
     }
 }

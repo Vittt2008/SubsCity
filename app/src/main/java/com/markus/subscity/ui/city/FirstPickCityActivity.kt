@@ -3,16 +3,18 @@ package com.markus.subscity.ui.city
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import com.markus.subscity.utils.BaseActivity
+import android.support.v7.app.AppCompatActivity
+import com.markus.subscity.dagger.SubsCityDagger
 
 /**
  * @author Vitaliy Markus
  */
-class CityActivity : BaseActivity() {
+class FirstPickCityActivity : AppCompatActivity() {
 
     companion object {
+
         fun start(context: Context) {
-            val intent = Intent(context, CityActivity::class.java)
+            val intent = Intent(context, FirstPickCityActivity::class.java)
             context.startActivity(intent)
         }
     }
@@ -22,8 +24,13 @@ class CityActivity : BaseActivity() {
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                    .add(android.R.id.content, CityFragment.newInstance(false))
+                    .add(android.R.id.content, CityFragment.newInstance(true))
                     .commit()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        SubsCityDagger.component.provideAnalytics().logActivity(this)
     }
 }

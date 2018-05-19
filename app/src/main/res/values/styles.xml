@@ -16,17 +16,31 @@
         <item name="android:windowAnimationStyle">@style/AppTheme.ActivityAnimation</item>
     </style>
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
     <style name="AppTheme.NoActionBar" parent="AppTheme.Activity">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="AppTheme.MainActivity">
+        <item name="android:windowDisablePreview">true</item>
+        <item name="android:windowAnimationStyle">@style/AppTheme.MainActivityAnimation</item>
+    </style>
+
+    <style name="AppTheme.FirstPickCityActivity">
+        <item name="android:windowDisablePreview">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
     <style name="AppTheme.ActivityAnimation" parent="@android:style/Animation.Activity">
         <item name="android:activityOpenEnterAnimation">@anim/events_right_in</item>
-        <!--<item name="android:activityOpenExitAnimation">@anim/events_left_out</item>-->
-        <!--<item name="android:activityCloseEnterAnimation">@anim/events_left_out</item>-->
+        <item name="android:activityCloseExitAnimation">@anim/events_left_out</item>
+    </style>
+
+    <style name="AppTheme.MainActivityAnimation" parent="@android:style/Animation.Activity">
         <item name="android:activityCloseExitAnimation">@anim/events_left_out</item>
     </style>
 

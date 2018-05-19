@@ -32,10 +32,12 @@ class CityFragment : MvpAppCompatFragment(), CityView {
     private lateinit var cityList: RecyclerView
 
     companion object {
+        private const val EXTRA_FIRST_PICK = "first_pick"
+
         fun newInstance(firstPick: Boolean): CityFragment {
             return CityFragment().apply {
                 arguments = Bundle().apply {
-                    putBoolean(CityActivity.EXTRA_FIRST_PICK, firstPick)
+                    putBoolean(EXTRA_FIRST_PICK, firstPick)
                 }
             }
         }
@@ -48,7 +50,7 @@ class CityFragment : MvpAppCompatFragment(), CityView {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root = inflater.inflate(R.layout.fragment_city, container, false)
-        isFirstPick = arguments?.getBoolean(CityActivity.EXTRA_FIRST_PICK, false) ?: false
+        isFirstPick = arguments?.getBoolean(EXTRA_FIRST_PICK, false) ?: false
         cityList = root.findViewById(R.id.rv_list)
         initToolbar(root.findViewById(R.id.toolbar))
         return root
