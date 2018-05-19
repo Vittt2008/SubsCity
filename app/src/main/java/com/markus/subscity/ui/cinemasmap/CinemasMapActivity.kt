@@ -23,6 +23,7 @@ import com.markus.subscity.extensions.analytics
 import com.markus.subscity.extensions.toast
 import com.markus.subscity.ui.cinema.CinemaActivity
 import com.r0adkll.slidr.Slidr
+import com.r0adkll.slidr.widget.SliderPanel
 
 
 /**
@@ -80,6 +81,8 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnI
         }
 
         Slidr.attach(this)
+
+        val sliderPanel = findViewById<SliderPanel>(R.id.slidable_panel)
 
     }
 
