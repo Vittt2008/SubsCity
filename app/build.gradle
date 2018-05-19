@@ -94,6 +94,7 @@ dependencies {
     implementation "com.aurelhubert:ahbottomnavigation:$bottomNavifationVersion"
     implementation "com.github.rubensousa:bottomsheetbuilder:$bottomSheetBuilderVersion"
     implementation 'com.hannesdorfmann:adapterdelegates3:3.0.1'
+    implementation 'com.r0adkll:slidableactivity:2.0.6'
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 

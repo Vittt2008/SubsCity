@@ -22,6 +22,7 @@ import com.markus.subscity.dagger.SubsCityDagger
 import com.markus.subscity.extensions.analytics
 import com.markus.subscity.extensions.toast
 import com.markus.subscity.ui.cinema.CinemaActivity
+import com.r0adkll.slidr.Slidr
 
 
 /**
@@ -77,6 +78,8 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnI
             it.setOnInfoWindowClickListener(this)
             cinemasMapPresenter.getCinemas(it)
         }
+
+        Slidr.attach(this)
 
     }
 

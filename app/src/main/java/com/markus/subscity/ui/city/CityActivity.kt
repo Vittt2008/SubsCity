@@ -23,10 +23,15 @@ class CityActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val firstPick = intent.getBooleanExtra(EXTRA_FIRST_PICK, false)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                    .add(android.R.id.content, CityFragment.newInstance(intent.getBooleanExtra(EXTRA_FIRST_PICK, false)))
+                    .add(android.R.id.content, CityFragment.newInstance(firstPick))
                     .commit()
+        }
+
+        if (firstPick){
+            slidrInterface.lock()
         }
     }
 }
