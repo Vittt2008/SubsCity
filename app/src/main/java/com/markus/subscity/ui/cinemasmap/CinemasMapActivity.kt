@@ -7,8 +7,10 @@ import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.content.res.AppCompatResources
 import android.view.MenuItem
+import android.view.View
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
@@ -22,8 +24,7 @@ import com.markus.subscity.dagger.SubsCityDagger
 import com.markus.subscity.extensions.analytics
 import com.markus.subscity.extensions.toast
 import com.markus.subscity.ui.cinema.CinemaActivity
-import com.r0adkll.slidr.Slidr
-import com.r0adkll.slidr.widget.SliderPanel
+import com.markus.subscity.utils.MapSlidr
 
 
 /**
@@ -66,6 +67,9 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnI
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
 
+        val content = findViewById<View>(android.R.id.content)
+        content.setBackgroundColor(ContextCompat.getColor(this, R.color.map_background_color))
+
         if (savedInstanceState == null) {
             mapFragment = SupportMapFragment.newInstance(GoogleMapOptions().camera(createCameraPosition()))
             supportFragmentManager.beginTransaction()
@@ -80,9 +84,7 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnI
             cinemasMapPresenter.getCinemas(it)
         }
 
-        Slidr.attach(this)
-
-        val sliderPanel = findViewById<SliderPanel>(R.id.slidable_panel)
+        MapSlidr.attach(this)
 
     }
 
