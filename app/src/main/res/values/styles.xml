@@ -13,6 +13,7 @@
         <item name="android:windowDisablePreview">true</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowAnimationStyle">@style/AppTheme.ActivityAnimation</item>
     </style>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
@@ -20,6 +21,13 @@
     <style name="AppTheme.NoActionBar" parent="AppTheme.Activity">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.ActivityAnimation" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/events_right_in</item>
+        <!--<item name="android:activityOpenExitAnimation">@anim/events_left_out</item>-->
+        <!--<item name="android:activityCloseEnterAnimation">@anim/events_left_out</item>-->
+        <item name="android:activityCloseExitAnimation">@anim/events_left_out</item>
     </style>
 
     <style name="AppTheme.SplashTheme" parent="AppTheme">

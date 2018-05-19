@@ -78,8 +78,12 @@ fun Fragment.openUrl(uri: Uri, useChromeTabsForce: Boolean = true) {
 
     val builder = CustomTabsIntent.Builder()
     builder.setToolbarColor(ContextCompat.getColor(context, R.color.primary_color))
-    //builder.setStartAnimations(context, android.R.anim.slide_in_right, R.anim.slide_out_left);
-    //builder.setExitAnimations(context, android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+    //builder.setStartAnimations(context, android.R.anim.slide_in_right, R.anim.slide_out_left)
+//    builder.setExitAnimations(context, android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+
+    builder.setStartAnimations(context, R.anim.events_right_in, R.anim.activity_open_exit)
+    builder.setExitAnimations(context, R.anim.activity_close_enter, R.anim.events_left_out)
+
 
     val customTabsIntent = builder.build()
     if (useChromeTabsForce) {
