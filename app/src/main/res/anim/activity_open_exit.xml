@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <set xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="#ff000000"
     android:zAdjustment="normal">
     <alpha
-        android:duration="217"
-        android:fillAfter="true"
-        android:fillBefore="false"
-        android:fillEnabled="true"
+        android:duration="200"
         android:fromAlpha="1.0"
-        android:interpolator="@anim/fast_out_slow_in"
-        android:toAlpha="0.7" />
+        android:toAlpha="1.0" />
 </set>
