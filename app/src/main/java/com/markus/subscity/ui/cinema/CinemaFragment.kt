@@ -3,8 +3,10 @@ package com.markus.subscity.ui.cinema
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.support.annotation.LayoutRes
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,20 +25,29 @@ import com.markus.subscity.utils.IntentUtils
 /**
  * @author Vitaliy Markus
  */
-class CinemaFragment : MvpAppCompatFragment(), CinemaView {
+open class CinemaFragment : MvpAppCompatFragment(), CinemaView {
 
     @InjectPresenter
     lateinit var cinemaPresenter: CinemaPresenter
 
     private lateinit var cinemaInfoList: RecyclerView
+    private var toolbar: Toolbar? = null
 
     private var adapter: CinemaAdapterDelegates? = null
 
     companion object {
-        fun newInstance(cinemaId: Long): CinemaFragment {
+
+        private const val EXTRA_LAYOUT_ID = "layout_id"
+
+        fun withToolbar(cinemaId: Long) = newInstance(cinemaId, R.layout.fragment_cinema_toolbar)
+
+        fun withoutToolbar(cinemaId: Long) = newInstance(cinemaId, R.layout.fragment_cinema)
+
+        private fun newInstance(cinemaId: Long, @LayoutRes layoutId: Int): CinemaFragment {
             return CinemaFragment().apply {
                 arguments = Bundle().apply {
                     putLong(CinemaActivity.EXTRA_CINEMA_ID, cinemaId)
+                    putInt(EXTRA_LAYOUT_ID, layoutId)
                 }
             }
         }
@@ -50,16 +61,17 @@ class CinemaFragment : MvpAppCompatFragment(), CinemaView {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val root = inflater.inflate(R.layout.fragment_cinema, container, false)
+        val root = inflater.inflate(arguments!!.getInt(EXTRA_LAYOUT_ID), container, false)
         cinemaInfoList = root.findViewById(R.id.rv_list)
         cinemaInfoList.layoutManager = LinearLayoutManager(activity)
-        setSupportActionBar(root.findViewById(R.id.toolbar))
+        toolbar = root.findViewById(R.id.toolbar)
+        toolbar?.let(::setSupportActionBar)
         return root
     }
 
     override fun showCinema(cinema: Cinema, second: List<CinemaPresenter.MovieScreenings>) {
         if (adapter == null) {
-            activity!!.supportActionBar.title = cinema.name
+            toolbar?.title = cinema.name
             adapter = CinemaAdapterDelegates(cinema, second, ::openMap, ::call, ::openSite, ::buyTicket, ::openMovie)
             cinemaInfoList.adapter = adapter
         } else {

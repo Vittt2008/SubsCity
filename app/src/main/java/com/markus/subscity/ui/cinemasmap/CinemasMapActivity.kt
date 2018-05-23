@@ -24,15 +24,17 @@ import com.markus.subscity.dagger.SubsCityDagger
 import com.markus.subscity.extensions.analytics
 import com.markus.subscity.extensions.toast
 import com.markus.subscity.ui.cinema.CinemaActivity
+import com.markus.subscity.ui.cinema.CinemaFragment
 import com.markus.subscity.utils.MapSlidr
 
 
 /**
  * @author Vitaliy Markus
  */
-class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnInfoWindowClickListener {
+class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnInfoWindowClickListener, GoogleMap.OnMarkerClickListener {
 
     private val FRAGMENT_MAP_TAG = "fragment_map_tag"
+    private val FRAGMENT_CINEMA_TAG = "fragment_cinema_tag"
 
     @InjectPresenter
     lateinit var cinemasMapPresenter: CinemasMapPresenter
@@ -64,6 +66,8 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnI
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        setContentView(R.layout.fragment_cinemas_map)
+
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
 
@@ -73,7 +77,7 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnI
         if (savedInstanceState == null) {
             mapFragment = SupportMapFragment.newInstance(GoogleMapOptions().camera(createCameraPosition()))
             supportFragmentManager.beginTransaction()
-                    .add(android.R.id.content, mapFragment, FRAGMENT_MAP_TAG)
+                    .add(R.id.map_root, mapFragment, FRAGMENT_MAP_TAG)
                     .commit()
         } else {
             mapFragment = supportFragmentManager.findFragmentByTag(FRAGMENT_MAP_TAG) as SupportMapFragment
@@ -81,6 +85,7 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnI
 
         mapFragment.getMapAsync {
             it.setOnInfoWindowClickListener(this)
+            it.setOnMarkerClickListener(this)
             cinemasMapPresenter.getCinemas(it)
         }
 
@@ -112,6 +117,19 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnI
         val cinemaId = markerCinemaMap[marker.id]!!
         analytics().logOpenCinemaFromMap(cinemaId)
         CinemaActivity.start(this, cinemaId)
+    }
+
+    override fun onMarkerClick(marker: Marker): Boolean {
+        val icon = AppCompatResources.getDrawable(this, R.drawable.ic_pin_unselected)!!.toBitmap()
+        marker.setIcon(BitmapDescriptorFactory.fromBitmap(icon))
+
+        val cinemaId = markerCinemaMap[marker.id]!!
+        analytics().logOpenCinemaFromMap(cinemaId)
+        val cinemaFragment = CinemaFragment.withoutToolbar(cinemaId)
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.cinema_root, cinemaFragment, FRAGMENT_CINEMA_TAG)
+                .commit()
+        return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
