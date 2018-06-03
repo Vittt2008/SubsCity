@@ -90,7 +90,7 @@ fun Fragment.openUrl(uri: Uri, useChromeTabsForce: Boolean = true) {
     val customTabsIntent = builder.build()
     if (useChromeTabsForce) {
         val packages = getCustomTabsPackages(context, uri)
-        if (packages.isNotEmpty() && (packages.size == 1 || packages[0].preferredOrder != packages[1].preferredOrder)) {
+        if (packages.isNotEmpty()) {
             val resolveInfo = packages[0]
             customTabsIntent.intent.setClassName(resolveInfo.activityInfo.packageName, resolveInfo.activityInfo.name)
         }

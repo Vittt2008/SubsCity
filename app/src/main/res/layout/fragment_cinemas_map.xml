@@ -9,15 +9,13 @@
         android:id="@+id/map_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="216dp"
         android:orientation="vertical" />
 
-    <LinearLayout
-        android:id="@+id/cinema_root"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/cinema_view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/splash_bg"
-        android:orientation="vertical"
-        app:behavior_hideable="true"
         app:behavior_peekHeight="216dp"
         app:layout_behavior="android.support.design.widget.BottomSheetBehavior" />
 

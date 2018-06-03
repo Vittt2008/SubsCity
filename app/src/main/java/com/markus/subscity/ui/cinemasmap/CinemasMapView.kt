@@ -9,5 +9,5 @@ import com.markus.subscity.api.entities.cinema.Cinema
 interface CinemasMapView : MvpView {
     fun showCinemas(cinemas: List<Cinema>, googleMap: Any)
     fun onError(throwable: Throwable)
-    fun onMarkersAdd(markerCinemaMap: Map<String, Long>)
+    fun onMarkersAdd(markerCinemaMap: Map<String, Long>, markers: List<Any>)
 }

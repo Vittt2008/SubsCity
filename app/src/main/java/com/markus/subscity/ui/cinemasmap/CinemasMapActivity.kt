@@ -7,13 +7,16 @@ import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.support.annotation.DrawableRes
 import android.support.v4.content.ContextCompat
+import android.support.v4.view.ViewPager
 import android.support.v7.content.res.AppCompatResources
 import android.view.MenuItem
 import android.view.View
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.GoogleMapOptions
 import com.google.android.gms.maps.SupportMapFragment
@@ -24,7 +27,6 @@ import com.markus.subscity.dagger.SubsCityDagger
 import com.markus.subscity.extensions.analytics
 import com.markus.subscity.extensions.toast
 import com.markus.subscity.ui.cinema.CinemaActivity
-import com.markus.subscity.ui.cinema.CinemaFragment
 import com.markus.subscity.utils.MapSlidr
 
 
@@ -39,9 +41,17 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnI
     @InjectPresenter
     lateinit var cinemasMapPresenter: CinemasMapPresenter
 
+    private lateinit var viewPager: ViewPager
     private lateinit var mapFragment: SupportMapFragment
 
-    private lateinit var markerCinemaMap: Map<String, Long>
+    private lateinit var map: GoogleMap
+    private lateinit var markers: List<Marker>
+    private lateinit var cinemas: List<Cinema>
+    private lateinit var markerIdCinemaIdMap: Map<String, Long>
+    private lateinit var cinemaIdMarkerIdMap: Map<Long, String>
+
+    private val inactiveIcon by lazy { getMarkerIcon(R.drawable.ic_pin_unselected) }
+    private val activeIcon by lazy { getMarkerIcon(R.drawable.ic_pin) }
 
     companion object {
 
@@ -73,6 +83,7 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnI
 
         val content = findViewById<View>(android.R.id.content)
         content.setBackgroundColor(ContextCompat.getColor(this, R.color.map_background_color))
+        viewPager = findViewById(R.id.cinema_view_pager)
 
         if (savedInstanceState == null) {
             mapFragment = SupportMapFragment.newInstance(GoogleMapOptions().camera(createCameraPosition()))
@@ -99,14 +110,20 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnI
     }
 
     override fun showCinemas(cinemas: List<Cinema>, googleMap: Any) {
-        val map = googleMap as GoogleMap
-        val icon = AppCompatResources.getDrawable(this, R.drawable.ic_pin)!!.toBitmap()
-        val markerCinemaMap: Map<String, Long> = cinemas.associateBy({ map.addMarker(createMarkerOptions(it, icon)).id }, { it.id })
-        cinemasMapPresenter.onMarkersAdd(markerCinemaMap)
+        map = googleMap as GoogleMap
+        this.cinemas = cinemas
+        val markersMap = cinemas.associateBy({ map.addMarker(createMarkerOptions(it)) }, { it.id })
+        val markerCinemaMap = markersMap.mapKeys { it.key.id }
+        val markers = markersMap.map { it.key }
+        viewPager.adapter = CinemaFragmentAdapter(supportFragmentManager, cinemas)
+        viewPager.addOnPageChangeListener(CinemaMapOnPageChangeListener(cinemas))
+        cinemasMapPresenter.onMarkersAdd(markerCinemaMap, markers)
     }
 
-    override fun onMarkersAdd(markerCinemaMap: Map<String, Long>) {
-        this.markerCinemaMap = markerCinemaMap
+    override fun onMarkersAdd(markerCinemaMap: Map<String, Long>, markers: List<Any>) {
+        this.markerIdCinemaIdMap = markerCinemaMap
+        this.cinemaIdMarkerIdMap = markerCinemaMap.entries.associateBy({ it.value }, { it.key })
+        this.markers = markers as List<Marker>
     }
 
     override fun onError(throwable: Throwable) {
@@ -114,21 +131,14 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnI
     }
 
     override fun onInfoWindowClick(marker: Marker) {
-        val cinemaId = markerCinemaMap[marker.id]!!
+        val cinemaId = markerIdCinemaIdMap[marker.id]!!
         analytics().logOpenCinemaFromMap(cinemaId)
         CinemaActivity.start(this, cinemaId)
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
-        val icon = AppCompatResources.getDrawable(this, R.drawable.ic_pin_unselected)!!.toBitmap()
-        marker.setIcon(BitmapDescriptorFactory.fromBitmap(icon))
-
-        val cinemaId = markerCinemaMap[marker.id]!!
-        analytics().logOpenCinemaFromMap(cinemaId)
-        val cinemaFragment = CinemaFragment.withoutToolbar(cinemaId)
-        supportFragmentManager.beginTransaction()
-                .replace(R.id.cinema_root, cinemaFragment, FRAGMENT_CINEMA_TAG)
-                .commit()
+        val cinemaId = markerIdCinemaIdMap[marker.id]!!
+        viewPager.currentItem = cinemas.indexOfFirst { it.id == cinemaId }
         return true
     }
 
@@ -146,14 +156,34 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnI
         return CameraPosition.fromLatLngZoom(LatLng(latitude, longitude), zoom.toFloat())
     }
 
-    private fun createMarkerOptions(it: Cinema, icon: Bitmap): MarkerOptions? {
+    private fun selectMarker(id: String) {
+        for (marker in markers) {
+            if (marker.id == id) {
+                marker.setIcon(activeIcon)
+                val projection = map.projection
+                val point = projection.toScreenLocation(marker.position)
+                val target = projection.fromScreenLocation(point)
+                map.animateCamera(CameraUpdateFactory.newLatLng(target))
+            } else {
+                marker.setIcon(inactiveIcon)
+            }
+        }
+    }
+
+    private fun createMarkerOptions(it: Cinema): MarkerOptions? {
         val markerOptions = MarkerOptions()
                 .position(LatLng(it.location.latitude, it.location.longitude))
-                .icon(BitmapDescriptorFactory.fromBitmap(icon))
+                .icon(inactiveIcon)
                 .anchor(0.5f, 1f)
                 .title(it.name)
                 .snippet(it.location.address)
         return markerOptions
+    }
+
+    private fun getMarkerIcon(@DrawableRes iconId: Int): BitmapDescriptor {
+        val icon = AppCompatResources.getDrawable(this, iconId)!!.toBitmap()
+        val markerIcon = BitmapDescriptorFactory.fromBitmap(icon)
+        return markerIcon
     }
 
     private fun Drawable.toBitmap(): Bitmap {
@@ -171,5 +201,18 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnI
         this.setBounds(0, 0, canvas.width, canvas.height)
         this.draw(canvas)
         return bitmap
+    }
+
+    inner class CinemaMapOnPageChangeListener(private val cinemas: List<Cinema>) : ViewPager.OnPageChangeListener {
+
+        override fun onPageSelected(position: Int) {
+            val cinema = cinemas[position]
+            val markerId = cinemaIdMarkerIdMap[cinema.id]!!
+            selectMarker(markerId)
+        }
+
+        override fun onPageScrollStateChanged(state: Int) {}
+        override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
+
     }
 }

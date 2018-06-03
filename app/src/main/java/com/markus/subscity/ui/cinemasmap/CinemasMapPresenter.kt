@@ -23,7 +23,7 @@ class CinemasMapPresenter @Inject constructor(private val cinemaRepository: Cine
                 )
     }
 
-    fun onMarkersAdd(markerCinemaMap: Map<String, Long>) {
-        viewState.onMarkersAdd(markerCinemaMap)
+    fun onMarkersAdd(markerCinemaMap: Map<String, Long>, markers: List<Any>) {
+        viewState.onMarkersAdd(markerCinemaMap, markers)
     }
 }
