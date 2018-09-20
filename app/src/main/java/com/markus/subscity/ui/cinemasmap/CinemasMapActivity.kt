@@ -165,6 +165,14 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnI
         return super.onOptionsItemSelected(item)
     }
 
+    override fun onBackPressed() {
+        if (behavior.state == BottomSheetBehavior.STATE_EXPANDED) {
+            behavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        } else {
+            super.onBackPressed()
+        }
+    }
+
     private fun createCameraPosition(): CameraPosition {
         val latitude = intent.getDoubleExtra(EXTRA_LATITUDE, 0.0)
         val longitude = intent.getDoubleExtra(EXTRA_LONGITUDE, 0.0)
@@ -192,7 +200,7 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnI
         }
     }
 
-    private fun animateCamera(marker: Marker, withOffset:Boolean) {
+    private fun animateCamera(marker: Marker, withOffset: Boolean) {
         if (withOffset) {
             val projection = map.projection
             val point = projection.toScreenLocation(marker.position)
@@ -256,28 +264,11 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnI
 
     inner class MapBottomSheetCallback : BottomSheetBehavior.BottomSheetCallback() {
         override fun onStateChanged(bottomSheet: View, newState: Int) {
-            when (newState) {
-                BottomSheetBehavior.STATE_DRAGGING -> {
-                    Log.e("=== STATE_DRAGGING ===", "=== STATE_DRAGGING ===")
-                }
-                BottomSheetBehavior.STATE_SETTLING -> {
-                    Log.e("=== STATE_SETTLING ===", "=== STATE_SETTLING ===")
-                }
-                BottomSheetBehavior.STATE_EXPANDED -> {
-                    Log.e("=== STATE_EXPANDED ===", "=== STATE_EXPANDED ===")
-                }
-                BottomSheetBehavior.STATE_COLLAPSED -> {
-                    Log.e("=== STATE_COLLAPSED ===", "=== STATE_COLLAPSED ===")
-                }
-                BottomSheetBehavior.STATE_HIDDEN -> {
-                    Log.e("=== STATE_HIDDEN ===", "=== STATE_HIDDEN ===")
-                    clearSelectedMarker(viewPager.currentItem)
-                }
+            if (newState == BottomSheetBehavior.STATE_HIDDEN) {
+                clearSelectedMarker(viewPager.currentItem)
             }
         }
 
-        override fun onSlide(bottomSheet: View, slideOffset: Float) {
-            val i = 0
-        }
+        override fun onSlide(bottomSheet: View, slideOffset: Float) {}
     }
 }
