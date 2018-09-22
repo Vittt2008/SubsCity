@@ -11,18 +11,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical" />
 
-    <LinearLayout
+    <android.support.v4.view.ViewPager
+        android:id="@+id/cinema_view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:behavior_hideable="true"
         app:behavior_peekHeight="@dimen/map_bottom_sheet_height"
-        app:layout_behavior="com.markus.subscity.ViewPagerBottomSheetBehavior">
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/cinema_view_pager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </LinearLayout>
+        app:layout_behavior="com.markus.subscity.ViewPagerBottomSheetBehavior" />
 
 </android.support.design.widget.CoordinatorLayout>

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.markus.subscity;
+package com.markus.subscity.widgets;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -39,6 +39,8 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+
+import com.markus.subscity.R;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -432,7 +434,7 @@ public class ViewPagerBottomSheetBehavior<V extends View> extends CoordinatorLay
                                 velocityX, velocityY));
     }
 
-    void invalidateScrollingChild() {
+    public void invalidateScrollingChild() {
         final View scrollingChild = findScrollingChild(mViewRef.get());
         mNestedScrollingChildRef = new WeakReference<>(scrollingChild);
     }
