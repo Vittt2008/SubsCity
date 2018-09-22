@@ -251,16 +251,12 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnI
         return bitmap
     }
 
-    inner class CinemaMapOnPageChangeListener : ViewPager.OnPageChangeListener {
+    inner class CinemaMapOnPageChangeListener : ViewPager.SimpleOnPageChangeListener() {
 
         override fun onPageSelected(position: Int) {
             selectMarker(position)
             viewPager.post { behavior.invalidateScrollingChild() }
         }
-
-        override fun onPageScrollStateChanged(state: Int) {}
-        override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
-
     }
 
     inner class MapBottomSheetCallback : ViewPagerBottomSheetBehavior.BottomSheetCallback() {
