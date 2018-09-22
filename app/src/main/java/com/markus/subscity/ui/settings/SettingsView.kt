@@ -20,6 +20,7 @@ interface SettingsView : MvpView {
         const val CITY = 4
         const val DONATE = 5
         const val RATE_APP = 6
+        const val POLICY = 7
     }
 
     fun showSettings(settings: List<SettingItem>)

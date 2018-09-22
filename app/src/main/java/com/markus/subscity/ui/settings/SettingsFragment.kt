@@ -19,10 +19,12 @@ import com.markus.subscity.ui.about.AboutActivity
 import com.markus.subscity.ui.cinemasmap.CinemasMapActivity
 import com.markus.subscity.ui.city.CityActivity
 import com.markus.subscity.ui.donate.DonateActivity
+import com.markus.subscity.ui.policy.PolicyActivity
 import com.markus.subscity.ui.settings.SettingsView.Companion.ABOUT
 import com.markus.subscity.ui.settings.SettingsView.Companion.CINEMA_MAP
 import com.markus.subscity.ui.settings.SettingsView.Companion.CITY
 import com.markus.subscity.ui.settings.SettingsView.Companion.DONATE
+import com.markus.subscity.ui.settings.SettingsView.Companion.POLICY
 import com.markus.subscity.ui.settings.SettingsView.Companion.RATE_APP
 
 /**
@@ -57,6 +59,7 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
                     CINEMA_MAP -> settingsPresenter.showCinemasMap()
                     RATE_APP -> settingsPresenter.openPlayStore()
                     ABOUT -> openAbout()
+                    POLICY -> openPolicy()
                     DONATE -> DonateActivity.start(activity!!)
                     CITY -> openCityPicker()
                 }
@@ -83,6 +86,11 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
     private fun openAbout() {
         analytics().logOpenAbout()
         AboutActivity.start(activity!!)
+    }
+
+    private fun openPolicy() {
+        analytics().logOpenPolicy()
+        PolicyActivity.start(activity!!)
     }
 
     private fun openCityPicker() {

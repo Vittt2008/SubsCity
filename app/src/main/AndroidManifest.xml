@@ -96,6 +96,11 @@
             android:label="@string/donate_title"
             android:theme="@style/AppTheme.NoActionBar" />
 
+        <activity
+            android:name=".ui.policy.PolicyActivity"
+            android:label="@string/policy_title"
+            android:theme="@style/AppTheme.Activity" />
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="@string/file_export_provider"

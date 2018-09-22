@@ -38,9 +38,6 @@ import com.markus.subscity.utils.MapSlidr
  */
 class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnInfoWindowClickListener, GoogleMap.OnMarkerClickListener {
 
-    private val FRAGMENT_MAP_TAG = "fragment_map_tag"
-    private val FRAGMENT_CINEMA_TAG = "fragment_cinema_tag"
-
     @InjectPresenter
     lateinit var cinemasMapPresenter: CinemasMapPresenter
 
@@ -59,6 +56,8 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnI
     private val activeIcon by lazy { getMarkerIcon(R.drawable.ic_pin) }
 
     companion object {
+
+        private const val FRAGMENT_MAP_TAG = "fragment_map_tag"
 
         private const val EXTRA_LATITUDE = "latitude"
         private const val EXTRA_LONGITUDE = "longitude"
