@@ -31,7 +31,7 @@ class CinemaActivity : BaseActivity() {
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                    .add(android.R.id.content, CinemaFragment.newInstance(intent.getLongExtra(EXTRA_CINEMA_ID, 0)))
+                    .add(android.R.id.content, CinemaFragment.withToolbar(intent.getLongExtra(EXTRA_CINEMA_ID, 0)))
                     .commit()
         }
     }

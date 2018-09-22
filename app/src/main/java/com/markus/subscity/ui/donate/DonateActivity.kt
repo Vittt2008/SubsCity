@@ -60,6 +60,7 @@ class DonateActivity : BaseActivity(), BillingProcessor.IBillingHandler {
 
     override fun onBillingInitialized() {
         val details = billingProcessor.getPurchaseListingDetails(ArrayList(listOf(PRODUCT_TEA, PRODUCT_COFFEE, PRODUCT_MOVIE_TICKET)))
+        //TODO details могут быть null
         donatesList.layoutManager = LinearLayoutManager(this)
         donatesList.adapter = DonateAdapter(details.sortedBy { it.priceLong }) { billingProcessor.purchase(this, it.productId) }
         loadingController.switchState(ContentLoadingController.State.CONTENT)
