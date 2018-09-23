@@ -2,14 +2,10 @@ package com.markus.subscity.ui.policy
 
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import android.text.Html
-import android.text.Spanned
-import android.widget.TextView
+import android.webkit.WebView
 import com.markus.subscity.R
 import com.markus.subscity.utils.BaseActivity
-import java.io.InputStreamReader
 
 /**
  * @author Vitaliy Markus
@@ -25,22 +21,10 @@ class PolicyActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_polocy)
-        val policyView = findViewById<TextView>(R.id.tv_policy)
-        policyView.text = fromHtml(getPolicy())
-    }
-
-    private fun fromHtml(text: String): Spanned {
-        return if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
-            Html.fromHtml(text)
-        } else {
-            Html.fromHtml(text, Html.FROM_HTML_MODE_COMPACT)
-        }
-    }
-
-    private fun getPolicy(): String {
-        val inputStream = resources.openRawResource(R.raw.privacy_policy)
-        val text = InputStreamReader(inputStream).readText()
-        return text
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayShowHomeEnabled(true)
+        setContentView(R.layout.activity_policy)
+        val policyView = findViewById<WebView>(R.id.wv_policy)
+        policyView.loadUrl("file:///android_asset/privacy_policy.html");
     }
 }
