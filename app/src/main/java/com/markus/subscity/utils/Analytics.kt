@@ -40,6 +40,7 @@ class Analytics @Inject constructor(context: Context) {
         private const val EVENT_CINEMA_WEB = "event_cinema_web"
 
         private const val EVENT_ABOUT = "event_about"
+        private const val EVENT_POLICY = "event_policy"
         private const val EVENT_SOCIAL_NETWORK = "event_social_network"
         private const val EVENT_EMAIL = "event_email"
         private const val EVENT_CITY_PICKER = "event_city_chooser"
@@ -202,6 +203,10 @@ class Analytics @Inject constructor(context: Context) {
 
     fun logOpenAbout() {
         analytics.logEvent(EVENT_ABOUT, Bundle())
+    }
+
+    fun logOpenPolicy() {
+        analytics.logEvent(EVENT_POLICY, Bundle())
     }
 
     fun logOpenSocialNetwork(socialNetwork: String, city: String, url: String) {

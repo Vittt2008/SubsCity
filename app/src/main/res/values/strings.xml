@@ -26,6 +26,7 @@
     <string name="setting_cinema_map_title">Карта кинотеатров</string>
     <string name="setting_sale_title">Акции</string>
     <string name="setting_about_title">О приложении</string>
+    <string name="setting_policy_title">Политика конфиденциальности</string>
     <string name="setting_city_title">Город</string>
     <string name="setting_donate_title">Пожертвования</string>
     <string name="setting_rate_app">Оценить приложение</string>
@@ -77,6 +78,8 @@
     <string name="about_team_designer">Николай Каврецкий</string>
     <string name="about_team_github">Subscity</string>
 
+    <!-- PolicyActivity -->
+    <string name="policy_title">Политика конфиденциальности</string>
 
     <!-- DonateActivity -->
     <string name="donate_title">Пожертвовать</string>
