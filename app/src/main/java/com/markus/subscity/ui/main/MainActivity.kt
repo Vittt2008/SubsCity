@@ -90,6 +90,14 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         SubsCityDagger.component.provideAnalytics().logActivity(this)
     }
 
+    override fun onBackPressed() {
+        if (dialogRateBehavior.state != BottomSheetBehavior.STATE_HIDDEN) {
+            dialogRateBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+        } else {
+            super.onBackPressed()
+        }
+    }
+
     private fun styleViewPager() {
         viewPager.adapter = MainFragmentAdapter(supportFragmentManager)
         viewPager.offscreenPageLimit = 2
