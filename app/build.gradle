@@ -12,8 +12,8 @@ android {
         applicationId "com.markus.subscity"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 16
-        versionName "1.1.1"
+        versionCode 17
+        versionName "1.2.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
