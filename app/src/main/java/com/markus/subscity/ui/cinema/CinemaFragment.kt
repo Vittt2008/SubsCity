@@ -38,16 +38,18 @@ open class CinemaFragment : MvpAppCompatFragment(), CinemaView {
     companion object {
 
         private const val EXTRA_LAYOUT_ID = "layout_id"
+        private const val EXTRA_SHOW_NAME = "show_name"
 
-        fun withToolbar(cinemaId: Long) = newInstance(cinemaId, R.layout.fragment_cinema_toolbar)
+        fun withToolbar(cinemaId: Long) = newInstance(cinemaId, R.layout.fragment_cinema_toolbar, false)
 
-        fun withoutToolbar(cinemaId: Long) = newInstance(cinemaId, R.layout.fragment_cinema)
+        fun withoutToolbar(cinemaId: Long) = newInstance(cinemaId, R.layout.fragment_cinema, true)
 
-        private fun newInstance(cinemaId: Long, @LayoutRes layoutId: Int): CinemaFragment {
+        private fun newInstance(cinemaId: Long, @LayoutRes layoutId: Int, showCinemaName: Boolean): CinemaFragment {
             return CinemaFragment().apply {
                 arguments = Bundle().apply {
                     putLong(CinemaActivity.EXTRA_CINEMA_ID, cinemaId)
                     putInt(EXTRA_LAYOUT_ID, layoutId)
+                    putBoolean(EXTRA_SHOW_NAME, showCinemaName)
                 }
             }
         }
@@ -72,7 +74,7 @@ open class CinemaFragment : MvpAppCompatFragment(), CinemaView {
     override fun showCinema(cinema: Cinema, second: List<CinemaPresenter.MovieScreenings>) {
         if (adapter == null) {
             toolbar?.title = cinema.name
-            adapter = CinemaAdapterDelegates(cinema, second, ::openMap, ::call, ::openSite, ::buyTicket, ::openMovie)
+            adapter = CinemaAdapterDelegates(cinema, second, arguments!!.getBoolean(EXTRA_SHOW_NAME), ::openMap, ::call, ::openSite, ::buyTicket, ::openMovie)
             cinemaInfoList.adapter = adapter
         } else {
             adapter!!.updateScreenings(second)

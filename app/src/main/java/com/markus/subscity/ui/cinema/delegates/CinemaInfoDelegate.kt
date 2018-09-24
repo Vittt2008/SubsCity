@@ -15,7 +15,8 @@ import javax.inject.Inject
 /**
  * @author Vitaliy Markus
  */
-class CinemaInfoDelegate(private val mapClickListener: (Cinema) -> Unit,
+class CinemaInfoDelegate(private val showCinemaName: Boolean,
+                         private val mapClickListener: (Cinema) -> Unit,
                          private val phoneClickListener: (Cinema) -> Unit,
                          private val siteClickListener: (Cinema) -> Unit) : AbsListItemAdapterDelegate<Cinema, Any, CinemaInfoDelegate.InfoViewHolder>() {
 
@@ -42,6 +43,7 @@ class CinemaInfoDelegate(private val mapClickListener: (Cinema) -> Unit,
     inner class InfoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private lateinit var cinema: Cinema
 
+        private val name = view.findViewById<TextView>(R.id.tv_cinema_name)
         private val address = view.findViewById<TextView>(R.id.tv_cinema_address)
         private val metroStation = view.findViewById<TextView>(R.id.tv_cinema_metro_station)
         private val phoneNumber = view.findViewById<TextView>(R.id.tv_phone_number)
@@ -59,6 +61,12 @@ class CinemaInfoDelegate(private val mapClickListener: (Cinema) -> Unit,
         fun bind(cinema: Cinema) {
             this.cinema = cinema
 
+            if (showCinemaName) {
+                name.text = cinema.name
+                name.visibility = View.VISIBLE
+            } else {
+                name.visibility = View.GONE
+            }
             address.text = cinema.location.address
             metroStation.text = metroProvider.currentMetroTextProvider.formatMetroListStation(cinema.location.metro)
 

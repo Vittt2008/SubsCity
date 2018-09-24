@@ -15,6 +15,7 @@ import com.markus.subscity.ui.cinema.delegates.TitleDelegate
  */
 class CinemaAdapterDelegates(cinema: Cinema,
                              movieScreenings: List<CinemaPresenter.MovieScreenings>,
+                             showCinemaName: Boolean,
                              mapClickListener: (Cinema) -> Unit,
                              phoneClickListener: (Cinema) -> Unit,
                              siteClickListener: (Cinema) -> Unit,
@@ -24,7 +25,8 @@ class CinemaAdapterDelegates(cinema: Cinema,
     private val data: MutableList<Any> = ArrayList()
 
     init {
-        delegatesManager.addDelegate(CinemaInfoDelegate(mapClickListener, phoneClickListener, siteClickListener))
+        delegatesManager
+                .addDelegate(CinemaInfoDelegate(showCinemaName, mapClickListener, phoneClickListener, siteClickListener))
                 .addDelegate(TitleDelegate())
                 .addDelegate(ProgressDelegate())
                 .addDelegate(MovieScreeningsDelegate(screeningClickListener, movieTitleClickListener))
