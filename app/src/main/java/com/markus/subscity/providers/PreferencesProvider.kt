@@ -12,8 +12,9 @@ class PreferencesProvider @Inject constructor(private val context: Context) {
     companion object {
         private const val PREFERENCES_NAME = "subs_city.xml"
         const val CITY_ID_KEY = "city_id"
-        const val LAUNCH_COUNT = "launch_count"
-        const val WAS_RANKED = "was_ranked"
+        const val LAUNCH_COUNT_KEY = "launch_count"
+        const val WAS_RANKED_KEY = "was_ranked"
+        const val WAS_DONATED_KEY = "was_donated"
     }
 
     fun getAppPreferences(): SharedPreferences {

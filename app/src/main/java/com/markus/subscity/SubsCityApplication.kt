@@ -44,8 +44,8 @@ class SubsCityApplication : MultiDexApplication() {
 
         val preferences = SubsCityDagger.component.providePreferencesProvider().getAppPreferences()
 
-        val launchCount = preferences.getInt(PreferencesProvider.LAUNCH_COUNT, 0)
-        preferences.edit().putInt(PreferencesProvider.LAUNCH_COUNT, launchCount + 1).apply()
+        val launchCount = preferences.getInt(PreferencesProvider.LAUNCH_COUNT_KEY, 0)
+        preferences.edit().putInt(PreferencesProvider.LAUNCH_COUNT_KEY, launchCount + 1).apply()
 
         val cityId = preferences.getString(PreferencesProvider.CITY_ID_KEY, null)
         if (cityId != null) {

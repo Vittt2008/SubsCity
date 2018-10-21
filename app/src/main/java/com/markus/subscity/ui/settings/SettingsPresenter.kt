@@ -36,7 +36,7 @@ class SettingsPresenter @Inject constructor(private val cityProvider: CityProvid
     }
 
     fun openPlayStore() {
-        preferencesProvider.getAppPreferences().edit().putBoolean(PreferencesProvider.WAS_RANKED, true).apply()
+        preferencesProvider.getAppPreferences().edit().putBoolean(PreferencesProvider.WAS_RANKED_KEY, true).apply()
         viewState.openPlayStore()
     }
 

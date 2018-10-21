@@ -10,7 +10,6 @@
     </style>
 
     <style name="AppTheme.Activity">
-        <item name="android:windowDisablePreview">true</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowAnimationStyle">@style/AppTheme.ActivityAnimation</item>
@@ -22,16 +21,13 @@
     </style>
 
     <style name="AppTheme.MainActivity">
-        <item name="android:windowDisablePreview">true</item>
-        <item name="android:windowAnimationStyle">@style/AppTheme.MainActivityAnimation</item>
+        <item name="android:windowAnimationStyle">@style/AppTheme.ActivityAnimation</item>
     </style>
 
     <style name="AppTheme.FirstPickCityActivity">
-        <item name="android:windowDisablePreview">true</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
