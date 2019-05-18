@@ -17,7 +17,7 @@ import com.markus.subscity.R
 import com.markus.subscity.api.entities.cinema.Cinema
 import com.markus.subscity.api.entities.movie.Movie
 import com.markus.subscity.api.entities.screening.Screening
-//import com.markus.subscity.dagger.GlideApp
+import com.markus.subscity.dagger.GlideApp
 import com.markus.subscity.dagger.SubsCityDagger
 import com.markus.subscity.extensions.*
 import com.markus.subscity.ui.cinema.CinemaActivity
@@ -27,7 +27,7 @@ import com.markus.subscity.ui.youtube.YouTubeActivity
 import com.markus.subscity.utils.FileUtils
 import com.markus.subscity.utils.IntentUtils
 import com.markus.subscity.widgets.ScrollableLinearLayoutManager
-//import com.markus.subscity.widgets.transformations.PosterCrop
+import com.markus.subscity.widgets.transformations.PosterCrop
 import java.io.File
 
 /**
@@ -44,7 +44,7 @@ class MovieFragment : MvpAppCompatFragment(), MovieView, ShareView {
     private lateinit var moviePoster: ImageView
     private lateinit var trailerButton: ImageView
     private lateinit var toolbarLayout: CollapsingToolbarLayout
-    private lateinit var movieInfoList: androidx.recyclerview.widget.RecyclerView
+    private lateinit var movieInfoList: RecyclerView
     private lateinit var movieInfoListLayoutManager: ScrollableLinearLayoutManager
 
     private lateinit var shareMenuItem: MenuItem
@@ -115,7 +115,7 @@ class MovieFragment : MvpAppCompatFragment(), MovieView, ShareView {
         activity!!.invalidateOptionsMenu()
         if (adapter == null) {
             toolbarLayout.title = movie.title.russian
-            //GlideApp.with(moviePoster).asBitmap().load(movie.poster).transform(PosterCrop()).into(moviePoster)
+            GlideApp.with(moviePoster).asBitmap().load(movie.poster).transform(PosterCrop()).into(moviePoster)
             adapter = MovieAdapterDelegates(movie, cinemaScreenings, ::buyTicket, ::openCinema)
             movieInfoList.adapter = adapter
             if (movie.trailer.hasTrailer) {
@@ -176,12 +176,12 @@ class MovieFragment : MvpAppCompatFragment(), MovieView, ShareView {
                     .setMode(BottomSheetBuilder.MODE_LIST)
                     .setMenu(R.menu.menu_trailer)
                     .setItemTextColorResource(R.color.subtitle_color)
-                    .setItemClickListener({ item ->
+                    .setItemClickListener { item ->
                         when (item.itemId) {
                             R.id.item_original -> openYoutube(movie, trailer.original, true)
                             R.id.item_russian -> openYoutube(movie, trailer.russian, false)
                         }
-                    })
+                    }
                     .createDialog()
                     .show()
         } else if (trailer.original.isNotEmpty()) {

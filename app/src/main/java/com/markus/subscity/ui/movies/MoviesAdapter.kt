@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.core.widget.TextViewCompat
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -15,19 +14,19 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.markus.subscity.R
 import com.markus.subscity.api.entities.movie.Movie
-//import com.markus.subscity.dagger.GlideApp
+import com.markus.subscity.dagger.GlideApp
 import com.markus.subscity.dagger.SubsCityDagger
 import com.markus.subscity.providers.LanguageProvider
-//import com.markus.subscity.widgets.transformations.PosterCrop
+import com.markus.subscity.widgets.transformations.PosterCrop
 import javax.inject.Inject
 
 
 /**
  * @author Vitaliy Markus
  */
-class MoviesAdapter(private val context: Context,
+class MoviesAdapter(context: Context,
                     private val movies: List<Movie>,
-                    private val clickListener: (Movie) -> Unit) : androidx.recyclerview.widget.RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
+                    private val clickListener: (Movie) -> Unit) : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 
     private val RATING = 6.9
 
@@ -73,12 +72,11 @@ class MoviesAdapter(private val context: Context,
         }
     }
 
-    inner class ViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         private lateinit var movie: Movie
 
         private val moviePoster = view.findViewById<ImageView>(R.id.iv_movie_poster)
-        private val shadow = view.findViewById<View>(R.id.shadow)
         private val movieLanguage = view.findViewById<TextView>(R.id.tv_movie_language)
         private val movieName = view.findViewById<AppCompatTextView>(R.id.tv_movie_name)
         private val movieGenre = view.findViewById<TextView>(R.id.tv_movie_genre)
@@ -100,7 +98,7 @@ class MoviesAdapter(private val context: Context,
             else
                 intArrayOf(R.dimen.poster_text_size)
 
-            //GlideApp.with(moviePoster).asBitmap().load(movie.poster).override(posterWidth, layoutParams.height).transform(PosterCrop()).into(moviePoster)
+            GlideApp.with(moviePoster).asBitmap().load(movie.poster).override(posterWidth, layoutParams.height).transform(PosterCrop()).into(moviePoster)
 
             movieLanguage.text = movieLanguage(movie)
             movieLanguage.visibility = if (movieLanguage.text.isNotEmpty()) View.VISIBLE else View.GONE
