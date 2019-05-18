@@ -1,8 +1,8 @@
 package com.markus.subscity.ui.settings
 
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,7 +35,7 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
     @InjectPresenter
     lateinit var settingsPresenter: SettingsPresenter
 
-    private lateinit var settingsList: RecyclerView
+    private lateinit var settingsList: androidx.recyclerview.widget.RecyclerView
 
     companion object {
         fun newInstance() = SettingsFragment()
@@ -47,13 +47,13 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        settingsList = inflater.inflate(R.layout.fragment_settings, container, false) as RecyclerView
+        settingsList = inflater.inflate(R.layout.fragment_settings, container, false) as androidx.recyclerview.widget.RecyclerView
         return settingsList
     }
 
     override fun showSettings(settings: List<SettingsView.SettingItem>) {
         settingsList.run {
-            layoutManager = LinearLayoutManager(activity)
+            layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
             adapter = SettingsAdapter(settings) { item ->
                 when (item) {
                     CINEMA_MAP -> settingsPresenter.showCinemasMap()

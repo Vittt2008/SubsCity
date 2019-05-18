@@ -1,6 +1,6 @@
 package com.markus.subscity.ui.settings
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +12,7 @@ import com.markus.subscity.R
  * @author Vitaliy Markus
  */
 class SettingsAdapter(private val settings: List<SettingsView.SettingItem>,
-                      private val clickListener: (Int) -> Unit) : RecyclerView.Adapter<SettingsAdapter.ViewHolder>() {
+                      private val clickListener: (Int) -> Unit) : androidx.recyclerview.widget.RecyclerView.Adapter<SettingsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val item = LayoutInflater.from(parent.context).inflate(R.layout.item_setting, parent, false)
@@ -27,7 +27,7 @@ class SettingsAdapter(private val settings: List<SettingsView.SettingItem>,
         holder.bind(settings[position])
     }
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class ViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
 
         private lateinit var item: SettingsView.SettingItem
 

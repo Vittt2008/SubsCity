@@ -1,9 +1,9 @@
 package com.markus.subscity.widgets
 
 import android.content.Context
-import android.support.design.widget.AppBarLayout
-import android.support.design.widget.CoordinatorLayout
-import android.support.v7.widget.RecyclerView
+import com.google.android.material.appbar.AppBarLayout
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.recyclerview.widget.RecyclerView
 import android.util.AttributeSet
 import android.view.View
 import java.lang.ref.WeakReference
@@ -20,7 +20,7 @@ class RecyclerViewAppBarBehavior(context: Context, attrs: AttributeSet) : AppBar
         if (target is RecyclerView) {
             if (scrollListenerMap[target] == null) {
                 val recyclerViewScrollListener = RecyclerViewScrollListener(coordinatorLayout, child, this)
-                scrollListenerMap.put(target, recyclerViewScrollListener)
+                scrollListenerMap[target] = recyclerViewScrollListener
                 target.addOnScrollListener(recyclerViewScrollListener)
             }
             scrollListenerMap[target]?.let {
@@ -41,14 +41,17 @@ class RecyclerViewAppBarBehavior(context: Context, attrs: AttributeSet) : AppBar
         private val childRef: WeakReference<AppBarLayout> = WeakReference(child)
         private val behaviorWeakReference: WeakReference<RecyclerViewAppBarBehavior> = WeakReference(barBehavior)
 
-        override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
+        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
             dragging = newState == RecyclerView.SCROLL_STATE_DRAGGING
         }
 
-        override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             scrolledY += dy
-            if (scrolledY <= 0 && !dragging && childRef.get() != null && coordinatorLayoutRef.get() != null && behaviorWeakReference.get() != null) {
-                behaviorWeakReference.get()!!.onNestedFling(coordinatorLayoutRef.get()!!, childRef.get()!!, recyclerView!!, 0f, velocity, false)
+            val child = childRef.get()
+            val coordinatorLayout = coordinatorLayoutRef.get()
+            val behavior = behaviorWeakReference.get()
+            if (scrolledY <= 0 && !dragging && child != null && coordinatorLayout != null && behavior != null) {
+                behavior.onNestedFling(coordinatorLayout, child, recyclerView, 0f, velocity, false)
             }
         }
     }

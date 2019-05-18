@@ -2,7 +2,7 @@ package com.markus.subscity.utils
 
 import android.content.Context
 import android.net.Uri
-import android.support.v4.content.FileProvider
+import androidx.core.content.FileProvider
 import com.markus.subscity.R
 import java.io.File
 

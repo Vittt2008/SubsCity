@@ -1,10 +1,10 @@
 package com.markus.subscity.ui.movies
 
 import android.content.Context
-import android.support.v4.widget.TextViewCompat
-import android.support.v7.widget.AppCompatTextView
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.StaggeredGridLayoutManager
+import androidx.core.widget.TextViewCompat
+import androidx.appcompat.widget.AppCompatTextView
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -15,10 +15,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.markus.subscity.R
 import com.markus.subscity.api.entities.movie.Movie
-import com.markus.subscity.dagger.GlideApp
+//import com.markus.subscity.dagger.GlideApp
 import com.markus.subscity.dagger.SubsCityDagger
 import com.markus.subscity.providers.LanguageProvider
-import com.markus.subscity.widgets.transformations.PosterCrop
+//import com.markus.subscity.widgets.transformations.PosterCrop
 import javax.inject.Inject
 
 
@@ -27,7 +27,7 @@ import javax.inject.Inject
  */
 class MoviesAdapter(private val context: Context,
                     private val movies: List<Movie>,
-                    private val clickListener: (Movie) -> Unit) : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
+                    private val clickListener: (Movie) -> Unit) : androidx.recyclerview.widget.RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 
     private val RATING = 6.9
 
@@ -73,7 +73,7 @@ class MoviesAdapter(private val context: Context,
         }
     }
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class ViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
 
         private lateinit var movie: Movie
 
@@ -90,7 +90,7 @@ class MoviesAdapter(private val context: Context,
         fun bind(movie: Movie, isFullSpan: Boolean) {
             this.movie = movie
 
-            val layoutParams = itemView.layoutParams as StaggeredGridLayoutManager.LayoutParams
+            val layoutParams = itemView.layoutParams as androidx.recyclerview.widget.StaggeredGridLayoutManager.LayoutParams
             layoutParams.isFullSpan = isFullSpan
 
             val posterWidth = if (isFullSpan) width else width / 2
@@ -100,7 +100,7 @@ class MoviesAdapter(private val context: Context,
             else
                 intArrayOf(R.dimen.poster_text_size)
 
-            GlideApp.with(moviePoster).asBitmap().load(movie.poster).override(posterWidth, layoutParams.height).transform(PosterCrop()).into(moviePoster)
+            //GlideApp.with(moviePoster).asBitmap().load(movie.poster).override(posterWidth, layoutParams.height).transform(PosterCrop()).into(moviePoster)
 
             movieLanguage.text = movieLanguage(movie)
             movieLanguage.visibility = if (movieLanguage.text.isNotEmpty()) View.VISIBLE else View.GONE

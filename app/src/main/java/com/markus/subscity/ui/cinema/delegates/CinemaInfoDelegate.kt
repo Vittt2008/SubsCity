@@ -1,6 +1,6 @@
 package com.markus.subscity.ui.cinema.delegates
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,7 +36,7 @@ class CinemaInfoDelegate(private val showCinemaName: Boolean,
         return position == 0
     }
 
-    override fun onBindViewHolder(item: Cinema, viewHolder: CinemaInfoDelegate.InfoViewHolder, payloads: List<Any>) {
+    override fun onBindViewHolder(item: Cinema, viewHolder: InfoViewHolder, payloads: List<Any>) {
         viewHolder.bind(item)
     }
 

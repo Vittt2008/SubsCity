@@ -1,13 +1,13 @@
 package com.markus.subscity.widgets
 
 import android.content.Context
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.AttributeSet
 
 /**
  * @author Vitaliy Markus
  */
-class ScrollableLinearLayoutManager : LinearLayoutManager {
+class ScrollableLinearLayoutManager : androidx.recyclerview.widget.LinearLayoutManager {
 
     constructor(context: Context) : super(context)
     constructor(context: Context, orientation: Int, reverseLayout: Boolean) : super(context, orientation, reverseLayout)

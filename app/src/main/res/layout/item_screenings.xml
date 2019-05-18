@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:paddingBottom="8dp">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/title_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,9 +39,9 @@
             app:layout_constraintStart_toEndOf="@+id/tv_title"
             tools:text="Невский проспект / Гостиный Двор" />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

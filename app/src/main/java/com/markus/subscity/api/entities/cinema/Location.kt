@@ -1,7 +1,7 @@
 package com.markus.subscity.api.entities.cinema
 
-import android.arch.persistence.room.Ignore
-import android.arch.persistence.room.TypeConverters
+import androidx.room.Ignore
+import androidx.room.TypeConverters
 import com.google.gson.annotations.SerializedName
 import com.markus.subscity.db.converters.Converter
 import java.io.Serializable

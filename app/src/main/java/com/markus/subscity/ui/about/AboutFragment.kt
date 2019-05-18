@@ -2,7 +2,7 @@ package com.markus.subscity.ui.about
 
 import android.net.Uri
 import android.os.Bundle
-import android.support.annotation.StringRes
+import androidx.annotation.StringRes
 import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View

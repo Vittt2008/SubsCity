@@ -4,9 +4,9 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
-import android.support.annotation.DrawableRes
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.RecyclerView
+import androidx.annotation.DrawableRes
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 
 /**
@@ -35,7 +35,7 @@ class MarginDivider(private val context: Context) : RecyclerView.ItemDecoration(
         divider = ContextCompat.getDrawable(context, drawableId) ?: throw IllegalArgumentException("Drawable with ID = $drawableId must be not null")
     }
 
-    override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State?) {
+    override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         if (parent.layoutManager == null) {
             return
         }
@@ -69,8 +69,9 @@ class MarginDivider(private val context: Context) : RecyclerView.ItemDecoration(
     }
 
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+        val adapter = parent.adapter ?: return
         val position = parent.getChildAdapterPosition(view)
-        if (position == parent.adapter.itemCount - 1) {
+        if (position == adapter.itemCount - 1) {
             outRect.setEmpty()
         } else {
             outRect.set(0, 0, 0, divider.intrinsicHeight)

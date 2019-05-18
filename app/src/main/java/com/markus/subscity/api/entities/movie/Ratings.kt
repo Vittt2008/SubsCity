@@ -1,7 +1,7 @@
 package com.markus.subscity.api.entities.movie
 
-import android.arch.persistence.room.Embedded
-import android.arch.persistence.room.Ignore
+import androidx.room.Embedded
+import androidx.room.Ignore
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 

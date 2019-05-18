@@ -1,6 +1,6 @@
 package com.markus.subscity
 
-import android.support.multidex.MultiDexApplication
+import androidx.multidex.MultiDexApplication
 import com.crashlytics.android.Crashlytics
 import com.markus.subscity.dagger.DaggerSubsCityComponent
 import com.markus.subscity.dagger.SubsCityDagger

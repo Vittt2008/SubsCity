@@ -1,8 +1,8 @@
 package com.markus.subscity.ui.cinema.delegates
 
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,13 +44,13 @@ class MovieScreeningsDelegate(private val screeningClickListener: (Screening) ->
         viewHolder.bind(item)
     }
 
-    inner class MovieScreeningsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class MovieScreeningsViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
         private val SPAN_COUNT = 5
         private lateinit var movie: Movie
         private val titleLayout = view.findViewById<View>(R.id.title_layout)
         private val movieTitle = view.findViewById<TextView>(R.id.tv_title)
         private val movieLanguage = view.findViewById<TextView>(R.id.tv_info)
-        private val screenings = view.findViewById<RecyclerView>(R.id.rv_list)
+        private val screenings = view.findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.rv_list)
 
         init {
             titleLayout.setOnClickListener { movieTitleClickListener.invoke(movie) }
@@ -61,7 +61,7 @@ class MovieScreeningsDelegate(private val screeningClickListener: (Screening) ->
             movieTitle.text = movie.title.russian
             movieLanguage.text = movieLanguage()
             screenings.apply {
-                layoutManager = GridLayoutManager(screenings.context, SPAN_COUNT, LinearLayoutManager.VERTICAL, false)
+                layoutManager = androidx.recyclerview.widget.GridLayoutManager(screenings.context, SPAN_COUNT, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
                 adapter = MovieScreeningAdapter(screenings.context!!, movieScreenings.screenings, screeningClickListener)
                 val margin = context.resources.getDimensionPixelSize(R.dimen.screening_margin)
                 addItemDecoration(ImageGridItemDecoration(SPAN_COUNT, margin, false))

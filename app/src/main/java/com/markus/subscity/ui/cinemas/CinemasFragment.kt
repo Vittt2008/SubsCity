@@ -1,8 +1,8 @@
 package com.markus.subscity.ui.cinemas
 
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.*
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatFragment

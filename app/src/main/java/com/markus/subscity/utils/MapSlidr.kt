@@ -3,7 +3,7 @@ package com.markus.subscity.utils
 import android.animation.ArgbEvaluator
 import android.app.Activity
 import android.os.Build
-import android.support.annotation.ColorInt
+import androidx.annotation.ColorInt
 import android.view.ViewGroup
 import com.markus.subscity.widgets.MapSliderPanel
 import com.r0adkll.slidr.R

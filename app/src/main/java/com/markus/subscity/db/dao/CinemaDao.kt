@@ -1,6 +1,6 @@
 package com.markus.subscity.db.dao
 
-import android.arch.persistence.room.*
+import androidx.room.*
 import com.markus.subscity.api.entities.cinema.Cinema
 import io.reactivex.Flowable
 import io.reactivex.Single

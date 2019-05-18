@@ -6,7 +6,7 @@ import android.app.Activity
 import android.os.Handler
 import android.os.Looper
 import android.os.SystemClock
-import android.support.annotation.IdRes
+import androidx.annotation.IdRes
 import android.view.View
 
 /**

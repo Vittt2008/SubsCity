@@ -4,9 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.support.design.widget.CollapsingToolbarLayout
-import android.support.transition.TransitionManager
-import android.support.v7.widget.RecyclerView
+import com.google.android.material.appbar.CollapsingToolbarLayout
+import androidx.transition.TransitionManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.*
 import android.widget.ImageView
 import com.arellomobile.mvp.MvpAppCompatFragment
@@ -17,7 +17,7 @@ import com.markus.subscity.R
 import com.markus.subscity.api.entities.cinema.Cinema
 import com.markus.subscity.api.entities.movie.Movie
 import com.markus.subscity.api.entities.screening.Screening
-import com.markus.subscity.dagger.GlideApp
+//import com.markus.subscity.dagger.GlideApp
 import com.markus.subscity.dagger.SubsCityDagger
 import com.markus.subscity.extensions.*
 import com.markus.subscity.ui.cinema.CinemaActivity
@@ -27,7 +27,7 @@ import com.markus.subscity.ui.youtube.YouTubeActivity
 import com.markus.subscity.utils.FileUtils
 import com.markus.subscity.utils.IntentUtils
 import com.markus.subscity.widgets.ScrollableLinearLayoutManager
-import com.markus.subscity.widgets.transformations.PosterCrop
+//import com.markus.subscity.widgets.transformations.PosterCrop
 import java.io.File
 
 /**
@@ -44,7 +44,7 @@ class MovieFragment : MvpAppCompatFragment(), MovieView, ShareView {
     private lateinit var moviePoster: ImageView
     private lateinit var trailerButton: ImageView
     private lateinit var toolbarLayout: CollapsingToolbarLayout
-    private lateinit var movieInfoList: RecyclerView
+    private lateinit var movieInfoList: androidx.recyclerview.widget.RecyclerView
     private lateinit var movieInfoListLayoutManager: ScrollableLinearLayoutManager
 
     private lateinit var shareMenuItem: MenuItem
@@ -115,7 +115,7 @@ class MovieFragment : MvpAppCompatFragment(), MovieView, ShareView {
         activity!!.invalidateOptionsMenu()
         if (adapter == null) {
             toolbarLayout.title = movie.title.russian
-            GlideApp.with(moviePoster).asBitmap().load(movie.poster).transform(PosterCrop()).into(moviePoster)
+            //GlideApp.with(moviePoster).asBitmap().load(movie.poster).transform(PosterCrop()).into(moviePoster)
             adapter = MovieAdapterDelegates(movie, cinemaScreenings, ::buyTicket, ::openCinema)
             movieInfoList.adapter = adapter
             if (movie.trailer.hasTrailer) {

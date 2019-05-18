@@ -1,7 +1,7 @@
 package com.markus.subscity.ui.movie
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +14,7 @@ import com.markus.subscity.api.entities.screening.Screening
  */
 class MovieScreeningAdapter(private val context: Context,
                             private val screenings: List<Screening>,
-                            private val clickListener: (Screening) -> Unit) : RecyclerView.Adapter<MovieScreeningAdapter.ViewHolder>() {
+                            private val clickListener: (Screening) -> Unit) : androidx.recyclerview.widget.RecyclerView.Adapter<MovieScreeningAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val root = LayoutInflater.from(parent.context).inflate(R.layout.item_screening, parent, false)
@@ -29,7 +29,7 @@ class MovieScreeningAdapter(private val context: Context,
         holder.bind(screenings[position])
     }
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class ViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
 
         private lateinit var screening: Screening
 

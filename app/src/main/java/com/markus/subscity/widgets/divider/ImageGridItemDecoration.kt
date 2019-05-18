@@ -1,7 +1,7 @@
 package com.markus.subscity.widgets.divider
 
 import android.graphics.Rect
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 
 /**
@@ -25,7 +25,7 @@ class ImageGridItemDecoration(private val spanCount: Int, private val spacing: I
             outRect.bottom = spacing // item bottom
         } else {
             outRect.left = column * spacing / spanCount
-            if (position + 1 == parent.adapter.itemCount) {
+            if (position + 1 == parent.adapter?.itemCount) {
                 outRect.right = 0
             } else {
                 outRect.right = spacing - (column + 1) * spacing / spanCount

@@ -1,8 +1,8 @@
 package com.markus.subscity;
 
 import android.content.Context;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
+import androidx.test.platform.app.InstrumentationRegistry;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 import android.util.Log;
 
 import com.markus.subscity.providers.CityProvider;
@@ -50,7 +50,7 @@ public class CachedRepositoryTest {
 
     @Test
     public void init() {
-        Context appContext = InstrumentationRegistry.getTargetContext();
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
         JodaTimeAndroid.init(appContext);
 

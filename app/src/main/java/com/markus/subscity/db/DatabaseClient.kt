@@ -1,7 +1,7 @@
 package com.markus.subscity.db
 
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.RoomDatabase
+import androidx.room.Database
+import androidx.room.RoomDatabase
 import com.markus.subscity.api.entities.cinema.Cinema
 import com.markus.subscity.api.entities.movie.Movie
 import com.markus.subscity.api.entities.screening.Screening
