@@ -60,7 +60,7 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
                     RATE_APP -> settingsPresenter.openPlayStore()
                     ABOUT -> openAbout()
                     POLICY -> openPolicy()
-                    DONATE -> DonateActivity.start(activity!!)
+                    DONATE -> DonateActivity.start(requireActivity())
                     CITY -> openCityPicker()
                 }
             }
@@ -69,7 +69,7 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
 
     override fun showCinemasMap(city: City) {
         analytics().logOpenCinemasMap(city.name, false)
-        CinemasMapActivity.start(activity!!, city.location.latitude, city.location.longitude, city.location.zoom)
+        CinemasMapActivity.start(requireActivity(), city.location.latitude, city.location.longitude, city.location.zoom)
     }
 
     override fun openPlayStore() {
@@ -85,16 +85,16 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
 
     private fun openAbout() {
         analytics().logOpenAbout()
-        AboutActivity.start(activity!!)
+        AboutActivity.start(requireActivity())
     }
 
     private fun openPolicy() {
         analytics().logOpenPolicy()
-        PolicyActivity.start(activity!!)
+        PolicyActivity.start(requireActivity())
     }
 
     private fun openCityPicker() {
         analytics().logOpenCityPicker()
-        CityActivity.start(activity!!)
+        CityActivity.start(requireActivity())
     }
 }

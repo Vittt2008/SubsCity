@@ -31,7 +31,7 @@ class MovieScreeningsDelegate(private val screeningClickListener: (Screening) ->
         SubsCityDagger.component.inject(this)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup): MovieScreeningsDelegate.MovieScreeningsViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup): MovieScreeningsViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_screenings, parent, false)
         return MovieScreeningsViewHolder(view)
     }
@@ -40,17 +40,17 @@ class MovieScreeningsDelegate(private val screeningClickListener: (Screening) ->
         return item is CinemaPresenter.MovieScreenings
     }
 
-    override fun onBindViewHolder(item: CinemaPresenter.MovieScreenings, viewHolder: MovieScreeningsDelegate.MovieScreeningsViewHolder, payloads: List<Any>) {
+    override fun onBindViewHolder(item: CinemaPresenter.MovieScreenings, viewHolder: MovieScreeningsViewHolder, payloads: List<Any>) {
         viewHolder.bind(item)
     }
 
-    inner class MovieScreeningsViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
+    inner class MovieScreeningsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val SPAN_COUNT = 5
         private lateinit var movie: Movie
         private val titleLayout = view.findViewById<View>(R.id.title_layout)
         private val movieTitle = view.findViewById<TextView>(R.id.tv_title)
         private val movieLanguage = view.findViewById<TextView>(R.id.tv_info)
-        private val screenings = view.findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.rv_list)
+        private val screenings = view.findViewById<RecyclerView>(R.id.rv_list)
 
         init {
             titleLayout.setOnClickListener { movieTitleClickListener.invoke(movie) }
@@ -61,8 +61,8 @@ class MovieScreeningsDelegate(private val screeningClickListener: (Screening) ->
             movieTitle.text = movie.title.russian
             movieLanguage.text = movieLanguage()
             screenings.apply {
-                layoutManager = androidx.recyclerview.widget.GridLayoutManager(screenings.context, SPAN_COUNT, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
-                adapter = MovieScreeningAdapter(screenings.context!!, movieScreenings.screenings, screeningClickListener)
+                layoutManager = GridLayoutManager(screenings.context, SPAN_COUNT, LinearLayoutManager.VERTICAL, false)
+                adapter = MovieScreeningAdapter(screenings.context, movieScreenings.screenings, screeningClickListener)
                 val margin = context.resources.getDimensionPixelSize(R.dimen.screening_margin)
                 addItemDecoration(ImageGridItemDecoration(SPAN_COUNT, margin, false))
             }

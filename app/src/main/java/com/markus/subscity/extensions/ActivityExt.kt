@@ -26,14 +26,14 @@ val FragmentActivity.supportActionBar: ActionBar
     get() = (this as AppCompatActivity).supportActionBar!!
 
 val Fragment.supportActionBar: ActionBar
-    get() = (this.activity!! as AppCompatActivity).supportActionBar!!
+    get() = (this.requireActivity() as AppCompatActivity).supportActionBar!!
 
 fun Fragment.setSupportActionBar(toolbar: Toolbar) {
     val appCompatActivity = activity as AppCompatActivity
     appCompatActivity.setSupportActionBar(toolbar)
     appCompatActivity.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     appCompatActivity.supportActionBar!!.setDisplayShowHomeEnabled(true)
-    toolbar.setNavigationOnClickListener { this.activity!!.onBackPressed() }
+    toolbar.setNavigationOnClickListener { this.requireActivity().onBackPressed() }
 }
 
 fun Fragment.setSupportActionBarWithoutBackButton(toolbar: Toolbar) {
@@ -42,7 +42,7 @@ fun Fragment.setSupportActionBarWithoutBackButton(toolbar: Toolbar) {
 }
 
 fun Fragment.openIntent(intent: Intent, @StringRes errorId: Int) {
-    if (intent.resolveActivity(activity!!.packageManager) != null) {
+    if (intent.resolveActivity(requireActivity().packageManager) != null) {
         startActivity(intent)
     } else {
         toast(getString(errorId))
@@ -74,7 +74,7 @@ fun analytics(): Analytics {
 }
 
 fun Fragment.openUrl(uri: Uri, useChromeTabsForce: Boolean = true) {
-    val context = activity!!
+    val context = requireActivity()
 
     val builder = CustomTabsIntent.Builder()
     builder.setToolbarColor(ContextCompat.getColor(context, R.color.primary_color))
@@ -112,7 +112,7 @@ fun Activity.rateApp() {
 }
 
 fun Fragment.rateApp() {
-    activity!!.rateApp()
+    requireActivity().rateApp()
 }
 
 private const val ACTION_CUSTOM_TABS_CONNECTION = "android.support.customtabs.action.CustomTabsService"

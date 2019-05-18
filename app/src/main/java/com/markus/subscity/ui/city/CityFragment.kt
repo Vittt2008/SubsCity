@@ -59,7 +59,7 @@ class CityFragment : MvpAppCompatFragment(), CityView {
     override fun showCities(cities: List<City>, currentCity: String) {
         cityList.apply {
             layoutManager = LinearLayoutManager(activity)
-            adapter = CityAdapter(activity!!, cities, if (isFirstPick) null else currentCity, ::updateCity)
+            adapter = CityAdapter(requireActivity(), cities, if (isFirstPick) null else currentCity, ::updateCity)
         }
     }
 
@@ -71,8 +71,8 @@ class CityFragment : MvpAppCompatFragment(), CityView {
         analytics().logSwitchCity(city)
         cityPresenter.updateCity(city)
         if (isFirstPick) {
-            MainActivity.start(activity!!)
-            activity!!.finish()
+            MainActivity.start(requireActivity())
+            requireActivity().finish()
         }
     }
 

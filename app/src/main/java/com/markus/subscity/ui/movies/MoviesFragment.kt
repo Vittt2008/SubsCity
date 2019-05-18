@@ -59,7 +59,7 @@ class MoviesFragment : MvpAppCompatFragment(), MoviesView {
         loadingController.switchState(ContentLoadingController.State.CONTENT)
         moviesList.run {
             layoutManager = androidx.recyclerview.widget.StaggeredGridLayoutManager(2, androidx.recyclerview.widget.StaggeredGridLayoutManager.VERTICAL)
-            adapter = MoviesAdapter(activity!!, movies, ::openMovie)
+            adapter = MoviesAdapter(requireActivity(), movies, ::openMovie)
         }
     }
 
@@ -77,6 +77,6 @@ class MoviesFragment : MvpAppCompatFragment(), MoviesView {
 
     private fun openMovie(movie: Movie) {
         analytics().logOpenMovie(movie.id, movie.title.russian, false)
-        MovieActivity.start(activity!!, movie.id)
+        MovieActivity.start(requireActivity(), movie.id)
     }
 }

@@ -62,7 +62,7 @@ class CinemaScreeningsDelegate(private val screeningClickListener: (Screening) -
             cinemaMetro.text = metroProvider.currentMetroTextProvider.formatMetroListStation(cinema.location.metro)
             screenings.apply {
                 layoutManager = GridLayoutManager(screenings.context, SPAN_COUNT, LinearLayoutManager.VERTICAL, false)
-                adapter = MovieScreeningAdapter(screenings.context!!, cinemaScreenings.screenings, screeningClickListener)
+                adapter = MovieScreeningAdapter(screenings.context, cinemaScreenings.screenings, screeningClickListener)
                 val margin = context.resources.getDimensionPixelSize(R.dimen.screening_margin)
                 addItemDecoration(ImageGridItemDecoration(SPAN_COUNT, margin, false))
             }

@@ -88,7 +88,7 @@ open class CinemaFragment : MvpAppCompatFragment(), CinemaView {
 
     override fun openMovie(movie: Movie) {
         analytics().logOpenMovie(movie.id, movie.title.russian, false)
-        MovieActivity.start(activity!!, movie.id)
+        MovieActivity.start(requireActivity(), movie.id)
     }
 
     private fun openMap(cinema: Cinema) {

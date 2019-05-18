@@ -84,7 +84,7 @@ class MovieFragment : MvpAppCompatFragment(), MovieView, ShareView {
         trailerButton = root.findViewById(R.id.iv_play)
         toolbarLayout = root.findViewById(R.id.toolbar_layout)
         movieInfoList = root.findViewById(R.id.rv_list)
-        movieInfoListLayoutManager = ScrollableLinearLayoutManager(activity!!)
+        movieInfoListLayoutManager = ScrollableLinearLayoutManager(requireActivity())
         movieInfoList.layoutManager = movieInfoListLayoutManager
         setSupportActionBar(root.findViewById(R.id.toolbar))
         toolbarLayout.title = ""
@@ -112,7 +112,7 @@ class MovieFragment : MvpAppCompatFragment(), MovieView, ShareView {
     }
 
     override fun showMovie(movie: Movie, cinemaScreenings: List<MoviePresenter.CinemaScreenings>) {
-        activity!!.invalidateOptionsMenu()
+        requireActivity().invalidateOptionsMenu()
         if (adapter == null) {
             toolbarLayout.title = movie.title.russian
             GlideApp.with(moviePoster).asBitmap().load(movie.poster).transform(PosterCrop()).into(moviePoster)
@@ -136,11 +136,11 @@ class MovieFragment : MvpAppCompatFragment(), MovieView, ShareView {
 
     override fun openCinema(cinema: Cinema) {
         analytics().logOpenCinema(cinema.id, cinema.name, false)
-        CinemaActivity.start(activity!!, cinema.id)
+        CinemaActivity.start(requireActivity(), cinema.id)
     }
 
     override fun share(file: File?, title: String, content: String) {
-        val intent = createIntent(activity!!, file, getString(R.string.movie_share_title, title), content)
+        val intent = createIntent(requireActivity(), file, getString(R.string.movie_share_title, title), content)
         openIntent(intent, R.string.movie_no_share_application)
     }
 
@@ -165,7 +165,7 @@ class MovieFragment : MvpAppCompatFragment(), MovieView, ShareView {
 
     private fun openYoutube(movie: Movie, trailerId: String, isOriginal: Boolean) {
         analytics().logOpenYouTube(movie.id, movie.title.russian, trailerId, isOriginal)
-        YouTubeActivity.start(activity!!, trailerId)
+        YouTubeActivity.start(requireActivity(), trailerId)
     }
 
 

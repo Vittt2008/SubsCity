@@ -58,7 +58,7 @@ class AboutFragment : MvpAppCompatFragment(), AboutView {
     private fun initTeamMembers(root: View) {
         val members = root.findViewById<TextView>(R.id.tv_team_members)
         members.movementMethod = LinkMovementMethod.getInstance()
-        val text = ClickableSpanBuilder(activity!!, R.string.about_team_members)
+        val text = ClickableSpanBuilder(requireActivity(), R.string.about_team_members)
                 .addLink(R.string.about_team_developer) { openEmailApp(R.string.developer_email) }
                 .addLink(R.string.about_team_designer) { openEmailApp(R.string.designer_email) }
                 .addLink(R.string.about_team_github) { openGitHub() }
