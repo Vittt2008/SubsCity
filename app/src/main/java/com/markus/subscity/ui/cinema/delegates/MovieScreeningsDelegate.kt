@@ -1,8 +1,8 @@
 package com.markus.subscity.ui.cinema.delegates
 
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,7 +31,7 @@ class MovieScreeningsDelegate(private val screeningClickListener: (Screening) ->
         SubsCityDagger.component.inject(this)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup): MovieScreeningsDelegate.MovieScreeningsViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup): MovieScreeningsViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_screenings, parent, false)
         return MovieScreeningsViewHolder(view)
     }
@@ -40,7 +40,7 @@ class MovieScreeningsDelegate(private val screeningClickListener: (Screening) ->
         return item is CinemaPresenter.MovieScreenings
     }
 
-    override fun onBindViewHolder(item: CinemaPresenter.MovieScreenings, viewHolder: MovieScreeningsDelegate.MovieScreeningsViewHolder, payloads: List<Any>) {
+    override fun onBindViewHolder(item: CinemaPresenter.MovieScreenings, viewHolder: MovieScreeningsViewHolder, payloads: List<Any>) {
         viewHolder.bind(item)
     }
 
@@ -62,7 +62,7 @@ class MovieScreeningsDelegate(private val screeningClickListener: (Screening) ->
             movieLanguage.text = movieLanguage()
             screenings.apply {
                 layoutManager = GridLayoutManager(screenings.context, SPAN_COUNT, LinearLayoutManager.VERTICAL, false)
-                adapter = MovieScreeningAdapter(screenings.context!!, movieScreenings.screenings, screeningClickListener)
+                adapter = MovieScreeningAdapter(screenings.context, movieScreenings.screenings, screeningClickListener)
                 val margin = context.resources.getDimensionPixelSize(R.dimen.screening_margin)
                 addItemDecoration(ImageGridItemDecoration(SPAN_COUNT, margin, false))
             }

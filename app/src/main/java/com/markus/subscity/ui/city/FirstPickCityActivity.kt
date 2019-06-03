@@ -3,7 +3,7 @@ package com.markus.subscity.ui.city
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.markus.subscity.dagger.SubsCityDagger
 
 /**

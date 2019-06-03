@@ -26,7 +26,7 @@ class MapSliderPanel : SliderPanel {
     }
 
     private fun getActionBarSize(): Int {
-        val typedArray = context.theme.obtainStyledAttributes(intArrayOf(android.support.v7.appcompat.R.attr.actionBarSize))
+        val typedArray = context.theme.obtainStyledAttributes(intArrayOf(androidx.appcompat.R.attr.actionBarSize))
         val defaultActionBarSize = resources.getDimensionPixelSize(R.dimen.default_action_bar_size)
         return typedArray.getDimensionPixelSize(0, defaultActionBarSize)
     }

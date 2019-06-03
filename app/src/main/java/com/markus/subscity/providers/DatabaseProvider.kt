@@ -1,6 +1,6 @@
 package com.markus.subscity.providers
 
-import android.arch.persistence.room.Room
+import androidx.room.Room
 import android.content.Context
 import com.markus.subscity.db.DatabaseClient
 import javax.inject.Inject

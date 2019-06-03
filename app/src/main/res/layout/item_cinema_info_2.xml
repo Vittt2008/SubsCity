@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Angleterre Cinema Lounge" />
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_show_on_map"
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -60,9 +60,9 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_cinema_address"
             tools:text="м. Адмиралтейская" />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_call"
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -90,9 +90,9 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="+7 (812) 494 50 63" />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_web"
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -124,7 +124,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="www.angleterrecinema.ru" />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <View
         android:id="@+id/divider"

@@ -1,9 +1,9 @@
 package com.markus.subscity.ui.city
 
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.Toolbar
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.appcompat.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,7 +59,7 @@ class CityFragment : MvpAppCompatFragment(), CityView {
     override fun showCities(cities: List<City>, currentCity: String) {
         cityList.apply {
             layoutManager = LinearLayoutManager(activity)
-            adapter = CityAdapter(activity!!, cities, if (isFirstPick) null else currentCity, ::updateCity)
+            adapter = CityAdapter(requireActivity(), cities, if (isFirstPick) null else currentCity, ::updateCity)
         }
     }
 
@@ -71,8 +71,8 @@ class CityFragment : MvpAppCompatFragment(), CityView {
         analytics().logSwitchCity(city)
         cityPresenter.updateCity(city)
         if (isFirstPick) {
-            MainActivity.start(activity!!)
-            activity!!.finish()
+            MainActivity.start(requireActivity())
+            requireActivity().finish()
         }
     }
 

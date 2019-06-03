@@ -1,6 +1,6 @@
 package com.markus.subscity.ui.cinema.delegates
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,7 +26,7 @@ class TitleDelegate : AbsListItemAdapterDelegate<Int, Any, TitleDelegate.TitleDi
         viewHolder.bind(item)
     }
 
-    class TitleDividerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class TitleDividerViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
 
         fun bind(titleId: Int) {
             itemView.findViewById<TextView>(R.id.tv_divider_title).setText(titleId)

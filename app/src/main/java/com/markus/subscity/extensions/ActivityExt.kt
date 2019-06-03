@@ -5,14 +5,14 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ResolveInfo
 import android.net.Uri
-import android.support.annotation.StringRes
-import android.support.customtabs.CustomTabsIntent
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.ActionBar
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
+import androidx.annotation.StringRes
+import androidx.browser.customtabs.CustomTabsIntent
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.core.content.ContextCompat
+import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import android.widget.Toast
 import com.markus.subscity.R
 import com.markus.subscity.dagger.SubsCityDagger
@@ -26,14 +26,14 @@ val FragmentActivity.supportActionBar: ActionBar
     get() = (this as AppCompatActivity).supportActionBar!!
 
 val Fragment.supportActionBar: ActionBar
-    get() = (this.activity!! as AppCompatActivity).supportActionBar!!
+    get() = (this.requireActivity() as AppCompatActivity).supportActionBar!!
 
 fun Fragment.setSupportActionBar(toolbar: Toolbar) {
     val appCompatActivity = activity as AppCompatActivity
     appCompatActivity.setSupportActionBar(toolbar)
     appCompatActivity.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     appCompatActivity.supportActionBar!!.setDisplayShowHomeEnabled(true)
-    toolbar.setNavigationOnClickListener { this.activity!!.onBackPressed() }
+    toolbar.setNavigationOnClickListener { this.requireActivity().onBackPressed() }
 }
 
 fun Fragment.setSupportActionBarWithoutBackButton(toolbar: Toolbar) {
@@ -42,7 +42,7 @@ fun Fragment.setSupportActionBarWithoutBackButton(toolbar: Toolbar) {
 }
 
 fun Fragment.openIntent(intent: Intent, @StringRes errorId: Int) {
-    if (intent.resolveActivity(activity!!.packageManager) != null) {
+    if (intent.resolveActivity(requireActivity().packageManager) != null) {
         startActivity(intent)
     } else {
         toast(getString(errorId))
@@ -74,7 +74,7 @@ fun analytics(): Analytics {
 }
 
 fun Fragment.openUrl(uri: Uri, useChromeTabsForce: Boolean = true) {
-    val context = activity!!
+    val context = requireActivity()
 
     val builder = CustomTabsIntent.Builder()
     builder.setToolbarColor(ContextCompat.getColor(context, R.color.primary_color))
@@ -112,7 +112,7 @@ fun Activity.rateApp() {
 }
 
 fun Fragment.rateApp() {
-    activity!!.rateApp()
+    requireActivity().rateApp()
 }
 
 private const val ACTION_CUSTOM_TABS_CONNECTION = "android.support.customtabs.action.CustomTabsService"

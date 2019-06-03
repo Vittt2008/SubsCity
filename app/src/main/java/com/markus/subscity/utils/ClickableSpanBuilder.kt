@@ -1,10 +1,10 @@
 package com.markus.subscity.utils
 
 import android.content.Context
-import android.support.annotation.ColorRes
-import android.support.annotation.StringRes
-import android.support.v4.content.ContextCompat
-import android.support.v4.util.ArrayMap
+import androidx.annotation.ColorRes
+import androidx.annotation.StringRes
+import androidx.core.content.ContextCompat
+import androidx.collection.ArrayMap
 import android.text.SpannableString
 import android.text.TextPaint
 import android.text.style.ClickableSpan

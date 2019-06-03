@@ -1,10 +1,9 @@
 package com.markus.subscity.ui.movies
 
 import android.content.Context
-import android.support.v4.widget.TextViewCompat
-import android.support.v7.widget.AppCompatTextView
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.StaggeredGridLayoutManager
+import androidx.core.widget.TextViewCompat
+import androidx.appcompat.widget.AppCompatTextView
+import androidx.recyclerview.widget.RecyclerView
 import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -25,7 +24,7 @@ import javax.inject.Inject
 /**
  * @author Vitaliy Markus
  */
-class MoviesAdapter(private val context: Context,
+class MoviesAdapter(context: Context,
                     private val movies: List<Movie>,
                     private val clickListener: (Movie) -> Unit) : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 
@@ -78,7 +77,6 @@ class MoviesAdapter(private val context: Context,
         private lateinit var movie: Movie
 
         private val moviePoster = view.findViewById<ImageView>(R.id.iv_movie_poster)
-        private val shadow = view.findViewById<View>(R.id.shadow)
         private val movieLanguage = view.findViewById<TextView>(R.id.tv_movie_language)
         private val movieName = view.findViewById<AppCompatTextView>(R.id.tv_movie_name)
         private val movieGenre = view.findViewById<TextView>(R.id.tv_movie_genre)
@@ -90,7 +88,7 @@ class MoviesAdapter(private val context: Context,
         fun bind(movie: Movie, isFullSpan: Boolean) {
             this.movie = movie
 
-            val layoutParams = itemView.layoutParams as StaggeredGridLayoutManager.LayoutParams
+            val layoutParams = itemView.layoutParams as androidx.recyclerview.widget.StaggeredGridLayoutManager.LayoutParams
             layoutParams.isFullSpan = isFullSpan
 
             val posterWidth = if (isFullSpan) width else width / 2

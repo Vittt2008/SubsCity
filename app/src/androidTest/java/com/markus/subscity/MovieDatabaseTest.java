@@ -1,9 +1,9 @@
 package com.markus.subscity;
 
-import android.arch.persistence.room.Room;
+import androidx.room.Room;
 import android.content.Context;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
+import androidx.test.platform.app.InstrumentationRegistry;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.markus.subscity.api.entities.movie.Movie;
 import com.markus.subscity.api.entities.movie.Rating;
@@ -33,7 +33,7 @@ public class MovieDatabaseTest {
 
     @Test
     public void movieTest() {
-        Context appContext = InstrumentationRegistry.getTargetContext();
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         DatabaseClient database = Room.databaseBuilder(appContext, DatabaseClient.class, "subs_city").build();
         final MovieDao movieDao = database.getMovieDao();
         final List<Movie> movies = getMovies();

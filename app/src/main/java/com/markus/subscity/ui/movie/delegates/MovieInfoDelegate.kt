@@ -1,6 +1,6 @@
 package com.markus.subscity.ui.movie.delegates
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,7 +38,7 @@ class MovieInfoDelegate : AbsListItemAdapterDelegate<Movie, Any, MovieInfoDelega
         viewHolder.bind(item)
     }
 
-    inner class InfoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class InfoViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
         private val genre = view.findViewById<TextView>(R.id.tv_genre_value)
         private val languageTitle = view.findViewById<TextView>(R.id.tv_language_title)
         private val language = view.findViewById<TextView>(R.id.tv_language_value)

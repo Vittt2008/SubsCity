@@ -1,6 +1,6 @@
 package com.markus.subscity.api.entities.cinema
 
-import android.arch.persistence.room.*
+import androidx.room.*
 import com.google.gson.annotations.SerializedName
 import com.markus.subscity.db.converters.Converter
 import java.io.Serializable

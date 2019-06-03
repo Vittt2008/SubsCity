@@ -1,21 +1,18 @@
 package com.markus.subscity.ui.movie.delegates
 
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates3.AbsListItemAdapterDelegate
 import com.markus.subscity.R
 import com.markus.subscity.api.entities.cinema.Cinema
-import com.markus.subscity.api.entities.movie.Movie
 import com.markus.subscity.api.entities.screening.Screening
 import com.markus.subscity.dagger.SubsCityDagger
-import com.markus.subscity.providers.LanguageProvider
 import com.markus.subscity.providers.MetroProvider
-import com.markus.subscity.ui.cinema.CinemaPresenter
 import com.markus.subscity.ui.movie.MoviePresenter
 import com.markus.subscity.ui.movie.MovieScreeningAdapter
 import com.markus.subscity.widgets.divider.ImageGridItemDecoration
@@ -34,7 +31,7 @@ class CinemaScreeningsDelegate(private val screeningClickListener: (Screening) -
         SubsCityDagger.component.inject(this)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup): CinemaScreeningsDelegate.CinemaScreeningsViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup): CinemaScreeningsViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_screenings, parent, false)
         return CinemaScreeningsViewHolder(view)
     }
@@ -43,7 +40,7 @@ class CinemaScreeningsDelegate(private val screeningClickListener: (Screening) -
         return item is MoviePresenter.CinemaScreenings
     }
 
-    override fun onBindViewHolder(item: MoviePresenter.CinemaScreenings, viewHolder: CinemaScreeningsDelegate.CinemaScreeningsViewHolder, payloads: List<Any>) {
+    override fun onBindViewHolder(item: MoviePresenter.CinemaScreenings, viewHolder: CinemaScreeningsViewHolder, payloads: List<Any>) {
         viewHolder.bind(item)
     }
 
@@ -65,7 +62,7 @@ class CinemaScreeningsDelegate(private val screeningClickListener: (Screening) -
             cinemaMetro.text = metroProvider.currentMetroTextProvider.formatMetroListStation(cinema.location.metro)
             screenings.apply {
                 layoutManager = GridLayoutManager(screenings.context, SPAN_COUNT, LinearLayoutManager.VERTICAL, false)
-                adapter = MovieScreeningAdapter(screenings.context!!, cinemaScreenings.screenings, screeningClickListener)
+                adapter = MovieScreeningAdapter(screenings.context, cinemaScreenings.screenings, screeningClickListener)
                 val margin = context.resources.getDimensionPixelSize(R.dimen.screening_margin)
                 addItemDecoration(ImageGridItemDecoration(SPAN_COUNT, margin, false))
             }

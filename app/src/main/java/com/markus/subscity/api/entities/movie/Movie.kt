@@ -1,6 +1,6 @@
 package com.markus.subscity.api.entities.movie
 
-import android.arch.persistence.room.*
+import androidx.room.*
 import com.google.gson.annotations.SerializedName
 import com.markus.subscity.db.converters.Converter
 import org.joda.time.DateTime

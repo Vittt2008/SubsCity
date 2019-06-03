@@ -3,10 +3,10 @@ package com.markus.subscity.ui.cinema
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.support.annotation.LayoutRes
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.Toolbar
+import androidx.annotation.LayoutRes
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.appcompat.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -88,7 +88,7 @@ open class CinemaFragment : MvpAppCompatFragment(), CinemaView {
 
     override fun openMovie(movie: Movie) {
         analytics().logOpenMovie(movie.id, movie.title.russian, false)
-        MovieActivity.start(activity!!, movie.id)
+        MovieActivity.start(requireActivity(), movie.id)
     }
 
     private fun openMap(cinema: Cinema) {

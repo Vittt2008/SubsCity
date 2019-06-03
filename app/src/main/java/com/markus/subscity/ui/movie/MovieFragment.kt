@@ -4,9 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.support.design.widget.CollapsingToolbarLayout
-import android.support.transition.TransitionManager
-import android.support.v7.widget.RecyclerView
+import com.google.android.material.appbar.CollapsingToolbarLayout
+import androidx.transition.TransitionManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.*
 import android.widget.ImageView
 import com.arellomobile.mvp.MvpAppCompatFragment
@@ -84,7 +84,7 @@ class MovieFragment : MvpAppCompatFragment(), MovieView, ShareView {
         trailerButton = root.findViewById(R.id.iv_play)
         toolbarLayout = root.findViewById(R.id.toolbar_layout)
         movieInfoList = root.findViewById(R.id.rv_list)
-        movieInfoListLayoutManager = ScrollableLinearLayoutManager(activity!!)
+        movieInfoListLayoutManager = ScrollableLinearLayoutManager(requireActivity())
         movieInfoList.layoutManager = movieInfoListLayoutManager
         setSupportActionBar(root.findViewById(R.id.toolbar))
         toolbarLayout.title = ""
@@ -112,7 +112,7 @@ class MovieFragment : MvpAppCompatFragment(), MovieView, ShareView {
     }
 
     override fun showMovie(movie: Movie, cinemaScreenings: List<MoviePresenter.CinemaScreenings>) {
-        activity!!.invalidateOptionsMenu()
+        requireActivity().invalidateOptionsMenu()
         if (adapter == null) {
             toolbarLayout.title = movie.title.russian
             GlideApp.with(moviePoster).asBitmap().load(movie.poster).transform(PosterCrop()).into(moviePoster)
@@ -136,11 +136,11 @@ class MovieFragment : MvpAppCompatFragment(), MovieView, ShareView {
 
     override fun openCinema(cinema: Cinema) {
         analytics().logOpenCinema(cinema.id, cinema.name, false)
-        CinemaActivity.start(activity!!, cinema.id)
+        CinemaActivity.start(requireActivity(), cinema.id)
     }
 
     override fun share(file: File?, title: String, content: String) {
-        val intent = createIntent(activity!!, file, getString(R.string.movie_share_title, title), content)
+        val intent = createIntent(requireActivity(), file, getString(R.string.movie_share_title, title), content)
         openIntent(intent, R.string.movie_no_share_application)
     }
 
@@ -165,7 +165,7 @@ class MovieFragment : MvpAppCompatFragment(), MovieView, ShareView {
 
     private fun openYoutube(movie: Movie, trailerId: String, isOriginal: Boolean) {
         analytics().logOpenYouTube(movie.id, movie.title.russian, trailerId, isOriginal)
-        YouTubeActivity.start(activity!!, trailerId)
+        YouTubeActivity.start(requireActivity(), trailerId)
     }
 
 
@@ -176,12 +176,12 @@ class MovieFragment : MvpAppCompatFragment(), MovieView, ShareView {
                     .setMode(BottomSheetBuilder.MODE_LIST)
                     .setMenu(R.menu.menu_trailer)
                     .setItemTextColorResource(R.color.subtitle_color)
-                    .setItemClickListener({ item ->
+                    .setItemClickListener { item ->
                         when (item.itemId) {
                             R.id.item_original -> openYoutube(movie, trailer.original, true)
                             R.id.item_russian -> openYoutube(movie, trailer.russian, false)
                         }
-                    })
+                    }
                     .createDialog()
                     .show()
         } else if (trailer.original.isNotEmpty()) {

@@ -1,8 +1,8 @@
 package com.markus.subscity.ui.cinemas
 
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.*
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatFragment
@@ -57,13 +57,13 @@ class CinemasFragment : MvpAppCompatFragment(), CinemasView {
         cinemasList.run {
             layoutManager = LinearLayoutManager(activity)
             adapter = CinemasAdapter(cinemas, ::openCinema)
-            addItemDecoration(MarginDivider(activity!!).apply { setDrawable(R.drawable.cinema_divider) })
+            addItemDecoration(MarginDivider(requireActivity()).apply { setDrawable(R.drawable.cinema_divider) })
         }
     }
 
     override fun showCinemasMap(city: City) {
         analytics().logOpenCinemasMap(city.name, true)
-        CinemasMapActivity.start(activity!!, city.location.latitude, city.location.longitude, city.location.zoom)
+        CinemasMapActivity.start(requireActivity(), city.location.latitude, city.location.longitude, city.location.zoom)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -99,7 +99,7 @@ class CinemasFragment : MvpAppCompatFragment(), CinemasView {
 
     private fun openCinema(cinema: Cinema) {
         analytics().logOpenCinema(cinema.id, cinema.name, false)
-        CinemaActivity.start(activity!!, cinema.id)
+        CinemaActivity.start(requireActivity(), cinema.id)
     }
 
 }
