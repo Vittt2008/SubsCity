@@ -33,7 +33,7 @@ public class MovieDatabaseTest {
 
     @Test
     public void movieTest() {
-        Context appContext = InstrumentationRegistry.getTargetContext();
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         DatabaseClient database = Room.databaseBuilder(appContext, DatabaseClient.class, "subs_city").build();
         final MovieDao movieDao = database.getMovieDao();
         final List<Movie> movies = getMovies();
