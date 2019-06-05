@@ -5,8 +5,6 @@
     <color name="colorAccent">@color/primary_color</color>
 
     <color name="black_color">#000000</color>
-    <color name="black_color_16">#29000000</color>
-    <color name="black_color_24">#3d000000</color>
 
     <color name="primary_color">#642957</color>
     <color name="primary_color_8">#14642957</color>

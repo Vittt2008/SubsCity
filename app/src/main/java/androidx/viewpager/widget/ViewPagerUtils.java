@@ -2,8 +2,6 @@ package androidx.viewpager.widget;
 
 import android.view.View;
 
-import androidx.viewpager.widget.ViewPager;
-
 /**
  * @author Vitaliy Markus
  */

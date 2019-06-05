@@ -44,6 +44,8 @@ class Analytics @Inject constructor(context: Context) {
         private const val EVENT_SOCIAL_NETWORK = "event_social_network"
         private const val EVENT_EMAIL = "event_email"
         private const val EVENT_CITY_PICKER = "event_city_chooser"
+        private const val EVENT_THEME_PICKER = "event_theme_chooser"
+        private const val EVENT_LANGUAGE_PICKER = "event_language_chooser"
         private const val EVENT_SWITCH_CITY = "event_choose_city"
 
         private const val EVENT_BUY_TICKET = "event_buy_ticket"
@@ -227,6 +229,14 @@ class Analytics @Inject constructor(context: Context) {
 
     fun logOpenCityPicker() {
         analytics.logEvent(EVENT_CITY_PICKER, Bundle())
+    }
+
+    fun logThemePicker() {
+        analytics.logEvent(EVENT_THEME_PICKER, Bundle())
+    }
+
+    fun logLanguagePicker() {
+        analytics.logEvent(EVENT_LANGUAGE_PICKER, Bundle())
     }
 
     fun logSwitchCity(city: String) {

@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.markus.subscity.R
 import com.markus.subscity.api.entities.movie.Movie
 import com.markus.subscity.dagger.GlideApp
@@ -88,7 +89,7 @@ class MoviesAdapter(context: Context,
         fun bind(movie: Movie, isFullSpan: Boolean) {
             this.movie = movie
 
-            val layoutParams = itemView.layoutParams as androidx.recyclerview.widget.StaggeredGridLayoutManager.LayoutParams
+            val layoutParams = itemView.layoutParams as StaggeredGridLayoutManager.LayoutParams
             layoutParams.isFullSpan = isFullSpan
 
             val posterWidth = if (isFullSpan) width else width / 2

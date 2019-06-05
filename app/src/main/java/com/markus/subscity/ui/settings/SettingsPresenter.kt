@@ -9,7 +9,9 @@ import com.markus.subscity.providers.PreferencesProvider
 import com.markus.subscity.ui.settings.SettingsView.Companion.ABOUT
 import com.markus.subscity.ui.settings.SettingsView.Companion.CINEMA_MAP
 import com.markus.subscity.ui.settings.SettingsView.Companion.CITY
+import com.markus.subscity.ui.settings.SettingsView.Companion.THEME
 import com.markus.subscity.ui.settings.SettingsView.Companion.DONATE
+import com.markus.subscity.ui.settings.SettingsView.Companion.LANGUAGE
 import com.markus.subscity.ui.settings.SettingsView.Companion.POLICY
 import com.markus.subscity.ui.settings.SettingsView.Companion.RATE_APP
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -43,6 +45,8 @@ class SettingsPresenter @Inject constructor(private val cityProvider: CityProvid
     private fun createSettings(cityName: String): List<SettingsView.SettingItem> {
         val settings = mutableListOf(
                 SettingsView.SettingItem(CINEMA_MAP, R.drawable.ic_menu_map, R.string.setting_cinema_map_title),
+                SettingsView.SettingItem(THEME, R.drawable.ic_menu_theme, R.string.setting_theme),
+                SettingsView.SettingItem(LANGUAGE, R.drawable.ic_menu_language, R.string.setting_language),
                 SettingsView.SettingItem(RATE_APP, R.drawable.ic_menu_rate_app, R.string.setting_rate_app),
                 SettingsView.SettingItem(ABOUT, R.drawable.ic_menu_about, R.string.setting_about_title),
                 SettingsView.SettingItem(POLICY, R.drawable.ic_menu_policy, R.string.setting_policy_title),

@@ -40,7 +40,7 @@ ext {
     slethoVersion = '1.5.0'
     safeRoomVersion = '0.1.0'
     rxJavaVersion = '2.1.2'
-    rxAndroidVersion = '2.0.1'
+    rxAndroidVersion = '2.1.1'
     rxKotlin = '2.1.0'
     daggerVersion = '2.14.1'
     crashlyticsVersion = '2.8.0'

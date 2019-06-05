@@ -14,7 +14,6 @@ import com.markus.subscity.ui.cinemasmap.CinemasMapPresenter
 import com.markus.subscity.ui.city.CityAdapter
 import com.markus.subscity.ui.city.CityPresenter
 import com.markus.subscity.ui.deeplink.DeepLinkPresenter
-import com.markus.subscity.ui.donate.DonatePresenter
 import com.markus.subscity.ui.main.MainPresenter
 import com.markus.subscity.ui.movie.MoviePresenter
 import com.markus.subscity.ui.movie.delegates.CinemaScreeningsDelegate
@@ -46,7 +45,6 @@ interface SubsCityComponent {
     fun createDeepLinkPresenter(): DeepLinkPresenter
     fun createCinemasMapPresenter(): CinemasMapPresenter
     fun createAboutPresenter(): AboutPresenter
-    fun createDonatePresenter(): DonatePresenter
     fun createSharePresenter(): SharePresenter
     fun createSplashPresenter(): SplashPresenter
 

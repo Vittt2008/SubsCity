@@ -30,6 +30,8 @@
     <string name="setting_city_title">Город</string>
     <string name="setting_donate_title">Пожертвования</string>
     <string name="setting_rate_app">Оценить приложение</string>
+    <string name="setting_theme">Тема</string>
+    <string name="setting_language">Язык</string>
 
     <!-- MovieFragment -->
     <string name="movie_genre_title">Жанр:</string>
@@ -59,6 +61,13 @@
 
     <!-- CinemasMapActivity -->
     <string name="cinemas_map_title">Карта кинотеатров</string>
+
+    <!-- ThemeActivity -->
+    <string name="theme_title">Тема</string>
+    <string name="theme_light">Светлая</string>
+    <string name="theme_dark">Темная</string>
+    <string name="theme_system_default">Системная тема</string>
+    <string name="theme_by_battery_saver">Учитывать режим энергосбережения</string>
 
     <!-- AboutActivity -->
     <string name="about_title">О приложении</string>
