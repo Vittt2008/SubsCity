@@ -9,13 +9,14 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.markus.subscity.R
+import com.markus.subscity.providers.ThemeProvider
 
 /**
  * @author Vitaliy Markus
  */
 class ThemeAdapter(private val context: Context,
-                   private val themeItems: List<SelectedThemeItem>,
-                   private val clickListener: (SelectedThemeItem) -> Unit) : RecyclerView.Adapter<ThemeAdapter.ViewHolder>() {
+                   private val themeItems: List<ThemeProvider.SelectedThemeItem>,
+                   private val clickListener: (ThemeProvider.SelectedThemeItem) -> Unit) : RecyclerView.Adapter<ThemeAdapter.ViewHolder>() {
 
     private val layoutInflater = LayoutInflater.from(context)
 
@@ -34,7 +35,7 @@ class ThemeAdapter(private val context: Context,
 
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private lateinit var item: SelectedThemeItem
+        private lateinit var item: ThemeProvider.SelectedThemeItem
 
         private val isSelected = view.findViewById<RadioButton>(R.id.rd_button)
         private val name = view.findViewById<TextView>(R.id.tv_city)
@@ -48,7 +49,7 @@ class ThemeAdapter(private val context: Context,
             }
         }
 
-        fun bind(item: SelectedThemeItem) {
+        fun bind(item: ThemeProvider.SelectedThemeItem) {
             this.item = item
 
             isSelected.isChecked = item.isSelected
