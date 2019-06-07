@@ -27,7 +27,7 @@ class SettingsAdapter(private val settings: List<SettingsView.SettingItem>,
         holder.bind(settings[position])
     }
 
-    inner class ViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         private lateinit var item: SettingsView.SettingItem
 

@@ -3,10 +3,10 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="colorControlHighlight">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/primary_color</item>
+        <item name="colorPrimaryDark">@color/status_bar_color</item>
+        <item name="colorAccent">@color/primary_color</item>
+        <item name="colorControlHighlight">@color/main_ripple_color</item>
     </style>
 
     <style name="AppTheme.Activity">
@@ -41,11 +41,11 @@
     </style>
 
     <style name="AppTheme.SplashTheme" parent="AppTheme">
+        <item name="colorPrimaryDark">@color/splash_status_bar_color</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowBackground">@drawable/splash_bg</item>
-        <item name="android:navigationBarColor" tools:targetApi="lollipop">@color/colorPrimary
-        </item>
+        <item name="android:navigationBarColor" tools:targetApi="lollipop">@color/splash_color</item>
     </style>
 
     <style name="AppTheme.YouTube" parent="AppTheme.NoActionBar">
@@ -96,7 +96,7 @@
     </style>
 
     <style name="AppTheme.TextView.Small.Black">
-        <item name="android:textColor">@color/black_color</item>
+        <item name="android:textColor">@color/title_color</item>
     </style>
 
     <style name="AppTheme.TextView.Small.White">
@@ -108,7 +108,7 @@
     </style>
 
     <style name="AppTheme.TextView.Medium.Black">
-        <item name="android:textColor">@color/black_color</item>
+        <item name="android:textColor">@color/title_color</item>
     </style>
 
     <style name="AppTheme.TextView.Medium.Black.Subtitle">
@@ -120,7 +120,7 @@
     </style>
 
     <style name="AppTheme.TextView.Large.Black">
-        <item name="android:textColor">@color/black_color</item>
+        <item name="android:textColor">@color/title_color</item>
     </style>
 
     <style name="AppTheme.TextView.Large.Black.Subtitle">
@@ -132,7 +132,7 @@
     </style>
 
     <style name="AppTheme.TextView.Huge.Black">
-        <item name="android:textColor">@color/black_color</item>
+        <item name="android:textColor">@color/title_color</item>
     </style>
 
     <style name="AppTheme.TextView.Huge.Black.Bold">
@@ -140,7 +140,7 @@
     </style>
 
     <style name="AppTheme.TextView.ExtraHuge.Black">
-        <item name="android:textColor">@color/black_color</item>
+        <item name="android:textColor">@color/title_color</item>
     </style>
 
     <style name="AppTheme.TextView.Screening">

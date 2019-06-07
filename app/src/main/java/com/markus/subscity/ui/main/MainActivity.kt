@@ -108,9 +108,9 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         adapter.setupWithBottomNavigation(ahBottomView)
 
         ahBottomView.isBehaviorTranslationEnabled = false
-        ahBottomView.accentColor = ContextCompat.getColor(this, R.color.primary_color)
-        ahBottomView.inactiveColor = ContextCompat.getColor(this, R.color.inactive_color)
-        ahBottomView.defaultBackgroundColor = ContextCompat.getColor(this, R.color.white_color)
+        ahBottomView.accentColor = ContextCompat.getColor(this, R.color.bottom_bar_active_color)
+        ahBottomView.inactiveColor = ContextCompat.getColor(this, R.color.bottom_bar_inactive_color)
+        ahBottomView.defaultBackgroundColor = ContextCompat.getColor(this, R.color.bottom_bar_background_color)
         ahBottomView.titleState = AHBottomNavigation.TitleState.ALWAYS_HIDE
         ahBottomView.setOnTabSelectedListener { position, wasSelected -> selectTab(position) }
         ahBottomView.setUseElevation(true)
