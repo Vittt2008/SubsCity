@@ -28,8 +28,9 @@
     <color name="primary_color_24">#3d642957</color>
     <color name="primary_color_pressed">#7D336D</color>
 
-    <color name="white_color">#232323</color>
-    <color name="white_background_color">#1E1E1E</color>
+    <color name="white_color">#FFFFFF</color>
+    <color name="main_background_color">#1E1E1E</color>
+    <color name="movies_background_color">#FAFAFA</color>
     <color name="map_background_color">#EFEAE6</color>
 
     <color name="ripple_color">#3DFFFFFF</color>
