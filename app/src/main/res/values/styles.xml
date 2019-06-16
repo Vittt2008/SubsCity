@@ -56,7 +56,7 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.Button.SocialNetwork" parent="Widget.AppCompat.Button">
-        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textColor">@color/white_color</item>
         <item name="android:textSize">16sp</item>
@@ -71,7 +71,7 @@
     </style>
 
     <style name="AppTheme.TextView" parent="TextAppearance.AppCompat">
-        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="android:textStyle">normal</item>
     </style>
 
@@ -116,7 +116,7 @@
     </style>
 
     <style name="AppTheme.TextView.Medium.Black.Bold">
-        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
     </style>
 
     <style name="AppTheme.TextView.Large.Black">
@@ -128,7 +128,7 @@
     </style>
 
     <style name="AppTheme.TextView.Large.Black.Bold">
-        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
     </style>
 
     <style name="AppTheme.TextView.Huge.Black">
@@ -136,7 +136,7 @@
     </style>
 
     <style name="AppTheme.TextView.Huge.Black.Bold">
-        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
     </style>
 
     <style name="AppTheme.TextView.ExtraHuge.Black">
@@ -152,7 +152,7 @@
     <style name="AppTheme.TextView.Screening.Price">
         <item name="android:textSize">12sp</item>
         <item name="android:alpha">0.54</item>
-        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:fontFamily">@font/roboto_light</item>
     </style>
 
 

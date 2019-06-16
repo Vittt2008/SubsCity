@@ -50,6 +50,7 @@
         android:layout_marginLeft="@dimen/screenings_padding"
         android:layout_marginRight="@dimen/screenings_padding"
         android:clipChildren="false"
-        android:clipToPadding="false" />
+        android:clipToPadding="false"
+        tools:listitem="@layout/item_screening" />
 
 </LinearLayout>
