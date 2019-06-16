@@ -1,23 +1,34 @@
 package com.markus.subscity.ui.movie
 
 import android.content.Context
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.markus.subscity.R
 import com.markus.subscity.api.entities.screening.Screening
+import com.markus.subscity.extensions.getWidthScreen
 
 /**
  * @author Vitaliy Markus
  */
 class MovieScreeningAdapter(private val context: Context,
                             private val screenings: List<Screening>,
-                            private val clickListener: (Screening) -> Unit) : androidx.recyclerview.widget.RecyclerView.Adapter<MovieScreeningAdapter.ViewHolder>() {
+                            private val spanCount: Int,
+                            private val clickListener: (Screening) -> Unit) : RecyclerView.Adapter<MovieScreeningAdapter.ViewHolder>() {
+
+    private val screenWidth: Int = context.getWidthScreen()
+    private val itemWidth: Int
+
+    init {
+        val recyclerWidth = screenWidth - 2 * context.resources.getDimensionPixelSize(R.dimen.screenings_padding)
+        itemWidth = (recyclerWidth - (spanCount - 1) * context.resources.getDimensionPixelSize(R.dimen.screening_horizontal_margin)) / spanCount
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val root = LayoutInflater.from(parent.context).inflate(R.layout.item_screening, parent, false)
+        root.layoutParams = RecyclerView.LayoutParams(itemWidth, itemWidth)
         return ViewHolder(root)
     }
 
@@ -29,7 +40,7 @@ class MovieScreeningAdapter(private val context: Context,
         holder.bind(screenings[position])
     }
 
-    inner class ViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         private lateinit var screening: Screening
 

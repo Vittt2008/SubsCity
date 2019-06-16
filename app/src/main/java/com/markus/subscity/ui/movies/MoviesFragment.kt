@@ -29,7 +29,7 @@ class MoviesFragment : MvpAppCompatFragment(), MoviesView {
     @InjectPresenter
     lateinit var moviesPresenter: MoviesPresenter
 
-    private lateinit var moviesList: androidx.recyclerview.widget.RecyclerView
+    private lateinit var moviesList: RecyclerView
 
     companion object {
         fun newInstance() = MoviesFragment()
@@ -58,7 +58,7 @@ class MoviesFragment : MvpAppCompatFragment(), MoviesView {
     override fun showMovies(movies: List<Movie>) {
         loadingController.switchState(ContentLoadingController.State.CONTENT)
         moviesList.run {
-            layoutManager = androidx.recyclerview.widget.StaggeredGridLayoutManager(2, androidx.recyclerview.widget.StaggeredGridLayoutManager.VERTICAL)
+            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             adapter = MoviesAdapter(requireActivity(), movies, ::openMovie)
         }
     }

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="screening_vertical_margin">@dimen/screening_horizontal_margin</dimen>
+</resources>

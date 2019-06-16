@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:clipChildren="false"
+    android:clipToPadding="false"
     android:orientation="vertical"
     android:paddingBottom="8dp">
 
@@ -11,10 +13,10 @@
         android:id="@+id/title_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="8dp"
         android:paddingLeft="16dp"
+        android:paddingTop="8dp"
         android:paddingRight="16dp"
-        android:paddingTop="8dp">
+        android:paddingBottom="8dp">
 
         <TextView
             android:id="@+id/tv_title"
@@ -46,6 +48,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/screenings_padding"
-        android:layout_marginRight="@dimen/screenings_padding" />
+        android:layout_marginRight="@dimen/screenings_padding"
+        android:clipChildren="false"
+        android:clipToPadding="false" />
 
 </LinearLayout>

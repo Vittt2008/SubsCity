@@ -1,22 +1,21 @@
 package com.markus.subscity.ui.movies
 
 import android.content.Context
-import androidx.core.widget.TextViewCompat
-import androidx.appcompat.widget.AppCompatTextView
-import androidx.recyclerview.widget.RecyclerView
-import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.widget.TextViewCompat
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.markus.subscity.R
 import com.markus.subscity.api.entities.movie.Movie
 import com.markus.subscity.dagger.GlideApp
 import com.markus.subscity.dagger.SubsCityDagger
+import com.markus.subscity.extensions.getWidthScreen
 import com.markus.subscity.providers.LanguageProvider
 import com.markus.subscity.widgets.transformations.PosterCrop
 import javax.inject.Inject
@@ -32,17 +31,13 @@ class MoviesAdapter(context: Context,
     private val RATING = 6.9
 
     private val layoutInflater = LayoutInflater.from(context)
-    private val width: Int
+    private val width: Int = context.getWidthScreen()
     private val isFullSpans: MutableList<Boolean> = ArrayList()
 
     @Inject
     lateinit var languageProvider: LanguageProvider
 
     init {
-        val metrics = DisplayMetrics()
-        val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        windowManager.defaultDisplay.getMetrics(metrics)
-        width = metrics.widthPixels
         updateFullSpans()
         SubsCityDagger.component.inject(this)
     }

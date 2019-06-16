@@ -27,7 +27,7 @@
     <!-- Old Colors -->
 
     <color name="primary_color">#642957</color>
-    <color name="primary_color_8">#14642957</color>
+    <color name="primary_color_8">#EFEBEF</color>
     <color name="primary_color_16">#29642957</color>
     <color name="primary_color_24">#3d642957</color>
     <color name="primary_color_pressed">#7D336D</color>

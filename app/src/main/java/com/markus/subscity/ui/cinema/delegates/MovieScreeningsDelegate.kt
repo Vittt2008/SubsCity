@@ -1,12 +1,12 @@
 package com.markus.subscity.ui.cinema.delegates
 
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates3.AbsListItemAdapterDelegate
 import com.markus.subscity.R
 import com.markus.subscity.api.entities.movie.Movie
@@ -45,7 +45,7 @@ class MovieScreeningsDelegate(private val screeningClickListener: (Screening) ->
     }
 
     inner class MovieScreeningsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val SPAN_COUNT = 5
+        private val SPAN_COUNT = 4
         private lateinit var movie: Movie
         private val titleLayout = view.findViewById<View>(R.id.title_layout)
         private val movieTitle = view.findViewById<TextView>(R.id.tv_title)
@@ -62,9 +62,10 @@ class MovieScreeningsDelegate(private val screeningClickListener: (Screening) ->
             movieLanguage.text = movieLanguage()
             screenings.apply {
                 layoutManager = GridLayoutManager(screenings.context, SPAN_COUNT, LinearLayoutManager.VERTICAL, false)
-                adapter = MovieScreeningAdapter(screenings.context, movieScreenings.screenings, screeningClickListener)
-                val margin = context.resources.getDimensionPixelSize(R.dimen.screening_margin)
-                addItemDecoration(ImageGridItemDecoration(SPAN_COUNT, margin, false))
+                adapter = MovieScreeningAdapter(screenings.context, movieScreenings.screenings, SPAN_COUNT, screeningClickListener)
+                val horizontal = context.resources.getDimensionPixelSize(R.dimen.screening_horizontal_margin)
+                val vertical = context.resources.getDimensionPixelSize(R.dimen.screening_vertical_margin)
+                addItemDecoration(ImageGridItemDecoration(SPAN_COUNT, horizontal, vertical, false))
             }
         }
 
