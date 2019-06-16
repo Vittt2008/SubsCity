@@ -19,12 +19,16 @@
 
     <color name="screening_item_text_color">#000000</color>
     <color name="screening_item_text_pressed_color">#FFFFFF</color>
+    <color name="screening_item_price_color">#8A000000</color>
 
     <color name="status_bar_color">#4F2045</color>
 
     <color name="divider_color">#9E9E9E</color>
 
     <color name="toolbar_title_color">#FFFFFF</color>
+
+    <color name="screening_default_bg">#EFEBEF</color>
+    <color name="screening_pressed_bg">#642957</color>
 
     <!-- Old Colors -->
 

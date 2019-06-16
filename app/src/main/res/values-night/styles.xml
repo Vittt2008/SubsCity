@@ -5,4 +5,13 @@
         <item name="android:navigationBarColor" tools:targetApi="lollipop">@color/main_background_color</item>
     </style>
 
+    <style name="AppTheme.TextView.Medium.Black">
+        <item name="android:textColor">@color/subtitle_color</item>
+    </style>
+
+    <style name="AppTheme.TextView.Medium.Black.Bold">
+        <item name="android:textColor">@color/title_color</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+
 </resources>

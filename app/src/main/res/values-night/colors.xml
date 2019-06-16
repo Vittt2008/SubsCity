@@ -14,13 +14,17 @@
     <color name="settings_color">#B7AEB5</color>
 
     <color name="screening_item_text_color">#A4A4A4</color>
-    <color name="screening_item_text_pressed_color">#FFFFFF</color>\
+    <color name="screening_item_text_pressed_color">#E1E1E1</color>
+    <color name="screening_item_price_color">#9F2184</color>
 
     <color name="status_bar_color">#121212</color>
 
     <color name="divider_color">#1AFFFFFF</color>
 
     <color name="toolbar_title_color">#E1E1E1</color>
+
+    <color name="screening_default_bg">#232323</color>
+    <color name="screening_pressed_bg">#2A1C27</color>
 
     <!-- Old Colors -->
 

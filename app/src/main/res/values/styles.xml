@@ -157,8 +157,9 @@
 
     <style name="AppTheme.TextView.Screening.Price">
         <item name="android:textSize">12sp</item>
-        <item name="android:alpha">0.54</item>
+        <item name="android:textColor">@color/screening_item_price_color</item>
         <item name="android:fontFamily">@font/roboto_light</item>
+        <item name="android:alpha">1</item>
     </style>
 
     <style name="AppTheme.ExpandedTitleTextAppearance">
