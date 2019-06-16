@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.markus.subscity.R
 import com.markus.subscity.dagger.SubsCityDagger
-import com.markus.subscity.utils.Analytics
+import com.markus.subscity.utils.analytics.Analytics
 import com.markus.subscity.utils.IntentUtils
 
 /**

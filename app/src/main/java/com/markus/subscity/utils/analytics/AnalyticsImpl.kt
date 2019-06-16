@@ -1,4 +1,4 @@
-package com.markus.subscity.utils
+package com.markus.subscity.utils.analytics
 
 import android.app.Activity
 import android.content.Context
@@ -13,7 +13,7 @@ import javax.inject.Singleton
  * @author Vitaliy Markus
  */
 @Singleton
-class Analytics @Inject constructor(context: Context) {
+class AnalyticsImpl @Inject constructor(context: Context) : Analytics {
 
     companion object {
 
@@ -90,36 +90,36 @@ class Analytics @Inject constructor(context: Context) {
         analytics.setAnalyticsCollectionEnabled(!BuildConfig.DEBUG)
     }
 
-    fun logStartApp(city: String) {
+    override fun logStartApp(city: String) {
         val bundle = Bundle().apply {
             putString(KEY_CITY, city)
         }
         analytics.logEvent(EVENT_APP, bundle)
     }
 
-    fun logOpenRateDialog() {
+    override fun logOpenRateDialog() {
         analytics.logEvent(EVENT_RATE_DIALOG, Bundle())
     }
 
-    fun logOpenMain() {
+    override fun logOpenMain() {
         analytics.logEvent(EVENT_MAIN, Bundle())
     }
 
-    fun logOpenMovies(fromDeepLink: Boolean) {
+    override fun logOpenMovies(fromDeepLink: Boolean) {
         val bundle = Bundle().apply {
             putBoolean(KEY_FROM_DEEP_LINK, fromDeepLink)
         }
         analytics.logEvent(EVENT_FILMS, bundle)
     }
 
-    fun logOpenCinemas(fromDeepLink: Boolean) {
+    override fun logOpenCinemas(fromDeepLink: Boolean) {
         val bundle = Bundle().apply {
             putBoolean(KEY_FROM_DEEP_LINK, fromDeepLink)
         }
         analytics.logEvent(EVENT_CINEMAS, bundle)
     }
 
-    fun logOpenCinemasMap(city: String, fromCinemas: Boolean) {
+    override fun logOpenCinemasMap(city: String, fromCinemas: Boolean) {
         val fromValue = if (fromCinemas) PARAM_FROM_CINEMAS else PARAM_FROM_SETTINGS
         val bundle = Bundle().apply {
             putString(KEY_CITY, city)
@@ -128,11 +128,11 @@ class Analytics @Inject constructor(context: Context) {
         analytics.logEvent(EVENT_CINEMAS_MAP, bundle)
     }
 
-    fun logOpenSettings() {
+    override fun logOpenSettings() {
         analytics.logEvent(EVENT_SETTINGS, Bundle())
     }
 
-    fun logOpenMovie(movieId: Long, movieName: String?, fromDeepLink: Boolean) {
+    override fun logOpenMovie(movieId: Long, movieName: String?, fromDeepLink: Boolean) {
         val bundle = Bundle().apply {
             putLong(KEY_MOVIE_ID, movieId)
             putString(KEY_MOVIE_NAME, movieName)
@@ -141,7 +141,7 @@ class Analytics @Inject constructor(context: Context) {
         analytics.logEvent(EVENT_MOVIE, bundle)
     }
 
-    fun logOpenYouTube(movieId: Long, movieName: String, trailerId: String, isOriginal: Boolean) {
+    override fun logOpenYouTube(movieId: Long, movieName: String, trailerId: String, isOriginal: Boolean) {
         val languageValue = if (isOriginal) PARAM_ORIGINAL else PARAM_RUSSIAN
         val bundle = Bundle().apply {
             putLong(KEY_MOVIE_ID, movieId)
@@ -152,7 +152,7 @@ class Analytics @Inject constructor(context: Context) {
         analytics.logEvent(EVENT_YOUTUBE, bundle)
     }
 
-    fun logShareMovie(filmId: Long, filmName: String) {
+    override fun logShareMovie(filmId: Long, filmName: String) {
         val bundle = Bundle().apply {
             putLong(KEY_MOVIE_ID, filmId)
             putString(KEY_MOVIE_NAME, filmName)
@@ -160,7 +160,7 @@ class Analytics @Inject constructor(context: Context) {
         analytics.logEvent(EVENT_SHARE, bundle)
     }
 
-    fun logOpenCinema(cinemaId: Long, cinemaName: String?, fromDeepLink: Boolean) {
+    override fun logOpenCinema(cinemaId: Long, cinemaName: String?, fromDeepLink: Boolean) {
         val bundle = Bundle().apply {
             putLong(KEY_CINEMA_ID, cinemaId)
             putString(KEY_CINEMA_NAME, cinemaName)
@@ -169,14 +169,14 @@ class Analytics @Inject constructor(context: Context) {
         analytics.logEvent(EVENT_CINEMA, bundle)
     }
 
-    fun logOpenCinemaFromMap(cinemaId: Long) {
+    override fun logOpenCinemaFromMap(cinemaId: Long) {
         val bundle = Bundle().apply {
             putLong(KEY_CINEMA_ID, cinemaId)
         }
         analytics.logEvent(EVENT_CINEMA_FROM_MAP, bundle)
     }
 
-    fun logCinemaAddressClick(cinemaId: Long, cinemaName: String, address: String) {
+    override fun logCinemaAddressClick(cinemaId: Long, cinemaName: String, address: String) {
         val bundle = Bundle().apply {
             putLong(KEY_CINEMA_ID, cinemaId)
             putString(KEY_CINEMA_NAME, cinemaName)
@@ -185,7 +185,7 @@ class Analytics @Inject constructor(context: Context) {
         analytics.logEvent(EVENT_CINEMA_ADDRESS, bundle)
     }
 
-    fun logCinemaPhoneClick(cinemaId: Long, cinemaName: String, phone: String) {
+    override fun logCinemaPhoneClick(cinemaId: Long, cinemaName: String, phone: String) {
         val bundle = Bundle().apply {
             putLong(KEY_CINEMA_ID, cinemaId)
             putString(KEY_CINEMA_NAME, cinemaName)
@@ -194,7 +194,7 @@ class Analytics @Inject constructor(context: Context) {
         analytics.logEvent(EVENT_CINEMA_DIALER, bundle)
     }
 
-    fun logCinemaWebClick(cinemaId: Long, cinemaName: String, url: String) {
+    override fun logCinemaWebClick(cinemaId: Long, cinemaName: String, url: String) {
         val bundle = Bundle().apply {
             putLong(KEY_CINEMA_ID, cinemaId)
             putString(KEY_CINEMA_NAME, cinemaName)
@@ -203,15 +203,15 @@ class Analytics @Inject constructor(context: Context) {
         analytics.logEvent(EVENT_CINEMA_WEB, bundle)
     }
 
-    fun logOpenAbout() {
+    override fun logOpenAbout() {
         analytics.logEvent(EVENT_ABOUT, Bundle())
     }
 
-    fun logOpenPolicy() {
+    override fun logOpenPolicy() {
         analytics.logEvent(EVENT_POLICY, Bundle())
     }
 
-    fun logOpenSocialNetwork(socialNetwork: String, city: String, url: String) {
+    override fun logOpenSocialNetwork(socialNetwork: String, city: String, url: String) {
         val bundle = Bundle().apply {
             putString(KEY_SOCIAL_NETWORK, socialNetwork)
             putString(KEY_CITY, city)
@@ -220,33 +220,33 @@ class Analytics @Inject constructor(context: Context) {
         analytics.logEvent(EVENT_SOCIAL_NETWORK, bundle)
     }
 
-    fun logOpenEmail(email: String) {
+    override fun logOpenEmail(email: String) {
         val bundle = Bundle().apply {
             putString(KEY_EMAIL, email)
         }
         analytics.logEvent(EVENT_EMAIL, bundle)
     }
 
-    fun logOpenCityPicker() {
+    override fun logOpenCityPicker() {
         analytics.logEvent(EVENT_CITY_PICKER, Bundle())
     }
 
-    fun logThemePicker() {
+    override fun logThemePicker() {
         analytics.logEvent(EVENT_THEME_PICKER, Bundle())
     }
 
-    fun logLanguagePicker() {
+    override fun logLanguagePicker() {
         analytics.logEvent(EVENT_LANGUAGE_PICKER, Bundle())
     }
 
-    fun logSwitchCity(city: String) {
+    override fun logSwitchCity(city: String) {
         val bundle = Bundle().apply {
             putString(KEY_CITY, city)
         }
         analytics.logEvent(EVENT_SWITCH_CITY, bundle)
     }
 
-    fun logBuyTicket(screening: Screening) {
+    override fun logBuyTicket(screening: Screening) {
         val bundle = Bundle().apply {
             putLong(KEY_SCREENING_ID, screening.id)
             putLong(KEY_CINEMA_ID, screening.cinemaId)
@@ -258,18 +258,18 @@ class Analytics @Inject constructor(context: Context) {
         analytics.logEvent(EVENT_BUY_TICKET, bundle)
     }
 
-    fun logOpenPlayStore(fromRateDialog: Boolean) {
+    override fun logOpenPlayStore(fromRateDialog: Boolean) {
         val bundle = Bundle().apply {
             putString(KEY_FROM, if (fromRateDialog) PARAM_FROM_RATE_DIALOG else PARAM_FROM_SETTINGS)
         }
         analytics.logEvent(EVENT_OPEN_PLAY_STORE, bundle)
     }
 
-    fun logOpenGitHub() {
+    override fun logOpenGitHub() {
         analytics.logEvent(EVENT_OPEN_GIT_HUB, Bundle())
     }
 
-    fun logActivity(activity: Activity) {
+    override fun logActivity(activity: Activity) {
         analytics.setCurrentScreen(activity, activity.javaClass.name.toString(), null)
     }
 }

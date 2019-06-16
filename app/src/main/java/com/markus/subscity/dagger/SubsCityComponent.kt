@@ -25,7 +25,7 @@ import com.markus.subscity.ui.settings.SettingsPresenter
 import com.markus.subscity.ui.share.SharePresenter
 import com.markus.subscity.ui.splash.SplashPresenter
 import com.markus.subscity.ui.theme.ThemePresenter
-import com.markus.subscity.utils.Analytics
+import com.markus.subscity.utils.analytics.Analytics
 import dagger.Component
 import javax.inject.Singleton
 
