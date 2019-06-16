@@ -7,6 +7,7 @@
         <item name="colorPrimaryDark">@color/status_bar_color</item>
         <item name="colorAccent">@color/primary_color</item>
         <item name="colorControlHighlight">@color/main_ripple_color</item>
+        <item name="actionBarTheme">@style/AppTheme.Toolbar</item>
     </style>
 
     <style name="AppTheme.Activity">
@@ -30,6 +31,11 @@
     </style>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.DayNight" />
+
+    <style name="AppTheme.Toolbar">
+        <item name="android:textColorSecondary">@color/toolbar_title_color</item>
+        <item name="titleTextColor">@color/toolbar_title_color</item>
+    </style>
 
     <style name="AppTheme.ActivityAnimation" parent="@android:style/Animation.Activity">
         <item name="android:activityOpenEnterAnimation">@anim/events_right_in</item>
@@ -153,6 +159,15 @@
         <item name="android:textSize">12sp</item>
         <item name="android:alpha">0.54</item>
         <item name="android:fontFamily">@font/roboto_light</item>
+    </style>
+
+    <style name="AppTheme.ExpandedTitleTextAppearance">
+        <item name="android:textColor">@color/toolbar_title_color</item>
+    </style>
+
+    <style name="AppTheme.CollapsedTitleTextAppearance">
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textColor">@color/toolbar_title_color</item>
     </style>
 
 
