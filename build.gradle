@@ -32,7 +32,8 @@ task clean(type: Delete) {
 
 ext {
     supportVersion = '27.1.1'
-    playServicesVersion = '11.8.0'
+    playServicesMaps = '16.1.0'
+    playServicesFirebase = '16.0.9'
     okHttpVersion = '3.8.1'
     retrofitVersion = '2.3.0'
     jodaTimeVersion = '2.9.9.3'

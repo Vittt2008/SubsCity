@@ -7,14 +7,13 @@ import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.view.MenuItem
+import android.view.View
 import androidx.annotation.DrawableRes
-import com.google.android.material.bottomsheet.BottomSheetBehavior
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.viewpager.widget.ViewPager
-import androidx.appcompat.content.res.AppCompatResources
-import android.view.MenuItem
-import android.view.View
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
@@ -23,14 +22,15 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.GoogleMapOptions
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.markus.subscity.R
-import com.markus.subscity.widgets.ViewPagerBottomSheetBehavior
 import com.markus.subscity.api.entities.cinema.Cinema
 import com.markus.subscity.dagger.SubsCityDagger
 import com.markus.subscity.extensions.analytics
 import com.markus.subscity.extensions.toast
 import com.markus.subscity.ui.cinema.CinemaActivity
 import com.markus.subscity.utils.MapSlidr
+import com.markus.subscity.widgets.ViewPagerBottomSheetBehavior
 
 
 /**
@@ -102,6 +102,7 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnI
         }
 
         mapFragment.getMapAsync {
+            it.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.maps_style))
             it.setOnInfoWindowClickListener(this)
             it.setOnMarkerClickListener(this)
             cinemasMapPresenter.getCinemas(it)
