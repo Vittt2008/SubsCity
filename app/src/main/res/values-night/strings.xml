@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="policy_url">file:///android_asset/privacy_policy_dark.html</string>
+</resources>

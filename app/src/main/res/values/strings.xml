@@ -89,6 +89,7 @@
 
     <!-- PolicyActivity -->
     <string name="policy_title">Политика конфиденциальности</string>
+    <string name="policy_url">file:///android_asset/privacy_policy.html</string>
 
     <!-- DonateActivity -->
     <string name="donate_title">Пожертвовать</string>
