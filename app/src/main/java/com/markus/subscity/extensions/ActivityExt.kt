@@ -86,7 +86,7 @@ fun Fragment.openUrl(uri: Uri, useChromeTabsForce: Boolean = true) {
     val context = requireActivity()
 
     val builder = CustomTabsIntent.Builder()
-    builder.setToolbarColor(ContextCompat.getColor(context, R.color.primary_color))
+    builder.setToolbarColor(ContextCompat.getColor(context, R.color.toolbar_color))
     //builder.setStartAnimations(context, android.R.anim.slide_in_right, R.anim.slide_out_left)
 //    builder.setExitAnimations(context, android.R.anim.slide_in_left, android.R.anim.slide_out_right)
 

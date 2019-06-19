@@ -3,7 +3,7 @@
 
     <!-- New Colors -->
 
-    <color name="main_ripple_color">#A4A4A4</color>
+    <color name="main_ripple_color">#4D9F2184</color>
 
     <color name="bottom_bar_active_color">#9F2184</color>
     <color name="bottom_bar_inactive_color">#C4C4C4</color>
@@ -21,14 +21,16 @@
 
     <color name="divider_color">#1AFFFFFF</color>
 
+    <color name="toolbar_color">#232323</color>
     <color name="toolbar_title_color">#E1E1E1</color>
 
     <color name="screening_default_bg">#232323</color>
     <color name="screening_pressed_bg">#2A1C27</color>
 
+    <color name="accent_color">#E1E1E1</color>
+
     <!-- Old Colors -->
 
-    <color name="primary_color">#232323</color>
     <color name="primary_color_8">#EFEBEF</color>
     <color name="primary_color_16">#29642957</color>
     <color name="primary_color_24">#3d642957</color>

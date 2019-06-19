@@ -25,14 +25,16 @@
 
     <color name="divider_color">#9E9E9E</color>
 
+    <color name="toolbar_color">#642957</color>
     <color name="toolbar_title_color">#FFFFFF</color>
 
     <color name="screening_default_bg">#EFEBEF</color>
     <color name="screening_pressed_bg">#642957</color>
 
+    <color name="accent_color">#642957</color>
+
     <!-- Old Colors -->
 
-    <color name="primary_color">#642957</color>
     <color name="primary_color_8">#EFEBEF</color>
     <color name="primary_color_16">#29642957</color>
     <color name="primary_color_24">#3d642957</color>
