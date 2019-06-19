@@ -4,7 +4,8 @@
     <!-- New Colors -->
 
     <color name="main_color">#642957</color>
-    <color name="main_ripple_color">#642957</color>
+    <color name="main_ripple_color">#4D642957</color>
+    <color name="main_color_pressed">#29642957</color>
 
     <color name="splash_color">#642957</color>
     <color name="splash_status_bar_color">#4F2045</color>
@@ -33,19 +34,17 @@
 
     <color name="accent_color">#642957</color>
 
+    <color name="main_background_color">#FAFAFA</color>
+
+    <color name="white_ripple_color">#3DFFFFFF</color>
+
     <!-- Old Colors -->
 
-    <color name="primary_color_8">#EFEBEF</color>
-    <color name="primary_color_16">#29642957</color>
-    <color name="primary_color_24">#3d642957</color>
     <color name="primary_color_pressed">#7D336D</color>
 
     <color name="white_color">#FFFFFF</color>
-    <color name="main_background_color">#FAFAFA</color>
     <color name="movies_background_color">#FAFAFA</color>
     <color name="map_background_color">#EFEAE6</color>
-
-    <color name="ripple_color">#3DFFFFFF</color>
 
     <!-- Social Networks -->
     <color name="telegram_color">#0D86D7</color>
