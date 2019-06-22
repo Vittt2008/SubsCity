@@ -86,7 +86,7 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnI
         supportActionBar!!.setDisplayShowHomeEnabled(true)
 
         val content = findViewById<View>(android.R.id.content)
-        content.setBackgroundColor(ContextCompat.getColor(this, R.color.map_background_color))
+        content.setBackgroundColor(ContextCompat.getColor(this, R.color.main_background_color))
         viewPager = findViewById(R.id.cinema_view_pager)
         behavior = (viewPager.layoutParams as CoordinatorLayout.LayoutParams).behavior as ViewPagerBottomSheetBehavior<ViewPager>
         behavior.state = ViewPagerBottomSheetBehavior.STATE_HIDDEN
@@ -133,7 +133,7 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnI
         this.cinemaIdMarkerIdMap = markerCinemaMap.entries.associateBy({ it.value }, { it.key })
         this.markers = markers as List<Marker>
 
-        val markerId = cinemaIdMarkerIdMap[cinemas.first().id]!!
+        val markerId = cinemaIdMarkerIdMap.getValue(cinemas.first().id)
         selectMarker(markerId)
     }
 

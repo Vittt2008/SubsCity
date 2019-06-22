@@ -38,13 +38,11 @@
 
     <color name="white_ripple_color">#3DFFFFFF</color>
 
-    <!-- Old Colors -->
-
-    <color name="primary_color_pressed">#7D336D</color>
+    <color name="rate_button_pressed">#7D336D</color>
 
     <color name="white_color">#FFFFFF</color>
+
     <color name="movies_background_color">#FAFAFA</color>
-    <color name="map_background_color">#EFEAE6</color>
 
     <!-- Social Networks -->
     <color name="telegram_color">#0D86D7</color>
