@@ -85,6 +85,8 @@
         <item name="android:textColor">@color/toolbar_title_color</item>
     </style>
 
+    <!--region Base TextView-->
+
     <style name="AppTheme.TextView" parent="TextAppearance.AppCompat">
         <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="android:textStyle">normal</item>
@@ -101,6 +103,16 @@
     <style name="AppTheme.TextView.Huge">
         <item name="android:textSize">20sp</item>
     </style>
+
+    <!--endregion-->
+
+    <!--region Common-->
+
+    <style name="AppTheme.TextView.Common.Subtitle" parent="AppTheme.TextView.Medium">
+        <item name="android:textColor">@color/subtitle_color</item>
+    </style>
+
+    <!--endregion-->
 
     <!--region Screening-->
 
@@ -155,7 +167,6 @@
 
     <!--endregion-->
 
-
     <!-- TextView Style -->
 
     <style name="AppTheme.TextView.Small.Black.Subtitle" parent="AppTheme.TextView">
@@ -165,10 +176,6 @@
 
     <style name="AppTheme.TextView.Medium.Black">
         <item name="android:textColor">@color/title_color</item>
-    </style>
-
-    <style name="AppTheme.TextView.Medium.Black.Subtitle">
-        <item name="android:textColor">@color/subtitle_color</item>
     </style>
 
     <style name="AppTheme.TextView.Medium.Black.Bold">

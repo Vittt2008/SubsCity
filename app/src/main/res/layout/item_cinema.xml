@@ -17,14 +17,14 @@
 
     <TextView
         android:id="@+id/tv_cinema_address"
-        style="@style/AppTheme.TextView.Medium.Black.Subtitle"
+        style="@style/AppTheme.TextView.Common.Subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="Мал.Морская, 24" />
 
     <TextView
         android:id="@+id/tv_cinema_metro_station"
-        style="@style/AppTheme.TextView.Medium.Black.Subtitle"
+        style="@style/AppTheme.TextView.Common.Subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="м. Адмиралтейская" />
