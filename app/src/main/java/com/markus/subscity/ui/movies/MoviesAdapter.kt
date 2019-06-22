@@ -94,7 +94,13 @@ class MoviesAdapter(context: Context,
             else
                 intArrayOf(R.dimen.poster_text_size)
 
-            GlideApp.with(moviePoster).asBitmap().load(movie.poster).override(posterWidth, layoutParams.height).transform(PosterCrop()).into(moviePoster)
+            GlideApp.with(moviePoster)
+                    .asBitmap()
+                    .load(movie.poster)
+                    .error(R.drawable.ic_splash_screen)
+                    .override(posterWidth, layoutParams.height)
+                    .transform(PosterCrop())
+                    .into(moviePoster)
 
             movieLanguage.text = movieLanguage(movie)
             movieLanguage.visibility = if (movieLanguage.text.isNotEmpty()) View.VISIBLE else View.GONE
