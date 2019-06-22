@@ -18,10 +18,6 @@
     <color name="subtitle_color">#A4A4A4</color>
     <color name="settings_color">#B7AEB5</color>
 
-    <color name="screening_item_text_color">#A4A4A4</color>
-    <color name="screening_item_text_pressed_color">#E1E1E1</color>
-    <color name="screening_item_price_color">#9F2184</color>
-
     <color name="status_bar_color">#121212</color>
 
     <color name="divider_color">#1AFFFFFF</color>

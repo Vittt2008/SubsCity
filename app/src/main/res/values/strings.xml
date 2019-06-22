@@ -42,7 +42,7 @@
     <string name="movie_rating_imdb_title">IMDB:</string>
     <string name="movie_description_title">Описание</string>
     <string name="movie_screenings_title">Сеансы</string>
-    <string name="movie_screening_price">%1$d₽</string>
+    <string name="movie_screening_price">%1$d&#8201;₽</string>
     <string name="movie_trailer_original">Оригинальный</string>
     <string name="movie_trailer_russian">Русский</string>
     <string name="movie_no_trailers">К сожалению у данного фильма нет трейлеров</string>

@@ -12,7 +12,7 @@
 
         <TextView
             android:id="@+id/tv_screening_date"
-            style="@style/AppTheme.TextView.Screening"
+            style="@style/AppTheme.TextView.Screening.Date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -23,7 +23,7 @@
 
         <TextView
             android:id="@+id/tv_screening_time"
-            style="@style/AppTheme.TextView.Screening"
+            style="@style/AppTheme.TextView.Screening.Time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"

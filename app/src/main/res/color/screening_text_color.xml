@@ -1,4 +1,0 @@
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:color="@color/screening_item_text_pressed_color" android:state_pressed="true" />
-    <item android:color="@color/screening_item_text_color" />
-</selector>

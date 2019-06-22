@@ -76,9 +76,17 @@
         <item name="android:background">@drawable/review_bg</item>
     </style>
 
+    <style name="AppTheme.ExpandedTitleTextAppearance">
+        <item name="android:textColor">@color/toolbar_title_color</item>
+    </style>
+
+    <style name="AppTheme.CollapsedTitleTextAppearance">
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textColor">@color/toolbar_title_color</item>
+    </style>
+
     <style name="AppTheme.TextView" parent="TextAppearance.AppCompat">
         <item name="android:fontFamily">@font/roboto_regular</item>
-        <item name="android:textStyle">normal</item>
     </style>
 
     <style name="AppTheme.TextView.Small">
@@ -100,6 +108,27 @@
     <style name="AppTheme.TextView.ExtraHuge">
         <item name="android:textSize">24sp</item>
     </style>
+
+    <style name="AppTheme.TextView.Screening">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="AppTheme.TextView.Screening.Date">
+        <item name="android:textColor">@color/screening_date_color</item>
+        <item name="android:alpha">0.87</item>
+    </style>
+
+    <style name="AppTheme.TextView.Screening.Time">
+        <item name="android:textColor">@color/screening_time_color</item>
+        <item name="android:alpha">0.87</item>
+    </style>
+
+    <style name="AppTheme.TextView.Screening.Price">
+        <item name="android:textColor">@color/screening_price_color</item>
+        <item name="android:alpha">0.87</item>
+    </style>
+
+    <!-- TextView Style -->
 
     <style name="AppTheme.TextView.Small.Black">
         <item name="android:textColor">@color/title_color</item>
@@ -148,28 +177,5 @@
     <style name="AppTheme.TextView.ExtraHuge.Black">
         <item name="android:textColor">@color/title_color</item>
     </style>
-
-    <style name="AppTheme.TextView.Screening">
-        <item name="android:textSize">13sp</item>
-        <item name="android:textColor">@color/screening_text_color</item>
-        <item name="android:alpha">0.87</item>
-    </style>
-
-    <style name="AppTheme.TextView.Screening.Price">
-        <item name="android:textSize">12sp</item>
-        <item name="android:textColor">@color/screening_item_price_color</item>
-        <item name="android:fontFamily">@font/roboto_light</item>
-        <item name="android:alpha">1</item>
-    </style>
-
-    <style name="AppTheme.ExpandedTitleTextAppearance">
-        <item name="android:textColor">@color/toolbar_title_color</item>
-    </style>
-
-    <style name="AppTheme.CollapsedTitleTextAppearance">
-        <item name="android:fontFamily">@font/roboto_medium</item>
-        <item name="android:textColor">@color/toolbar_title_color</item>
-    </style>
-
 
 </resources>

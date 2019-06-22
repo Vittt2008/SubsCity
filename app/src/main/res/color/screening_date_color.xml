@@ -1,0 +1,4 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@color/screening_date_pressed_color" android:state_pressed="true" />
+    <item android:color="@color/screening_date_default_color" />
+</selector>
