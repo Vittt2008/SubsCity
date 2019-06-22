@@ -40,4 +40,13 @@
 
     <color name="movies_background_color">#FAFAFA</color>
 
+    <color name="screening_date_default_color">#A4A4A4</color>
+    <color name="screening_date_pressed_color">#A4A4A4</color>
+    <color name="screening_time_default_color">#FF94E7</color>
+    <color name="screening_time_pressed_color">#FF94E7</color>
+    <color name="screening_price_default_color">#E1E1E1</color>
+    <color name="screening_price_pressed_color">#E1E1E1</color>
+
+    <color name="movie_text_color">#E1E1E1</color>
+
 </resources>

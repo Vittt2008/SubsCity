@@ -5,4 +5,11 @@
         <item name="android:navigationBarColor" tools:targetApi="lollipop">@color/main_background_color</item>
     </style>
 
+    <style name="AppTheme.TextView.Movie.Title" />
+
+    <style name="AppTheme.TextView.Movie.Genre">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/subtitle_color</item>
+    </style>
+
 </resources>

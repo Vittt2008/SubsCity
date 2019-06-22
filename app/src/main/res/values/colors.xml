@@ -47,6 +47,8 @@
     <color name="screening_price_default_color">#000000</color>
     <color name="screening_price_pressed_color">#CCCCCC</color>
 
+    <color name="movie_text_color">#FFFFFF</color>
+
     <!-- Social Networks -->
     <color name="telegram_color">#0D86D7</color>
     <color name="vkontakte_color">#4A76A8</color>

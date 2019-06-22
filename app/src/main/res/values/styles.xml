@@ -87,10 +87,7 @@
 
     <style name="AppTheme.TextView" parent="TextAppearance.AppCompat">
         <item name="android:fontFamily">@font/roboto_regular</item>
-    </style>
-
-    <style name="AppTheme.TextView.Small">
-        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">normal</item>
     </style>
 
     <style name="AppTheme.TextView.Medium">
@@ -108,6 +105,8 @@
     <style name="AppTheme.TextView.ExtraHuge">
         <item name="android:textSize">24sp</item>
     </style>
+
+    <!--region Screening-->
 
     <style name="AppTheme.TextView.Screening">
         <item name="android:textSize">14sp</item>
@@ -128,17 +127,34 @@
         <item name="android:alpha">0.87</item>
     </style>
 
+    <!--endregion-->
+
+    <!--region Movie-->
+
+    <style name="AppTheme.TextView.Movie">
+        <item name="android:textColor">@color/movie_text_color</item>
+    </style>
+
+    <style name="AppTheme.TextView.Movie.Language">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="AppTheme.TextView.Movie.Title">
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+
+    <style name="AppTheme.TextView.Movie.Genre">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">italic</item>
+    </style>
+
+    <!--endregion-->
+
+
     <!-- TextView Style -->
 
-    <style name="AppTheme.TextView.Small.Black">
-        <item name="android:textColor">@color/title_color</item>
-    </style>
-
-    <style name="AppTheme.TextView.Small.White">
-        <item name="android:textColor">@color/white_color</item>
-    </style>
-
-    <style name="AppTheme.TextView.Small.Black.Subtitle">
+    <style name="AppTheme.TextView.Small.Black.Subtitle" parent="AppTheme.TextView">
+        <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/subtitle_color</item>
     </style>
 
