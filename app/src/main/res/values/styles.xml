@@ -102,10 +102,6 @@
         <item name="android:textSize">20sp</item>
     </style>
 
-    <style name="AppTheme.TextView.ExtraHuge">
-        <item name="android:textSize">24sp</item>
-    </style>
-
     <!--region Screening-->
 
     <style name="AppTheme.TextView.Screening">
@@ -150,6 +146,15 @@
 
     <!--endregion-->
 
+    <!--region Cinema-->
+
+    <style name="AppTheme.TextView.Cinema.Title" parent="AppTheme.TextView">
+        <item name="android:textColor">@color/title_color</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <!--endregion-->
+
 
     <!-- TextView Style -->
 
@@ -190,8 +195,5 @@
         <item name="android:fontFamily">@font/roboto_medium</item>
     </style>
 
-    <style name="AppTheme.TextView.ExtraHuge.Black">
-        <item name="android:textColor">@color/title_color</item>
-    </style>
 
 </resources>

@@ -59,26 +59,26 @@
     <color name="facebook_dark_pressed">#4A72C7</color> <!-- #35528F -->
 
     <!-- St. Petersburg Metro -->
-    <color name="metro_spb_line_1">#d51c36</color>
-    <color name="metro_spb_line_2">#197dce</color>
-    <color name="metro_spb_line_3">#1b9958</color>
-    <color name="metro_spb_line_4">#dd700d</color>
-    <color name="metro_spb_line_5">#6c0b78</color>
-    <color name="metro_spb_line_6">#8d5b2f</color>
+    <color name="metro_spb_line_1">#D6083B</color>
+    <color name="metro_spb_line_2">#0078C9</color>
+    <color name="metro_spb_line_3">#009A49</color>
+    <color name="metro_spb_line_4">#EA7125</color>
+    <color name="metro_spb_line_5">#702785</color>
+    <color name="metro_spb_line_6">#8D5B2D</color>
 
     <!-- Moscow Metro -->
-    <color name="metro_msk_line_1">#e32213</color>
-    <color name="metro_msk_line_2">#4eae4f</color>
-    <color name="metro_msk_line_3">#0072b9</color>
-    <color name="metro_msk_line_4">#04baee</color>
-    <color name="metro_msk_line_5">#905133</color>
-    <color name="metro_msk_line_6">#ef7e23</color>
-    <color name="metro_msk_line_7">#933d8e</color>
-    <color name="metro_msk_line_8">#ffcc1b</color>
-    <color name="metro_msk_line_9">#adabab</color>
-    <color name="metro_msk_line_10">#bdd02b</color>
-    <color name="metro_msk_line_11">#86cbce</color>
-    <color name="metro_msk_line_12">#b9c7e7</color>
+    <color name="metro_msk_line_1">#ED1B35</color>
+    <color name="metro_msk_line_2">#44B85C</color>
+    <color name="metro_msk_line_3">#0078BF</color>
+    <color name="metro_msk_line_4">#19C1F3</color>
+    <color name="metro_msk_line_5">#894E35</color>
+    <color name="metro_msk_line_6">#F58631</color>
+    <color name="metro_msk_line_7">#8E479C</color>
+    <color name="metro_msk_line_8">#FFCB31</color>
+    <color name="metro_msk_line_9">#A1A2A3</color>
+    <color name="metro_msk_line_10">#99CC00</color>
+    <color name="metro_msk_line_11">#79CDCD</color>
+    <color name="metro_msk_line_12">#ACBFE1</color>
     <color name="metro_msk_line_13">#2C74C5</color>
     <color name="metro_msk_line_14">#FFA8AF</color>
     <color name="metro_msk_line_15">#4FA6A4</color>
