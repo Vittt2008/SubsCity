@@ -1,5 +1,6 @@
 package com.markus.subscity.providers
 
+import android.content.Context
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.app.AppCompatDelegate.*
@@ -10,7 +11,8 @@ import javax.inject.Inject
 /**
  * @author Vitaliy Markus
  */
-class ThemeProvider @Inject constructor(private val preferencesProvider: PreferencesProvider) {
+class ThemeProvider @Inject constructor(private val context: Context,
+                                        private val preferencesProvider: PreferencesProvider) {
 
     fun createThemeList(): List<SelectedThemeItem> {
         val themeMode = getCurrentThemeMode()
@@ -29,6 +31,12 @@ class ThemeProvider @Inject constructor(private val preferencesProvider: Prefere
     fun applyCurrentTheme() {
         val themeMode = getCurrentThemeMode()
         applyTheme(themeMode)
+    }
+
+    fun getCurrentThemeTitle(): String {
+        val mode = getCurrentThemeMode()
+        val titleId = createThemeList().find { it.mode == mode }?.title ?: createAutoSystemItem(getAutoSystemValue()).title
+        return context.getString(titleId)
     }
 
     private fun applyTheme(mode: Int) {

@@ -25,6 +25,7 @@ interface SettingsView : MvpView {
         const val LANGUAGE = 9
     }
 
+    @StateStrategyType(OneExecutionStateStrategy::class)
     fun showSettings(settings: List<SettingItem>)
 
     @StateStrategyType(OneExecutionStateStrategy::class)
@@ -33,5 +34,5 @@ interface SettingsView : MvpView {
     @StateStrategyType(OneExecutionStateStrategy::class)
     fun openPlayStore()
 
-    class SettingItem(val id: Int, @DrawableRes val icon: Int, @StringRes val title: Int, val city: String = "")
+    class SettingItem(val id: Int, @DrawableRes val icon: Int, @StringRes val title: Int, val subtitle: String? = null)
 }

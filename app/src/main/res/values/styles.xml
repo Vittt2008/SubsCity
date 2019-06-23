@@ -167,6 +167,26 @@
 
     <!--endregion-->
 
+    <!--region Settings-->
+
+    <style name="AppTheme.Image.Setting" parent="AppTheme">
+        <item name="android:layout_width">24dp</item>
+        <item name="android:layout_height">24dp</item>
+        <item name="android:scaleType">center</item>
+        <item name="android:tint">@color/settings_color</item>
+    </style>
+
+    <style name="AppTheme.TextView.Setting.Title" parent="AppTheme.TextView.Medium">
+        <item name="android:textColor">@color/settings_color</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+
+    <style name="AppTheme.TextView.Setting.Subtitle" parent="AppTheme.TextView.Medium">
+        <item name="android:textColor">@color/subtitle_color</item>
+    </style>
+
+    <!--endregion-->
+
     <!-- TextView Style -->
 
     <style name="AppTheme.TextView.Small.Black.Subtitle" parent="AppTheme.TextView">
