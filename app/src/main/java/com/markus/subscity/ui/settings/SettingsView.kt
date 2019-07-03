@@ -1,7 +1,5 @@
 package com.markus.subscity.ui.settings
 
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
 import com.arellomobile.mvp.MvpView
 import com.arellomobile.mvp.viewstate.strategy.OneExecutionStateStrategy
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
@@ -26,13 +24,11 @@ interface SettingsView : MvpView {
     }
 
     @StateStrategyType(OneExecutionStateStrategy::class)
-    fun showSettings(settings: List<SettingItem>)
+    fun showSettings(settings: List<Setting>)
 
     @StateStrategyType(OneExecutionStateStrategy::class)
     fun showCinemasMap(city: City)
 
     @StateStrategyType(OneExecutionStateStrategy::class)
     fun openPlayStore()
-
-    class SettingItem(val id: Int, @DrawableRes val icon: Int, @StringRes val title: Int, val subtitle: String? = null)
 }

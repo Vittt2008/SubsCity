@@ -11,6 +11,7 @@ import com.markus.subscity.ui.settings.SettingsView.Companion.ABOUT
 import com.markus.subscity.ui.settings.SettingsView.Companion.CINEMA_MAP
 import com.markus.subscity.ui.settings.SettingsView.Companion.CITY
 import com.markus.subscity.ui.settings.SettingsView.Companion.DONATE
+import com.markus.subscity.ui.settings.SettingsView.Companion.LANGUAGE
 import com.markus.subscity.ui.settings.SettingsView.Companion.POLICY
 import com.markus.subscity.ui.settings.SettingsView.Companion.RATE_APP
 import com.markus.subscity.ui.settings.SettingsView.Companion.THEME
@@ -43,17 +44,18 @@ class SettingsPresenter @Inject constructor(private val cityProvider: CityProvid
         viewState.openPlayStore()
     }
 
-    private fun createSettings(cityName: String, themeTitle: String): List<SettingsView.SettingItem> {
+    private fun createSettings(cityName: String, themeTitle: String): List<Setting> {
         val settings = mutableListOf(
-                SettingsView.SettingItem(CINEMA_MAP, R.drawable.ic_menu_map, R.string.setting_cinema_map_title),
-                SettingsView.SettingItem(THEME, R.drawable.ic_menu_theme, R.string.setting_theme, themeTitle),
-//                SettingsView.SettingItem(LANGUAGE, R.drawable.ic_menu_language, R.string.setting_language),
-                SettingsView.SettingItem(RATE_APP, R.drawable.ic_menu_rate_app, R.string.setting_rate_app),
-                SettingsView.SettingItem(ABOUT, R.drawable.ic_menu_about, R.string.setting_about_title),
-                SettingsView.SettingItem(POLICY, R.drawable.ic_menu_policy, R.string.setting_policy_title),
-                SettingsView.SettingItem(CITY, R.drawable.ic_menu_city, R.string.setting_city_title, cityName))
+                Setting.Item(CINEMA_MAP, R.drawable.ic_menu_map, R.string.setting_cinema_map_title),
+                Setting.TwoLineItem(THEME, R.drawable.ic_menu_theme, R.string.setting_theme, themeTitle),
+                Setting.ThemeItem(THEME, R.drawable.ic_menu_theme, R.string.setting_theme, false),
+                Setting.TwoLineItem(LANGUAGE, R.drawable.ic_menu_language, R.string.setting_language, "Русский"),
+                Setting.Item(RATE_APP, R.drawable.ic_menu_rate_app, R.string.setting_rate_app),
+                Setting.Item(ABOUT, R.drawable.ic_menu_about, R.string.setting_about_title),
+                Setting.Item(POLICY, R.drawable.ic_menu_policy, R.string.setting_policy_title),
+                Setting.TwoLineItem(CITY, R.drawable.ic_menu_city, R.string.setting_city_title, cityName))
         if (billingProvider.isBillingAvailable) {
-            settings.add(SettingsView.SettingItem(DONATE, R.drawable.ic_menu_donate, R.string.setting_donate_title))
+            settings.add(Setting.Item(DONATE, R.drawable.ic_menu_donate, R.string.setting_donate_title))
         }
         return settings
     }

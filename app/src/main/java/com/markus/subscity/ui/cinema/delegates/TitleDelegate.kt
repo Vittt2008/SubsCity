@@ -13,7 +13,7 @@ import com.markus.subscity.R
  */
 class TitleDelegate : AbsListItemAdapterDelegate<Int, Any, TitleDelegate.TitleDividerViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup): TitleDelegate.TitleDividerViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup): TitleDividerViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_divider_title, parent, false)
         return TitleDividerViewHolder(view)
     }
@@ -22,11 +22,11 @@ class TitleDelegate : AbsListItemAdapterDelegate<Int, Any, TitleDelegate.TitleDi
         return position == 1 && item is Int
     }
 
-    override fun onBindViewHolder(item: Int, viewHolder: TitleDelegate.TitleDividerViewHolder, payloads: MutableList<Any>) {
+    override fun onBindViewHolder(item: Int, viewHolder: TitleDividerViewHolder, payloads: MutableList<Any>) {
         viewHolder.bind(item)
     }
 
-    class TitleDividerViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
+    class TitleDividerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         fun bind(titleId: Int) {
             itemView.findViewById<TextView>(R.id.tv_divider_title).setText(titleId)

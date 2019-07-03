@@ -23,11 +23,11 @@ import com.markus.subscity.ui.policy.PolicyActivity
 import com.markus.subscity.ui.settings.SettingsView.Companion.ABOUT
 import com.markus.subscity.ui.settings.SettingsView.Companion.CINEMA_MAP
 import com.markus.subscity.ui.settings.SettingsView.Companion.CITY
-import com.markus.subscity.ui.settings.SettingsView.Companion.THEME
 import com.markus.subscity.ui.settings.SettingsView.Companion.DONATE
 import com.markus.subscity.ui.settings.SettingsView.Companion.LANGUAGE
 import com.markus.subscity.ui.settings.SettingsView.Companion.POLICY
 import com.markus.subscity.ui.settings.SettingsView.Companion.RATE_APP
+import com.markus.subscity.ui.settings.SettingsView.Companion.THEME
 import com.markus.subscity.ui.theme.ThemeActivity
 
 /**
@@ -54,10 +54,10 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
         return settingsList
     }
 
-    override fun showSettings(settings: List<SettingsView.SettingItem>) {
+    override fun showSettings(settings: List<Setting>) {
         settingsList.run {
             layoutManager = LinearLayoutManager(activity)
-            adapter = SettingsAdapter(settings) { item ->
+            adapter = SettingsDelegatesAdapter(settings, { item ->
                 when (item) {
                     CINEMA_MAP -> settingsPresenter.showCinemasMap()
                     THEME -> openThemePicker()
@@ -68,7 +68,9 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
                     DONATE -> DonateActivity.start(requireActivity())
                     CITY -> openCityPicker()
                 }
-            }
+            }, { isThemeChecked ->
+
+            })
         }
     }
 

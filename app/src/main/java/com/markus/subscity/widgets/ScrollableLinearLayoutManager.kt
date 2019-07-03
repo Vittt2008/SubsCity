@@ -7,7 +7,7 @@ import android.util.AttributeSet
 /**
  * @author Vitaliy Markus
  */
-class ScrollableLinearLayoutManager : androidx.recyclerview.widget.LinearLayoutManager {
+class ScrollableLinearLayoutManager : LinearLayoutManager {
 
     constructor(context: Context) : super(context)
     constructor(context: Context, orientation: Int, reverseLayout: Boolean) : super(context, orientation, reverseLayout)
