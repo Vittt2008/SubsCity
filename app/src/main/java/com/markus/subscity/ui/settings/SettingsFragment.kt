@@ -68,9 +68,7 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
                     DONATE -> DonateActivity.start(requireActivity())
                     CITY -> openCityPicker()
                 }
-            }, { isThemeChecked ->
-
-            })
+            }, settingsPresenter::switchTheme)
         }
     }
 
@@ -106,7 +104,7 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
     }
 
     private fun openThemePicker() {
-//        analytics().logThemePicker()
+        analytics().logThemePicker()
         ThemeActivity.start(requireActivity())
     }
 

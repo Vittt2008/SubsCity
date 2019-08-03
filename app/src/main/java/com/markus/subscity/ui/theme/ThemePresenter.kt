@@ -17,6 +17,6 @@ class ThemePresenter @Inject constructor(private val themeProvider: ThemeProvide
     }
 
     fun updateTheme(item: ThemeProvider.SelectedThemeItem) {
-        themeProvider.applyTheme(item)
+        themeProvider.applyTheme(item.mode)
     }
 }

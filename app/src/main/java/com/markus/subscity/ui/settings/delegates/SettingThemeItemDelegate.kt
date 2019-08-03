@@ -47,7 +47,7 @@ class SettingThemeItemDelegate(private val clickListener: (Boolean) -> Unit) : A
             settingIcon.setImageResource(item.icon)
             settingTitle.setText(item.title)
             settingTitle.setText(item.title)
-            settingSwitch.isChecked = item.checked
+            settingSwitch.isChecked = itemView.resources.getBoolean(R.bool.is_dark)
         }
     }
 }

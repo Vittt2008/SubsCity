@@ -1,6 +1,8 @@
 package com.markus.subscity.ui.splash
 
 import android.os.Bundle
+import android.os.Parcel
+import android.os.Parcelable
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
@@ -83,4 +85,28 @@ class SplashActivity : MvpAppCompatActivity(), SplashView, DeepLinkView {
         FirstPickCityActivity.start(this)
         finish()
     }
+}
+
+class Value(val value: Int) : Parcelable {
+
+    constructor(parcel: Parcel) : this(parcel.readInt())
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeInt(value)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<Value> {
+        override fun createFromParcel(parcel: Parcel): Value {
+            return Value(parcel)
+        }
+
+        override fun newArray(size: Int): Array<Value?> {
+            return arrayOfNulls(size)
+        }
+    }
+
 }
