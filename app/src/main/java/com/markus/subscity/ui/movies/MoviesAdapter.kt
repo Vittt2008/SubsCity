@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.content.ContextCompat
 import androidx.core.widget.TextViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -17,6 +18,7 @@ import com.markus.subscity.dagger.GlideApp
 import com.markus.subscity.dagger.SubsCityDagger
 import com.markus.subscity.extensions.getWidthScreen
 import com.markus.subscity.providers.LanguageProvider
+import com.markus.subscity.providers.ThemeProvider
 import com.markus.subscity.widgets.transformations.PosterCrop
 import javax.inject.Inject
 
@@ -28,7 +30,11 @@ class MoviesAdapter(context: Context,
                     private val movies: List<Movie>,
                     private val clickListener: (Movie) -> Unit) : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 
-    private val RATING = 6.9
+    companion object {
+        private const val RATING = 6.9
+    }
+
+    private val errorDrawable = ContextCompat.getDrawable(context, R.drawable.ic_error_poster)
 
     private val layoutInflater = LayoutInflater.from(context)
     private val width: Int = context.getWidthScreen()
@@ -97,7 +103,7 @@ class MoviesAdapter(context: Context,
             GlideApp.with(moviePoster)
                     .asBitmap()
                     .load(movie.poster)
-                    .error(R.drawable.ic_splash_screen)
+                    .error(errorDrawable)
                     .override(posterWidth, layoutParams.height)
                     .transform(PosterCrop())
                     .into(moviePoster)

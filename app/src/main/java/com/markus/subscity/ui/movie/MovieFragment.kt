@@ -2,17 +2,19 @@ package com.markus.subscity.ui.movie
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
-import com.google.android.material.appbar.CollapsingToolbarLayout
-import androidx.transition.TransitionManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.*
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
+import androidx.transition.TransitionManager
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.github.rubensousa.bottomsheetbuilder.BottomSheetBuilder
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.markus.subscity.R
 import com.markus.subscity.api.entities.cinema.Cinema
 import com.markus.subscity.api.entities.movie.Movie
@@ -50,6 +52,7 @@ class MovieFragment : MvpAppCompatFragment(), MovieView, ShareView {
     private lateinit var shareMenuItem: MenuItem
 
     private var adapter: MovieAdapterDelegates? = null
+    private var errorDrawable: Drawable? = null
 
     companion object {
         fun newInstance(movieId: Long): MovieFragment {
@@ -89,6 +92,7 @@ class MovieFragment : MvpAppCompatFragment(), MovieView, ShareView {
         setSupportActionBar(root.findViewById(R.id.toolbar))
         toolbarLayout.title = ""
         supportActionBar.title = ""
+        errorDrawable = ContextCompat.getDrawable(requireActivity(), R.drawable.ic_error_poster)
         return root
     }
 
@@ -115,7 +119,12 @@ class MovieFragment : MvpAppCompatFragment(), MovieView, ShareView {
         requireActivity().invalidateOptionsMenu()
         if (adapter == null) {
             toolbarLayout.title = movie.title.russian
-            GlideApp.with(moviePoster).asBitmap().load(movie.poster).transform(PosterCrop()).into(moviePoster)
+            GlideApp.with(moviePoster)
+                    .asBitmap()
+                    .load(movie.poster)
+                    .error(errorDrawable)
+                    .transform(PosterCrop())
+                    .into(moviePoster)
             adapter = MovieAdapterDelegates(movie, cinemaScreenings, ::buyTicket, ::openCinema)
             movieInfoList.adapter = adapter
             if (movie.trailer.hasTrailer) {

@@ -19,6 +19,7 @@ class MovieScreeningAdapter(private val context: Context,
                             private val clickListener: (Screening) -> Unit) : RecyclerView.Adapter<MovieScreeningAdapter.ViewHolder>() {
 
     private val screenWidth: Int = context.getWidthScreen()
+    private val itemHeight = context.resources.getDimensionPixelSize(R.dimen.screenings_size)
     private val itemWidth: Int
 
     init {
@@ -28,7 +29,7 @@ class MovieScreeningAdapter(private val context: Context,
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val root = LayoutInflater.from(parent.context).inflate(R.layout.item_screening, parent, false)
-        root.layoutParams = RecyclerView.LayoutParams(itemWidth, itemWidth)
+        root.layoutParams = RecyclerView.LayoutParams(itemWidth, itemHeight)
         return ViewHolder(root)
     }
 
