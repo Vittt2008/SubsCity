@@ -24,6 +24,10 @@ import javax.inject.Inject
 class MovieScreeningsDelegate(private val screeningClickListener: (Screening) -> Unit,
                               private val movieTitleClickListener: (Movie) -> Unit) : AbsListItemAdapterDelegate<CinemaPresenter.MovieScreenings, Any, MovieScreeningsDelegate.MovieScreeningsViewHolder>() {
 
+    companion object {
+        private const val SPAN_COUNT = 4
+    }
+
     @Inject
     lateinit var languageProvider: LanguageProvider
 
@@ -45,7 +49,7 @@ class MovieScreeningsDelegate(private val screeningClickListener: (Screening) ->
     }
 
     inner class MovieScreeningsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val SPAN_COUNT = 4
+
         private lateinit var movie: Movie
         private val titleLayout = view.findViewById<View>(R.id.title_layout)
         private val movieTitle = view.findViewById<TextView>(R.id.tv_title)
