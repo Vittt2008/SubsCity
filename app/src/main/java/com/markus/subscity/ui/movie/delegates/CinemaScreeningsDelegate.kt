@@ -24,6 +24,10 @@ import javax.inject.Inject
 class CinemaScreeningsDelegate(private val screeningClickListener: (Screening) -> Unit,
                                private val cinemaTitleClickListener: (Cinema) -> Unit) : AbsListItemAdapterDelegate<MoviePresenter.CinemaScreenings, Any, CinemaScreeningsDelegate.CinemaScreeningsViewHolder>() {
 
+    companion object{
+        private const val SPAN_COUNT = 4
+    }
+
     @Inject
     lateinit var metroProvider: MetroProvider
 
@@ -45,7 +49,7 @@ class CinemaScreeningsDelegate(private val screeningClickListener: (Screening) -
     }
 
     inner class CinemaScreeningsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val SPAN_COUNT = 4
+
         private lateinit var cinema: Cinema
         private val titleLayout = view.findViewById<View>(R.id.title_layout)
         private val cinemaTitle = view.findViewById<TextView>(R.id.tv_title)

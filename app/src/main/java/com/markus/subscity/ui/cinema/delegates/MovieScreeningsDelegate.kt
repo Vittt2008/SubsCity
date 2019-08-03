@@ -65,7 +65,9 @@ class MovieScreeningsDelegate(private val screeningClickListener: (Screening) ->
                 adapter = MovieScreeningAdapter(screenings.context, movieScreenings.screenings, SPAN_COUNT, screeningClickListener)
                 val horizontal = context.resources.getDimensionPixelSize(R.dimen.screening_horizontal_margin)
                 val vertical = context.resources.getDimensionPixelSize(R.dimen.screening_vertical_margin)
-                addItemDecoration(ImageGridItemDecoration(SPAN_COUNT, horizontal, vertical, false))
+                if (screenings.itemDecorationCount == 0) {
+                    addItemDecoration(ImageGridItemDecoration(SPAN_COUNT, horizontal, vertical, false))
+                }
             }
         }
 
