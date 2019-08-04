@@ -18,10 +18,12 @@ class ProgressDelegate : AbsListItemAdapterDelegate<Any, Any, ProgressDelegate.P
     }
 
     override fun isForViewType(item: Any, items: List<Any>, position: Int): Boolean {
-        return position == 1 && item !is Int
+        return item is ProgressObject
     }
 
     override fun onBindViewHolder(item: Any, viewHolder: ProgressViewHolder, payloads: List<Any>) {}
+
+    object ProgressObject
 
     class ProgressViewHolder(view: View) : RecyclerView.ViewHolder(view)
 }

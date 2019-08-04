@@ -11,7 +11,7 @@ import com.markus.subscity.R
 /**
  * @author Vitaliy Markus
  */
-class TitleDelegate : AbsListItemAdapterDelegate<Int, Any, TitleDelegate.TitleDividerViewHolder>() {
+class TitleDelegate : AbsListItemAdapterDelegate<TitleDelegate.TitleInfo, Any, TitleDelegate.TitleDividerViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup): TitleDividerViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_divider_title, parent, false)
@@ -19,17 +19,19 @@ class TitleDelegate : AbsListItemAdapterDelegate<Int, Any, TitleDelegate.TitleDi
     }
 
     override fun isForViewType(item: Any, items: List<Any>, position: Int): Boolean {
-        return position == 1 && item is Int
+        return item is TitleInfo
     }
 
-    override fun onBindViewHolder(item: Int, viewHolder: TitleDividerViewHolder, payloads: MutableList<Any>) {
+    override fun onBindViewHolder(item: TitleInfo, viewHolder: TitleDividerViewHolder, payloads: MutableList<Any>) {
         viewHolder.bind(item)
     }
 
+    class TitleInfo(val titleId: Int)
+
     class TitleDividerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        fun bind(titleId: Int) {
-            itemView.findViewById<TextView>(R.id.tv_divider_title).setText(titleId)
+        fun bind(info: TitleInfo) {
+            itemView.findViewById<TextView>(R.id.tv_divider_title).setText(info.titleId)
         }
     }
 }

@@ -30,7 +30,7 @@ class MovieInfoDelegate : AbsListItemAdapterDelegate<Movie, Any, MovieInfoDelega
     }
 
     override fun isForViewType(item: Any, items: List<Any>, position: Int): Boolean {
-        return position == 0
+        return item is Movie
     }
 
     override fun onBindViewHolder(item: Movie, viewHolder: InfoViewHolder, payloads: List<Any>) {

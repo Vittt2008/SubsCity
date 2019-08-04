@@ -33,7 +33,7 @@ class CinemaInfoDelegate(private val showCinemaName: Boolean,
     }
 
     override fun isForViewType(item: Any, items: List<Any>, position: Int): Boolean {
-        return position == 0
+        return item is Cinema
     }
 
     override fun onBindViewHolder(item: Cinema, viewHolder: InfoViewHolder, payloads: List<Any>) {
@@ -43,6 +43,7 @@ class CinemaInfoDelegate(private val showCinemaName: Boolean,
     inner class InfoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private lateinit var cinema: Cinema
 
+        private val dragItem = view.findViewById<View>(R.id.drag_item)
         private val name = view.findViewById<TextView>(R.id.tv_cinema_name)
         private val address = view.findViewById<TextView>(R.id.tv_cinema_address)
         private val metroStation = view.findViewById<TextView>(R.id.tv_cinema_metro_station)
@@ -62,9 +63,11 @@ class CinemaInfoDelegate(private val showCinemaName: Boolean,
             this.cinema = cinema
 
             if (showCinemaName) {
+                dragItem.visibility = View.VISIBLE
                 name.text = cinema.name
                 name.visibility = View.VISIBLE
             } else {
+                dragItem.visibility = View.GONE
                 name.visibility = View.GONE
             }
             address.text = cinema.location.address
