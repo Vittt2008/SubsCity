@@ -9,7 +9,7 @@
 
     <TextView
         android:id="@+id/tv_cinema_name"
-        style="@style/AppTheme.TextView.Huge.Black.Bold"
+        style="@style/AppTheme.TextView.Huge.Black.Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="8dp"
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:src="@drawable/ic_menu_show_on_map"
-            android:tint="@color/subtitle_color"
+            android:tint="@color/icon_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -74,7 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:src="@drawable/ic_menu_call"
-            android:tint="@color/subtitle_color"
+            android:tint="@color/icon_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -104,7 +104,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:src="@drawable/ic_menu_web"
-            android:tint="@color/subtitle_color"
+            android:tint="@color/icon_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

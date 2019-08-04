@@ -59,12 +59,7 @@ class MovieScreeningAdapter(private val context: Context,
             date.text = screening.dateTime.toString("d MMM").replace(".", "")
             time.text = screening.dateTime.toString("HH:mm")
             val ticketPrice = if (screening.priceMin != 0) screening.priceMin else if (screening.priceMax != 0) screening.priceMax else 0
-            if (ticketPrice != 0) {
-                price.text = context.getString(R.string.movie_screening_price, ticketPrice)
-                price.visibility = View.VISIBLE
-            } else {
-                price.visibility = View.GONE
-            }
+            price.text = if (ticketPrice != 0) context.getString(R.string.movie_screening_price, ticketPrice) else "—"
         }
     }
 }

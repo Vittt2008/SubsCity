@@ -10,7 +10,7 @@
         android:id="@+id/scroll"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/bt_rate_app"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -67,7 +67,7 @@
 
             <TextView
                 android:id="@+id/tv_social_network_title"
-                style="@style/AppTheme.TextView.Huge.Black.Bold"
+                style="@style/AppTheme.TextView.Huge.Black.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
@@ -121,7 +121,7 @@
 
             <TextView
                 android:id="@+id/tv_team"
-                style="@style/AppTheme.TextView.Huge.Black.Bold"
+                style="@style/AppTheme.TextView.Huge.Black.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
@@ -148,18 +148,5 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
-
-    <Button
-        android:id="@+id/bt_rate_app"
-        style="@style/AppTheme.Button.Accent"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:text="@string/about_review"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:targetApi="lollipop" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

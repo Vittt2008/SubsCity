@@ -12,4 +12,12 @@
         <item name="android:textColor">@color/subtitle_color</item>
     </style>
 
+    <style name="AppTheme.TextView.MovieInfo.Title" parent="AppTheme.TextView.Medium.Black" />
+
+    <style name="AppTheme.TextView.MovieInfo.Subtitle" parent="AppTheme.TextView.Medium.Black">
+        <item name="android:textColor">@color/subtitle_color</item>
+    </style>
+
+    <style name="AppTheme.TextView.Huge.Black.Title" />
+
 </resources>

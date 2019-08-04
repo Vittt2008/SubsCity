@@ -15,6 +15,7 @@ import com.markus.subscity.ui.deeplink.DeepLinkView
 import com.markus.subscity.ui.deeplink.isFromDeepLink
 import com.markus.subscity.ui.main.MainActivity
 import com.markus.subscity.ui.movie.MovieActivity
+import java.lang.IllegalArgumentException
 
 /**
  * @author Vitaliy Markus
@@ -41,7 +42,8 @@ class SplashActivity : MvpAppCompatActivity(), SplashView, DeepLinkView {
         super.onCreate(savedInstanceState)
 
         if (isFromDeepLink) {
-            deepLinkPresenter.performDeepLink(intent.data)
+            val data = (intent.data ?: throw IllegalArgumentException("Data must be non null"))
+            deepLinkPresenter.performDeepLink(data)
         } else {
             splashPresenter.checkFirstLaunch()
         }

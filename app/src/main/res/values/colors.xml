@@ -15,6 +15,7 @@
     <color name="bottom_bar_background_color">#FFFFFF</color>
 
     <color name="title_color">#000000</color>
+    <color name="icon_color">#8A000000</color>
     <color name="subtitle_color">#8A000000</color>
     <color name="settings_color">#60565e</color>
 

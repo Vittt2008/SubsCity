@@ -5,7 +5,7 @@ apply plugin: "kotlin-kapt"
 apply plugin: 'io.fabric'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
         applicationId "com.markus.subscity"
         minSdkVersion 16
@@ -26,7 +26,6 @@ android {
         targetCompatibility 1.8
         sourceCompatibility 1.8
     }
-    buildToolsVersion = '28.0.3'
 }
 
 dependencies {

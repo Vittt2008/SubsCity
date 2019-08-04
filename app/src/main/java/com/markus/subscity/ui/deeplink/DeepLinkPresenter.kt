@@ -20,7 +20,7 @@ class DeepLinkPresenter @Inject constructor(private val cityProvider: CityProvid
     }
 
     fun performDeepLink(data: Uri) {
-        val hosts = data.host.split('.')
+        val hosts = data.host.orEmpty().split('.')
         if (hosts.size == 3) {
             cityProvider.changeCity(hosts.first())
         }

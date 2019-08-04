@@ -45,7 +45,6 @@ class AboutFragment : MvpAppCompatFragment(), AboutView {
         root.findViewById<View>(R.id.bt_telegram).setOnClickListener { aboutPresenter.openTelegram() }
         root.findViewById<View>(R.id.bt_vk).setOnClickListener { aboutPresenter.openVkontakte() }
         root.findViewById<View>(R.id.bt_fb).setOnClickListener { aboutPresenter.openFacebook() }
-        root.findViewById<View>(R.id.bt_rate_app).setOnClickListener { openEmailApp(R.string.email_address) }
         initTeamMembers(root)
         return root
     }

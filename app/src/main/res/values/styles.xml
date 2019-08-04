@@ -187,6 +187,16 @@
 
     <!--endregion-->
 
+    <!--region Movie Info-->
+
+    <style name="AppTheme.TextView.MovieInfo.Title" parent="AppTheme.TextView.Medium.Black">
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+
+    <style name="AppTheme.TextView.MovieInfo.Subtitle" parent="AppTheme.TextView.Medium.Black"/>
+
+    <!--endregion-->
+
     <!-- TextView Style -->
 
     <style name="AppTheme.TextView.Small.Black.Subtitle" parent="AppTheme.TextView">
@@ -196,10 +206,6 @@
 
     <style name="AppTheme.TextView.Medium.Black">
         <item name="android:textColor">@color/title_color</item>
-    </style>
-
-    <style name="AppTheme.TextView.Medium.Black.Bold">
-        <item name="android:fontFamily">@font/roboto_medium</item>
     </style>
 
     <style name="AppTheme.TextView.Large.Black">
@@ -218,9 +224,8 @@
         <item name="android:textColor">@color/title_color</item>
     </style>
 
-    <style name="AppTheme.TextView.Huge.Black.Bold">
+    <style name="AppTheme.TextView.Huge.Black.Title">
         <item name="android:fontFamily">@font/roboto_medium</item>
     </style>
-
 
 </resources>

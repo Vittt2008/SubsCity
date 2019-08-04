@@ -22,9 +22,9 @@ class MarginDivider(private val context: Context) : RecyclerView.ItemDecoration(
     var marginRight = 0
 
     init {
-        val a = context.obtainStyledAttributes(ATTRS)
-        divider = a.getDrawable(0)
-        a.recycle()
+        val typedArray = context.obtainStyledAttributes(ATTRS)
+        divider = typedArray.getDrawable(0) ?: throw IllegalArgumentException("Drawable is null")
+        typedArray.recycle()
     }
 
     fun setDrawable(drawable: Drawable) {
@@ -32,7 +32,8 @@ class MarginDivider(private val context: Context) : RecyclerView.ItemDecoration(
     }
 
     fun setDrawable(@DrawableRes drawableId: Int) {
-        divider = ContextCompat.getDrawable(context, drawableId) ?: throw IllegalArgumentException("Drawable with ID = $drawableId must be not null")
+        divider = ContextCompat.getDrawable(context, drawableId)
+                ?: throw IllegalArgumentException("Drawable with ID = $drawableId must be not null")
     }
 
     override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
