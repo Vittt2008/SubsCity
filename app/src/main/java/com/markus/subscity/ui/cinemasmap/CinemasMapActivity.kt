@@ -13,7 +13,10 @@ import androidx.annotation.DrawableRes
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
+import androidx.viewpager.widget.getCurrentView
+import androidx.viewpager.widget.getView
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
@@ -167,6 +170,7 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnI
 
     override fun onBackPressed() {
         if (behavior.state == ViewPagerBottomSheetBehavior.STATE_EXPANDED) {
+            smoothScrollToTop()
             behavior.state = ViewPagerBottomSheetBehavior.STATE_COLLAPSED
         } else {
             super.onBackPressed()
@@ -253,19 +257,45 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnI
 
     inner class CinemaMapOnPageChangeListener : ViewPager.SimpleOnPageChangeListener() {
 
+        private var previousPosition: Int = 0
+        private var currentPosition: Int = 0
+
         override fun onPageSelected(position: Int) {
             selectMarker(position)
             viewPager.post { behavior.invalidateScrollingChild() }
         }
+
+        override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+            if (positionOffset == 0f) {
+                previousPosition = currentPosition
+                currentPosition = position
+                scrollToTop(previousPosition)
+            }
+        }
     }
 
     inner class MapBottomSheetCallback : ViewPagerBottomSheetBehavior.BottomSheetCallback() {
+
         override fun onStateChanged(bottomSheet: View, newState: Int) {
             if (newState == BottomSheetBehavior.STATE_HIDDEN) {
                 clearSelectedMarker(viewPager.currentItem)
             }
         }
 
-        override fun onSlide(bottomSheet: View, slideOffset: Float) {}
+        override fun onSlide(bottomSheet: View, slideOffset: Float) = Unit
+    }
+
+    private fun smoothScrollToTop() {
+        val view = viewPager.getCurrentView()
+        if (view is RecyclerView) {
+            view.smoothScrollToPosition(0)
+        }
+    }
+
+    private fun scrollToTop(position: Int) {
+        val view = viewPager.getView(position)
+        if (view is RecyclerView) {
+            view.scrollToPosition(0)
+        }
     }
 }

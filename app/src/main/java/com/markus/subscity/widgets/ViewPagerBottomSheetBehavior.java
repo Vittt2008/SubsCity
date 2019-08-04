@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.RestrictTo;
@@ -29,8 +30,9 @@ import androidx.core.math.MathUtils;
 import androidx.customview.view.AbsSavedState;
 import androidx.core.view.ViewCompat;
 import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager.widget.ViewPagerUtils;
 import androidx.customview.widget.ViewDragHelper;
+import androidx.viewpager.widget.ViewPagerUtils;
+
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.MotionEvent;
