@@ -41,14 +41,15 @@ import com.markus.subscity.ui.theme.ThemeActivity
  */
 class SettingsFragment : MvpAppCompatFragment(), SettingsView {
 
+    companion object{
+        private const val DIALOG_DELAY = 100L
+        fun newInstance() = SettingsFragment()
+    }
+
     @InjectPresenter
     lateinit var settingsPresenter: SettingsPresenter
 
     private lateinit var settingsList: RecyclerView
-
-    companion object {
-        fun newInstance() = SettingsFragment()
-    }
 
     @ProvidePresenter
     fun moviesPresenter(): SettingsPresenter {
@@ -97,17 +98,12 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
         val values = list.map { getString(it.title) }.toTypedArray()
         val selected = list.indexOfFirst { it.isSelected }
         AlertDialog.Builder(requireActivity())
-                .setSingleChoiceItems(values, selected) { _, index -> switchTheme(list[index].mode) }
+                .setSingleChoiceItems(values, selected) { dialog, index ->
+                    view?.postDelayed({ dialog.dismiss() }, DIALOG_DELAY)
+                    switchTheme(list[index].mode)
+                }
                 .setCancelable(true)
                 .show()
-    }
-
-    private fun switchTheme(dark: Boolean) {
-        settingsPresenter.switchTheme(dark)
-    }
-
-    private fun switchTheme(mode: Int) {
-        settingsPresenter.switchTheme(mode)
     }
 
     override fun recreate() {
@@ -116,6 +112,14 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
         TaskStackBuilder.create(activity)
                 .addNextIntent(MainActivity.createIntent(activity, MainActivity.Companion.Mode.SETTINGS))
                 .startActivities(bundle)
+    }
+
+    private fun switchTheme(dark: Boolean) {
+        settingsPresenter.switchTheme(dark)
+    }
+
+    private fun switchTheme(mode: Int) {
+        settingsPresenter.switchTheme(mode)
     }
 
     private fun openAbout() {
