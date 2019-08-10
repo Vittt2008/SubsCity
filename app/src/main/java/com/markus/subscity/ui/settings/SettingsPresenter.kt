@@ -10,6 +10,8 @@ import com.markus.subscity.providers.ThemeProvider
 import com.markus.subscity.ui.settings.SettingsView.Companion.ABOUT
 import com.markus.subscity.ui.settings.SettingsView.Companion.CINEMA_MAP
 import com.markus.subscity.ui.settings.SettingsView.Companion.CITY
+import com.markus.subscity.ui.settings.SettingsView.Companion.DARK_THEME
+import com.markus.subscity.ui.settings.SettingsView.Companion.DIALOG_THEME
 import com.markus.subscity.ui.settings.SettingsView.Companion.DONATE
 import com.markus.subscity.ui.settings.SettingsView.Companion.LANGUAGE
 import com.markus.subscity.ui.settings.SettingsView.Companion.POLICY
@@ -44,18 +46,35 @@ class SettingsPresenter @Inject constructor(private val cityProvider: CityProvid
         viewState.openPlayStore()
     }
 
+    fun openThemeDialog() {
+        val themeList = themeProvider.createThemeList()
+        viewState.showThemeDialog(themeList)
+    }
+
     fun switchTheme(dark: Boolean) {
-        val recreate = themeProvider.applyTheme(dark)
-        if (recreate) {
-            viewState.recreate()
-        }
+        themeProvider.applyTheme(dark)
+                .subscribe { recreate ->
+                    if (recreate) {
+                        viewState.recreate()
+                    }
+                }
+    }
+
+    fun switchTheme(mode: Int) {
+        themeProvider.applyTheme(mode)
+                .subscribe { recreate ->
+                    if (recreate) {
+                        viewState.recreate()
+                    }
+                }
     }
 
     private fun createSettings(cityName: String, themeTitle: String): List<Setting> {
         val settings = mutableListOf(
                 Setting.Item(CINEMA_MAP, R.drawable.ic_menu_map, R.string.setting_cinema_map_title),
                 Setting.TwoLineItem(THEME, R.drawable.ic_menu_dark_theme, R.string.setting_theme, themeTitle),
-                Setting.ThemeItem(THEME, R.drawable.ic_menu_dark_theme, R.string.setting_theme),
+                Setting.ThemeItem(DARK_THEME, R.drawable.ic_menu_dark_theme, R.string.setting_dark_theme),
+                Setting.TwoLineItem(DIALOG_THEME, R.drawable.ic_menu_dark_theme, R.string.setting_theme, themeTitle),
                 Setting.TwoLineItem(LANGUAGE, R.drawable.ic_menu_language, R.string.setting_language, "Русский"),
                 Setting.Item(RATE_APP, R.drawable.ic_menu_rate_app, R.string.setting_rate_app),
                 Setting.Item(ABOUT, R.drawable.ic_menu_about, R.string.setting_about_title),

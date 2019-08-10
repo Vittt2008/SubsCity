@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.app.TaskStackBuilder
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +18,7 @@ import com.markus.subscity.dagger.SubsCityDagger
 import com.markus.subscity.extensions.analytics
 import com.markus.subscity.extensions.rateApp
 import com.markus.subscity.extensions.supportActionBar
+import com.markus.subscity.providers.ThemeProvider
 import com.markus.subscity.ui.about.AboutActivity
 import com.markus.subscity.ui.cinemasmap.CinemasMapActivity
 import com.markus.subscity.ui.city.CityActivity
@@ -25,6 +28,7 @@ import com.markus.subscity.ui.policy.PolicyActivity
 import com.markus.subscity.ui.settings.SettingsView.Companion.ABOUT
 import com.markus.subscity.ui.settings.SettingsView.Companion.CINEMA_MAP
 import com.markus.subscity.ui.settings.SettingsView.Companion.CITY
+import com.markus.subscity.ui.settings.SettingsView.Companion.DIALOG_THEME
 import com.markus.subscity.ui.settings.SettingsView.Companion.DONATE
 import com.markus.subscity.ui.settings.SettingsView.Companion.LANGUAGE
 import com.markus.subscity.ui.settings.SettingsView.Companion.POLICY
@@ -63,6 +67,7 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
                 when (item) {
                     CINEMA_MAP -> settingsPresenter.showCinemasMap()
                     THEME -> openThemePicker()
+                    DIALOG_THEME -> settingsPresenter.openThemeDialog()
                     LANGUAGE -> openLanguagePicker()
                     RATE_APP -> settingsPresenter.openPlayStore()
                     ABOUT -> openAbout()
@@ -90,14 +95,29 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
         }
     }
 
+    override fun showThemeDialog(list: List<ThemeProvider.SelectedThemeItem>) {
+        val values = list.map { getString(it.title) }.toTypedArray()
+        val selected = list.indexOfFirst { it.isSelected }
+        AlertDialog.Builder(requireActivity())
+                .setSingleChoiceItems(values, selected) { _, index -> switchTheme(list[index].mode) }
+                .setCancelable(true)
+                .show()
+    }
+
     private fun switchTheme(dark: Boolean) {
         settingsPresenter.switchTheme(dark)
     }
 
+    private fun switchTheme(mode: Int) {
+        settingsPresenter.switchTheme(mode)
+    }
+
     override fun recreate() {
-        TaskStackBuilder.create(requireActivity())
-                .addNextIntent(MainActivity.createIntent(requireContext(), MainActivity.Companion.Mode.SETTINGS))
-                .startActivities()
+        val activity = requireActivity()
+        val bundle = ActivityOptionsCompat.makeCustomAnimation(activity, android.R.anim.fade_in, android.R.anim.fade_out).toBundle()
+        TaskStackBuilder.create(activity)
+                .addNextIntent(MainActivity.createIntent(activity, MainActivity.Companion.Mode.SETTINGS))
+                .startActivities(bundle)
     }
 
     private fun openAbout() {

@@ -31,6 +31,7 @@
     <string name="setting_donate_title">Пожертвования</string>
     <string name="setting_rate_app">Оценить приложение</string>
     <string name="setting_theme">Тема</string>
+    <string name="setting_dark_theme">Темная тема</string>
     <string name="setting_language">Язык</string>
 
     <!-- MovieFragment -->

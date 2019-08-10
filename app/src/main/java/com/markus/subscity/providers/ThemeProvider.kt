@@ -6,6 +6,10 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.app.AppCompatDelegate.*
 import androidx.core.os.BuildCompat
 import com.markus.subscity.R
+import io.reactivex.Completable
+import io.reactivex.Single
+import io.reactivex.android.schedulers.AndroidSchedulers
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 /**
@@ -13,6 +17,11 @@ import javax.inject.Inject
  */
 class ThemeProvider @Inject constructor(private val context: Context,
                                         private val preferencesProvider: PreferencesProvider) {
+
+    companion object {
+        //Need additional time to finish ripple animation
+        private const val THEME_ACTIVATION_DELAY = 150L
+    }
 
     fun createThemeList(): List<SelectedThemeItem> {
         val themeMode = getCurrentThemeMode()
@@ -24,12 +33,16 @@ class ThemeProvider @Inject constructor(private val context: Context,
         )
     }
 
-    fun applyTheme(mode: Int): Boolean {
-        return applyThemeMode(mode)
+    fun applyTheme(mode: Int): Single<Boolean> {
+        return Completable.timer(THEME_ACTIVATION_DELAY, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .andThen(Single.fromCallable { applyThemeMode(mode) })
     }
 
-    fun applyTheme(dark: Boolean): Boolean {
-        return applyThemeMode(if (dark) MODE_NIGHT_YES else MODE_NIGHT_NO)
+    fun applyTheme(dark: Boolean): Single<Boolean> {
+        return Completable.timer(THEME_ACTIVATION_DELAY, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .andThen(Single.fromCallable { applyThemeMode(if (dark) MODE_NIGHT_YES else MODE_NIGHT_NO) })
     }
 
     fun applyCurrentTheme() {

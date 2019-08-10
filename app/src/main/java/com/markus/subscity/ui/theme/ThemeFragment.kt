@@ -57,10 +57,11 @@ class ThemeFragment : MvpAppCompatFragment(), ThemeView {
     }
 
     override fun recreate() {
-        val bundle = ActivityOptionsCompat.makeCustomAnimation(context!!, android.R.anim.fade_in, android.R.anim.fade_out).toBundle()
-        TaskStackBuilder.create(requireActivity())
-                .addNextIntent(MainActivity.createIntent(requireContext(), MainActivity.Companion.Mode.SETTINGS))
-                .addNextIntent(ThemeActivity.createIntent(requireContext(), changingTheme = true))
+        val activity = requireActivity()
+        val bundle = ActivityOptionsCompat.makeCustomAnimation(activity, 0, 0).toBundle()
+        TaskStackBuilder.create(activity)
+                .addNextIntent(MainActivity.createIntent(activity, MainActivity.Companion.Mode.SETTINGS))
+                .addNextIntent(ThemeActivity.createIntent(activity, changingTheme = false))
                 .startActivities(bundle)
     }
 }

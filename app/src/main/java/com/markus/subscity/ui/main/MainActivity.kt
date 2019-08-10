@@ -63,7 +63,6 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        overridePendingTransition(R.anim.fast_fade_in, R.anim.fast_fade_out)
         setContentView(R.layout.activity_main)
         viewPager = findViewById(R.id.ahb_pager)
         ahBottomView = findViewById(R.id.ahb_bottom)

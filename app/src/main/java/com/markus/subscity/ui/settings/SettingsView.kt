@@ -4,6 +4,7 @@ import com.arellomobile.mvp.MvpView
 import com.arellomobile.mvp.viewstate.strategy.OneExecutionStateStrategy
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 import com.markus.subscity.api.entities.City
+import com.markus.subscity.providers.ThemeProvider
 
 /**
  * @author Vitaliy Markus
@@ -20,7 +21,9 @@ interface SettingsView : MvpView {
         const val RATE_APP = 6
         const val POLICY = 7
         const val THEME = 8
-        const val LANGUAGE = 9
+        const val DARK_THEME = 9
+        const val DIALOG_THEME = 10
+        const val LANGUAGE = 11
     }
 
     @StateStrategyType(OneExecutionStateStrategy::class)
@@ -34,4 +37,7 @@ interface SettingsView : MvpView {
 
     @StateStrategyType(OneExecutionStateStrategy::class)
     fun recreate()
+
+    @StateStrategyType(OneExecutionStateStrategy::class)
+    fun showThemeDialog(list: List<ThemeProvider.SelectedThemeItem>)
 }
