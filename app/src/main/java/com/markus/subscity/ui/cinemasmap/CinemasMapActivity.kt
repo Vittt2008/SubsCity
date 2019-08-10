@@ -53,6 +53,7 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnI
     private lateinit var markerIdCinemaIdMap: Map<String, Long>
     private lateinit var cinemaIdMarkerIdMap: Map<Long, String>
 
+    private val mapBottomSheetCallback = MapBottomSheetCallback()
     private lateinit var behavior: ViewPagerBottomSheetBehavior<ViewPager>
 
     private val inactiveIcon by lazy { getMarkerIcon(R.drawable.ic_pin_unselected) }
@@ -91,9 +92,10 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnI
         val content = findViewById<View>(android.R.id.content)
         content.setBackgroundColor(ContextCompat.getColor(this, R.color.main_background_color))
         viewPager = findViewById(R.id.cinema_view_pager)
+        viewPager.offscreenPageLimit = 2
         behavior = (viewPager.layoutParams as CoordinatorLayout.LayoutParams).behavior as ViewPagerBottomSheetBehavior<ViewPager>
         behavior.state = ViewPagerBottomSheetBehavior.STATE_HIDDEN
-        behavior.setBottomSheetCallback(MapBottomSheetCallback())
+        behavior.setBottomSheetCallback(mapBottomSheetCallback)
 
         if (savedInstanceState == null) {
             mapFragment = SupportMapFragment.newInstance(GoogleMapOptions().camera(createCameraPosition()))
@@ -127,7 +129,7 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnI
         val markerCinemaMap = markersMap.mapKeys { it.key.id }
         val markers = markersMap.map { it.key }
         viewPager.adapter = CinemaFragmentAdapter(supportFragmentManager, cinemas)
-        viewPager.addOnPageChangeListener(CinemaMapOnPageChangeListener())
+        viewPager.addOnPageChangeListener(mapBottomSheetCallback)
         cinemasMapPresenter.onMarkersAdd(markerCinemaMap, markers)
     }
 
@@ -255,7 +257,7 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnI
         return bitmap
     }
 
-    inner class CinemaMapOnPageChangeListener : ViewPager.SimpleOnPageChangeListener() {
+    inner class MapBottomSheetCallback : ViewPagerBottomSheetBehavior.BottomSheetCallback(), ViewPager.OnPageChangeListener {
 
         private var previousPosition: Int = 0
         private var currentPosition: Int = 0
@@ -269,19 +271,25 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnI
             if (positionOffset == 0f) {
                 previousPosition = currentPosition
                 currentPosition = position
-                scrollToTop(previousPosition)
+                if (behavior.state == ViewPagerBottomSheetBehavior.STATE_COLLAPSED) {
+                    scrollToTop(previousPosition)
+                    scrollToTop(previousPosition + 2)
+                }
             }
         }
-    }
-
-    inner class MapBottomSheetCallback : ViewPagerBottomSheetBehavior.BottomSheetCallback() {
 
         override fun onStateChanged(bottomSheet: View, newState: Int) {
-            if (newState == BottomSheetBehavior.STATE_HIDDEN) {
-                clearSelectedMarker(viewPager.currentItem)
+            when (newState) {
+                ViewPagerBottomSheetBehavior.STATE_HIDDEN -> clearSelectedMarker(viewPager.currentItem)
+                ViewPagerBottomSheetBehavior.STATE_COLLAPSED -> {
+                    scrollToTop(previousPosition)
+                    scrollToTop(previousPosition + 2)
+                }
+                else -> Unit
             }
         }
 
+        override fun onPageScrollStateChanged(state: Int) = Unit
         override fun onSlide(bottomSheet: View, slideOffset: Float) = Unit
     }
 

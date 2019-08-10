@@ -1,5 +1,6 @@
 package com.markus.subscity.ui.movies
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -18,7 +19,6 @@ import com.markus.subscity.dagger.GlideApp
 import com.markus.subscity.dagger.SubsCityDagger
 import com.markus.subscity.extensions.getWidthScreen
 import com.markus.subscity.providers.LanguageProvider
-import com.markus.subscity.providers.ThemeProvider
 import com.markus.subscity.widgets.transformations.PosterCrop
 import javax.inject.Inject
 
@@ -32,6 +32,8 @@ class MoviesAdapter(context: Context,
 
     companion object {
         private const val RATING = 6.9
+        //Hack for textView autosizing. Empty ending is ignored by TextView drawing and measurement, but isn't ignored autosizing.
+        private val emptyEnding = CharArray(30) { ' ' }.joinToString(separator = "")
     }
 
     private val errorDrawable = ContextCompat.getDrawable(context, R.drawable.ic_error_poster)
@@ -87,6 +89,7 @@ class MoviesAdapter(context: Context,
             view.setOnClickListener { clickListener.invoke(movie) }
         }
 
+        @SuppressLint("SetTextI18n")
         fun bind(movie: Movie, isFullSpan: Boolean) {
             this.movie = movie
 
@@ -96,7 +99,7 @@ class MoviesAdapter(context: Context,
             val posterWidth = if (isFullSpan) width else width / 2
             val maxLines = if (isFullSpan) R.integer.poster_max_line_huge else R.integer.poster_max_line
             val sizes = if (isFullSpan)
-                intArrayOf(R.dimen.poster_text_size_middle, R.dimen.poster_text_size_huge)
+                intArrayOf(R.dimen.poster_text_size_middle, R.dimen.poster_text_size_large, R.dimen.poster_text_size_huge)
             else
                 intArrayOf(R.dimen.poster_text_size)
 
@@ -113,7 +116,7 @@ class MoviesAdapter(context: Context,
 
             movieGenre.text = movie.genres.joinToString(", ").capitalize()
 
-            movieName.text = movie.title.russian
+            movieName.text = movie.title.russian + emptyEnding
             movieName.context.resources.also { resources ->
                 movieName.maxLines = resources.getInteger(maxLines)
                 val dimensions = sizes.map { resources.getDimension(it).toInt() }.toIntArray()

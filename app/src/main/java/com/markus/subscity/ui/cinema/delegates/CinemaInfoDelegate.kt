@@ -70,7 +70,7 @@ class CinemaInfoDelegate(private val showCinemaName: Boolean,
                 dragItem.visibility = View.GONE
                 name.visibility = View.GONE
             }
-            address.text = cinema.location.address
+            address.text = cinema.location.address.trim()
             metroStation.text = metroProvider.currentMetroTextProvider.formatMetroListStation(cinema.location.metro)
 
             val phone = cinema.phones.firstOrNull()

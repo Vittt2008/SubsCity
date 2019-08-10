@@ -17,6 +17,9 @@ class ThemePresenter @Inject constructor(private val themeProvider: ThemeProvide
     }
 
     fun updateTheme(item: ThemeProvider.SelectedThemeItem) {
-        themeProvider.applyTheme(item.mode)
+        val recreate = themeProvider.applyTheme(item.mode)
+        if (recreate) {
+            viewState.recreate()
+        }
     }
 }

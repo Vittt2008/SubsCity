@@ -24,12 +24,12 @@ class ThemeProvider @Inject constructor(private val context: Context,
         )
     }
 
-    fun applyTheme(mode: Int) {
-        applyThemeMode(mode)
+    fun applyTheme(mode: Int): Boolean {
+        return applyThemeMode(mode)
     }
 
-    fun applyTheme(dark: Boolean) {
-        applyThemeMode(if (dark) MODE_NIGHT_YES else MODE_NIGHT_NO)
+    fun applyTheme(dark: Boolean): Boolean {
+        return applyThemeMode(if (dark) MODE_NIGHT_YES else MODE_NIGHT_NO)
     }
 
     fun applyCurrentTheme() {
@@ -43,9 +43,11 @@ class ThemeProvider @Inject constructor(private val context: Context,
         return context.getString(titleId)
     }
 
-    private fun applyThemeMode(mode: Int) {
+    private fun applyThemeMode(mode: Int): Boolean {
+        val currentMode = getCurrentThemeMode()
         preferencesProvider.getAppPreferences().edit().putInt(PreferencesProvider.APP_THEME_KEY, mode).apply()
         AppCompatDelegate.setDefaultNightMode(mode)
+        return currentMode != mode
     }
 
     private fun getCurrentThemeMode(): Int {

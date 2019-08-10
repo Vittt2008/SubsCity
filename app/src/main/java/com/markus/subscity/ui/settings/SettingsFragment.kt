@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.TaskStackBuilder
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.arellomobile.mvp.MvpAppCompatFragment
@@ -19,6 +20,7 @@ import com.markus.subscity.ui.about.AboutActivity
 import com.markus.subscity.ui.cinemasmap.CinemasMapActivity
 import com.markus.subscity.ui.city.CityActivity
 import com.markus.subscity.ui.donate.DonateActivity
+import com.markus.subscity.ui.main.MainActivity
 import com.markus.subscity.ui.policy.PolicyActivity
 import com.markus.subscity.ui.settings.SettingsView.Companion.ABOUT
 import com.markus.subscity.ui.settings.SettingsView.Companion.CINEMA_MAP
@@ -68,7 +70,7 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
                     DONATE -> DonateActivity.start(requireActivity())
                     CITY -> openCityPicker()
                 }
-            }, settingsPresenter::switchTheme)
+            }, ::switchTheme)
         }
     }
 
@@ -86,6 +88,16 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
         if (isVisibleToUser) {
             activity?.let { it.supportActionBar.setTitle(R.string.main_settings) }
         }
+    }
+
+    private fun switchTheme(dark: Boolean) {
+        settingsPresenter.switchTheme(dark)
+    }
+
+    override fun recreate() {
+        TaskStackBuilder.create(requireActivity())
+                .addNextIntent(MainActivity.createIntent(requireContext(), MainActivity.Companion.Mode.SETTINGS))
+                .startActivities()
     }
 
     private fun openAbout() {

@@ -45,7 +45,10 @@ class SettingsPresenter @Inject constructor(private val cityProvider: CityProvid
     }
 
     fun switchTheme(dark: Boolean) {
-        themeProvider.applyTheme(dark)
+        val recreate = themeProvider.applyTheme(dark)
+        if (recreate) {
+            viewState.recreate()
+        }
     }
 
     private fun createSettings(cityName: String, themeTitle: String): List<Setting> {

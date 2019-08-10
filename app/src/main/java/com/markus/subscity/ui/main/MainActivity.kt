@@ -3,15 +3,15 @@ package com.markus.subscity.ui.main
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.bottomsheet.BottomSheetBehavior
+import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.viewpager.widget.ViewPager
-import android.view.View
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationAdapter
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.markus.subscity.R
 import com.markus.subscity.dagger.SubsCityDagger
 import com.markus.subscity.extensions.analytics
@@ -63,13 +63,14 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        overridePendingTransition(R.anim.fast_fade_in, R.anim.fast_fade_out)
         setContentView(R.layout.activity_main)
         viewPager = findViewById(R.id.ahb_pager)
         ahBottomView = findViewById(R.id.ahb_bottom)
         styleViewPager()
         styleBottomNavigation()
         initRateDialog()
-        supportActionBar!!.setTitle(R.string.main_films)
+//        supportActionBar!!.setTitle(R.string.main_films)
         analytics().logOpenMain()
     }
 

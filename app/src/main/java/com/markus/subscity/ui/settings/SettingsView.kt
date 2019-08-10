@@ -31,4 +31,7 @@ interface SettingsView : MvpView {
 
     @StateStrategyType(OneExecutionStateStrategy::class)
     fun openPlayStore()
+
+    @StateStrategyType(OneExecutionStateStrategy::class)
+    fun recreate()
 }
