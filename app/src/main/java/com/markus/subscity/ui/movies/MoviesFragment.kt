@@ -1,12 +1,12 @@
 package com.markus.subscity.ui.movies
 
 import android.os.Bundle
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
@@ -47,12 +47,9 @@ class MoviesFragment : MvpAppCompatFragment(), MoviesView {
         return root
     }
 
-
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        super.setUserVisibleHint(isVisibleToUser)
-        if (isVisibleToUser) {
-            activity?.let { it.supportActionBar.setTitle(R.string.main_films) }
-        }
+    override fun onResume() {
+        super.onResume()
+        requireActivity().supportActionBar.setTitle(R.string.main_films)
     }
 
     override fun showMovies(movies: List<Movie>) {

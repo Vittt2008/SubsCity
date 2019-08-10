@@ -52,6 +52,11 @@ class CinemasFragment : MvpAppCompatFragment(), CinemasView {
         return root
     }
 
+    override fun onResume() {
+        super.onResume()
+        requireActivity().supportActionBar.setTitle(R.string.main_cinemas)
+    }
+
     override fun showCinemas(cinemas: List<Cinema>) {
         cinemas.toString().equals("", true)
         cinemasList.run {
@@ -76,13 +81,6 @@ class CinemasFragment : MvpAppCompatFragment(), CinemasView {
             return true
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        super.setUserVisibleHint(isVisibleToUser)
-        if (isVisibleToUser) {
-            activity?.let { it.supportActionBar.setTitle(R.string.main_cinemas) }
-        }
     }
 
     override fun onError(throwable: Throwable) {

@@ -60,6 +60,11 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
         return settingsList
     }
 
+    override fun onResume() {
+        super.onResume()
+        requireActivity().supportActionBar.setTitle(R.string.main_settings)
+    }
+
     override fun showSettings(settings: List<Setting>) {
         settingsList.run {
             layoutManager = LinearLayoutManager(activity)
@@ -86,13 +91,6 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
 
     override fun openPlayStore() {
         rateApp()
-    }
-
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        super.setUserVisibleHint(isVisibleToUser)
-        if (isVisibleToUser) {
-            activity?.let { it.supportActionBar.setTitle(R.string.main_settings) }
-        }
     }
 
     override fun showThemeDialog(list: List<ThemeProvider.SelectedThemeItem>) {
