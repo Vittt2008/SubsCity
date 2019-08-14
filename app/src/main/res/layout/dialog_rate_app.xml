@@ -5,15 +5,14 @@
     android:id="@+id/dialog_rate"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/shadow_bg_8dp"
     android:orientation="vertical"
     app:behavior_hideable="true"
-    android:background="@drawable/shadow_bg_8dp"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white_color"
         android:orientation="vertical">
 
         <TextView
@@ -21,19 +20,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
             android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
             android:text="@string/rate_title" />
 
         <TextView
             style="@style/AppTheme.TextView.Medium.Black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="36dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
             android:layout_marginTop="8dp"
-            android:fontFamily="sans-serif-light"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="36dp"
+            android:fontFamily="@font/roboto_light"
             android:text="@string/rate_subtitle" />
     </LinearLayout>
 

@@ -28,10 +28,10 @@ class MovieAdapterDelegates(val movie: Movie,
 
         data.add(movie)
         if (cinemaScreenings.isNotEmpty()) {
-            data.add(R.string.movie_screenings_title)
+            data.add(TitleDelegate.TitleInfo(R.string.movie_screenings_title))
             data.addAll(cinemaScreenings)
         } else {
-            data.add(Any())
+            data.add(ProgressDelegate.ProgressObject)
         }
         setItems(data)
     }
@@ -39,7 +39,7 @@ class MovieAdapterDelegates(val movie: Movie,
     fun updateScreenings(cinemaScreenings: List<MoviePresenter.CinemaScreenings>) {
         val oldSize = itemCount
         if (cinemaScreenings.isNotEmpty()) {
-            data[oldSize - 1] = R.string.movie_screenings_title
+            data[oldSize - 1] = TitleDelegate.TitleInfo(R.string.movie_screenings_title)
             notifyItemChanged(oldSize - 1)
             data.addAll(cinemaScreenings)
             notifyItemRangeInserted(oldSize, itemCount - oldSize)

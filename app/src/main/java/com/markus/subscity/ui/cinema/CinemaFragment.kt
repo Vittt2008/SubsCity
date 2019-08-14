@@ -3,13 +3,13 @@ package com.markus.subscity.ui.cinema
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import androidx.annotation.LayoutRes
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.appcompat.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
+import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
@@ -21,6 +21,7 @@ import com.markus.subscity.dagger.SubsCityDagger
 import com.markus.subscity.extensions.*
 import com.markus.subscity.ui.movie.MovieActivity
 import com.markus.subscity.utils.IntentUtils
+import com.markus.subscity.widgets.SpeedyLinearLayoutManager
 
 /**
  * @author Vitaliy Markus
@@ -65,7 +66,7 @@ open class CinemaFragment : MvpAppCompatFragment(), CinemaView {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root = inflater.inflate(arguments!!.getInt(EXTRA_LAYOUT_ID), container, false)
         cinemaInfoList = root.findViewById(R.id.rv_list)
-        cinemaInfoList.layoutManager = LinearLayoutManager(activity)
+        cinemaInfoList.layoutManager = SpeedyLinearLayoutManager(requireActivity())
         toolbar = root.findViewById(R.id.toolbar)
         toolbar?.let(::setSupportActionBar)
         return root

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- New Colors -->
+
+    <color name="main_color">#642957</color>
+    <color name="main_ripple_color">#3D9F2184</color>
+    <color name="main_color_pressed">#299F2184</color>
+
+    <color name="splash_color">#642957</color>
+    <color name="splash_status_bar_color">#4F2045</color>
+
+    <color name="bottom_bar_active_color">#9F2184</color>
+    <color name="bottom_bar_inactive_color">#C4C4C4</color>
+    <color name="bottom_bar_background_color">#232323</color>
+
+    <color name="title_color">#E1E1E1</color>
+    <color name="icon_color">#E1E1E1</color>
+    <color name="subtitle_color">#A4A4A4</color>
+    <color name="settings_color">#E1E1E1</color>
+
+    <color name="status_bar_color">#121212</color>
+
+    <color name="divider_color">#1AFFFFFF</color>
+
+    <color name="toolbar_color">#232323</color>
+    <color name="toolbar_title_color">#E1E1E1</color>
+
+    <color name="screening_default_bg">#232323</color>
+    <color name="screening_pressed_bg">#2A1C27</color>
+
+    <color name="accent_color">#E1E1E1</color>
+
+    <color name="main_background_color">#1E1E1E</color>
+
+    <color name="white_ripple_color">#3DFFFFFF</color>
+
+    <color name="rate_button_pressed">#2C2C2C</color>
+
+    <color name="white_color">#FFFFFF</color>
+
+    <color name="movies_background_color">#FAFAFA</color>
+
+    <color name="screening_date_default_color">#A4A4A4</color>
+    <color name="screening_date_pressed_color">#A4A4A4</color>
+    <color name="screening_time_default_color">#FF94E7</color>
+    <color name="screening_time_pressed_color">#FF94E7</color>
+    <color name="screening_price_default_color">#E1E1E1</color>
+    <color name="screening_price_pressed_color">#E1E1E1</color>
+
+    <color name="movie_text_color">#E1E1E1</color>
+
+</resources>

@@ -5,10 +5,7 @@ import com.markus.subscity.R
 import com.markus.subscity.api.entities.cinema.Cinema
 import com.markus.subscity.api.entities.movie.Movie
 import com.markus.subscity.api.entities.screening.Screening
-import com.markus.subscity.ui.cinema.delegates.CinemaInfoDelegate
-import com.markus.subscity.ui.cinema.delegates.MovieScreeningsDelegate
-import com.markus.subscity.ui.cinema.delegates.ProgressDelegate
-import com.markus.subscity.ui.cinema.delegates.TitleDelegate
+import com.markus.subscity.ui.cinema.delegates.*
 
 /**
  * @author Vitaliy Markus
@@ -33,10 +30,10 @@ class CinemaAdapterDelegates(cinema: Cinema,
 
         data.add(cinema)
         if (movieScreenings.isNotEmpty()) {
-            data.add(R.string.movie_screenings_title)
+            data.add(TitleDelegate.TitleInfo(R.string.movie_screenings_title))
             data.addAll(movieScreenings)
         } else {
-            data.add(Any())
+            data.add(ProgressDelegate.ProgressObject)
         }
         setItems(data)
     }
@@ -44,7 +41,7 @@ class CinemaAdapterDelegates(cinema: Cinema,
     fun updateScreenings(movieScreenings: List<CinemaPresenter.MovieScreenings>) {
         val oldSize = itemCount
         if (movieScreenings.isNotEmpty()) {
-            data[oldSize - 1] = R.string.movie_screenings_title
+            data[oldSize - 1] = TitleDelegate.TitleInfo(R.string.movie_screenings_title)
             notifyItemChanged(oldSize - 1)
             data.addAll(movieScreenings)
             notifyItemRangeInserted(oldSize, itemCount - oldSize)

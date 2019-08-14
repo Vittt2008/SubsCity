@@ -3,7 +3,7 @@
     <string name="file_export_provider">com.markus.subscity.FileProvider</string>
     <string name="send">Отправить</string>
     <string name="github_url">https://github.com/Vittt2008/SubsCity</string>
-    <string name="developer_email">§</string>
+    <string name="developer_email">vitalii.markus@gmail.com</string>
     <string name="designer_email">shelmoon518@gmail.com</string>
     <string name="empty_title" />
 
@@ -30,6 +30,9 @@
     <string name="setting_city_title">Город</string>
     <string name="setting_donate_title">Пожертвования</string>
     <string name="setting_rate_app">Оценить приложение</string>
+    <string name="setting_theme">Тема</string>
+    <string name="setting_dark_theme">Темная тема</string>
+    <string name="setting_language">Язык</string>
 
     <!-- MovieFragment -->
     <string name="movie_genre_title">Жанр:</string>
@@ -40,7 +43,7 @@
     <string name="movie_rating_imdb_title">IMDB:</string>
     <string name="movie_description_title">Описание</string>
     <string name="movie_screenings_title">Сеансы</string>
-    <string name="movie_screening_price">%1$d₽</string>
+    <string name="movie_screening_price">%1$d&#8201;₽</string>
     <string name="movie_trailer_original">Оригинальный</string>
     <string name="movie_trailer_russian">Русский</string>
     <string name="movie_no_trailers">К сожалению у данного фильма нет трейлеров</string>
@@ -59,6 +62,13 @@
 
     <!-- CinemasMapActivity -->
     <string name="cinemas_map_title">Карта кинотеатров</string>
+
+    <!-- ThemeActivity -->
+    <string name="theme_title">Тема</string>
+    <string name="theme_light">Светлая</string>
+    <string name="theme_dark">Темная</string>
+    <string name="theme_system_default">Системная тема</string>
+    <string name="theme_by_battery_saver">Учитывать режим энергосбережения</string>
 
     <!-- AboutActivity -->
     <string name="about_title">О приложении</string>
@@ -80,6 +90,7 @@
 
     <!-- PolicyActivity -->
     <string name="policy_title">Политика конфиденциальности</string>
+    <string name="policy_url">file:///android_asset/privacy_policy.html</string>
 
     <!-- DonateActivity -->
     <string name="donate_title">Пожертвовать</string>

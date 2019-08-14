@@ -11,7 +11,7 @@
 
     <TextView
         android:id="@+id/tv_divider_title"
-        style="@style/AppTheme.TextView.Huge.Black.Bold"
+        style="@style/AppTheme.TextView.Huge.Black.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"

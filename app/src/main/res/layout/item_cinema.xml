@@ -10,21 +10,21 @@
 
     <TextView
         android:id="@+id/tv_cinema_name"
-        style="@style/AppTheme.TextView.ExtraHuge.Black"
+        style="@style/AppTheme.TextView.Cinema.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="Формула Кино Галерея" />
 
     <TextView
         android:id="@+id/tv_cinema_address"
-        style="@style/AppTheme.TextView.Medium.Black.Subtitle"
+        style="@style/AppTheme.TextView.Common.Subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="Мал.Морская, 24" />
 
     <TextView
         android:id="@+id/tv_cinema_metro_station"
-        style="@style/AppTheme.TextView.Medium.Black.Subtitle"
+        style="@style/AppTheme.TextView.Common.Subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="м. Адмиралтейская" />

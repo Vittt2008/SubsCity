@@ -1,33 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">@color/primary_color</color>
-    <color name="colorPrimaryDark">@color/primary_dark_color</color>
-    <color name="colorAccent">@color/primary_color</color>
 
-    <color name="black_color">#000000</color>
-    <color name="black_color_16">#29000000</color>
-    <color name="black_color_24">#3d000000</color>
+    <!-- New Colors -->
 
-    <color name="primary_color">#642957</color>
-    <color name="primary_color_8">#14642957</color>
-    <color name="primary_color_16">#29642957</color>
-    <color name="primary_color_24">#3d642957</color>
-    <color name="primary_color_pressed">#7D336D</color>
+    <color name="main_color">#642957</color>
+    <color name="main_ripple_color">#4D642957</color>
+    <color name="main_color_pressed">#29642957</color>
 
-    <color name="primary_dark_color">#4F2045</color>
-    <color name="title_color">@color/black_color</color>
+    <color name="splash_color">#642957</color>
+    <color name="splash_status_bar_color">#4F2045</color>
+
+    <color name="bottom_bar_active_color">#642957</color>
+    <color name="bottom_bar_inactive_color">#A9AEB2</color>
+    <color name="bottom_bar_background_color">#FFFFFF</color>
+
+    <color name="title_color">#000000</color>
+    <color name="icon_color">#8A000000</color>
     <color name="subtitle_color">#8A000000</color>
     <color name="settings_color">#60565e</color>
-    <color name="inactive_color">#a9aeb2</color>
-    <color name="white_color">#ffffff</color>
-    <color name="white_background_color">#FAFAFA</color>
-    <color name="map_background_color">#EFEAE6</color>
-    <color name="setting_bg_color">#42642957</color>
-    <color name="divider_color">#9e9e9e</color>
 
-    <color name="ripple_color">#3dffffff</color>
+    <color name="status_bar_color">#4F2045</color>
 
-    <color name="yellow_color">#EEC689</color>
+    <color name="divider_color">#9E9E9E</color>
+
+    <color name="toolbar_color">#642957</color>
+    <color name="toolbar_title_color">#FFFFFF</color>
+
+    <color name="screening_default_bg">#EFEBEF</color>
+    <color name="screening_pressed_bg">#642957</color>
+
+    <color name="accent_color">#642957</color>
+
+    <color name="main_background_color">#FAFAFA</color>
+
+    <color name="white_ripple_color">#3DFFFFFF</color>
+
+    <color name="rate_button_pressed">#7D336D</color>
+
+    <color name="white_color">#FFFFFF</color>
+
+    <color name="movies_background_color">#FAFAFA</color>
+
+    <color name="screening_date_default_color">#737373</color>
+    <color name="screening_date_pressed_color">#CCCCCC</color>
+    <color name="screening_time_default_color">#642957</color>
+    <color name="screening_time_pressed_color">#FFFFFF</color>
+    <color name="screening_price_default_color">#000000</color>
+    <color name="screening_price_pressed_color">#CCCCCC</color>
+
+    <color name="movie_text_color">#FFFFFF</color>
 
     <!-- Social Networks -->
     <color name="telegram_color">#0D86D7</color>
@@ -39,26 +60,26 @@
     <color name="facebook_dark_pressed">#4A72C7</color> <!-- #35528F -->
 
     <!-- St. Petersburg Metro -->
-    <color name="metro_spb_line_1">#d51c36</color>
-    <color name="metro_spb_line_2">#197dce</color>
-    <color name="metro_spb_line_3">#1b9958</color>
-    <color name="metro_spb_line_4">#dd700d</color>
-    <color name="metro_spb_line_5">#6c0b78</color>
-    <color name="metro_spb_line_6">#8d5b2f</color>
+    <color name="metro_spb_line_1">#D6083B</color>
+    <color name="metro_spb_line_2">#0078C9</color>
+    <color name="metro_spb_line_3">#009A49</color>
+    <color name="metro_spb_line_4">#EA7125</color>
+    <color name="metro_spb_line_5">#702785</color>
+    <color name="metro_spb_line_6">#8D5B2D</color>
 
     <!-- Moscow Metro -->
-    <color name="metro_msk_line_1">#e32213</color>
-    <color name="metro_msk_line_2">#4eae4f</color>
-    <color name="metro_msk_line_3">#0072b9</color>
-    <color name="metro_msk_line_4">#04baee</color>
-    <color name="metro_msk_line_5">#905133</color>
-    <color name="metro_msk_line_6">#ef7e23</color>
-    <color name="metro_msk_line_7">#933d8e</color>
-    <color name="metro_msk_line_8">#ffcc1b</color>
-    <color name="metro_msk_line_9">#adabab</color>
-    <color name="metro_msk_line_10">#bdd02b</color>
-    <color name="metro_msk_line_11">#86cbce</color>
-    <color name="metro_msk_line_12">#b9c7e7</color>
+    <color name="metro_msk_line_1">#ED1B35</color>
+    <color name="metro_msk_line_2">#44B85C</color>
+    <color name="metro_msk_line_3">#0078BF</color>
+    <color name="metro_msk_line_4">#19C1F3</color>
+    <color name="metro_msk_line_5">#894E35</color>
+    <color name="metro_msk_line_6">#F58631</color>
+    <color name="metro_msk_line_7">#8E479C</color>
+    <color name="metro_msk_line_8">#FFCB31</color>
+    <color name="metro_msk_line_9">#A1A2A3</color>
+    <color name="metro_msk_line_10">#99CC00</color>
+    <color name="metro_msk_line_11">#79CDCD</color>
+    <color name="metro_msk_line_12">#ACBFE1</color>
     <color name="metro_msk_line_13">#2C74C5</color>
     <color name="metro_msk_line_14">#FFA8AF</color>
     <color name="metro_msk_line_15">#4FA6A4</color>

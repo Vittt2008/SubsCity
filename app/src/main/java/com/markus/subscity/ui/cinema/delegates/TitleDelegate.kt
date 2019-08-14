@@ -11,25 +11,27 @@ import com.markus.subscity.R
 /**
  * @author Vitaliy Markus
  */
-class TitleDelegate : AbsListItemAdapterDelegate<Int, Any, TitleDelegate.TitleDividerViewHolder>() {
+class TitleDelegate : AbsListItemAdapterDelegate<TitleDelegate.TitleInfo, Any, TitleDelegate.TitleDividerViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup): TitleDelegate.TitleDividerViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup): TitleDividerViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_divider_title, parent, false)
         return TitleDividerViewHolder(view)
     }
 
     override fun isForViewType(item: Any, items: List<Any>, position: Int): Boolean {
-        return position == 1 && item is Int
+        return item is TitleInfo
     }
 
-    override fun onBindViewHolder(item: Int, viewHolder: TitleDelegate.TitleDividerViewHolder, payloads: MutableList<Any>) {
+    override fun onBindViewHolder(item: TitleInfo, viewHolder: TitleDividerViewHolder, payloads: MutableList<Any>) {
         viewHolder.bind(item)
     }
 
-    class TitleDividerViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
+    class TitleInfo(val titleId: Int)
 
-        fun bind(titleId: Int) {
-            itemView.findViewById<TextView>(R.id.tv_divider_title).setText(titleId)
+    class TitleDividerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
+        fun bind(info: TitleInfo) {
+            itemView.findViewById<TextView>(R.id.tv_divider_title).setText(info.titleId)
         }
     }
 }

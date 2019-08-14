@@ -8,7 +8,8 @@
     <ImageView
         android:id="@+id/iv_movie_poster"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
 
     <View
         android:id="@+id/shadow"
@@ -18,7 +19,7 @@
 
     <TextView
         android:id="@+id/tv_movie_language"
-        style="@style/AppTheme.TextView.Small.White"
+        style="@style/AppTheme.TextView.Movie.Language"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
@@ -29,18 +30,16 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_movie_name"
+        style="@style/AppTheme.TextView.Movie.Title"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="8dp"
         android:ellipsize="end"
-        android:fontFamily="sans-serif-medium"
         android:gravity="left|bottom"
         android:maxLines="3"
-        android:textColor="@color/white_color"
-        android:textStyle="normal"
         app:layout_constraintBottom_toTopOf="@+id/tv_movie_genre"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,18 +49,17 @@
 
     <TextView
         android:id="@+id/tv_movie_genre"
-        style="@style/AppTheme.TextView.Small.White"
+        style="@style/AppTheme.TextView.Movie.Genre"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
+        android:layout_marginBottom="24dp"
         android:ellipsize="marquee"
         android:singleLine="true"
-        android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="@+id/shadow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:text="боевик, приключение, боевик, приключение, боевик, приключение, боевик, приключение, боевик, приключение, боевик, приключение" />
+        tools:text="Боевик, приключение, боевик, приключение, боевик, приключение, боевик, приключение, боевик, приключение, боевик, приключение" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

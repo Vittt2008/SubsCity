@@ -2,6 +2,7 @@ package com.markus.subscity.dagger
 
 import com.markus.subscity.providers.CityProvider
 import com.markus.subscity.providers.PreferencesProvider
+import com.markus.subscity.providers.ThemeProvider
 import com.markus.subscity.providers.metro.MoscowMetroTextProvider
 import com.markus.subscity.providers.metro.SpbMetroTextProvider
 import com.markus.subscity.ui.about.AboutPresenter
@@ -14,7 +15,6 @@ import com.markus.subscity.ui.cinemasmap.CinemasMapPresenter
 import com.markus.subscity.ui.city.CityAdapter
 import com.markus.subscity.ui.city.CityPresenter
 import com.markus.subscity.ui.deeplink.DeepLinkPresenter
-import com.markus.subscity.ui.donate.DonatePresenter
 import com.markus.subscity.ui.main.MainPresenter
 import com.markus.subscity.ui.movie.MoviePresenter
 import com.markus.subscity.ui.movie.delegates.CinemaScreeningsDelegate
@@ -24,7 +24,8 @@ import com.markus.subscity.ui.movies.MoviesPresenter
 import com.markus.subscity.ui.settings.SettingsPresenter
 import com.markus.subscity.ui.share.SharePresenter
 import com.markus.subscity.ui.splash.SplashPresenter
-import com.markus.subscity.utils.Analytics
+import com.markus.subscity.ui.theme.ThemePresenter
+import com.markus.subscity.utils.analytics.Analytics
 import dagger.Component
 import javax.inject.Singleton
 
@@ -46,9 +47,9 @@ interface SubsCityComponent {
     fun createDeepLinkPresenter(): DeepLinkPresenter
     fun createCinemasMapPresenter(): CinemasMapPresenter
     fun createAboutPresenter(): AboutPresenter
-    fun createDonatePresenter(): DonatePresenter
     fun createSharePresenter(): SharePresenter
     fun createSplashPresenter(): SplashPresenter
+    fun createThemePresenter(): ThemePresenter
 
     fun createSpbMetroTextProvider(): SpbMetroTextProvider
     fun createMoscowMetroTextProvider(): MoscowMetroTextProvider
@@ -65,5 +66,6 @@ interface SubsCityComponent {
     fun provideAnalytics(): Analytics
     fun provideCityProvider(): CityProvider
     fun providePreferencesProvider(): PreferencesProvider
+    fun provideThemeProvider(): ThemeProvider
 
 }

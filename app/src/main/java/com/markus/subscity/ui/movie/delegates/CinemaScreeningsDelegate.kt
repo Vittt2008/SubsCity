@@ -24,6 +24,10 @@ import javax.inject.Inject
 class CinemaScreeningsDelegate(private val screeningClickListener: (Screening) -> Unit,
                                private val cinemaTitleClickListener: (Cinema) -> Unit) : AbsListItemAdapterDelegate<MoviePresenter.CinemaScreenings, Any, CinemaScreeningsDelegate.CinemaScreeningsViewHolder>() {
 
+    companion object{
+        private const val SPAN_COUNT = 4
+    }
+
     @Inject
     lateinit var metroProvider: MetroProvider
 
@@ -45,7 +49,7 @@ class CinemaScreeningsDelegate(private val screeningClickListener: (Screening) -
     }
 
     inner class CinemaScreeningsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val SPAN_COUNT = 5
+
         private lateinit var cinema: Cinema
         private val titleLayout = view.findViewById<View>(R.id.title_layout)
         private val cinemaTitle = view.findViewById<TextView>(R.id.tv_title)
@@ -62,9 +66,12 @@ class CinemaScreeningsDelegate(private val screeningClickListener: (Screening) -
             cinemaMetro.text = metroProvider.currentMetroTextProvider.formatMetroListStation(cinema.location.metro)
             screenings.apply {
                 layoutManager = GridLayoutManager(screenings.context, SPAN_COUNT, LinearLayoutManager.VERTICAL, false)
-                adapter = MovieScreeningAdapter(screenings.context, cinemaScreenings.screenings, screeningClickListener)
-                val margin = context.resources.getDimensionPixelSize(R.dimen.screening_margin)
-                addItemDecoration(ImageGridItemDecoration(SPAN_COUNT, margin, false))
+                adapter = MovieScreeningAdapter(screenings.context, cinemaScreenings.screenings, SPAN_COUNT, screeningClickListener)
+                val horizontal = context.resources.getDimensionPixelSize(R.dimen.screening_horizontal_margin)
+                val vertical = context.resources.getDimensionPixelSize(R.dimen.screening_vertical_margin)
+                if (screenings.itemDecorationCount == 0) {
+                    addItemDecoration(ImageGridItemDecoration(SPAN_COUNT, horizontal, vertical, false))
+                }
             }
         }
     }

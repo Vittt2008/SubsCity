@@ -49,50 +49,50 @@
         </activity>
 
         <activity
-            android:name="com.markus.subscity.ui.main.MainActivity"
+            android:name=".ui.main.MainActivity"
             android:label="@string/empty_title"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.MainActivity" />
 
         <activity
-            android:name="com.markus.subscity.ui.movie.MovieActivity"
+            android:name=".ui.movie.MovieActivity"
             android:label="@string/empty_title"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name="com.markus.subscity.ui.cinema.CinemaActivity"
+            android:name=".ui.cinema.CinemaActivity"
             android:label="@string/empty_title"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name="com.markus.subscity.ui.city.CityActivity"
+            android:name=".ui.city.CityActivity"
             android:label="@string/city_title"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name="com.markus.subscity.ui.city.FirstPickCityActivity"
+            android:name=".ui.city.FirstPickCityActivity"
             android:label="@string/city_title"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.FirstPickCityActivity" />
 
         <activity
-            android:name="com.markus.subscity.ui.youtube.YouTubeActivity"
+            android:name=".ui.youtube.YouTubeActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|keyboard"
             android:label="@string/empty_title"
             android:theme="@style/AppTheme.YouTube" />
 
         <activity
-            android:name="com.markus.subscity.ui.cinemasmap.CinemasMapActivity"
+            android:name=".ui.cinemasmap.CinemasMapActivity"
             android:label="@string/cinemas_map_title"
             android:theme="@style/AppTheme.Activity" />
 
         <activity
-            android:name="com.markus.subscity.ui.about.AboutActivity"
+            android:name=".ui.about.AboutActivity"
             android:label="@string/about_title"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name="com.markus.subscity.ui.donate.DonateActivity"
+            android:name=".ui.donate.DonateActivity"
             android:label="@string/donate_title"
             android:theme="@style/AppTheme.NoActionBar" />
 
@@ -100,6 +100,11 @@
             android:name=".ui.policy.PolicyActivity"
             android:label="@string/policy_title"
             android:theme="@style/AppTheme.Activity" />
+
+        <activity
+            android:name=".ui.theme.ThemeActivity"
+            android:label="@string/theme_title"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

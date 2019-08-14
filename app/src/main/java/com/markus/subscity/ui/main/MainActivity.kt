@@ -3,15 +3,15 @@ package com.markus.subscity.ui.main
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.bottomsheet.BottomSheetBehavior
+import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.viewpager.widget.ViewPager
-import android.view.View
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationAdapter
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.markus.subscity.R
 import com.markus.subscity.dagger.SubsCityDagger
 import com.markus.subscity.extensions.analytics
@@ -69,7 +69,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         styleViewPager()
         styleBottomNavigation()
         initRateDialog()
-        supportActionBar!!.setTitle(R.string.main_films)
+//        supportActionBar!!.setTitle(R.string.main_films)
         analytics().logOpenMain()
     }
 
@@ -108,9 +108,9 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         adapter.setupWithBottomNavigation(ahBottomView)
 
         ahBottomView.isBehaviorTranslationEnabled = false
-        ahBottomView.accentColor = ContextCompat.getColor(this, R.color.primary_color)
-        ahBottomView.inactiveColor = ContextCompat.getColor(this, R.color.inactive_color)
-        ahBottomView.defaultBackgroundColor = ContextCompat.getColor(this, R.color.white_color)
+        ahBottomView.accentColor = ContextCompat.getColor(this, R.color.bottom_bar_active_color)
+        ahBottomView.inactiveColor = ContextCompat.getColor(this, R.color.bottom_bar_inactive_color)
+        ahBottomView.defaultBackgroundColor = ContextCompat.getColor(this, R.color.bottom_bar_background_color)
         ahBottomView.titleState = AHBottomNavigation.TitleState.ALWAYS_HIDE
         ahBottomView.setOnTabSelectedListener { position, wasSelected -> selectTab(position) }
         ahBottomView.setUseElevation(true)

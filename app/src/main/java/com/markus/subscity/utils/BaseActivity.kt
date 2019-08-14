@@ -4,18 +4,15 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.markus.subscity.dagger.SubsCityDagger
 import com.r0adkll.slidr.Slidr
-import com.r0adkll.slidr.model.SlidrInterface
 
 /**
  * @author Vitaliy Markus
  */
 abstract class BaseActivity : AppCompatActivity() {
 
-    lateinit var slidrInterface: SlidrInterface
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        slidrInterface = Slidr.attach(this)
+        Slidr.attach(this)
     }
 
     override fun onResume() {

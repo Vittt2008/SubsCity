@@ -53,7 +53,7 @@ class CinemasAdapter(private val cinemas: List<Cinema>,
             this.cinema = cinema
 
             cinemaName.text = cinema.name
-            cinemaAddress.text = cinema.location.address
+            cinemaAddress.text = cinema.location.address.trim()
             cinemaMetroStation.text = metroProvider.currentMetroTextProvider.formatMetroListStation(cinema.location.metro)
         }
 

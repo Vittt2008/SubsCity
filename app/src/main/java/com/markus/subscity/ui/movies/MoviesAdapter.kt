@@ -1,21 +1,23 @@
 package com.markus.subscity.ui.movies
 
+import android.annotation.SuppressLint
 import android.content.Context
-import androidx.core.widget.TextViewCompat
-import androidx.appcompat.widget.AppCompatTextView
-import androidx.recyclerview.widget.RecyclerView
-import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.content.ContextCompat
+import androidx.core.widget.TextViewCompat
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.markus.subscity.R
 import com.markus.subscity.api.entities.movie.Movie
 import com.markus.subscity.dagger.GlideApp
 import com.markus.subscity.dagger.SubsCityDagger
+import com.markus.subscity.extensions.getWidthScreen
 import com.markus.subscity.providers.LanguageProvider
 import com.markus.subscity.widgets.transformations.PosterCrop
 import javax.inject.Inject
@@ -28,20 +30,22 @@ class MoviesAdapter(context: Context,
                     private val movies: List<Movie>,
                     private val clickListener: (Movie) -> Unit) : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 
-    private val RATING = 6.9
+    companion object {
+        private const val RATING = 6.9
+        //Hack for textView autosizing. Empty ending is ignored by TextView drawing and measurement, but isn't ignored autosizing.
+        private val emptyEnding = CharArray(30) { ' ' }.joinToString(separator = "")
+    }
+
+    private val errorDrawable = ContextCompat.getDrawable(context, R.drawable.ic_error_poster)
 
     private val layoutInflater = LayoutInflater.from(context)
-    private val width: Int
+    private val width: Int = context.getWidthScreen()
     private val isFullSpans: MutableList<Boolean> = ArrayList()
 
     @Inject
     lateinit var languageProvider: LanguageProvider
 
     init {
-        val metrics = DisplayMetrics()
-        val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        windowManager.defaultDisplay.getMetrics(metrics)
-        width = metrics.widthPixels
         updateFullSpans()
         SubsCityDagger.component.inject(this)
     }
@@ -85,27 +89,34 @@ class MoviesAdapter(context: Context,
             view.setOnClickListener { clickListener.invoke(movie) }
         }
 
+        @SuppressLint("SetTextI18n")
         fun bind(movie: Movie, isFullSpan: Boolean) {
             this.movie = movie
 
-            val layoutParams = itemView.layoutParams as androidx.recyclerview.widget.StaggeredGridLayoutManager.LayoutParams
+            val layoutParams = itemView.layoutParams as StaggeredGridLayoutManager.LayoutParams
             layoutParams.isFullSpan = isFullSpan
 
             val posterWidth = if (isFullSpan) width else width / 2
             val maxLines = if (isFullSpan) R.integer.poster_max_line_huge else R.integer.poster_max_line
             val sizes = if (isFullSpan)
-                intArrayOf(R.dimen.poster_text_size_middle, R.dimen.poster_text_size_huge)
+                intArrayOf(R.dimen.poster_text_size_middle, R.dimen.poster_text_size_large, R.dimen.poster_text_size_huge)
             else
                 intArrayOf(R.dimen.poster_text_size)
 
-            GlideApp.with(moviePoster).asBitmap().load(movie.poster).override(posterWidth, layoutParams.height).transform(PosterCrop()).into(moviePoster)
+            GlideApp.with(moviePoster)
+                    .asBitmap()
+                    .load(movie.poster)
+                    .error(errorDrawable)
+                    .override(posterWidth, layoutParams.height)
+                    .transform(PosterCrop())
+                    .into(moviePoster)
 
             movieLanguage.text = movieLanguage(movie)
             movieLanguage.visibility = if (movieLanguage.text.isNotEmpty()) View.VISIBLE else View.GONE
 
             movieGenre.text = movie.genres.joinToString(", ").capitalize()
 
-            movieName.text = movie.title.russian
+            movieName.text = movie.title.russian + emptyEnding
             movieName.context.resources.also { resources ->
                 movieName.maxLines = resources.getInteger(maxLines)
                 val dimensions = sizes.map { resources.getDimension(it).toInt() }.toIntArray()

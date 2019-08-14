@@ -3,11 +3,15 @@ package com.markus.subscity.dagger
 import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.markus.subscity.BuildConfig
 import com.markus.subscity.api.ApiClient
 import com.markus.subscity.api.deserializers.DateTimeDeserializer
 import com.markus.subscity.api.deserializers.SubsCityTypeAdapterFactory
 import com.markus.subscity.providers.DateTimeProvider
 import com.markus.subscity.providers.DateTimeProviderImpl
+import com.markus.subscity.utils.analytics.Analytics
+import com.markus.subscity.utils.analytics.AnalyticsImpl
+import com.markus.subscity.utils.analytics.AnalyticsStub
 import dagger.Module
 import dagger.Provides
 import io.reactivex.schedulers.Schedulers
@@ -58,5 +62,11 @@ class SubsCityModule(@get:Provides val context: Context) {
     @Singleton
     fun dateTimeProvider(dateTimeProvider: DateTimeProviderImpl): DateTimeProvider {
         return dateTimeProvider
+    }
+
+    @Provides
+    @Singleton
+    fun analytics(context: Context): Analytics {
+        return if (BuildConfig.DEBUG) AnalyticsStub() else AnalyticsImpl(context)
     }
 }

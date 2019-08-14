@@ -1,23 +1,35 @@
 package com.markus.subscity.ui.movie
 
 import android.content.Context
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.markus.subscity.R
 import com.markus.subscity.api.entities.screening.Screening
+import com.markus.subscity.extensions.getWidthScreen
 
 /**
  * @author Vitaliy Markus
  */
 class MovieScreeningAdapter(private val context: Context,
                             private val screenings: List<Screening>,
-                            private val clickListener: (Screening) -> Unit) : androidx.recyclerview.widget.RecyclerView.Adapter<MovieScreeningAdapter.ViewHolder>() {
+                            private val spanCount: Int,
+                            private val clickListener: (Screening) -> Unit) : RecyclerView.Adapter<MovieScreeningAdapter.ViewHolder>() {
+
+    private val screenWidth: Int = context.getWidthScreen()
+    private val itemHeight = context.resources.getDimensionPixelSize(R.dimen.screenings_size)
+    private val itemWidth: Int
+
+    init {
+        val recyclerWidth = screenWidth - 2 * context.resources.getDimensionPixelSize(R.dimen.screenings_padding)
+        itemWidth = (recyclerWidth - (spanCount - 1) * context.resources.getDimensionPixelSize(R.dimen.screening_horizontal_margin)) / spanCount
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val root = LayoutInflater.from(parent.context).inflate(R.layout.item_screening, parent, false)
+        root.layoutParams = RecyclerView.LayoutParams(itemWidth, itemHeight)
         return ViewHolder(root)
     }
 
@@ -29,7 +41,7 @@ class MovieScreeningAdapter(private val context: Context,
         holder.bind(screenings[position])
     }
 
-    inner class ViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         private lateinit var screening: Screening
 
@@ -47,12 +59,7 @@ class MovieScreeningAdapter(private val context: Context,
             date.text = screening.dateTime.toString("d MMM").replace(".", "")
             time.text = screening.dateTime.toString("HH:mm")
             val ticketPrice = if (screening.priceMin != 0) screening.priceMin else if (screening.priceMax != 0) screening.priceMax else 0
-            if (ticketPrice != 0) {
-                price.text = context.getString(R.string.movie_screening_price, ticketPrice)
-                price.visibility = View.VISIBLE
-            } else {
-                price.visibility = View.GONE
-            }
+            price.text = if (ticketPrice != 0) context.getString(R.string.movie_screening_price, ticketPrice) else "—"
         }
     }
 }

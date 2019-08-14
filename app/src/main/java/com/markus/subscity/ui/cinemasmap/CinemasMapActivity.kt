@@ -7,14 +7,16 @@ import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import androidx.annotation.DrawableRes
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.core.content.ContextCompat
-import androidx.viewpager.widget.ViewPager
-import androidx.appcompat.content.res.AppCompatResources
 import android.view.MenuItem
 import android.view.View
+import androidx.annotation.DrawableRes
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager.widget.ViewPager
+import androidx.viewpager.widget.getCurrentView
+import androidx.viewpager.widget.getView
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
@@ -23,20 +25,20 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.GoogleMapOptions
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.markus.subscity.R
-import com.markus.subscity.widgets.ViewPagerBottomSheetBehavior
 import com.markus.subscity.api.entities.cinema.Cinema
 import com.markus.subscity.dagger.SubsCityDagger
 import com.markus.subscity.extensions.analytics
 import com.markus.subscity.extensions.toast
-import com.markus.subscity.ui.cinema.CinemaActivity
 import com.markus.subscity.utils.MapSlidr
+import com.markus.subscity.widgets.ViewPagerBottomSheetBehavior
 
 
 /**
  * @author Vitaliy Markus
  */
-class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnInfoWindowClickListener, GoogleMap.OnMarkerClickListener {
+class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnMarkerClickListener {
 
     @InjectPresenter
     lateinit var cinemasMapPresenter: CinemasMapPresenter
@@ -50,6 +52,7 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnI
     private lateinit var markerIdCinemaIdMap: Map<String, Long>
     private lateinit var cinemaIdMarkerIdMap: Map<Long, String>
 
+    private val mapBottomSheetCallback = MapBottomSheetCallback()
     private lateinit var behavior: ViewPagerBottomSheetBehavior<ViewPager>
 
     private val inactiveIcon by lazy { getMarkerIcon(R.drawable.ic_pin_unselected) }
@@ -82,15 +85,18 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnI
 
         setContentView(R.layout.fragment_cinemas_map)
 
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.setDisplayShowHomeEnabled(true)
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowHomeEnabled(true)
+        }
 
         val content = findViewById<View>(android.R.id.content)
-        content.setBackgroundColor(ContextCompat.getColor(this, R.color.map_background_color))
+        content.setBackgroundColor(ContextCompat.getColor(this, R.color.main_background_color))
         viewPager = findViewById(R.id.cinema_view_pager)
+        viewPager.offscreenPageLimit = 2
         behavior = (viewPager.layoutParams as CoordinatorLayout.LayoutParams).behavior as ViewPagerBottomSheetBehavior<ViewPager>
         behavior.state = ViewPagerBottomSheetBehavior.STATE_HIDDEN
-        behavior.setBottomSheetCallback(MapBottomSheetCallback())
+        behavior.setBottomSheetCallback(mapBottomSheetCallback)
 
         if (savedInstanceState == null) {
             mapFragment = SupportMapFragment.newInstance(GoogleMapOptions().camera(createCameraPosition()))
@@ -102,7 +108,7 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnI
         }
 
         mapFragment.getMapAsync {
-            it.setOnInfoWindowClickListener(this)
+            it.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.maps_style))
             it.setOnMarkerClickListener(this)
             cinemasMapPresenter.getCinemas(it)
         }
@@ -123,7 +129,7 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnI
         val markerCinemaMap = markersMap.mapKeys { it.key.id }
         val markers = markersMap.map { it.key }
         viewPager.adapter = CinemaFragmentAdapter(supportFragmentManager, cinemas)
-        viewPager.addOnPageChangeListener(CinemaMapOnPageChangeListener())
+        viewPager.addOnPageChangeListener(mapBottomSheetCallback)
         cinemasMapPresenter.onMarkersAdd(markerCinemaMap, markers)
     }
 
@@ -132,7 +138,7 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnI
         this.cinemaIdMarkerIdMap = markerCinemaMap.entries.associateBy({ it.value }, { it.key })
         this.markers = markers as List<Marker>
 
-        val markerId = cinemaIdMarkerIdMap[cinemas.first().id]!!
+        val markerId = cinemaIdMarkerIdMap.getValue(cinemas.first().id)
         selectMarker(markerId)
     }
 
@@ -140,14 +146,8 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnI
         toast(throwable.message)
     }
 
-    override fun onInfoWindowClick(marker: Marker) {
-        val cinemaId = markerIdCinemaIdMap[marker.id]!!
-        analytics().logOpenCinemaFromMap(cinemaId)
-        CinemaActivity.start(this, cinemaId)
-    }
-
     override fun onMarkerClick(marker: Marker): Boolean {
-        val cinemaId = markerIdCinemaIdMap[marker.id]!!
+        val cinemaId = markerIdCinemaIdMap[marker.id]
         val oldIndex = viewPager.currentItem
         val smoothScroll = behavior.state != BottomSheetBehavior.STATE_HIDDEN
         viewPager.setCurrentItem(cinemas.indexOfFirst { it.id == cinemaId }, smoothScroll)
@@ -166,6 +166,7 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnI
 
     override fun onBackPressed() {
         if (behavior.state == ViewPagerBottomSheetBehavior.STATE_EXPANDED) {
+            smoothScrollToTop()
             behavior.state = ViewPagerBottomSheetBehavior.STATE_COLLAPSED
         } else {
             super.onBackPressed()
@@ -181,14 +182,16 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnI
 
     private fun selectMarker(position: Int) {
         val cinema = cinemas[position]
-        val markerId = cinemaIdMarkerIdMap[cinema.id]!!
+        val markerId = cinemaIdMarkerIdMap.getValue(cinema.id)
         selectMarker(markerId)
     }
 
     private fun selectMarker(id: String) {
+        val maxZIndex = markers.maxBy { it.zIndex }?.zIndex ?: 0f
         for (marker in markers) {
             if (marker.id == id) {
                 marker.setIcon(activeIcon)
+                marker.zIndex = maxZIndex + 1
                 animateCamera(marker, true)
                 if (behavior.state == ViewPagerBottomSheetBehavior.STATE_HIDDEN) {
                     behavior.state = ViewPagerBottomSheetBehavior.STATE_COLLAPSED
@@ -228,7 +231,7 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnI
     }
 
     private fun getMarkerIcon(@DrawableRes iconId: Int): BitmapDescriptor {
-        val icon = AppCompatResources.getDrawable(this, iconId)!!.toBitmap()
+        val icon = AppCompatResources.getDrawable(this, iconId)?.toBitmap() ?: throw IllegalArgumentException("Drawable $iconId must be non null")
         val markerIcon = BitmapDescriptorFactory.fromBitmap(icon)
         return markerIcon
     }
@@ -250,21 +253,53 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnI
         return bitmap
     }
 
-    inner class CinemaMapOnPageChangeListener : ViewPager.SimpleOnPageChangeListener() {
+    inner class MapBottomSheetCallback : ViewPagerBottomSheetBehavior.BottomSheetCallback(), ViewPager.OnPageChangeListener {
+
+        private var previousPosition: Int = 0
+        private var currentPosition: Int = 0
 
         override fun onPageSelected(position: Int) {
             selectMarker(position)
             viewPager.post { behavior.invalidateScrollingChild() }
         }
-    }
 
-    inner class MapBottomSheetCallback : ViewPagerBottomSheetBehavior.BottomSheetCallback() {
-        override fun onStateChanged(bottomSheet: View, newState: Int) {
-            if (newState == BottomSheetBehavior.STATE_HIDDEN) {
-                clearSelectedMarker(viewPager.currentItem)
+        override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+            if (positionOffset == 0f) {
+                previousPosition = currentPosition
+                currentPosition = position
+                if (behavior.state == ViewPagerBottomSheetBehavior.STATE_COLLAPSED) {
+                    scrollToTop(previousPosition)
+                    scrollToTop(previousPosition + 2)
+                }
             }
         }
 
-        override fun onSlide(bottomSheet: View, slideOffset: Float) {}
+        override fun onStateChanged(bottomSheet: View, newState: Int) {
+            when (newState) {
+                ViewPagerBottomSheetBehavior.STATE_HIDDEN -> clearSelectedMarker(viewPager.currentItem)
+                ViewPagerBottomSheetBehavior.STATE_COLLAPSED -> {
+                    scrollToTop(previousPosition)
+                    scrollToTop(previousPosition + 2)
+                }
+                else -> Unit
+            }
+        }
+
+        override fun onPageScrollStateChanged(state: Int) = Unit
+        override fun onSlide(bottomSheet: View, slideOffset: Float) = Unit
+    }
+
+    private fun smoothScrollToTop() {
+        val view = viewPager.getCurrentView()
+        if (view is RecyclerView) {
+            view.smoothScrollToPosition(0)
+        }
+    }
+
+    private fun scrollToTop(position: Int) {
+        val view = viewPager.getView(position)
+        if (view is RecyclerView) {
+            view.scrollToPosition(0)
+        }
     }
 }

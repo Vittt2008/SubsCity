@@ -15,6 +15,7 @@ class PreferencesProvider @Inject constructor(private val context: Context) {
         const val LAUNCH_COUNT_KEY = "launch_count"
         const val WAS_RANKED_KEY = "was_ranked"
         const val WAS_DONATED_KEY = "was_donated"
+        const val APP_THEME_KEY = "app_theme"
     }
 
     fun getAppPreferences(): SharedPreferences {

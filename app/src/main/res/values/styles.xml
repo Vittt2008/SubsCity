@@ -1,13 +1,14 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="colorControlHighlight">@color/colorPrimary</item>
+    <style name="CoreAppTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <item name="colorPrimary">@color/toolbar_color</item>
+        <item name="colorPrimaryDark">@color/status_bar_color</item>
+        <item name="colorAccent">@color/accent_color</item>
+        <item name="colorControlHighlight">@color/main_ripple_color</item>
+        <item name="actionBarTheme">@style/AppTheme.Toolbar</item>
     </style>
+
+    <style name="AppTheme" parent="CoreAppTheme" />
 
     <style name="AppTheme.Activity">
         <item name="android:windowIsTranslucent">true</item>
@@ -29,7 +30,12 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.DayNight" />
+
+    <style name="AppTheme.Toolbar">
+        <item name="android:textColorSecondary">@color/toolbar_title_color</item>
+        <item name="titleTextColor">@color/toolbar_title_color</item>
+    </style>
 
     <style name="AppTheme.ActivityAnimation" parent="@android:style/Animation.Activity">
         <item name="android:activityOpenEnterAnimation">@anim/events_right_in</item>
@@ -41,11 +47,11 @@
     </style>
 
     <style name="AppTheme.SplashTheme" parent="AppTheme">
+        <item name="colorPrimaryDark">@color/splash_status_bar_color</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowBackground">@drawable/splash_bg</item>
-        <item name="android:navigationBarColor" tools:targetApi="lollipop">@color/colorPrimary
-        </item>
+        <item name="android:navigationBarColor" tools:targetApi="lollipop">@color/splash_color</item>
     </style>
 
     <style name="AppTheme.YouTube" parent="AppTheme.NoActionBar">
@@ -56,7 +62,7 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.Button.SocialNetwork" parent="Widget.AppCompat.Button">
-        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textColor">@color/white_color</item>
         <item name="android:textSize">16sp</item>
@@ -70,13 +76,20 @@
         <item name="android:background">@drawable/review_bg</item>
     </style>
 
-    <style name="AppTheme.TextView" parent="TextAppearance.AppCompat">
-        <item name="android:fontFamily">sans-serif</item>
-        <item name="android:textStyle">normal</item>
+    <style name="AppTheme.ExpandedTitleTextAppearance">
+        <item name="android:textColor">@color/toolbar_title_color</item>
     </style>
 
-    <style name="AppTheme.TextView.Small">
-        <item name="android:textSize">12sp</item>
+    <style name="AppTheme.CollapsedTitleTextAppearance">
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textColor">@color/toolbar_title_color</item>
+    </style>
+
+    <!--region Base TextView-->
+
+    <style name="AppTheme.TextView" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textStyle">normal</item>
     </style>
 
     <style name="AppTheme.TextView.Medium">
@@ -91,36 +104,112 @@
         <item name="android:textSize">20sp</item>
     </style>
 
-    <style name="AppTheme.TextView.ExtraHuge">
+    <!--endregion-->
+
+    <!--region Common-->
+
+    <style name="AppTheme.TextView.Common.Subtitle" parent="AppTheme.TextView.Medium">
+        <item name="android:textColor">@color/subtitle_color</item>
+    </style>
+
+    <!--endregion-->
+
+    <!--region Screening-->
+
+    <style name="AppTheme.TextView.Screening">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="AppTheme.TextView.Screening.Date">
+        <item name="android:textColor">@color/screening_date_color</item>
+        <item name="android:alpha">0.87</item>
+    </style>
+
+    <style name="AppTheme.TextView.Screening.Time">
+        <item name="android:textColor">@color/screening_time_color</item>
+        <item name="android:alpha">0.87</item>
+    </style>
+
+    <style name="AppTheme.TextView.Screening.Price">
+        <item name="android:textColor">@color/screening_price_color</item>
+        <item name="android:alpha">0.87</item>
+    </style>
+
+    <!--endregion-->
+
+    <!--region Movie-->
+
+    <style name="AppTheme.TextView.Movie">
+        <item name="android:textColor">@color/movie_text_color</item>
+    </style>
+
+    <style name="AppTheme.TextView.Movie.Language">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="AppTheme.TextView.Movie.Title">
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+
+    <style name="AppTheme.TextView.Movie.Genre">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">italic</item>
+    </style>
+
+    <!--endregion-->
+
+    <!--region Cinema-->
+
+    <style name="AppTheme.TextView.Cinema.Title" parent="AppTheme.TextView">
+        <item name="android:textColor">@color/title_color</item>
         <item name="android:textSize">24sp</item>
     </style>
 
-    <style name="AppTheme.TextView.Small.Black">
-        <item name="android:textColor">@color/black_color</item>
+    <!--endregion-->
+
+    <!--region Settings-->
+
+    <style name="AppTheme.Image.Setting" parent="AppTheme">
+        <item name="android:layout_width">24dp</item>
+        <item name="android:layout_height">24dp</item>
+        <item name="android:scaleType">center</item>
+        <item name="android:tint">@color/settings_color</item>
     </style>
 
-    <style name="AppTheme.TextView.Small.White">
-        <item name="android:textColor">@color/white_color</item>
+    <style name="AppTheme.TextView.Setting.Title" parent="AppTheme.TextView.Medium">
+        <item name="android:textColor">@color/settings_color</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
     </style>
 
-    <style name="AppTheme.TextView.Small.Black.Subtitle">
+    <style name="AppTheme.TextView.Setting.Subtitle" parent="AppTheme.TextView.Medium">
+        <item name="android:textColor">@color/subtitle_color</item>
+    </style>
+
+    <!--endregion-->
+
+    <!--region Movie Info-->
+
+    <style name="AppTheme.TextView.MovieInfo.Title" parent="AppTheme.TextView.Medium.Black">
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+
+    <style name="AppTheme.TextView.MovieInfo.Subtitle" parent="AppTheme.TextView.Medium.Black"/>
+
+    <!--endregion-->
+
+    <!-- TextView Style -->
+
+    <style name="AppTheme.TextView.Small.Black.Subtitle" parent="AppTheme.TextView">
+        <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/subtitle_color</item>
     </style>
 
     <style name="AppTheme.TextView.Medium.Black">
-        <item name="android:textColor">@color/black_color</item>
-    </style>
-
-    <style name="AppTheme.TextView.Medium.Black.Subtitle">
-        <item name="android:textColor">@color/subtitle_color</item>
-    </style>
-
-    <style name="AppTheme.TextView.Medium.Black.Bold">
-        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/title_color</item>
     </style>
 
     <style name="AppTheme.TextView.Large.Black">
-        <item name="android:textColor">@color/black_color</item>
+        <item name="android:textColor">@color/title_color</item>
     </style>
 
     <style name="AppTheme.TextView.Large.Black.Subtitle">
@@ -128,32 +217,15 @@
     </style>
 
     <style name="AppTheme.TextView.Large.Black.Bold">
-        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
     </style>
 
     <style name="AppTheme.TextView.Huge.Black">
-        <item name="android:textColor">@color/black_color</item>
+        <item name="android:textColor">@color/title_color</item>
     </style>
 
-    <style name="AppTheme.TextView.Huge.Black.Bold">
-        <item name="android:fontFamily">sans-serif-medium</item>
+    <style name="AppTheme.TextView.Huge.Black.Title">
+        <item name="android:fontFamily">@font/roboto_medium</item>
     </style>
-
-    <style name="AppTheme.TextView.ExtraHuge.Black">
-        <item name="android:textColor">@color/black_color</item>
-    </style>
-
-    <style name="AppTheme.TextView.Screening">
-        <item name="android:textSize">13sp</item>
-        <item name="android:textColor">@color/screening_text_color</item>
-        <item name="android:alpha">0.87</item>
-    </style>
-
-    <style name="AppTheme.TextView.Screening.Price">
-        <item name="android:textSize">12sp</item>
-        <item name="android:alpha">0.54</item>
-        <item name="android:fontFamily">sans-serif-light</item>
-    </style>
-
 
 </resources>

@@ -12,16 +12,18 @@ import com.markus.subscity.R
  */
 class ProgressDelegate : AbsListItemAdapterDelegate<Any, Any, ProgressDelegate.ProgressViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup): ProgressDelegate.ProgressViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup): ProgressViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_progress, parent, false)
-        return ProgressDelegate.ProgressViewHolder(view)
+        return ProgressViewHolder(view)
     }
 
     override fun isForViewType(item: Any, items: List<Any>, position: Int): Boolean {
-        return position == 1 && item !is Int
+        return item is ProgressObject
     }
 
-    override fun onBindViewHolder(item: Any, viewHolder: ProgressDelegate.ProgressViewHolder, payloads: List<Any>) {}
+    override fun onBindViewHolder(item: Any, viewHolder: ProgressViewHolder, payloads: List<Any>) {}
 
-    class ProgressViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view)
+    object ProgressObject
+
+    class ProgressViewHolder(view: View) : RecyclerView.ViewHolder(view)
 }

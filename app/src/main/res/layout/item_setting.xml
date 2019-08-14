@@ -9,42 +9,24 @@
 
     <ImageView
         android:id="@+id/iv_setting_icon"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        style="@style/AppTheme.Image.Setting"
         android:layout_gravity="center_vertical"
-        android:src="@drawable/ic_movie_star"
-        android:scaleType="center"
-        android:tint="@color/settings_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_movie_star" />
 
     <TextView
         android:id="@+id/tv_setting_title"
-        style="@style/AppTheme.TextView.Large"
+        style="@style/AppTheme.TextView.Setting.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:ellipsize="end"
-        android:fontFamily="sans-serif-medium"
         android:lines="1"
-        android:textColor="@color/settings_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_setting_icon"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Скоро в прокате" />
-
-    <TextView
-        android:id="@+id/tv_settings_city"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
-        android:textColor="@color/settings_color"
-        android:textSize="12sp"
-        android:textStyle="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Санкт-Петербург" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

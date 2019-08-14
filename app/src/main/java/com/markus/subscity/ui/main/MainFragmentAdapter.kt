@@ -10,9 +10,11 @@ import com.markus.subscity.ui.settings.SettingsFragment
 /**
  * @author Vitaliy Markus
  */
-class MainFragmentAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager) {
+class MainFragmentAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
-    private val TAB_MAIN_COUNT = 3
+    companion object {
+        private const val TAB_MAIN_COUNT = 3
+    }
 
     override fun getItem(position: Int): Fragment {
         return when (position) {

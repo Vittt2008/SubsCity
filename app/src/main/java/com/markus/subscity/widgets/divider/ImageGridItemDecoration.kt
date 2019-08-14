@@ -1,37 +1,40 @@
 package com.markus.subscity.widgets.divider
 
 import android.graphics.Rect
-import androidx.recyclerview.widget.RecyclerView
 import android.view.View
+import androidx.recyclerview.widget.RecyclerView
 
 /**
- * http://stackoverflow.com/questions/28531996/android-recyclerview-gridlayoutmanager-column-spacing
+ * http://stackoverflow.com/questions/28531996/android-recyclerview-gridlayoutmanager-column-horizontalSpacing
  *
  * @author Vitaliy Markus
  */
-class ImageGridItemDecoration(private val spanCount: Int, private val spacing: Int, private val includeEdge: Boolean) : RecyclerView.ItemDecoration() {
+class ImageGridItemDecoration(private val spanCount: Int,
+                              private val horizontalSpacing: Int,
+                              private val verticalSpacing: Int,
+                              private val includeEdge: Boolean) : RecyclerView.ItemDecoration() {
 
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
         val position = parent.getChildAdapterPosition(view)
         val column = position % spanCount
 
         if (includeEdge) {
-            outRect.left = spacing - column * spacing / spanCount
-            outRect.right = (column + 1) * spacing / spanCount
+            outRect.left = horizontalSpacing - column * horizontalSpacing / spanCount
+            outRect.right = (column + 1) * horizontalSpacing / spanCount
 
             if (position < spanCount) { // top edge
-                outRect.top = spacing
+                outRect.top = verticalSpacing
             }
-            outRect.bottom = spacing // item bottom
+            outRect.bottom = verticalSpacing // item bottom
         } else {
-            outRect.left = column * spacing / spanCount
+            outRect.left = column * horizontalSpacing / spanCount
             if (position + 1 == parent.adapter?.itemCount) {
                 outRect.right = 0
             } else {
-                outRect.right = spacing - (column + 1) * spacing / spanCount
+                outRect.right = horizontalSpacing - (column + 1) * horizontalSpacing / spanCount
             }
             if (position >= spanCount) {
-                outRect.top = spacing // item top
+                outRect.top = verticalSpacing // item top
             }
         }
     }

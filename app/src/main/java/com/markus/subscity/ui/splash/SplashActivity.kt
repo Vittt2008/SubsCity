@@ -1,6 +1,8 @@
 package com.markus.subscity.ui.splash
 
 import android.os.Bundle
+import android.os.Parcel
+import android.os.Parcelable
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
@@ -13,6 +15,7 @@ import com.markus.subscity.ui.deeplink.DeepLinkView
 import com.markus.subscity.ui.deeplink.isFromDeepLink
 import com.markus.subscity.ui.main.MainActivity
 import com.markus.subscity.ui.movie.MovieActivity
+import java.lang.IllegalArgumentException
 
 /**
  * @author Vitaliy Markus
@@ -39,7 +42,8 @@ class SplashActivity : MvpAppCompatActivity(), SplashView, DeepLinkView {
         super.onCreate(savedInstanceState)
 
         if (isFromDeepLink) {
-            deepLinkPresenter.performDeepLink(intent.data)
+            val data = (intent.data ?: throw IllegalArgumentException("Data must be non null"))
+            deepLinkPresenter.performDeepLink(data)
         } else {
             splashPresenter.checkFirstLaunch()
         }
@@ -83,4 +87,28 @@ class SplashActivity : MvpAppCompatActivity(), SplashView, DeepLinkView {
         FirstPickCityActivity.start(this)
         finish()
     }
+}
+
+class Value(val value: Int) : Parcelable {
+
+    constructor(parcel: Parcel) : this(parcel.readInt())
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeInt(value)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<Value> {
+        override fun createFromParcel(parcel: Parcel): Value {
+            return Value(parcel)
+        }
+
+        override fun newArray(size: Int): Array<Value?> {
+            return arrayOfNulls(size)
+        }
+    }
+
 }

@@ -37,19 +37,21 @@ class SubsCityApplication : MultiDexApplication() {
 
         JodaTimeAndroid.init(this)
 
-        val subsCityComponent = DaggerSubsCityComponent.builder()
+        val component = DaggerSubsCityComponent.builder()
                 .subsCityModule(SubsCityModule(this))
                 .build()
-        SubsCityDagger.init(subsCityComponent)
+        SubsCityDagger.init(component)
 
-        val preferences = SubsCityDagger.component.providePreferencesProvider().getAppPreferences()
+        component.provideThemeProvider().applyCurrentTheme()
+
+        val preferences = component.providePreferencesProvider().getAppPreferences()
 
         val launchCount = preferences.getInt(PreferencesProvider.LAUNCH_COUNT_KEY, 0)
         preferences.edit().putInt(PreferencesProvider.LAUNCH_COUNT_KEY, launchCount + 1).apply()
 
         val cityId = preferences.getString(PreferencesProvider.CITY_ID_KEY, null)
         if (cityId != null) {
-            val cityProvider = SubsCityDagger.component.provideCityProvider()
+            val cityProvider = component.provideCityProvider()
             analytics().logStartApp(cityProvider.cityName)
         }
     }

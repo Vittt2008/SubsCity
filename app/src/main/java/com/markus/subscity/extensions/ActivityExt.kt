@@ -5,18 +5,20 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ResolveInfo
 import android.net.Uri
+import android.util.DisplayMetrics
+import android.view.WindowManager
+import android.widget.Toast
 import androidx.annotation.StringRes
-import androidx.browser.customtabs.CustomTabsIntent
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
-import androidx.core.content.ContextCompat
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import android.widget.Toast
+import androidx.browser.customtabs.CustomTabsIntent
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import com.markus.subscity.R
 import com.markus.subscity.dagger.SubsCityDagger
-import com.markus.subscity.utils.Analytics
+import com.markus.subscity.utils.analytics.Analytics
 import com.markus.subscity.utils.IntentUtils
 
 /**
@@ -69,6 +71,13 @@ fun Context.longToast(text: String?) {
     Toast.makeText(this, text, Toast.LENGTH_LONG).show()
 }
 
+fun Context.getWidthScreen(): Int {
+    val metrics = DisplayMetrics()
+    val windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
+    windowManager.defaultDisplay.getMetrics(metrics)
+    return metrics.widthPixels
+}
+
 fun analytics(): Analytics {
     return SubsCityDagger.component.provideAnalytics()
 }
@@ -77,7 +86,7 @@ fun Fragment.openUrl(uri: Uri, useChromeTabsForce: Boolean = true) {
     val context = requireActivity()
 
     val builder = CustomTabsIntent.Builder()
-    builder.setToolbarColor(ContextCompat.getColor(context, R.color.primary_color))
+    builder.setToolbarColor(ContextCompat.getColor(context, R.color.toolbar_color))
     //builder.setStartAnimations(context, android.R.anim.slide_in_right, R.anim.slide_out_left)
 //    builder.setExitAnimations(context, android.R.anim.slide_in_left, android.R.anim.slide_out_right)
 

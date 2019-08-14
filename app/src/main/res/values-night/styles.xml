@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="AppTheme" parent="CoreAppTheme">
+        <item name="android:navigationBarColor" tools:targetApi="lollipop">@color/main_background_color</item>
+    </style>
+
+    <style name="AppTheme.TextView.Movie.Title" />
+
+    <style name="AppTheme.TextView.Movie.Genre">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/subtitle_color</item>
+    </style>
+
+    <style name="AppTheme.TextView.MovieInfo.Title" parent="AppTheme.TextView.Medium.Black" />
+
+    <style name="AppTheme.TextView.MovieInfo.Subtitle" parent="AppTheme.TextView.Medium.Black">
+        <item name="android:textColor">@color/subtitle_color</item>
+    </style>
+
+    <style name="AppTheme.TextView.Huge.Black.Title" />
+
+</resources>

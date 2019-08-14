@@ -3,10 +3,10 @@ package com.markus.subscity.ui.donate
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.appcompat.widget.Toolbar
-import android.util.Log
 import com.anjlab.android.iab.v3.BillingProcessor
 import com.anjlab.android.iab.v3.Constants.BILLING_RESPONSE_RESULT_DEVELOPER_ERROR
 import com.anjlab.android.iab.v3.Constants.BILLING_RESPONSE_RESULT_USER_CANCELED
@@ -39,6 +39,8 @@ class DonateActivity : BaseActivity(), BillingProcessor.IBillingHandler {
         const val PRODUCT_COFFEE = "donate_coffee"
         const val PRODUCT_MOVIE_TICKET = "donate_movie_ticket"
 
+        val products = arrayListOf(PRODUCT_TEA, PRODUCT_COFFEE, PRODUCT_MOVIE_TICKET)
+
 
         fun start(context: Context) {
             val intent = Intent(context, DonateActivity::class.java)
@@ -63,10 +65,9 @@ class DonateActivity : BaseActivity(), BillingProcessor.IBillingHandler {
     }
 
     override fun onBillingInitialized() {
-        val details = billingProcessor.getPurchaseListingDetails(ArrayList(listOf(PRODUCT_TEA, PRODUCT_COFFEE, PRODUCT_MOVIE_TICKET)))
-        //TODO details могут быть null
+        val details = billingProcessor.getPurchaseListingDetails(products)?.sortedBy { it.priceLong } ?: return
         donatesList.layoutManager = LinearLayoutManager(this)
-        donatesList.adapter = DonateAdapter(details.sortedBy { it.priceLong }) { billingProcessor.purchase(this, it.productId) }
+        donatesList.adapter = DonateAdapter(details) { billingProcessor.purchase(this, it.productId) }
         loadingController.switchState(ContentLoadingController.State.CONTENT)
     }
 
