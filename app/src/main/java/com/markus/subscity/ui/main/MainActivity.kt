@@ -69,7 +69,6 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         styleViewPager()
         styleBottomNavigation()
         initRateDialog()
-//        supportActionBar!!.setTitle(R.string.main_films)
         analytics().logOpenMain()
     }
 

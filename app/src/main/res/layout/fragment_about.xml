@@ -41,7 +41,7 @@
 
             <TextView
                 android:id="@+id/tv_about"
-                style="@style/AppTheme.TextView.Large.Black"
+                style="@style/AppTheme.TextView.Large.Title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
@@ -54,7 +54,7 @@
 
             <TextView
                 android:id="@+id/tv_about_tickets"
-                style="@style/AppTheme.TextView.Large.Black"
+                style="@style/AppTheme.TextView.Large.Title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
@@ -67,7 +67,7 @@
 
             <TextView
                 android:id="@+id/tv_social_network_title"
-                style="@style/AppTheme.TextView.Huge.Black.Title"
+                style="@style/AppTheme.TextView.Huge.Title.Bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
@@ -121,7 +121,7 @@
 
             <TextView
                 android:id="@+id/tv_team"
-                style="@style/AppTheme.TextView.Huge.Black.Title"
+                style="@style/AppTheme.TextView.Huge.Title.Bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
@@ -134,7 +134,7 @@
 
             <TextView
                 android:id="@+id/tv_team_members"
-                style="@style/AppTheme.TextView.Large.Black"
+                style="@style/AppTheme.TextView.Large.Title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
