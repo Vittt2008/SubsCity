@@ -80,6 +80,7 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnM
         return SubsCityDagger.component.createCinemasMapPresenter()
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -133,6 +134,7 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnM
         cinemasMapPresenter.onMarkersAdd(markerCinemaMap, markers)
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun onMarkersAdd(markerCinemaMap: Map<String, Long>, markers: List<Any>) {
         this.markerIdCinemaIdMap = markerCinemaMap
         this.cinemaIdMarkerIdMap = markerCinemaMap.entries.associateBy({ it.value }, { it.key })
@@ -221,19 +223,17 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnM
     }
 
     private fun createMarkerOptions(it: Cinema): MarkerOptions? {
-        val markerOptions = MarkerOptions()
+        return MarkerOptions()
                 .position(LatLng(it.location.latitude, it.location.longitude))
                 .icon(inactiveIcon)
                 .anchor(0.5f, 1f)
                 .title(it.name)
                 .snippet(it.location.address)
-        return markerOptions
     }
 
     private fun getMarkerIcon(@DrawableRes iconId: Int): BitmapDescriptor {
         val icon = AppCompatResources.getDrawable(this, iconId)?.toBitmap() ?: throw IllegalArgumentException("Drawable $iconId must be non null")
-        val markerIcon = BitmapDescriptorFactory.fromBitmap(icon)
-        return markerIcon
+        return BitmapDescriptorFactory.fromBitmap(icon)
     }
 
     private fun Drawable.toBitmap(): Bitmap {

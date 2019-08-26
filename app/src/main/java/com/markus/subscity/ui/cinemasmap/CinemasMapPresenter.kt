@@ -17,10 +17,11 @@ class CinemasMapPresenter @Inject constructor(private val cinemaRepository: Cine
         cinemaRepository.getCinemas()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        { viewState.showCinemas(it, googleMap) },
-                        { viewState.onError(it) }
-                )
+                .subscribe({ cinema ->
+                    viewState.showCinemas(cinema, googleMap)
+                }, {
+                    viewState.onError(it)
+                })
     }
 
     fun onMarkersAdd(markerCinemaMap: Map<String, Long>, markers: List<Any>) {

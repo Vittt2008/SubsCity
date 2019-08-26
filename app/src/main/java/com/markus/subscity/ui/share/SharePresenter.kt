@@ -21,7 +21,7 @@ class SharePresenter @Inject constructor(private val drawableExporter: DrawableE
                                          private val cityProvider: CityProvider) : MvpPresenter<ShareView>() {
 
     companion object {
-        private val POSTER_NAME = "temp_poster.jpg"
+        private const val POSTER_NAME = "temp_poster.jpg"
     }
 
     fun share(drawable: Drawable?, movie: Movie) {
@@ -29,7 +29,11 @@ class SharePresenter @Inject constructor(private val drawableExporter: DrawableE
                 .map { file -> ShareData(file.value, formatTitle(movie), String.format(SubsCityApplication.MOVIE_URL, cityProvider.cityId, movie.id)) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ viewState.share(it.file, it.title, it.url) }, { viewState.onShareError() })
+                .subscribe({ data ->
+                    viewState.share(data.file, data.title, data.url)
+                }, {
+                    viewState.onShareError()
+                })
     }
 
     private fun formatTitle(movie: Movie): String {

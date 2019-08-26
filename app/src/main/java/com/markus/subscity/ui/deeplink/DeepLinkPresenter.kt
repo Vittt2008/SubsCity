@@ -4,15 +4,13 @@ import android.net.Uri
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.markus.subscity.providers.CityProvider
-import com.markus.subscity.providers.PreferencesProvider
 import javax.inject.Inject
 
 /**
  * @author Vitaliy Markus
  */
 @InjectViewState
-class DeepLinkPresenter @Inject constructor(private val cityProvider: CityProvider,
-                                            private val preferencesProvider: PreferencesProvider) : MvpPresenter<DeepLinkView>() {
+class DeepLinkPresenter @Inject constructor(private val cityProvider: CityProvider) : MvpPresenter<DeepLinkView>() {
 
     companion object {
         const val MOVIES = "movies"

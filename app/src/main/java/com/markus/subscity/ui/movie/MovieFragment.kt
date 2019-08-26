@@ -49,8 +49,6 @@ class MovieFragment : MvpAppCompatFragment(), MovieView, ShareView {
     private lateinit var movieInfoList: RecyclerView
     private lateinit var movieInfoListLayoutManager: ScrollableLinearLayoutManager
 
-    private lateinit var shareMenuItem: MenuItem
-
     private var adapter: MovieAdapterDelegates? = null
     private var errorDrawable: Drawable? = null
 

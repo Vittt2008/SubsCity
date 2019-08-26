@@ -7,7 +7,6 @@ import android.view.View
 /**
  * @author Vitaliy Markus
  */
-
 fun ViewPager.getCurrentView(): View? {
     val currentItem = currentItem
     for (i in 0 until childCount) {

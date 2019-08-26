@@ -32,7 +32,7 @@ class YouTubeActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedListen
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
         setContentView(R.layout.activity_youtube)
 
         playerView = findViewById(R.id.player)

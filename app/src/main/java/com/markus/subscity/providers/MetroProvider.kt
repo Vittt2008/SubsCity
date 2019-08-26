@@ -11,7 +11,7 @@ import javax.inject.Singleton
  */
 @Singleton
 class MetroProvider @Inject constructor(private val cityProvider: CityProvider,
-                                        private val defaultMetroTextProvider: DefaultMetroTextProvider) {
+                                        defaultMetroTextProvider: DefaultMetroTextProvider) {
 
     private var currentCityId: String? = null
     private var currentProvider: MetroTextProvider = defaultMetroTextProvider

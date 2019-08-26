@@ -12,7 +12,6 @@ import com.markus.subscity.ui.cinema.delegates.MovieScreeningsDelegate
 import com.markus.subscity.ui.cinemas.CinemasAdapter
 import com.markus.subscity.ui.cinemas.CinemasPresenter
 import com.markus.subscity.ui.cinemasmap.CinemasMapPresenter
-import com.markus.subscity.ui.city.CityAdapter
 import com.markus.subscity.ui.city.CityPresenter
 import com.markus.subscity.ui.deeplink.DeepLinkPresenter
 import com.markus.subscity.ui.main.MainPresenter

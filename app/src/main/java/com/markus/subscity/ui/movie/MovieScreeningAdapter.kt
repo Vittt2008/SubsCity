@@ -18,7 +18,7 @@ import javax.inject.Inject
  */
 class MovieScreeningAdapter(private val context: Context,
                             private val screenings: List<Screening>,
-                            private val spanCount: Int,
+                            spanCount: Int,
                             private val clickListener: (Screening) -> Unit) : RecyclerView.Adapter<MovieScreeningAdapter.ViewHolder>() {
 
     private val screenWidth: Int = context.getWidthScreen()

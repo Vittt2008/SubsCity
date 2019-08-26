@@ -4,8 +4,8 @@ import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.markus.subscity.api.entities.movie.Movie
 import com.markus.subscity.api.entities.screening.Screening
-import com.markus.subscity.repositories.CinemaRepository
 import com.markus.subscity.providers.DateTimeProvider
+import com.markus.subscity.repositories.CinemaRepository
 import com.markus.subscity.repositories.MovieRepository
 import com.markus.subscity.repositories.ScreeningRepository
 import io.reactivex.Observable
@@ -38,10 +38,11 @@ class CinemaPresenter @Inject constructor(private val cinemaRepository: CinemaRe
 
         Observables.combineLatest(cinema, movieScreenings)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        { viewState.showCinema(it.first, it.second) },
-                        { viewState.onError(it) }
-                )
+                .subscribe({ (cinema, screenings) ->
+                    viewState.showCinema(cinema, screenings)
+                }, {
+                    viewState.onError(it)
+                })
     }
 
     private fun convert(pair: Pair<List<Screening>, List<Movie>>): List<MovieScreenings> {

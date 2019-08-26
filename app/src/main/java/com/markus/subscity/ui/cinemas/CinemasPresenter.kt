@@ -21,9 +21,9 @@ class CinemasPresenter @Inject constructor(private val cinemaRepository: CinemaR
                 .flatMapSingle { cinemaRepository.getCinemas() }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
+                .subscribe({ cinemas ->
                     viewState.hideProgress()
-                    viewState.showCinemas(it)
+                    viewState.showCinemas(cinemas)
                 }, {
                     viewState.hideProgress()
                     viewState.onError(it)

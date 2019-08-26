@@ -17,10 +17,11 @@ class CityPresenter @Inject constructor(private val cityProvider: CityProvider) 
         cityProvider.supportedCities
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        { viewState.showCities(it, cityProvider.cityId) },
-                        { viewState.onError(it) }
-                )
+                .subscribe({ cities ->
+                    viewState.showCities(cities, cityProvider.cityId)
+                }, {
+                    viewState.onError(it)
+                })
     }
 
     fun updateCity(city: String) {

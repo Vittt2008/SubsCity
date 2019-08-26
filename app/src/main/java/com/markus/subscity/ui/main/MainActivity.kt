@@ -111,7 +111,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         ahBottomView.inactiveColor = ContextCompat.getColor(this, R.color.bottom_bar_inactive_color)
         ahBottomView.defaultBackgroundColor = ContextCompat.getColor(this, R.color.bottom_bar_background_color)
         ahBottomView.titleState = AHBottomNavigation.TitleState.ALWAYS_HIDE
-        ahBottomView.setOnTabSelectedListener { position, wasSelected -> selectTab(position) }
+        ahBottomView.setOnTabSelectedListener { position, _ -> selectTab(position) }
         ahBottomView.setUseElevation(true)
 
         val mode = intent.getSerializableExtra(EXTRA_MODE) as Mode
