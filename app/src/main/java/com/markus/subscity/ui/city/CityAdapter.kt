@@ -23,7 +23,6 @@ class CityAdapter(private val context: Context,
     private val selectableCities: List<SelectableCity>
 
     init {
-        SubsCityDagger.component.inject(this)
         selectableCities = cities.map { SelectableCity(it.id, it.name, it.id == city) }
     }
 

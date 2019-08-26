@@ -8,7 +8,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.markus.subscity.R
 import com.markus.subscity.api.entities.screening.Screening
+import com.markus.subscity.dagger.SubsCityDagger
 import com.markus.subscity.extensions.getWidthScreen
+import com.markus.subscity.providers.DisplayLanguageProvider
+import javax.inject.Inject
 
 /**
  * @author Vitaliy Markus
@@ -22,7 +25,11 @@ class MovieScreeningAdapter(private val context: Context,
     private val itemHeight = context.resources.getDimensionPixelSize(R.dimen.screenings_size)
     private val itemWidth: Int
 
+    @Inject
+    lateinit var displayLanguageProvider: DisplayLanguageProvider
+
     init {
+        SubsCityDagger.component.inject(this)
         val recyclerWidth = screenWidth - 2 * context.resources.getDimensionPixelSize(R.dimen.screenings_padding)
         itemWidth = (recyclerWidth - (spanCount - 1) * context.resources.getDimensionPixelSize(R.dimen.screening_horizontal_margin)) / spanCount
     }
@@ -56,7 +63,7 @@ class MovieScreeningAdapter(private val context: Context,
         fun bind(screening: Screening) {
             this.screening = screening
 
-            date.text = screening.dateTime.toString("d MMM").replace(".", "")
+            date.text = screening.dateTime.toString("d MMM", displayLanguageProvider.displayLanguage).replace(".", "")
             time.text = screening.dateTime.toString("HH:mm")
             val ticketPrice = if (screening.priceMin != 0) screening.priceMin else if (screening.priceMax != 0) screening.priceMax else 0
             price.text = if (ticketPrice != 0) context.getString(R.string.movie_screening_price, ticketPrice) else "—"

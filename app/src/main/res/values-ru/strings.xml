@@ -1,0 +1,124 @@
+<resources>
+    <string name="app_name">SubsCity</string>
+    <string name="current_language">ru</string>
+
+    <string name="send">Отправить</string>
+
+    <string name="email_subject">Обратная связь. Приложение SubsCity</string>
+    <string name="email_rate_app">Отзыв. Приложение SubsCity</string>
+
+    <string name="rate_title">Вы уже долгое время используете SubCity</string>
+    <string name="rate_subtitle">Мы будем рады, если вы сможете рассказать нам ваши мысли о приложении.</string>
+    <string name="rate_button">Оценить приложение</string>
+    <string name="rate_no_play_store">Отсутвет приложение Play Store</string>
+
+    <!-- MainActivity -->
+    <string name="main_films">Фильмы</string>
+    <string name="main_cinemas">Кинотеатры</string>
+    <string name="main_settings">Меню</string>
+
+    <!-- SettingsFragment -->
+    <string name="setting_new_in_cinema_title">Скоро в прокате</string>
+    <string name="setting_cinema_map_title">Карта кинотеатров</string>
+    <string name="setting_sale_title">Акции</string>
+    <string name="setting_about_title">О приложении</string>
+    <string name="setting_policy_title">Политика конфиденциальности</string>
+    <string name="setting_city_title">Город</string>
+    <string name="setting_donate_title">Пожертвования</string>
+    <string name="setting_rate_app">Оценить приложение</string>
+    <string name="setting_theme">Тема</string>
+    <string name="setting_dark_theme">Темная тема</string>
+    <string name="setting_language">Язык</string>
+
+    <!-- MovieFragment -->
+    <string name="movie_genre_title">Жанр:</string>
+    <string name="movie_language_title">Язык озвучки:</string>
+    <string name="movie_durability_title">Длительность:</string>
+    <string name="movie_age_title">Возрастное ограничение:</string>
+    <string name="movie_rating_kinopoisk_title">КиноПоиск:</string>
+    <string name="movie_rating_imdb_title">IMDB:</string>
+    <string name="movie_description_title">Описание</string>
+    <string name="movie_screenings_title">Сеансы</string>
+    <string name="movie_screening_price">%1$d&#8201;₽</string>
+    <string name="movie_trailer_original">Оригинальный</string>
+    <string name="movie_trailer_russian">Русский</string>
+    <string name="movie_no_trailers">К сожалению у данного фильма нет трейлеров</string>
+    <string name="movie_share">Поделиться</string>
+    <string name="movie_no_share_application">Отсутвуют приложения для функционала "Полелиться"</string>
+    <string name="movie_share_title">Фильм %s на языке оригинала в кино</string>
+    <string name="movie_share_error">Произошла ошибка при попытке поделиться фильмом</string>
+
+    <!-- CinemasFragment -->
+    <string name="cinemas_map_menu">На карте</string>
+
+    <!-- CinemaFragment -->
+    <string name="cinema_point_on_map">На карте</string>
+    <string name="cinema_no_map_application">Отсутвуют приложения для работы с картой</string>
+    <string name="cinema_no_phone_application">Отсутвуют приложения для осуществления звонков</string>
+
+    <!-- CinemasMapActivity -->
+    <string name="cinemas_map_title">Карта кинотеатров</string>
+
+    <!-- ThemeActivity -->
+    <string name="theme_title">Theme</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="theme_system_default">Системная тема</string>
+    <string name="theme_by_battery_saver">Учитывать режим энергосбережения</string>
+
+    <!-- AboutActivity -->
+    <string name="about_title">О приложении</string>
+    <string name="about_info">Предоставляем расписания фильмов на оригинальном языке в кинотеатрах вашего города. На всех сеансах есть субтитры.</string>
+    <string name="about_info_tickets">Билеты покупаются через Рамблер/касса.</string>
+    <string name="about_subscribe">Подписывайтесь на нас в Telegram, ВКонтакте и Facebook и не пропустите ни одного нового фильма в кино на языке оригинала!</string>
+    <string name="about_social_networks">Соцсети</string>
+    <string name="about_vkontakte">ВКонтакте</string>
+    <string name="about_telegram">Telegram</string>
+    <string name="about_facebook">Facebook</string>
+    <string name="about_review">Обратная связь</string>
+    <string name="about_no_email_application">Отсутвуют приложения для отправки электронных писем</string>
+    <string name="about_github">SubCity является некоммерческим проектом. Все предложения по улучшению можете оставлять по почте или на GitHub:</string>
+    <string name="about_team">Команда</string>
+    <string name="about_team_members">Разработчик: Виталий Маркус\nUX-дизайнер: Николай Каврецкий\nСсылка на GitHub: Subscity</string>
+    <string name="about_team_developer">Виталий Маркус</string>
+    <string name="about_team_designer">Николай Каврецкий</string>
+    <string name="about_team_github">Subscity</string>
+
+    <!-- PolicyActivity -->
+    <string name="policy_title">Политика конфиденциальности</string>
+    <string name="policy_url">file:///android_asset/privacy_policy.html</string>
+
+    <!-- DonateActivity -->
+    <string name="donate_title">Пожертвовать</string>
+    <string name="donate_message">SubCity является некоммерческим проектом. Если вы хотите поблагодарить нас за работу, то можно это сделать с помощью пожертвований.</string>
+    <string name="donate_types">Можно пожертвовать следующие суммы:</string>
+    <string name="donate_success">Спасибо. Ваши пожертвование позволяют нам успешно развивать приложение.</string>
+    <string name="donate_error">При транзации произошла ошибка. Попробуйте еще раз.</string>
+
+    <!-- OfferActivity -->
+    <string name="offer_go_to_store">Оценить в Play Store</string>
+    <string name="offer_go_to_main">Продолжить использование</string>
+    <string name="offer_no_play_store">На устройстве отсутсвует Play Store</string>
+
+    <!-- CityFragment -->
+    <string name="city_title">Выбор города</string>
+
+    <!-- YouTube -->
+    <string name="youtube_error_player">Ошибка при инициализации YouTube плеера (%1$s)</string>
+
+    <!-- LanguageProvider -->
+    <string name="language_provider_ending">ий</string>
+    <string name="language_provider_format_declinable">На %sом</string>
+    <string name="language_provider_format_undeclinable">На %s</string>
+
+    <!-- DurationProvider -->
+    <string name="duration_provider_format">%1$d ч %2$d мин</string>
+
+    <!-- CityProvider -->
+    <string name="saint_petersburg">Санкт-Петербург</string>
+    <string name="moscow">Москва</string>
+
+    <!-- GeoUri -->
+    <string name="geo_uri">geo:%1$f,%2$f?z=15&amp;q=%3$s</string>
+
+</resources>

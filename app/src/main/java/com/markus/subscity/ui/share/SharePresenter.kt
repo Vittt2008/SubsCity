@@ -9,7 +9,6 @@ import com.markus.subscity.providers.CityProvider
 import com.markus.subscity.utils.DrawableExporter
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
 import java.io.File
 import javax.inject.Inject
@@ -21,7 +20,9 @@ import javax.inject.Inject
 class SharePresenter @Inject constructor(private val drawableExporter: DrawableExporter,
                                          private val cityProvider: CityProvider) : MvpPresenter<ShareView>() {
 
-    private val POSTER_NAME = "temp_poster.jpg"
+    companion object {
+        private val POSTER_NAME = "temp_poster.jpg"
+    }
 
     fun share(drawable: Drawable?, movie: Movie) {
         Single.fromCallable { FileOptional(drawableExporter.export(drawable, POSTER_NAME)) }

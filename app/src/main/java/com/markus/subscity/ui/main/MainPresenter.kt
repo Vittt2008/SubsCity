@@ -2,6 +2,7 @@ package com.markus.subscity.ui.main
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
+import com.markus.subscity.providers.DisplayLanguageProvider
 import com.markus.subscity.providers.PreferencesProvider
 import javax.inject.Inject
 
@@ -11,7 +12,9 @@ import javax.inject.Inject
 @InjectViewState
 class MainPresenter @Inject constructor(private val preferencesProvider: PreferencesProvider) : MvpPresenter<MainView>() {
 
-    private val LAUNCH_COUNT_MOD = 15
+    companion object {
+        private val LAUNCH_COUNT_MOD = 15
+    }
 
     override fun onFirstViewAttach() {
         val preferences = preferencesProvider.getAppPreferences()

@@ -3,9 +3,7 @@ package com.markus.subscity.repositories
 import com.markus.subscity.api.ApiClient
 import com.markus.subscity.api.entities.movie.Movie
 import com.markus.subscity.extensions.timeout
-import com.markus.subscity.providers.CityProvider
-import com.markus.subscity.providers.DatabaseProvider
-import com.markus.subscity.providers.DateTimeProvider
+import com.markus.subscity.providers.*
 import io.reactivex.Single
 import javax.inject.Inject
 
@@ -15,6 +13,7 @@ import javax.inject.Inject
 class MovieRepository @Inject constructor(private val apiClient: ApiClient,
                                           databaseProvider: DatabaseProvider,
                                           private val cityProvider: CityProvider,
+                                          private val displayLanguageProvider: DisplayLanguageProvider,
                                           dateTimeProvider: DateTimeProvider) : CachedRepository(databaseProvider, dateTimeProvider) {
 
     fun getMovies(): Single<List<Movie>> {
@@ -27,7 +26,7 @@ class MovieRepository @Inject constructor(private val apiClient: ApiClient,
                                 .onErrorResumeNext { getMoviesFromDb() }
                     }
                 }
-                .map { movies -> movies.sortedBy { it.title.russian } }
+                .map { movies -> movies.sortedBy(createSelector()) }
     }
 
     fun getMovie(id: Long): Single<Movie> {
@@ -48,9 +47,13 @@ class MovieRepository @Inject constructor(private val apiClient: ApiClient,
     private fun getMoviesFromApi(): Single<List<Movie>> {
         return apiClient.subsCityService.getMovies(cityProvider.cityId)
                 .doOnSuccess { databaseProvider.currentDatabaseClient.movieDao.deleteAllMovies() } //TODO Remove All
-                .doOnSuccess { it -> databaseProvider.currentDatabaseClient.movieDao.saveMovies(it) }
+                .doOnSuccess { databaseProvider.currentDatabaseClient.movieDao.saveMovies(it) }
                 .doOnSuccess { updateCacheTimestamp() }
                 .timeout()
+    }
+
+    private fun createSelector(): (Movie) -> String {
+        return if (displayLanguageProvider.isRussian) { movie -> movie.title.russian } else { movie -> movie.title.original }
     }
 
     private fun getMoviesFromDb(): Single<List<Movie>> {
