@@ -88,6 +88,7 @@ class DonateActivity : BaseActivity(), BillingProcessor.IBillingHandler {
             val exception = BillingException(errorCode, error)
             logBillingError(exception)
             toast(getString(R.string.donate_error))
+            loadingController.switchState(ContentLoadingController.State.CONTENT)
         }
     }
 
