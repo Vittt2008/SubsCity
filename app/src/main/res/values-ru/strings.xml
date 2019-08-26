@@ -79,10 +79,10 @@
     <string name="about_no_email_application">Отсутвуют приложения для отправки электронных писем</string>
     <string name="about_github">SubCity является некоммерческим проектом. Все предложения по улучшению можете оставлять по почте или на GitHub:</string>
     <string name="about_team">Команда</string>
-    <string name="about_team_members">Разработчик: Виталий Маркус\nUX-дизайнер: Николай Каврецкий\nСсылка на GitHub: Subscity</string>
+    <string name="about_team_members">Разработчик: Виталий Маркус\nUX-дизайнер: Николай Каврецкий\nСсылка на GitHub: SubsCity</string>
     <string name="about_team_developer">Виталий Маркус</string>
     <string name="about_team_designer">Николай Каврецкий</string>
-    <string name="about_team_github">Subscity</string>
+    <string name="about_team_github">SubsCity</string>
 
     <!-- PolicyActivity -->
     <string name="policy_title">Политика конфиденциальности</string>

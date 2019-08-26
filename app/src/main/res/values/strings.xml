@@ -79,10 +79,10 @@
     <string name="about_no_email_application">There are no Apps to send e-mails</string>
     <string name="about_github">SubCity is a non-commercial project. You can send all you suggestions via e-mails on leave them on GitHub:</string>
     <string name="about_team">The Team</string>
-    <string name="about_team_members">Android Developer: Vitalii Markus\nUX-Designer: Nickolay Kavretskyi\n Link to GitHub: Subscity</string>
+    <string name="about_team_members">Android Developer: Vitalii Markus\nUX-Designer: Nickolay Kavretskyi\nLink to GitHub: SubsCity</string>
     <string name="about_team_developer">Vitalii Markus</string>
     <string name="about_team_designer">Nickolay Kavretskyi</string>
-    <string name="about_team_github">Subscity</string>
+    <string name="about_team_github">SubsCity</string>
 
     <!-- PolicyActivity -->
     <string name="policy_title">Privacy Policy</string>
