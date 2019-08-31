@@ -63,8 +63,8 @@
     <string name="theme_title">Theme</string>
     <string name="theme_light">Light</string>
     <string name="theme_dark">Dark</string>
-    <string name="theme_system_default">System Theme</string>
-    <string name="theme_by_battery_saver">Take into Account the Energy Saving Mode</string>
+    <string name="theme_system_default">System default</string>
+    <string name="theme_by_battery_saver">Set by Battery Saver</string>
 
     <!-- AboutActivity -->
     <string name="about_title">About the App</string>
@@ -115,7 +115,7 @@
     <string name="duration_provider_format">%1$d h %2$d min</string>
 
     <!-- CityProvider -->
-    <string name="saint_petersburg">St.-Petersburg</string>
+    <string name="saint_petersburg">St. Petersburg</string>
     <string name="moscow">Moscow</string>
 
     <!-- GeoUri -->

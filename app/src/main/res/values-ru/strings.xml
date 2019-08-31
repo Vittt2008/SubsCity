@@ -60,9 +60,9 @@
     <string name="cinemas_map_title">Карта кинотеатров</string>
 
     <!-- ThemeActivity -->
-    <string name="theme_title">Theme</string>
-    <string name="theme_light">Light</string>
-    <string name="theme_dark">Dark</string>
+    <string name="theme_title">Тема</string>
+    <string name="theme_light">Светлая</string>
+    <string name="theme_dark">Темная</string>
     <string name="theme_system_default">Системная тема</string>
     <string name="theme_by_battery_saver">Учитывать режим энергосбережения</string>
 
