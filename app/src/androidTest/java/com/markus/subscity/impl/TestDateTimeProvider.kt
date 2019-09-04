@@ -1,4 +1,4 @@
-package com.markus.subscity
+package com.markus.subscity.impl
 
 import com.markus.subscity.providers.DateTimeProvider
 import org.joda.time.DateTime

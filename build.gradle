@@ -43,7 +43,7 @@ ext {
     playServicesFirebase = '16.0.9'
     okHttpVersion = '3.8.1'
     retrofitVersion = '2.3.0'
-    jodaTimeVersion = '2.9.9.3'
+    jodaTimeVersion = '2.10.2'
     roomVersion = '2.1.0'
     slethoVersion = '1.5.0'
     rxJavaVersion = '2.1.2'

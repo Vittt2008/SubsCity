@@ -1,4 +1,4 @@
-package com.markus.subscity
+package com.markus.subscity.impl
 
 import com.markus.subscity.providers.DatabaseProvider
 import com.markus.subscity.repositories.CachedRepository
@@ -15,7 +15,7 @@ class TestCachedRepository(databaseProvider: DatabaseProvider,
         const val FROM_DB = "from_db"
     }
 
-    var testSyncTime: Array<String> = arrayOf("05:55", "10:05", "14:05", "19:00", "23:00")
+    var testSyncTime: Array<String> = emptyArray()
 
     init {
         deleteCacheStamp()
