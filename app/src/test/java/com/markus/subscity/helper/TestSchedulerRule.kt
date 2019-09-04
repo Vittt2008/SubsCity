@@ -1,4 +1,4 @@
-package com.markus.subscity
+package com.markus.subscity.helper
 
 import io.reactivex.Scheduler
 import io.reactivex.android.plugins.RxAndroidPlugins

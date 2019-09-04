@@ -7,6 +7,7 @@ import com.markus.subscity.api.deserializers.DateTimeDeserializer
 import com.markus.subscity.api.deserializers.SubsCityTypeAdapterFactory
 import com.markus.subscity.api.entities.cinema.Cinema
 import com.markus.subscity.api.entities.movie.Movie
+import com.markus.subscity.helper.TestSchedulerRule
 import io.reactivex.rxkotlin.Observables
 import io.reactivex.rxkotlin.Singles
 import okhttp3.OkHttpClient
