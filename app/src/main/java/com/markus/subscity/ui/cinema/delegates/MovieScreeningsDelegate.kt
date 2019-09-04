@@ -12,7 +12,9 @@ import com.markus.subscity.R
 import com.markus.subscity.api.entities.movie.Movie
 import com.markus.subscity.api.entities.screening.Screening
 import com.markus.subscity.dagger.SubsCityDagger
+import com.markus.subscity.providers.DisplayLanguageProvider
 import com.markus.subscity.providers.LanguageProvider
+import com.markus.subscity.providers.isRussian
 import com.markus.subscity.ui.cinema.CinemaPresenter
 import com.markus.subscity.ui.movie.MovieScreeningAdapter
 import com.markus.subscity.widgets.divider.ImageGridItemDecoration
@@ -30,6 +32,9 @@ class MovieScreeningsDelegate(private val screeningClickListener: (Screening) ->
 
     @Inject
     lateinit var languageProvider: LanguageProvider
+
+    @Inject
+    lateinit var displayLanguageProvider: DisplayLanguageProvider
 
     init {
         SubsCityDagger.component.inject(this)
@@ -62,7 +67,7 @@ class MovieScreeningsDelegate(private val screeningClickListener: (Screening) ->
 
         fun bind(movieScreenings: CinemaPresenter.MovieScreenings) {
             movie = movieScreenings.movie
-            movieTitle.text = movie.title.russian
+            movieTitle.text = if (displayLanguageProvider.isRussian) movie.title.russian else movie.title.original
             movieLanguage.text = movieLanguage()
             screenings.apply {
                 layoutManager = GridLayoutManager(screenings.context, SPAN_COUNT, LinearLayoutManager.VERTICAL, false)

@@ -12,11 +12,11 @@ import com.markus.subscity.ui.cinema.delegates.MovieScreeningsDelegate
 import com.markus.subscity.ui.cinemas.CinemasAdapter
 import com.markus.subscity.ui.cinemas.CinemasPresenter
 import com.markus.subscity.ui.cinemasmap.CinemasMapPresenter
-import com.markus.subscity.ui.city.CityAdapter
 import com.markus.subscity.ui.city.CityPresenter
 import com.markus.subscity.ui.deeplink.DeepLinkPresenter
 import com.markus.subscity.ui.main.MainPresenter
 import com.markus.subscity.ui.movie.MoviePresenter
+import com.markus.subscity.ui.movie.MovieScreeningAdapter
 import com.markus.subscity.ui.movie.delegates.CinemaScreeningsDelegate
 import com.markus.subscity.ui.movie.delegates.MovieInfoDelegate
 import com.markus.subscity.ui.movies.MoviesAdapter
@@ -56,7 +56,7 @@ interface SubsCityComponent {
 
     fun inject(adapter: CinemasAdapter)
     fun inject(adapter: MoviesAdapter)
-    fun inject(adapter: CityAdapter)
+    fun inject(adapter: MovieScreeningAdapter)
 
     fun inject(delegate: CinemaInfoDelegate)
     fun inject(delegate: MovieScreeningsDelegate)

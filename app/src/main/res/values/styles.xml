@@ -189,42 +189,42 @@
 
     <!--region Movie Info-->
 
-    <style name="AppTheme.TextView.MovieInfo.Title" parent="AppTheme.TextView.Medium.Black">
+    <style name="AppTheme.TextView.MovieInfo.Title" parent="AppTheme.TextView.Medium.Title">
         <item name="android:fontFamily">@font/roboto_medium</item>
     </style>
 
-    <style name="AppTheme.TextView.MovieInfo.Subtitle" parent="AppTheme.TextView.Medium.Black"/>
+    <style name="AppTheme.TextView.MovieInfo.Subtitle" parent="AppTheme.TextView.Medium.Title"/>
 
     <!--endregion-->
 
     <!-- TextView Style -->
 
-    <style name="AppTheme.TextView.Small.Black.Subtitle" parent="AppTheme.TextView">
+    <style name="AppTheme.TextView.Small.Subtitle" parent="AppTheme.TextView">
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/subtitle_color</item>
     </style>
 
-    <style name="AppTheme.TextView.Medium.Black">
+    <style name="AppTheme.TextView.Medium.Title">
         <item name="android:textColor">@color/title_color</item>
     </style>
 
-    <style name="AppTheme.TextView.Large.Black">
+    <style name="AppTheme.TextView.Large.Title">
         <item name="android:textColor">@color/title_color</item>
     </style>
 
-    <style name="AppTheme.TextView.Large.Black.Subtitle">
+    <style name="AppTheme.TextView.Large.Subtitle">
         <item name="android:textColor">@color/subtitle_color</item>
     </style>
 
-    <style name="AppTheme.TextView.Large.Black.Bold">
+    <style name="AppTheme.TextView.Large.Title.Bold">
         <item name="android:fontFamily">@font/roboto_medium</item>
     </style>
 
-    <style name="AppTheme.TextView.Huge.Black">
+    <style name="AppTheme.TextView.Huge.Title">
         <item name="android:textColor">@color/title_color</item>
     </style>
 
-    <style name="AppTheme.TextView.Huge.Black.Title">
+    <style name="AppTheme.TextView.Huge.Title.Bold">
         <item name="android:fontFamily">@font/roboto_medium</item>
     </style>
 

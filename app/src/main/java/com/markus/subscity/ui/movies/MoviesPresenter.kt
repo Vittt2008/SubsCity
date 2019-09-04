@@ -21,9 +21,9 @@ class MoviesPresenter @Inject constructor(private val movieRepository: MovieRepo
                 .flatMapSingle { movieRepository.getMovies() }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
+                .subscribe({ movies ->
                     viewState.hideProgress()
-                    viewState.showMovies(it)
+                    viewState.showMovies(movies)
                 }, {
                     viewState.hideProgress()
                     viewState.onError(it)

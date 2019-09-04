@@ -17,7 +17,7 @@
 
     <TextView
         android:id="@+id/tv_cinema_name"
-        style="@style/AppTheme.TextView.Huge.Black.Title"
+        style="@style/AppTheme.TextView.Huge.Title.Bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="16dp"
@@ -48,7 +48,7 @@
 
         <TextView
             android:id="@+id/tv_cinema_address"
-            style="@style/AppTheme.TextView.Medium.Black"
+            style="@style/AppTheme.TextView.Medium.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="56dp"
@@ -60,7 +60,7 @@
 
         <TextView
             android:id="@+id/tv_cinema_metro_station"
-            style="@style/AppTheme.TextView.Small.Black.Subtitle"
+            style="@style/AppTheme.TextView.Small.Subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -89,7 +89,7 @@
 
         <TextView
             android:id="@+id/tv_phone_number"
-            style="@style/AppTheme.TextView.Medium.Black"
+            style="@style/AppTheme.TextView.Medium.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="56dp"
@@ -119,7 +119,7 @@
 
         <TextView
             android:id="@+id/tv_web_site"
-            style="@style/AppTheme.TextView.Medium.Black"
+            style="@style/AppTheme.TextView.Medium.Title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="56dp"

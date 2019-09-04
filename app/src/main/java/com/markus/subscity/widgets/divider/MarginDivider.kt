@@ -14,15 +14,15 @@ import android.view.View
  */
 class MarginDivider(private val context: Context) : RecyclerView.ItemDecoration() {
 
-    private val ATTRS = intArrayOf(android.R.attr.listDivider)
+    private val attrs = intArrayOf(android.R.attr.listDivider)
     private var divider: Drawable
     private val bounds = Rect()
 
-    var marginLeft = 0
-    var marginRight = 0
+    private var marginLeft = 0
+    private var marginRight = 0
 
     init {
-        val typedArray = context.obtainStyledAttributes(ATTRS)
+        val typedArray = context.obtainStyledAttributes(attrs)
         divider = typedArray.getDrawable(0) ?: throw IllegalArgumentException("Drawable is null")
         typedArray.recycle()
     }

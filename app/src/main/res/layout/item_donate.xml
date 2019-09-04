@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/tv_title"
-        style="@style/AppTheme.TextView.Large.Black"
+        style="@style/AppTheme.TextView.Large.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
@@ -20,7 +20,7 @@
 
     <TextView
         android:id="@+id/tv_price"
-        style="@style/AppTheme.TextView.Large.Black"
+        style="@style/AppTheme.TextView.Large.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="16dp"

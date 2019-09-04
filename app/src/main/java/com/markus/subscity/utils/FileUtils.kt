@@ -11,7 +11,7 @@ import java.io.File
  */
 object FileUtils {
 
-    private val EXPORTED_PATH_NAME = "export"
+    private const val EXPORTED_PATH_NAME = "export"
 
     fun getFileExportPath(context: Context): File {
         return File(context.filesDir, EXPORTED_PATH_NAME)

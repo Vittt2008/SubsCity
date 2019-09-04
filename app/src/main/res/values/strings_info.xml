@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="file_export_provider" translatable="false">com.markus.subscity.FileProvider</string>
+    <string name="github_url" translatable="false">https://github.com/Vittt2008/SubsCity</string>
+    <string name="developer_email" translatable="false">vitalii.markus@gmail.com</string>
+    <string name="designer_email" translatable="false">shelmoon518@gmail.com</string>
+    <string name="email_address" translatable="false">subscity.info@gmail.com</string>
+    <string name="empty_title" translatable="false" />
+</resources>

@@ -4,8 +4,10 @@ import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.markus.subscity.api.entities.cinema.Cinema
 import com.markus.subscity.api.entities.screening.Screening
-import com.markus.subscity.repositories.CinemaRepository
 import com.markus.subscity.providers.DateTimeProvider
+import com.markus.subscity.providers.DisplayLanguageProvider
+import com.markus.subscity.providers.isRussian
+import com.markus.subscity.repositories.CinemaRepository
 import com.markus.subscity.repositories.MovieRepository
 import com.markus.subscity.repositories.ScreeningRepository
 import io.reactivex.Observable
@@ -22,7 +24,8 @@ import javax.inject.Inject
 class MoviePresenter @Inject constructor(private val movieRepository: MovieRepository,
                                          private val cinemaRepository: CinemaRepository,
                                          private val screeningRepository: ScreeningRepository,
-                                         private val dateTimeProvider: DateTimeProvider) : MvpPresenter<MovieView>() {
+                                         private val dateTimeProvider: DateTimeProvider,
+                                         private val displayLanguageProvider: DisplayLanguageProvider) : MvpPresenter<MovieView>() {
 
     var movieId: Long = 0
 
@@ -38,10 +41,13 @@ class MoviePresenter @Inject constructor(private val movieRepository: MovieRepos
 
         Observables.combineLatest(movie, cinemaScreenings)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        { viewState.showMovie(it.first, it.second) },
-                        { viewState.onError(it) }
-                )
+                .subscribe({ (movie, screenings) ->
+                    val title = if (displayLanguageProvider.isRussian) movie.title.russian else movie.title.original
+                    viewState.showTitle(title)
+                    viewState.showMovie(movie, screenings)
+                }, {
+                    viewState.onError(it)
+                })
     }
 
     private fun convert(pair: Pair<List<Screening>, List<Cinema>>): List<CinemaScreenings> {

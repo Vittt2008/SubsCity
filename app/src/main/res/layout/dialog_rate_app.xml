@@ -16,7 +16,7 @@
         android:orientation="vertical">
 
         <TextView
-            style="@style/AppTheme.TextView.Large.Black.Bold"
+            style="@style/AppTheme.TextView.Large.Title.Bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -25,7 +25,7 @@
             android:text="@string/rate_title" />
 
         <TextView
-            style="@style/AppTheme.TextView.Medium.Black"
+            style="@style/AppTheme.TextView.Medium.Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"

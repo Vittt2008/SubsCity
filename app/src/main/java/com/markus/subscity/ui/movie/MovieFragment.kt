@@ -49,8 +49,6 @@ class MovieFragment : MvpAppCompatFragment(), MovieView, ShareView {
     private lateinit var movieInfoList: RecyclerView
     private lateinit var movieInfoListLayoutManager: ScrollableLinearLayoutManager
 
-    private lateinit var shareMenuItem: MenuItem
-
     private var adapter: MovieAdapterDelegates? = null
     private var errorDrawable: Drawable? = null
 
@@ -115,10 +113,13 @@ class MovieFragment : MvpAppCompatFragment(), MovieView, ShareView {
         menu.findItem(R.id.item_share).isVisible = adapter != null
     }
 
+    override fun showTitle(title: String) {
+        toolbarLayout.title = title
+    }
+
     override fun showMovie(movie: Movie, cinemaScreenings: List<MoviePresenter.CinemaScreenings>) {
         requireActivity().invalidateOptionsMenu()
         if (adapter == null) {
-            toolbarLayout.title = movie.title.russian
             GlideApp.with(moviePoster)
                     .asBitmap()
                     .load(movie.poster)

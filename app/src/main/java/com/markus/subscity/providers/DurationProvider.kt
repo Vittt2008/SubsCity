@@ -9,7 +9,9 @@ import javax.inject.Inject
  */
 class DurationProvider @Inject constructor(private val context: Context) {
 
-    private val MINUTES_IN_HOUR = 60
+    companion object {
+        private const val MINUTES_IN_HOUR = 60
+    }
 
     fun format(min: Int): String {
         return context.getString(R.string.duration_provider_format, min / MINUTES_IN_HOUR, min % MINUTES_IN_HOUR)

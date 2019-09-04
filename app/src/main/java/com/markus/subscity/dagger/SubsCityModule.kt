@@ -27,7 +27,9 @@ import javax.inject.Singleton
 @Module
 class SubsCityModule(@get:Provides val context: Context) {
 
-    private val TIMEOUT = 10_000L
+    companion object {
+        private const val TIMEOUT = 10_000L
+    }
 
     @Provides
     @Singleton

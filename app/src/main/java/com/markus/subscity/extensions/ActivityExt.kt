@@ -18,8 +18,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.markus.subscity.R
 import com.markus.subscity.dagger.SubsCityDagger
-import com.markus.subscity.utils.analytics.Analytics
 import com.markus.subscity.utils.IntentUtils
+import com.markus.subscity.utils.analytics.Analytics
 
 /**
  * @author Vitaliy Markus
@@ -86,15 +86,9 @@ fun Fragment.openUrl(uri: Uri, useChromeTabsForce: Boolean = true) {
     val context = requireActivity()
 
     val builder = CustomTabsIntent.Builder()
-    builder.setToolbarColor(ContextCompat.getColor(context, R.color.toolbar_color))
-    //builder.setStartAnimations(context, android.R.anim.slide_in_right, R.anim.slide_out_left)
-//    builder.setExitAnimations(context, android.R.anim.slide_in_left, android.R.anim.slide_out_right)
-
-    builder.setStartAnimations(context, R.anim.events_right_in, R.anim.activity_open_exit)
-    builder.setExitAnimations(context, R.anim.activity_close_enter, R.anim.events_left_out)
-//    builder.setStartAnimations(context, R.anim.events_right_in, R.anim.activity_close_exit)
-//    builder.setExitAnimations(context, R.anim.activity_close_enter, R.anim.activity_open_exit)
-
+            .setToolbarColor(ContextCompat.getColor(context, R.color.toolbar_color))
+            .setStartAnimations(context, R.anim.events_right_in, R.anim.activity_open_exit)
+            .setExitAnimations(context, R.anim.activity_close_enter, R.anim.events_left_out)
 
     val customTabsIntent = builder.build()
     if (useChromeTabsForce) {

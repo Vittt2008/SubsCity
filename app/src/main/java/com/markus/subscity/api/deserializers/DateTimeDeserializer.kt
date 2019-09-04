@@ -11,7 +11,7 @@ import java.lang.reflect.Type
  */
 object DateTimeDeserializer : JsonDeserializer<DateTime> {
 
-    val emptyDateTime: DateTime by lazy { DateTime(0) }
+    private val emptyDateTime: DateTime by lazy { DateTime(0) }
 
     override fun deserialize(json: JsonElement?, typeOfT: Type?, context: JsonDeserializationContext?): DateTime {
         return if (json != null) DateTime.parse(json.asString) else emptyDateTime

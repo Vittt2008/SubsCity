@@ -9,7 +9,6 @@ import com.markus.subscity.providers.CityProvider
 import com.markus.subscity.utils.DrawableExporter
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
 import java.io.File
 import javax.inject.Inject
@@ -21,14 +20,20 @@ import javax.inject.Inject
 class SharePresenter @Inject constructor(private val drawableExporter: DrawableExporter,
                                          private val cityProvider: CityProvider) : MvpPresenter<ShareView>() {
 
-    private val POSTER_NAME = "temp_poster.jpg"
+    companion object {
+        private const val POSTER_NAME = "temp_poster.jpg"
+    }
 
     fun share(drawable: Drawable?, movie: Movie) {
         Single.fromCallable { FileOptional(drawableExporter.export(drawable, POSTER_NAME)) }
                 .map { file -> ShareData(file.value, formatTitle(movie), String.format(SubsCityApplication.MOVIE_URL, cityProvider.cityId, movie.id)) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ viewState.share(it.file, it.title, it.url) }, { viewState.onShareError() })
+                .subscribe({ data ->
+                    viewState.share(data.file, data.title, data.url)
+                }, {
+                    viewState.onShareError()
+                })
     }
 
     private fun formatTitle(movie: Movie): String {

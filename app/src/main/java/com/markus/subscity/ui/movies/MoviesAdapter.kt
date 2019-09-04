@@ -18,7 +18,9 @@ import com.markus.subscity.api.entities.movie.Movie
 import com.markus.subscity.dagger.GlideApp
 import com.markus.subscity.dagger.SubsCityDagger
 import com.markus.subscity.extensions.getWidthScreen
+import com.markus.subscity.providers.DisplayLanguageProvider
 import com.markus.subscity.providers.LanguageProvider
+import com.markus.subscity.providers.isRussian
 import com.markus.subscity.widgets.transformations.PosterCrop
 import javax.inject.Inject
 
@@ -32,8 +34,6 @@ class MoviesAdapter(context: Context,
 
     companion object {
         private const val RATING = 6.9
-        //Hack for textView autosizing. Empty ending is ignored by TextView drawing and measurement, but isn't ignored autosizing.
-        private val emptyEnding = CharArray(30) { ' ' }.joinToString(separator = "")
     }
 
     private val errorDrawable = ContextCompat.getDrawable(context, R.drawable.ic_error_poster)
@@ -44,6 +44,9 @@ class MoviesAdapter(context: Context,
 
     @Inject
     lateinit var languageProvider: LanguageProvider
+
+    @Inject
+    lateinit var displayLanguageProvider: DisplayLanguageProvider
 
     init {
         updateFullSpans()
@@ -116,7 +119,7 @@ class MoviesAdapter(context: Context,
 
             movieGenre.text = movie.genres.joinToString(", ").capitalize()
 
-            movieName.text = movie.title.russian + emptyEnding
+            movieName.text = if (displayLanguageProvider.isRussian) movie.title.russian else movie.title.original
             movieName.context.resources.also { resources ->
                 movieName.maxLines = resources.getInteger(maxLines)
                 val dimensions = sizes.map { resources.getDimension(it).toInt() }.toIntArray()

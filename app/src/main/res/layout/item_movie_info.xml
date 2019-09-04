@@ -111,7 +111,7 @@
 
     <TextView
         android:id="@+id/tv_description_title"
-        style="@style/AppTheme.TextView.Huge.Black.Title"
+        style="@style/AppTheme.TextView.Huge.Title.Bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"

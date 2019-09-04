@@ -73,9 +73,6 @@ class SettingsPresenter @Inject constructor(private val cityProvider: CityProvid
         val settings = mutableListOf(
                 Setting.Item(CINEMA_MAP, R.drawable.ic_menu_map, R.string.setting_cinema_map_title),
                 Setting.TwoLineItem(THEME, R.drawable.ic_menu_dark_theme, R.string.setting_theme, themeTitle),
-                Setting.ThemeItem(DARK_THEME, R.drawable.ic_menu_dark_theme, R.string.setting_dark_theme),
-                Setting.TwoLineItem(DIALOG_THEME, R.drawable.ic_menu_dark_theme, R.string.setting_theme, themeTitle),
-                Setting.TwoLineItem(LANGUAGE, R.drawable.ic_menu_language, R.string.setting_language, "Русский"),
                 Setting.Item(RATE_APP, R.drawable.ic_menu_rate_app, R.string.setting_rate_app),
                 Setting.Item(ABOUT, R.drawable.ic_menu_about, R.string.setting_about_title),
                 Setting.Item(POLICY, R.drawable.ic_menu_policy, R.string.setting_policy_title),

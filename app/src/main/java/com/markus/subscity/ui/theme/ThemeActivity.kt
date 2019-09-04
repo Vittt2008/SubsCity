@@ -3,7 +3,6 @@ package com.markus.subscity.ui.theme
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import com.markus.subscity.R
 import com.markus.subscity.utils.BaseActivity
 
 /**

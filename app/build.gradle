@@ -26,6 +26,9 @@ android {
         targetCompatibility 1.8
         sourceCompatibility 1.8
     }
+    lintOptions {
+        disable 'CheckResult'
+    }
 }
 
 dependencies {
@@ -36,23 +39,23 @@ dependencies {
     }
 
     //ANDROID
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'com.google.android.material:material:1.1.0-alpha09'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0-beta01'
-    implementation 'androidx.browser:browser:1.0.0'
-    implementation 'androidx.transition:transition:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation "androidx.appcompat:appcompat:$appcompatVersion"
+    implementation "com.google.android.material:material:$materialVersion"
+    implementation "androidx.recyclerview:recyclerview:$recyclerViewVersion"
+    implementation "androidx.browser:browser:$browserVersion"
+    implementation "androidx.transition:transition:$transitionVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
+    implementation "androidx.multidex:multidex:$multidexVersion"
 
     //YOUTUBE
-    implementation files('libs/YouTubeAndroidPlayerApi.jar')
+    implementation files("libs/YouTubeAndroidPlayerApi.jar")
 
     //PLAY SERVICES
     implementation "com.google.android.gms:play-services-maps:$playServicesMaps"
     implementation "com.google.firebase:firebase-core:$playServicesFirebase"
 
     //BILLING
-    implementation 'com.anjlab.android.iab.v3:library:1.0.44'
+    implementation "com.anjlab.android.iab.v3:library:$billingVersion"
 
     //RX
     implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
@@ -68,9 +71,9 @@ dependencies {
     implementation "net.danlew:android.joda:$jodaTimeVersion"
 
     //ROOM
-    implementation 'androidx.room:room-runtime:2.1.0'
-    implementation 'androidx.room:room-rxjava2:2.1.0'
-    kapt 'androidx.room:room-compiler:2.1.0'
+    implementation "androidx.room:room-runtime:$roomVersion"
+    implementation "androidx.room:room-rxjava2:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
     implementation "com.facebook.stetho:stetho:$slethoVersion"
 
     //DAGGER
@@ -78,9 +81,9 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
 
     //MOXY
-    implementation 'tech.schoolhelper:moxy-x:1.7.0'
-    implementation 'tech.schoolhelper:moxy-x-androidx:1.7.0'
-    kapt 'tech.schoolhelper:moxy-x-compiler:1.7.0'
+    implementation "tech.schoolhelper:moxy-x:$moxyVersion"
+    implementation "tech.schoolhelper:moxy-x-androidx:$moxyVersion"
+    kapt "tech.schoolhelper:moxy-x-compiler:$moxyVersion"
 
     //GLIDE
     implementation("com.github.bumptech.glide:glide:$glideVersion") {
@@ -91,18 +94,18 @@ dependencies {
     //UI
     implementation "com.aurelhubert:ahbottomnavigation:$bottomNavifationVersion"
     implementation "com.github.rubensousa:bottomsheetbuilder:$bottomSheetBuilderVersion"
-    implementation 'com.hannesdorfmann:adapterdelegates3:3.0.1'
-    implementation 'com.r0adkll:slidableactivity:2.0.6'
+    implementation "com.hannesdorfmann:adapterdelegates3:$adapterDelegatesVersion"
+    implementation "com.r0adkll:slidableactivity:$slidableActivityVersion"
 
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: "libs", include: ["*.jar"])
 
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+    testImplementation "junit:junit:4.12"
+    androidTestImplementation "androidx.test.ext:junit:1.1.1"
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.2.0"
 }
 
 kapt {
     generateStubs = true
 }
 
-apply plugin: 'com.google.gms.google-services'
+apply plugin: "com.google.gms.google-services"

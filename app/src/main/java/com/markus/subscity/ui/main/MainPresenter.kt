@@ -11,7 +11,9 @@ import javax.inject.Inject
 @InjectViewState
 class MainPresenter @Inject constructor(private val preferencesProvider: PreferencesProvider) : MvpPresenter<MainView>() {
 
-    private val LAUNCH_COUNT_MOD = 15
+    companion object {
+        private const val LAUNCH_COUNT_MOD = 15
+    }
 
     override fun onFirstViewAttach() {
         val preferences = preferencesProvider.getAppPreferences()

@@ -69,11 +69,6 @@ class SplashActivity : MvpAppCompatActivity(), SplashView, DeepLinkView {
     override fun showMovie(movieId: Long) {
         analytics().logOpenMovie(movieId, null, true)
         MovieActivity.start(this, movieId)
-//        TaskStackBuilder.create(this)
-//                .addNextIntent(MainActivity.createIntent(this, MainActivity.Companion.Mode.MOVIES))
-//                .addNextIntent(MovieActivity.createIntent(this, movieId))
-//                .startActivities()
-        //startActivities(arrayOf(MainActivity.createIntent(this, MainActivity.Companion.Mode.MOVIES), MovieActivity.createIntent(this, movieId)))
         finish()
     }
 
@@ -87,28 +82,4 @@ class SplashActivity : MvpAppCompatActivity(), SplashView, DeepLinkView {
         FirstPickCityActivity.start(this)
         finish()
     }
-}
-
-class Value(val value: Int) : Parcelable {
-
-    constructor(parcel: Parcel) : this(parcel.readInt())
-
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(value)
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<Value> {
-        override fun createFromParcel(parcel: Parcel): Value {
-            return Value(parcel)
-        }
-
-        override fun newArray(size: Int): Array<Value?> {
-            return arrayOfNulls(size)
-        }
-    }
-
 }

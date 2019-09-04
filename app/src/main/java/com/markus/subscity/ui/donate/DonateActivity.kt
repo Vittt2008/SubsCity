@@ -34,13 +34,12 @@ class DonateActivity : BaseActivity(), BillingProcessor.IBillingHandler {
     private val preferences = SubsCityDagger.component.providePreferencesProvider().getAppPreferences()
 
     companion object {
-        const val LICENSE_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAi5lzOD4D0Lg4vPUhX+qb5HWhDb66fa0+i6ginNFkWFRH1dzx9Nv6++LwfzpF1UiAJIDiS7jAllDfssgqF8a67XXgAUJ/c62sLLvhD/XO9ZhMxNQA+FMR3SZW/yj4AXi7NNz1dT/mU9wmOeJXbetWTsqG+GI3Ww25+E4WH8AqCQ9WpXH5oIkOFJpN6PHob80g5rMIXHMxdUbfHCfXwz3f9XTGtzkMFz81hyT45pgfa4iggsjkuEVHzMX9W42TQmhb/SEgaPBw8vUa905OVDvr40WRw6oCwa/u4XA6WTViDBP0EiZ3KvV6Z267Gd7zlwJJbYfXv070mgoEKDfH3qUxoQIDAQAB"
-        const val PRODUCT_TEA = "donate_tea"
-        const val PRODUCT_COFFEE = "donate_coffee"
-        const val PRODUCT_MOVIE_TICKET = "donate_movie_ticket"
+        private const val LICENSE_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAi5lzOD4D0Lg4vPUhX+qb5HWhDb66fa0+i6ginNFkWFRH1dzx9Nv6++LwfzpF1UiAJIDiS7jAllDfssgqF8a67XXgAUJ/c62sLLvhD/XO9ZhMxNQA+FMR3SZW/yj4AXi7NNz1dT/mU9wmOeJXbetWTsqG+GI3Ww25+E4WH8AqCQ9WpXH5oIkOFJpN6PHob80g5rMIXHMxdUbfHCfXwz3f9XTGtzkMFz81hyT45pgfa4iggsjkuEVHzMX9W42TQmhb/SEgaPBw8vUa905OVDvr40WRw6oCwa/u4XA6WTViDBP0EiZ3KvV6Z267Gd7zlwJJbYfXv070mgoEKDfH3qUxoQIDAQAB"
+        private const val PRODUCT_TEA = "donate_tea"
+        private const val PRODUCT_COFFEE = "donate_coffee"
+        private const val PRODUCT_MOVIE_TICKET = "donate_movie_ticket"
 
-        val products = arrayListOf(PRODUCT_TEA, PRODUCT_COFFEE, PRODUCT_MOVIE_TICKET)
-
+        private val products = arrayListOf(PRODUCT_TEA, PRODUCT_COFFEE, PRODUCT_MOVIE_TICKET)
 
         fun start(context: Context) {
             val intent = Intent(context, DonateActivity::class.java)
@@ -89,6 +88,7 @@ class DonateActivity : BaseActivity(), BillingProcessor.IBillingHandler {
             val exception = BillingException(errorCode, error)
             logBillingError(exception)
             toast(getString(R.string.donate_error))
+            loadingController.switchState(ContentLoadingController.State.CONTENT)
         }
     }
 

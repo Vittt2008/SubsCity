@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 class SpeedyLinearLayoutManager : LinearLayoutManager {
 
     companion object {
-        private val MILLISECONDS_PER_INCH = 5f
+        private const val MILLISECONDS_PER_INCH = 5f
     }
 
     constructor(context: Context) : super(context)

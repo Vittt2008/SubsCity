@@ -20,7 +20,7 @@ object MapSlidr {
         return attach(activity, -1, -1)
     }
 
-    fun attach(activity: Activity, @ColorInt statusBarColor1: Int, @ColorInt statusBarColor2: Int): SlidrInterface {
+    private fun attach(activity: Activity, @ColorInt statusBarColor1: Int, @ColorInt statusBarColor2: Int): SlidrInterface {
         val panel = attachSliderPanel(activity, null)
         panel.setOnPanelSlideListener(ColorPanelSlideListener(activity, statusBarColor1, statusBarColor2))
         return panel.defaultInterface

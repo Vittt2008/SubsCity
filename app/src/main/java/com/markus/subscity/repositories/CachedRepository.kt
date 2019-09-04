@@ -38,7 +38,7 @@ abstract class CachedRepository(protected val databaseProvider: DatabaseProvider
         return deleteCacheStamp(checkAndGetDefaultKey())
     }
 
-    protected fun deleteCacheStamp(key: String) {
+    private fun deleteCacheStamp(key: String) {
         return databaseProvider.currentDatabaseClient.cacheTimestampDao.deleteCacheTimestamp(key)
     }
 
