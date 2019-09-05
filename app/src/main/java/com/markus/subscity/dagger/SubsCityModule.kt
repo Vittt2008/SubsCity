@@ -35,9 +35,11 @@ class SubsCityModule(@get:Provides val context: Context) {
     @Singleton
     fun okHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
-                .addInterceptor(HttpLoggingInterceptor().apply {
-                    level = HttpLoggingInterceptor.Level.BODY
-                })
+                .applyIf(BuildConfig.DEBUG) {
+                    addInterceptor(HttpLoggingInterceptor().apply {
+                        level = HttpLoggingInterceptor.Level.BODY
+                    })
+                }
                 .readTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
                 .connectTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
                 .writeTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
@@ -70,5 +72,12 @@ class SubsCityModule(@get:Provides val context: Context) {
     @Singleton
     fun analytics(context: Context): Analytics {
         return if (BuildConfig.DEBUG) AnalyticsStub() else AnalyticsImpl(context)
+    }
+
+    private inline fun <T> T.applyIf(boolean: Boolean, block: T.() -> Unit): T {
+        if (boolean) {
+            block()
+        }
+        return this
     }
 }
