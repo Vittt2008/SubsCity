@@ -1,12 +1,9 @@
 # SubsCity
-Добро пожаловать на SubsCity! :)
+Welcome to SubsCity! :)
 
-# Screenshots
-![Films 1](/screenshots/SubsCity_1.jpg) ![Films 2](/screenshots/SubsCity_2.jpg) ![Cinemas SPB](/screenshots/SubsCity_3.png) 
-![Cinemas MSK](/screenshots/SubsCity_4.png) ![Map SPB](/screenshots/SubsCity_5.png) ![Map MSK](/screenshots/SubsCity_6.png) 
-![City Picker](/screenshots/SubsCity_7.png) ![Menu](/screenshots/SubsCity_8.jpg) ![About App](/screenshots/SubsCity_9.jpg)
+Showtimes of the movies in the original languages in cinemas in your city. Subtitles are always available
 
-Это удобное и всегда актуальное расписание показа фильмов на языке оригинала (с русскими субтитрами) в кинотеатрах Москвы и Санкт-Петербурга.
-Билеты на выбранные сеансы вы можете купить онлайн с помощью сервиса Рамблер.Касса.
-
-
+# Top Screenshots
+![Movies 1](/screenshots/Dark/Movies 1.png) ![Movie info 1](/screenshots/Dark/Movie info 1.png) ![Movie info 2](/screenshots/Dark/Movie info 2.png)
+![Cinemas map](/screenshots/Dark/Cinemas map.png) ![Cinemas](/screenshots/Dark/Cinemas.png) ![Cinema info](/screenshots/Dark/Cinema info.png)
+![Menu](/screenshots/Dark/Menu.png) ![About app](/screenshots/Dark/About the app.png) ![Pick city](/screenshots/Dark/Pick a city.png)
