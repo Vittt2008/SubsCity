@@ -7,8 +7,9 @@
 
 ### Галерея
 Приложение поддерживает переключение на темную тему.
-*[Темная тема](/screenshots/Dark)
-*[Светлая тема](/screenshots/Light)
+
+* [Темная тема](/screenshots/Dark)
+* [Светлая тема](/screenshots/Light)
 
 ### Англиский язык
 Readme также доступен на [Английском/English](README.md)
