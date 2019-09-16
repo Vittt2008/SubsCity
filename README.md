@@ -5,6 +5,13 @@ Showtimes of the movies in the original languages in cinemas in Moscow and St. P
 
 The tickets are booked through Rambler Kassa.
 
+### Gallery
+The application supports dark mode.
+[Dark Mode Gallery](/screenshots/Dark) [Light Mode Gallery](/screenshots/Light)
+
+### Russian
+The Readme file is also available in [Russian](README_RUS.md)
+
 [<img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" width="258" height="100">](https://play.google.com/store/apps/details?id=com.markus.subscity)
 
 # Top Screenshots
