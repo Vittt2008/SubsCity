@@ -5,6 +5,15 @@
 
 Билеты на выбранные сеансы вы можете купить онлайн с помощью сервиса Рамблер.Касса.
 
+### Галерея
+Приложение поддерживает переключение на темную тему.
+*[Темная тема](/screenshots/Dark)
+*[Светлая тема](/screenshots/Light)
+
+### Англиский язык
+Readme также доступен на [Английском/English](README.md)
+
+### Google Play
 [<img src="https://play.google.com/intl/en_us/badges/images/generic/ru_badge_web_generic.png" width="258" height="100">](https://play.google.com/store/apps/details?id=com.markus.subscity)
 
 # Избранные скриншоты
