@@ -1,11 +1,11 @@
 # SubsCity
 Welcome to SubsCity! :)
 
-Showtimes of the movies in the original languages in cinemas in Moscow and St. Petersburg. Subtitles are always available.
+Это удобное и всегда актуальное расписание показа фильмов на языке оригинала (с русскими субтитрами) в кинотеатрах Москвы и Санкт-Петербурга. 
 
-The tickets are booked through Rambler Kassa.
+Билеты на выбранные сеансы вы можете купить онлайн с помощью сервиса Рамблер.Касса.
 
-[<img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" width="258" height="100">](https://play.google.com/store/apps/details?id=com.markus.subscity)
+[<img src="https://play.google.com/intl/en_us/badges/images/generic/ru_badge_web_generic.png" width="258" height="100">](https://play.google.com/store/apps/details?id=com.markus.subscity)
 
 # Top Screenshots
 <img src="/screenshots/Dark/Movies%201.png" width="281" height="500"> <img src="/screenshots/Dark/Movie%20info%201.png" width="281" height="500"> <img src="/screenshots/Dark/Movie%20info%202.png" width="281" height="500">
