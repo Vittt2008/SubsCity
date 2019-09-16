@@ -7,8 +7,8 @@ The tickets are booked through Rambler Kassa.
 
 ### Gallery
 The application supports dark mode.
-*[Dark Mode Gallery](/screenshots/Dark)
-*[Light Mode Gallery](/screenshots/Light)
+* [Dark Mode Gallery](/screenshots/Dark)
+* [Light Mode Gallery](/screenshots/Light)
 
 ### Russian
 The Readme file is also available in [Russian](README_RUS.md)
