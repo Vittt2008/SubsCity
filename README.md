@@ -1,12 +1,22 @@
 # SubsCity
-Добро пожаловать на SubsCity! :)
+Welcome to SubsCity! :)
 
-# Screenshots
-![Films 1](/screenshots/SubsCity_1.jpg) ![Films 2](/screenshots/SubsCity_2.jpg) ![Cinemas SPB](/screenshots/SubsCity_3.png) 
-![Cinemas MSK](/screenshots/SubsCity_4.png) ![Map SPB](/screenshots/SubsCity_5.png) ![Map MSK](/screenshots/SubsCity_6.png) 
-![City Picker](/screenshots/SubsCity_7.png) ![Menu](/screenshots/SubsCity_8.jpg) ![About App](/screenshots/SubsCity_9.jpg)
+Showtimes of the movies in the original languages in cinemas in Moscow and St. Petersburg. Subtitles are always available.
 
-Это удобное и всегда актуальное расписание показа фильмов на языке оригинала (с русскими субтитрами) в кинотеатрах Москвы и Санкт-Петербурга.
-Билеты на выбранные сеансы вы можете купить онлайн с помощью сервиса Рамблер.Касса.
+The tickets are booked through Rambler Kassa.
 
+### Gallery
+The application supports dark mode.
+* [Dark Mode Gallery](/screenshots/Dark)
+* [Light Mode Gallery](/screenshots/Light)
 
+### Russian
+The Readme file is also available in [Russian](README_RUS.md)
+
+### Google Play
+[<img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" width="258" height="100">](https://play.google.com/store/apps/details?id=com.markus.subscity)
+
+# Top Screenshots
+<img src="/screenshots/Dark/Movies%201.png" width="281" height="500"> <img src="/screenshots/Dark/Movie%20info%201.png" width="281" height="500"> <img src="/screenshots/Dark/Movie%20info%202.png" width="281" height="500">
+<img src="/screenshots/Dark/Cinemas%20map.png" width="281" height="500"> <img src="/screenshots/Dark/Cinemas.png" width="281" height="500"> <img src="/screenshots/Dark/Cinema%20info.png" width="281" height="500">
+<img src="/screenshots/Dark/Menu.png" width="281" height="500"> <img src="/screenshots/Dark/About%20the%20app.png" width="281" height="500"> <img src="/screenshots/Dark/Pick%20a%20city.png" width="281" height="500">
