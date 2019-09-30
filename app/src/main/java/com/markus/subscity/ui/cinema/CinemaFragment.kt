@@ -25,7 +25,7 @@ import com.markus.subscity.widgets.SpeedyLinearLayoutManager
 /**
  * @author Vitaliy Markus
  */
-open class CinemaFragment : MvpAppCompatFragment(), CinemaView {
+ class CinemaFragment : MvpAppCompatFragment(), CinemaView {
 
     @InjectPresenter
     lateinit var cinemaPresenter: CinemaPresenter

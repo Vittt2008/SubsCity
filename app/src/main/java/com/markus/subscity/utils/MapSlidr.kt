@@ -3,8 +3,8 @@ package com.markus.subscity.utils
 import android.animation.ArgbEvaluator
 import android.app.Activity
 import android.os.Build
-import androidx.annotation.ColorInt
 import android.view.ViewGroup
+import androidx.annotation.ColorInt
 import com.markus.subscity.widgets.MapSliderPanel
 import com.r0adkll.slidr.R
 import com.r0adkll.slidr.model.SlidrConfig
@@ -20,7 +20,7 @@ object MapSlidr {
         return attach(activity, -1, -1)
     }
 
-    private fun attach(activity: Activity, @ColorInt statusBarColor1: Int, @ColorInt statusBarColor2: Int): SlidrInterface {
+    fun attach(activity: Activity, @ColorInt statusBarColor1: Int, @ColorInt statusBarColor2: Int): SlidrInterface {
         val panel = attachSliderPanel(activity, null)
         panel.setOnPanelSlideListener(ColorPanelSlideListener(activity, statusBarColor1, statusBarColor2))
         return panel.defaultInterface

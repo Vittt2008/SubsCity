@@ -66,7 +66,7 @@ class ScreeningRepository @Inject constructor(private val apiClient: ApiClient,
 
     private fun getMovieScreeningsFromApi(movieId: Long): Single<List<Screening>> {
         return apiClient.subsCityService.getMovieScreenings(cityProvider.cityId, movieId)
-                .doOnSuccess { it -> databaseProvider.currentDatabaseClient.screeningDao.saveScreening(it) }
+                .doOnSuccess { databaseProvider.currentDatabaseClient.screeningDao.saveScreening(it) }
                 .doOnSuccess { updateCacheTimestamp(movieScreeningKey) }
                 .timeout()
     }
@@ -78,7 +78,7 @@ class ScreeningRepository @Inject constructor(private val apiClient: ApiClient,
 
     private fun getCinemaScreeningsFromApi(cinemaId: Long): Single<List<Screening>> {
         return apiClient.subsCityService.getCinemaScreenings(cityProvider.cityId, cinemaId)
-                .doOnSuccess { it -> databaseProvider.currentDatabaseClient.screeningDao.saveScreening(it) }
+                .doOnSuccess { databaseProvider.currentDatabaseClient.screeningDao.saveScreening(it) }
                 .doOnSuccess { updateCacheTimestamp(cinemaScreeningKey) }
                 .timeout()
     }
@@ -90,7 +90,7 @@ class ScreeningRepository @Inject constructor(private val apiClient: ApiClient,
 
     private fun getDateScreeningsFromApi(dateTime: DateTime): Single<List<Screening>> {
         return apiClient.subsCityService.getDateScreenings(cityProvider.cityId, dateTime)
-                .doOnSuccess { it -> databaseProvider.currentDatabaseClient.screeningDao.saveScreening(it) }
+                .doOnSuccess { databaseProvider.currentDatabaseClient.screeningDao.saveScreening(it) }
                 .doOnSuccess { updateCacheTimestamp(dateScreeningKey) }
                 .timeout()
     }

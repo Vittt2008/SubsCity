@@ -54,12 +54,11 @@ class MoviePresenter @Inject constructor(private val movieRepository: MovieRepos
         val now = dateTimeProvider.now()
         val screenings = pair.first.filter { x -> x.dateTime > now }
         val cinemas = pair.second.associateBy { it.id }
-        val cinemaScreenings = screenings
+        return screenings
                 .filter { it.cinemaId != 0L }
                 .groupBy { it.cinemaId }
-                .filter { cinemas.containsKey(it.key) } //TODO Если ключ не найден, то нужно перезапросить все с сервера
+                .filter { cinemas.containsKey(it.key) } //TODO If key isn't exist, we would have to reload all data from backend
                 .map { CinemaScreenings(cinemas.getValue(it.key), it.value.sortedBy { x -> x.dateTime }) }
-        return cinemaScreenings
     }
 
     class CinemaScreenings(val cinema: Cinema,

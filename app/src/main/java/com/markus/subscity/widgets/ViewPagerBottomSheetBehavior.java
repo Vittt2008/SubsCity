@@ -54,6 +54,7 @@ import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP;
 /**
  * An interaction behavior plugin for a child view of {@link CoordinatorLayout} to make it work as
  * a bottom sheet.
+ * Copied from https://github.com/laenger/ViewPagerBottomSheet/blob/master/vpbs/src/main/java/biz/laenger/android/vpbs/ViewPagerBottomSheetBehavior.java
  */
 public class ViewPagerBottomSheetBehavior<V extends View> extends CoordinatorLayout.Behavior<V> {
 

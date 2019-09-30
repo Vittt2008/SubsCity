@@ -10,5 +10,4 @@ class DefaultMetroTextProvider @Inject constructor() : MetroTextProvider {
     override fun formatMetroListStation(stations: List<String>): CharSequence {
         return stations.join(" / ")
     }
-
 }

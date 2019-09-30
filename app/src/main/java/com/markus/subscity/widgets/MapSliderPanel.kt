@@ -7,7 +7,6 @@ import com.r0adkll.slidr.model.SlidrConfig
 import com.r0adkll.slidr.widget.SliderPanel
 import com.markus.subscity.R
 
-
 /**
  * @author Vitaliy Markus
  */

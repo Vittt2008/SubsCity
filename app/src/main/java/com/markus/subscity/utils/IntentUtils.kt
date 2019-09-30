@@ -11,7 +11,7 @@ import com.markus.subscity.R
  */
 object IntentUtils {
 
-    private val PHONE_RES_SCHEME = "tel:"
+    private const val PHONE_RES_SCHEME = "tel:"
 
     fun createShareTextIntent(context: Context, subject: String, shareBody: String): Intent {
         val sharingIntent = Intent(Intent.ACTION_SEND)

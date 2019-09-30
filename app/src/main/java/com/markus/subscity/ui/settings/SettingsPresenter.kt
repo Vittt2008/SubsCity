@@ -10,10 +10,7 @@ import com.markus.subscity.providers.ThemeProvider
 import com.markus.subscity.ui.settings.SettingsView.Companion.ABOUT
 import com.markus.subscity.ui.settings.SettingsView.Companion.CINEMA_MAP
 import com.markus.subscity.ui.settings.SettingsView.Companion.CITY
-import com.markus.subscity.ui.settings.SettingsView.Companion.DARK_THEME
-import com.markus.subscity.ui.settings.SettingsView.Companion.DIALOG_THEME
 import com.markus.subscity.ui.settings.SettingsView.Companion.DONATE
-import com.markus.subscity.ui.settings.SettingsView.Companion.LANGUAGE
 import com.markus.subscity.ui.settings.SettingsView.Companion.POLICY
 import com.markus.subscity.ui.settings.SettingsView.Companion.RATE_APP
 import com.markus.subscity.ui.settings.SettingsView.Companion.THEME

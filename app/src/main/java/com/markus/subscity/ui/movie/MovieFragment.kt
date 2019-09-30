@@ -209,11 +209,11 @@ class MovieFragment : MvpAppCompatFragment(), MovieView, ShareView {
     }
 
     private fun createIntent(context: Context, file: File?, title: String, content: String): Intent {
-        if (file != null && file.exists()) {
+        return if (file != null && file.exists()) {
             val image = FileUtils.getUriForShareFile(context, file)
-            return IntentUtils.createShareTextWithImageIntent(context, title, content, image)
+            IntentUtils.createShareTextWithImageIntent(context, title, content, image)
         } else {
-            return IntentUtils.createShareTextIntent(context, title, content)
+            IntentUtils.createShareTextIntent(context, title, content)
         }
     }
 }

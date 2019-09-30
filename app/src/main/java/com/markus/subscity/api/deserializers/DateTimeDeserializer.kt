@@ -17,5 +17,4 @@ object DateTimeDeserializer : JsonDeserializer<DateTime> {
     override fun deserialize(json: JsonElement?, typeOfT: Type?, context: JsonDeserializationContext?): DateTime {
         return if (json != null) ISODateTimeFormat.dateTimeParser().parseDateTime(json.asString) else emptyDateTime
     }
-
 }

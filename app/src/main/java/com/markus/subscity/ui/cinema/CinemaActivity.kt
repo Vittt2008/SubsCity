@@ -19,11 +19,6 @@ class CinemaActivity : BaseActivity() {
                     .putExtra(EXTRA_CINEMA_ID, cinemaId)
             context.startActivity(intent)
         }
-
-        fun createIntent(context: Context, cinemaId: Long): Intent {
-            return Intent(context, CinemaActivity::class.java)
-                    .putExtra(EXTRA_CINEMA_ID, cinemaId)
-        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

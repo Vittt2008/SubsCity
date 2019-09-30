@@ -23,11 +23,11 @@ class TestCachedRepository(databaseProvider: DatabaseProvider,
 
     fun getData(): String {
         val isCacheActual = isCacheActual().blockingGet()
-        if (isCacheActual) {
-            return FROM_DB
+        return if (isCacheActual) {
+            FROM_DB
         } else {
             updateCacheTimestamp()
-            return FROM_SERVER
+            FROM_SERVER
         }
     }
 

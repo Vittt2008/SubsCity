@@ -3,7 +3,6 @@ package com.markus.subscity.providers
 import android.content.Context
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.app.AppCompatDelegate.*
 import androidx.core.os.BuildCompat
 import com.markus.subscity.R
 import io.reactivex.Completable
@@ -27,8 +26,8 @@ class ThemeProvider @Inject constructor(private val context: Context,
         val themeMode = getCurrentThemeMode()
         val lastItem = createAutoSystemItem(themeMode)
         return listOf(
-                SelectedThemeItem(MODE_NIGHT_NO, R.string.theme_light, MODE_NIGHT_NO == themeMode),
-                SelectedThemeItem(MODE_NIGHT_YES, R.string.theme_dark, MODE_NIGHT_YES == themeMode),
+                SelectedThemeItem(AppCompatDelegate.MODE_NIGHT_NO, R.string.theme_light, AppCompatDelegate.MODE_NIGHT_NO == themeMode),
+                SelectedThemeItem(AppCompatDelegate.MODE_NIGHT_YES, R.string.theme_dark, AppCompatDelegate.MODE_NIGHT_YES == themeMode),
                 lastItem
         )
     }
@@ -42,7 +41,7 @@ class ThemeProvider @Inject constructor(private val context: Context,
     fun applyTheme(dark: Boolean): Single<Boolean> {
         return Completable.timer(THEME_ACTIVATION_DELAY, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
-                .andThen(Single.fromCallable { applyThemeMode(if (dark) MODE_NIGHT_YES else MODE_NIGHT_NO) })
+                .andThen(Single.fromCallable { applyThemeMode(if (dark) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO) })
     }
 
     fun applyCurrentTheme() {
@@ -68,14 +67,14 @@ class ThemeProvider @Inject constructor(private val context: Context,
     }
 
     private fun getAutoSystemValue(): Int {
-        return if (BuildCompat.isAtLeastQ()) MODE_NIGHT_FOLLOW_SYSTEM else MODE_NIGHT_AUTO_BATTERY
+        return if (BuildCompat.isAtLeastQ()) AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM else AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY
     }
 
     private fun createAutoSystemItem(nightMode: Int): SelectedThemeItem {
         return if (BuildCompat.isAtLeastQ()) {
-            SelectedThemeItem(MODE_NIGHT_FOLLOW_SYSTEM, R.string.theme_system_default, MODE_NIGHT_FOLLOW_SYSTEM == nightMode)
+            SelectedThemeItem(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM, R.string.theme_system_default, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM == nightMode)
         } else {
-            SelectedThemeItem(MODE_NIGHT_AUTO_BATTERY, R.string.theme_by_battery_saver, MODE_NIGHT_AUTO_BATTERY == nightMode)
+            SelectedThemeItem(AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY, R.string.theme_by_battery_saver, AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY == nightMode)
         }
     }
 

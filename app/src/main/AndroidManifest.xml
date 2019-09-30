@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.markus.subscity">
 
     <uses-permission android:name="com.android.vending.BILLING" />
@@ -24,7 +25,8 @@
         <activity
             android:name=".ui.splash.SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.SplashTheme">
+            android:theme="@style/AppTheme.SplashTheme"
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -52,7 +54,8 @@
             android:name=".ui.main.MainActivity"
             android:label="@string/empty_title"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.MainActivity" />
+            android:theme="@style/AppTheme.MainActivity"
+            tools:ignore="LockedOrientationActivity" />
 
         <activity
             android:name=".ui.movie.MovieActivity"
@@ -73,7 +76,8 @@
             android:name=".ui.city.FirstPickCityActivity"
             android:label="@string/city_title"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.FirstPickCityActivity" />
+            android:theme="@style/AppTheme.FirstPickCityActivity"
+            tools:ignore="LockedOrientationActivity" />
 
         <activity
             android:name=".ui.youtube.YouTubeActivity"

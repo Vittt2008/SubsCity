@@ -19,6 +19,7 @@ import java.util.concurrent.locks.ReentrantLock
 
 /**
  * @author Vitaliy Markus
+ * Part of logic was copied from {@link com.bumptech.glide.load.resource.bitmap.TransformationUtils}
  */
 class PosterCrop : BitmapTransformation() {
 
@@ -27,7 +28,7 @@ class PosterCrop : BitmapTransformation() {
         private val ID_BYTES = ID.toByteArray(CHARSET)
         private val DEFAULT_PAINT = Paint(PAINT_FLAGS)
         private val MODELS_REQUIRING_BITMAP_LOCK = HashSet(
-                Arrays.asList(
+                listOf(
                         // Moto X gen 2
                         "XT1085",
                         "XT1092",
@@ -70,7 +71,7 @@ class PosterCrop : BitmapTransformation() {
     }
 
     override fun transform(pool: BitmapPool, toTransform: Bitmap, outWidth: Int, outHeight: Int): Bitmap {
-        return centerCrop(pool, toTransform, outWidth, outHeight)
+        return posterCrop(pool, toTransform, outWidth, outHeight)
     }
 
     override fun equals(other: Any?): Boolean {
@@ -85,7 +86,7 @@ class PosterCrop : BitmapTransformation() {
         messageDigest.update(ID_BYTES)
     }
 
-    private fun centerCrop(pool: BitmapPool, inBitmap: Bitmap, width: Int, height: Int): Bitmap {
+    private fun posterCrop(pool: BitmapPool, inBitmap: Bitmap, width: Int, height: Int): Bitmap {
         if (inBitmap.width == width && inBitmap.height == height) {
             return inBitmap
         }

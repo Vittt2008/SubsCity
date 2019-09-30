@@ -125,12 +125,11 @@ private fun getCustomTabsPackages(context: Context, uri: Uri): List<ResolveInfo>
     val activityIntent = Intent(Intent.ACTION_VIEW, uri)
 
     val resolvedActivityList = pm.queryIntentActivities(activityIntent, 0)
-    val packagesSupportingCustomTabs = resolvedActivityList.filter { info ->
+
+    return resolvedActivityList.filter { info ->
         val serviceIntent = Intent()
         serviceIntent.action = ACTION_CUSTOM_TABS_CONNECTION
         serviceIntent.setPackage(info.activityInfo.packageName)
         return@filter pm.resolveService(serviceIntent, 0) != null
     }.sortedBy { it.preferredOrder }
-
-    return packagesSupportingCustomTabs
 }

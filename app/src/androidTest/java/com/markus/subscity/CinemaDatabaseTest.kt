@@ -9,8 +9,8 @@ import com.markus.subscity.db.DatabaseClient
 import com.markus.subscity.db.dao.CinemaDao
 import com.markus.subscity.helper.createGson
 import io.reactivex.Completable
-import junit.framework.Assert.assertTrue
 import net.danlew.android.joda.JodaTimeAndroid
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -23,7 +23,7 @@ class CinemaDatabaseTest {
 
     private val expectedCinemas: List<Cinema> by lazy {
         val listCinemaType = object : TypeToken<List<Cinema>>() {}.type
-        createGson().fromJson<List<Cinema>>(cinemasJson, listCinemaType)
+        createGson().fromJson(cinemasJson, listCinemaType)
     }
     private val cinemaDao: CinemaDao by lazy {
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
@@ -35,7 +35,7 @@ class CinemaDatabaseTest {
     @Before
     fun setUp() {
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        JodaTimeAndroid.init(appContext);
+        JodaTimeAndroid.init(appContext)
     }
 
     @Test

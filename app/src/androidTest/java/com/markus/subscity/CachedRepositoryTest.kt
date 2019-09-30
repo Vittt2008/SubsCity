@@ -39,7 +39,7 @@ class CachedRepositoryTest {
     fun checkCachedRepository() {
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
 
-        JodaTimeAndroid.init(appContext);
+        JodaTimeAndroid.init(appContext)
 
         val dateTimeProvider = createDateTimeProvider()
         val cachedRepository = createCachedRepository(appContext, dateTimeProvider)

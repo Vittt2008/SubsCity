@@ -21,7 +21,7 @@ class MovieDatabaseTest {
 
     private val expectedMovies: List<Movie> by lazy {
         val listMovieType = object : TypeToken<List<Movie>>() {}.type
-        createGson().fromJson<List<Movie>>(moviesJson, listMovieType)
+        createGson().fromJson(moviesJson, listMovieType)
     }
     private val movieDao: MovieDao by lazy {
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext

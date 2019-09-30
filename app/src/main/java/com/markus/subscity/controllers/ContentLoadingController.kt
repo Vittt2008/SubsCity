@@ -6,8 +6,9 @@ import android.app.Activity
 import android.os.Handler
 import android.os.Looper
 import android.os.SystemClock
-import androidx.annotation.IdRes
 import android.view.View
+import androidx.annotation.IdRes
+import kotlin.math.max
 
 /**
  * @author Vitaliy Markus
@@ -27,14 +28,23 @@ class ContentLoadingController {
 
     private var animated = false
 
+    companion object {
+        private const val MIN_PROGRESS_SHOW_TIME = 500
+        private const val PROGRESS_SHOW_DELAY = 500
+        private const val CROSS_FADE_DURATION = 300L
+    }
+
     enum class State {
         CONTENT,
         EMPTY,
         PROGRESS
     }
 
+
     constructor(rootView: View, contentViewIds: IntArray, @IdRes progressViewId: Int, @IdRes emptyViewId: Int = View.NO_ID) {
-        this.contentViews = contentViewIds.map { viewId -> rootView.findViewById<View>(viewId) ?: throw IllegalArgumentException("View with id $viewId was not found") }.toTypedArray()
+        this.contentViews = contentViewIds.map { viewId ->
+            rootView.findViewById<View>(viewId) ?: throw IllegalArgumentException("View with id $viewId was not found")
+        }.toTypedArray()
         this.progressView = rootView.findViewById(progressViewId) ?: throw IllegalArgumentException("View with id $progressViewId was not found")
         this.handler = Handler(Looper.getMainLooper())
         this.minProgressShowTime = MIN_PROGRESS_SHOW_TIME
@@ -71,16 +81,17 @@ class ContentLoadingController {
     }
 
     fun switchState(state: State) {
-        handler.removeCallbacks(switchStateCallback)
+        switchStateCallback?.let(handler::removeCallbacks)
 
         if (currentState == state) {
             return
         }
 
-        switchStateCallback = Runnable { setContentState(state) }
+        val switchStateCallback = Runnable { setContentState(state) }
+        this.switchStateCallback = switchStateCallback
         val elapsedTime = SystemClock.elapsedRealtime() - lastStateSwitchTimestamp
         when (state) {
-            State.CONTENT, State.EMPTY -> handler.postDelayed(switchStateCallback, Math.max(0, minProgressShowTime - elapsedTime))
+            State.CONTENT, State.EMPTY -> handler.postDelayed(switchStateCallback, max(0, minProgressShowTime - elapsedTime))
             State.PROGRESS -> handler.postDelayed(switchStateCallback, progressShowDelay.toLong())
         }
     }
@@ -153,12 +164,5 @@ class ContentLoadingController {
 
     private fun hideView(views: Array<View>) {
         views.forEach { view -> hideView(view) }
-    }
-
-    companion object {
-
-        private val MIN_PROGRESS_SHOW_TIME = 500
-        private val PROGRESS_SHOW_DELAY = 500
-        private val CROSS_FADE_DURATION = 300L
     }
 }

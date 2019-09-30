@@ -21,7 +21,7 @@ class ScreeningDatabaseTest {
 
     private val allScreenings: List<Screening> by lazy {
         val listScreeningType = object : TypeToken<List<Screening>>() {}.type
-        createGson().fromJson<List<Screening>>(screeningJson, listScreeningType)
+        createGson().fromJson(screeningJson, listScreeningType)
     }
     private val screeningDao: ScreeningDao by lazy {
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext

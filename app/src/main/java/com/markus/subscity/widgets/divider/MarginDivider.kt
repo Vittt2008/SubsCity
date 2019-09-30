@@ -8,6 +8,7 @@ import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import android.view.View
+import kotlin.math.roundToInt
 
 /**
  * @author Vitaliy Markus
@@ -61,7 +62,7 @@ class MarginDivider(private val context: Context) : RecyclerView.ItemDecoration(
         for (i in 0 until childCount - 1) {
             val child = parent.getChildAt(i)
             parent.getDecoratedBoundsWithMargins(child, bounds)
-            val bottom = bounds.bottom + Math.round(child.translationY)
+            val bottom = bounds.bottom + child.translationY.roundToInt()
             val top = bottom - divider.intrinsicHeight
             divider.setBounds(left, top, right, bottom)
             divider.draw(canvas)
