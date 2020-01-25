@@ -24,7 +24,6 @@
 
         <activity
             android:name=".ui.splash.SplashActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SplashTheme"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
@@ -53,7 +52,6 @@
         <activity
             android:name=".ui.main.MainActivity"
             android:label="@string/empty_title"
-            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.MainActivity"
             tools:ignore="LockedOrientationActivity" />
 
@@ -75,7 +73,6 @@
         <activity
             android:name=".ui.city.FirstPickCityActivity"
             android:label="@string/city_title"
-            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.FirstPickCityActivity"
             tools:ignore="LockedOrientationActivity" />
 

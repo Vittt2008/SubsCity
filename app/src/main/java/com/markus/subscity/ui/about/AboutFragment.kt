@@ -8,25 +8,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.arellomobile.mvp.MvpAppCompatFragment
-import com.arellomobile.mvp.presenter.InjectPresenter
-import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.markus.subscity.R
-import com.markus.subscity.dagger.SubsCityDagger
 import com.markus.subscity.extensions.analytics
 import com.markus.subscity.extensions.openIntent
 import com.markus.subscity.extensions.openUrl
 import com.markus.subscity.extensions.setSupportActionBar
 import com.markus.subscity.utils.ClickableSpanBuilder
 import com.markus.subscity.utils.IntentUtils
+import com.markus.subscity.viewmodels.ViewModelFragment
 
 /**
  * @author Vitaliy Markus
  */
-class AboutFragment : MvpAppCompatFragment(), AboutView {
-
-    @InjectPresenter
-    lateinit var aboutPresenter: AboutPresenter
+class AboutFragment : ViewModelFragment<AboutViewModel>(AboutViewModel::class) {
 
     companion object {
         fun newInstance(): AboutFragment {
@@ -34,22 +28,24 @@ class AboutFragment : MvpAppCompatFragment(), AboutView {
         }
     }
 
-    @ProvidePresenter
-    fun aboutPresenter(): AboutPresenter {
-        return SubsCityDagger.component.createAboutPresenter()
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root = inflater.inflate(R.layout.fragment_about, container, false)
         setSupportActionBar(root.findViewById(R.id.toolbar))
-        root.findViewById<View>(R.id.bt_telegram).setOnClickListener { aboutPresenter.openTelegram() }
-        root.findViewById<View>(R.id.bt_vk).setOnClickListener { aboutPresenter.openVkontakte() }
-        root.findViewById<View>(R.id.bt_fb).setOnClickListener { aboutPresenter.openFacebook() }
+        root.findViewById<View>(R.id.bt_telegram).setOnClickListener { viewModel.openTelegram() }
+        root.findViewById<View>(R.id.bt_vk).setOnClickListener { viewModel.openVkontakte() }
+        root.findViewById<View>(R.id.bt_fb).setOnClickListener { viewModel.openFacebook() }
         initTeamMembers(root)
         return root
     }
 
-    override fun openSocialNetwork(socialNetwork: AboutView.SocialNetwork, city: String, url: String) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.socialNetworkCommandLiveData.observe { command ->
+            openSocialNetwork(command.socialNetwork, command.city, command.url)
+        }
+    }
+
+    private fun openSocialNetwork(socialNetwork: SocialNetwork, city: String, url: String) {
         analytics().logOpenSocialNetwork(socialNetwork.toString(), city, url)
         openUrl(Uri.parse(url), false)
     }
