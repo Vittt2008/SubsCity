@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/My Projects-SubsCity.iml" filepath="$PROJECT_DIR$/My Projects-SubsCity.iml" group="SubsCity" />
       <module fileurl="file://$PROJECT_DIR$/SubsCity.iml" filepath="$PROJECT_DIR$/SubsCity.iml" group="SubsCity" />
+      <module fileurl="file://$PROJECT_DIR$/app/SubsCity-app.iml" filepath="$PROJECT_DIR$/app/SubsCity-app.iml" group="SubsCity/app" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="SubsCity/app" />
     </modules>
   </component>

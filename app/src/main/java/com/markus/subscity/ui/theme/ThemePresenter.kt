@@ -1,15 +1,15 @@
 package com.markus.subscity.ui.theme
 
 import com.arellomobile.mvp.InjectViewState
-import com.arellomobile.mvp.MvpPresenter
 import com.markus.subscity.providers.ThemeProvider
+import com.markus.subscity.ui.base.BaseMvpPresenter
 import javax.inject.Inject
 
 /**
  * @author Vitaliy Markus
  */
 @InjectViewState
-class ThemePresenter @Inject constructor(private val themeProvider: ThemeProvider) : MvpPresenter<ThemeView>() {
+class ThemePresenter @Inject constructor(private val themeProvider: ThemeProvider) : BaseMvpPresenter<ThemeView>() {
 
     override fun onFirstViewAttach() {
         val themeList = themeProvider.createThemeList()
@@ -18,7 +18,7 @@ class ThemePresenter @Inject constructor(private val themeProvider: ThemeProvide
 
     fun updateTheme(item: ThemeProvider.SelectedThemeItem) {
         themeProvider.applyTheme(item.mode)
-                .subscribe { recreate ->
+                .subscribeTillDetach { recreate ->
                     if (recreate) {
                         viewState.recreate()
                     }

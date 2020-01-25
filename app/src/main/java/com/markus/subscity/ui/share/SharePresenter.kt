@@ -2,10 +2,10 @@ package com.markus.subscity.ui.share
 
 import android.graphics.drawable.Drawable
 import com.arellomobile.mvp.InjectViewState
-import com.arellomobile.mvp.MvpPresenter
 import com.markus.subscity.SubsCityApplication
 import com.markus.subscity.api.entities.movie.Movie
 import com.markus.subscity.providers.CityProvider
+import com.markus.subscity.ui.base.BaseMvpPresenter
 import com.markus.subscity.utils.DrawableExporter
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -18,7 +18,7 @@ import javax.inject.Inject
  */
 @InjectViewState
 class SharePresenter @Inject constructor(private val drawableExporter: DrawableExporter,
-                                         private val cityProvider: CityProvider) : MvpPresenter<ShareView>() {
+                                         private val cityProvider: CityProvider) : BaseMvpPresenter<ShareView>() {
 
     companion object {
         private const val POSTER_NAME = "temp_poster.jpg"
@@ -29,7 +29,7 @@ class SharePresenter @Inject constructor(private val drawableExporter: DrawableE
                 .map { file -> ShareData(file.value, formatTitle(movie), String.format(SubsCityApplication.MOVIE_URL, cityProvider.cityId, movie.id)) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ data ->
+                .subscribeTillDetach({ data ->
                     viewState.share(data.file, data.title, data.url)
                 }, {
                     viewState.onShareError()

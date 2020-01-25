@@ -1,13 +1,13 @@
 package com.markus.subscity.ui.cinema
 
 import com.arellomobile.mvp.InjectViewState
-import com.arellomobile.mvp.MvpPresenter
 import com.markus.subscity.api.entities.movie.Movie
 import com.markus.subscity.api.entities.screening.Screening
 import com.markus.subscity.providers.DateTimeProvider
 import com.markus.subscity.repositories.CinemaRepository
 import com.markus.subscity.repositories.MovieRepository
 import com.markus.subscity.repositories.ScreeningRepository
+import com.markus.subscity.ui.base.BaseMvpPresenter
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.Observables
@@ -22,7 +22,7 @@ import javax.inject.Inject
 class CinemaPresenter @Inject constructor(private val cinemaRepository: CinemaRepository,
                                           private val movieRepository: MovieRepository,
                                           private val screeningRepository: ScreeningRepository,
-                                          private val dateTimeProvider: DateTimeProvider) : MvpPresenter<CinemaView>() {
+                                          private val dateTimeProvider: DateTimeProvider) : BaseMvpPresenter<CinemaView>() {
 
     var cinemaId: Long = 0
 
@@ -38,7 +38,7 @@ class CinemaPresenter @Inject constructor(private val cinemaRepository: CinemaRe
 
         Observables.combineLatest(cinema, movieScreenings)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ (cinema, screenings) ->
+                .subscribeTillDetach({ (cinema, screenings) ->
                     viewState.showCinema(cinema, screenings)
                 }, {
                     viewState.onError(it)
