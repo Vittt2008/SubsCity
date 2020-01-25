@@ -1,15 +1,15 @@
 package com.markus.subscity.ui.about
 
 import com.arellomobile.mvp.InjectViewState
-import com.arellomobile.mvp.MvpPresenter
 import com.markus.subscity.providers.CityProvider
+import com.markus.subscity.ui.base.BaseMvpPresenter
 import javax.inject.Inject
 
 /**
  * @author Vitaliy Markus
  */
 @InjectViewState
-class AboutPresenter @Inject constructor(private val cityProvider: CityProvider) : MvpPresenter<AboutView>() {
+class AboutPresenter @Inject constructor(private val cityProvider: CityProvider) : BaseMvpPresenter<AboutView>() {
 
     fun openTelegram() {
         viewState.openSocialNetwork(AboutView.SocialNetwork.TELEGRAM, cityProvider.cityName, cityProvider.city.socialNetworks.telegram)

@@ -1,7 +1,6 @@
 package com.markus.subscity.ui.movie
 
 import com.arellomobile.mvp.InjectViewState
-import com.arellomobile.mvp.MvpPresenter
 import com.markus.subscity.api.entities.cinema.Cinema
 import com.markus.subscity.api.entities.screening.Screening
 import com.markus.subscity.providers.DateTimeProvider
@@ -10,6 +9,7 @@ import com.markus.subscity.providers.isRussian
 import com.markus.subscity.repositories.CinemaRepository
 import com.markus.subscity.repositories.MovieRepository
 import com.markus.subscity.repositories.ScreeningRepository
+import com.markus.subscity.ui.base.BaseMvpPresenter
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.Observables
@@ -25,7 +25,7 @@ class MoviePresenter @Inject constructor(private val movieRepository: MovieRepos
                                          private val cinemaRepository: CinemaRepository,
                                          private val screeningRepository: ScreeningRepository,
                                          private val dateTimeProvider: DateTimeProvider,
-                                         private val displayLanguageProvider: DisplayLanguageProvider) : MvpPresenter<MovieView>() {
+                                         private val displayLanguageProvider: DisplayLanguageProvider) : BaseMvpPresenter<MovieView>() {
 
     var movieId: Long = 0
 
@@ -41,7 +41,7 @@ class MoviePresenter @Inject constructor(private val movieRepository: MovieRepos
 
         Observables.combineLatest(movie, cinemaScreenings)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ (movie, screenings) ->
+                .subscribeTillDetach({ (movie, screenings) ->
                     val title = if (displayLanguageProvider.isRussian) movie.title.russian else movie.title.original
                     viewState.showTitle(title)
                     viewState.showMovie(movie, screenings)

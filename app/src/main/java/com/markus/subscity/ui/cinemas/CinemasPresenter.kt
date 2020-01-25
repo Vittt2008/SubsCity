@@ -1,9 +1,9 @@
 package com.markus.subscity.ui.cinemas
 
 import com.arellomobile.mvp.InjectViewState
-import com.arellomobile.mvp.MvpPresenter
 import com.markus.subscity.providers.CityProvider
 import com.markus.subscity.repositories.CinemaRepository
+import com.markus.subscity.ui.base.BaseMvpPresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
@@ -13,7 +13,7 @@ import javax.inject.Inject
  */
 @InjectViewState
 class CinemasPresenter @Inject constructor(private val cinemaRepository: CinemaRepository,
-                                           private val cityProvider: CityProvider) : MvpPresenter<CinemasView>() {
+                                           private val cityProvider: CityProvider) : BaseMvpPresenter<CinemasView>() {
 
     override fun onFirstViewAttach() {
         viewState.showProgress()
@@ -21,7 +21,7 @@ class CinemasPresenter @Inject constructor(private val cinemaRepository: CinemaR
                 .flatMapSingle { cinemaRepository.getCinemas() }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ cinemas ->
+                .subscribeTillDetach({ cinemas ->
                     viewState.hideProgress()
                     viewState.showCinemas(cinemas)
                 }, {

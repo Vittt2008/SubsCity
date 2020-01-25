@@ -1,15 +1,15 @@
 package com.markus.subscity.ui.main
 
 import com.arellomobile.mvp.InjectViewState
-import com.arellomobile.mvp.MvpPresenter
 import com.markus.subscity.providers.PreferencesProvider
+import com.markus.subscity.ui.base.BaseMvpPresenter
 import javax.inject.Inject
 
 /**
  * @author Vitaliy Markus
  */
 @InjectViewState
-class MainPresenter @Inject constructor(private val preferencesProvider: PreferencesProvider) : MvpPresenter<MainView>() {
+class MainPresenter @Inject constructor(private val preferencesProvider: PreferencesProvider) : BaseMvpPresenter<MainView>() {
 
     companion object {
         private const val LAUNCH_COUNT_MOD = 15

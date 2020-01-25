@@ -1,12 +1,12 @@
 package com.markus.subscity.ui.settings
 
 import com.arellomobile.mvp.InjectViewState
-import com.arellomobile.mvp.MvpPresenter
 import com.markus.subscity.R
 import com.markus.subscity.providers.BillingProvider
 import com.markus.subscity.providers.CityProvider
 import com.markus.subscity.providers.PreferencesProvider
 import com.markus.subscity.providers.ThemeProvider
+import com.markus.subscity.ui.base.BaseMvpPresenter
 import com.markus.subscity.ui.settings.SettingsView.Companion.ABOUT
 import com.markus.subscity.ui.settings.SettingsView.Companion.CINEMA_MAP
 import com.markus.subscity.ui.settings.SettingsView.Companion.CITY
@@ -24,14 +24,14 @@ import javax.inject.Inject
 class SettingsPresenter @Inject constructor(private val cityProvider: CityProvider,
                                             private val preferencesProvider: PreferencesProvider,
                                             private val themeProvider: ThemeProvider,
-                                            private val billingProvider: BillingProvider) : MvpPresenter<SettingsView>() {
+                                            private val billingProvider: BillingProvider) : BaseMvpPresenter<SettingsView>() {
 
     override fun attachView(view: SettingsView) {
         super.attachView(view)
         cityProvider.asyncCity
                 .observeOn(AndroidSchedulers.mainThread())
                 .map { createSettings(cityProvider.cityName, themeProvider.getCurrentThemeTitle()) }
-                .subscribe { settings -> viewState.showSettings(settings) }
+                .subscribeTillDetach { settings -> viewState.showSettings(settings) }
     }
 
     fun showCinemasMap() {
@@ -50,7 +50,7 @@ class SettingsPresenter @Inject constructor(private val cityProvider: CityProvid
 
     fun switchTheme(dark: Boolean) {
         themeProvider.applyTheme(dark)
-                .subscribe { recreate ->
+                .subscribeTillDetach { recreate ->
                     if (recreate) {
                         viewState.recreate()
                     }
@@ -59,7 +59,7 @@ class SettingsPresenter @Inject constructor(private val cityProvider: CityProvid
 
     fun switchTheme(mode: Int) {
         themeProvider.applyTheme(mode)
-                .subscribe { recreate ->
+                .subscribeTillDetach { recreate ->
                     if (recreate) {
                         viewState.recreate()
                     }
