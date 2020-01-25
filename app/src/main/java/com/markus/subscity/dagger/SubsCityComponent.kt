@@ -10,7 +10,6 @@ import com.markus.subscity.providers.metro.SpbMetroTextProvider
 import com.markus.subscity.ui.cinema.delegates.CinemaInfoDelegate
 import com.markus.subscity.ui.cinema.delegates.MovieScreeningsDelegate
 import com.markus.subscity.ui.cinemas.CinemasAdapter
-import com.markus.subscity.ui.cinemas.CinemasPresenter
 import com.markus.subscity.ui.cinemasmap.CinemasMapPresenter
 import com.markus.subscity.ui.city.CityPresenter
 import com.markus.subscity.ui.deeplink.DeepLinkPresenter
@@ -41,7 +40,6 @@ interface SubsCityComponent {
 
     fun createMainPresenter(): MainPresenter
     fun createMoviesPresenter(): MoviesPresenter
-    fun createCinemasPresenter(): CinemasPresenter
     fun createSettingsPresenter(): SettingsPresenter
     fun createMoviePresenter(): MoviePresenter
     fun createCityPresenter(): CityPresenter

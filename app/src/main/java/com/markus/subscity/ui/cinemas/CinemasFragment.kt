@@ -1,43 +1,32 @@
 package com.markus.subscity.ui.cinemas
 
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.*
 import android.widget.Toast
-import com.arellomobile.mvp.MvpAppCompatFragment
-import com.arellomobile.mvp.presenter.InjectPresenter
-import com.arellomobile.mvp.presenter.ProvidePresenter
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.markus.subscity.R
 import com.markus.subscity.api.entities.City
 import com.markus.subscity.api.entities.cinema.Cinema
 import com.markus.subscity.controllers.ContentLoadingController
-import com.markus.subscity.dagger.SubsCityDagger
 import com.markus.subscity.extensions.analytics
 import com.markus.subscity.extensions.supportActionBar
 import com.markus.subscity.ui.cinema.CinemaActivity
 import com.markus.subscity.ui.cinemasmap.CinemasMapActivity
+import com.markus.subscity.viewmodels.ViewModelFragment
 import com.markus.subscity.widgets.divider.MarginDivider
 
 /**
  * @author Vitaliy Markus
  */
-class CinemasFragment : MvpAppCompatFragment(), CinemasView {
+class CinemasFragment : ViewModelFragment<CinemasViewModel>(CinemasViewModel::class) {
 
     private lateinit var loadingController: ContentLoadingController
-
-    @InjectPresenter
-    lateinit var cinemasPresenter: CinemasPresenter
 
     private lateinit var cinemasList: RecyclerView
 
     companion object {
         fun newInstance() = CinemasFragment()
-    }
-
-    @ProvidePresenter
-    fun cinemasPresenter(): CinemasPresenter {
-        return SubsCityDagger.component.createCinemasPresenter()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,23 +41,17 @@ class CinemasFragment : MvpAppCompatFragment(), CinemasView {
         return root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.progress.observe { progress -> if (progress) showProgress() else hideProgress() }
+        viewModel.cinemas.observe { cinemas -> showCinemas(cinemas) }
+        viewModel.errorEvent.observe { throwable -> onError(throwable) }
+        viewModel.mapEvent.observe { city -> showCinemasMap(city) }
+    }
+
     override fun onResume() {
         super.onResume()
         requireActivity().supportActionBar.setTitle(R.string.main_cinemas)
-    }
-
-    override fun showCinemas(cinemas: List<Cinema>) {
-        cinemas.toString().equals("", true)
-        cinemasList.run {
-            layoutManager = LinearLayoutManager(activity)
-            adapter = CinemasAdapter(cinemas, ::openCinema)
-            addItemDecoration(MarginDivider(requireActivity()).apply { setDrawable(R.drawable.cinema_divider) })
-        }
-    }
-
-    override fun showCinemasMap(city: City) {
-        analytics().logOpenCinemasMap(city.name, true)
-        CinemasMapActivity.start(requireActivity(), city.location.latitude, city.location.longitude, city.location.zoom)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -77,21 +60,35 @@ class CinemasFragment : MvpAppCompatFragment(), CinemasView {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.item_map_cinema) {
-            cinemasPresenter.showCinemasMap()
+            viewModel.showCinemasMap()
             return true
         }
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onError(throwable: Throwable) {
+    private fun showCinemas(cinemas: List<Cinema>) {
+        cinemas.toString().equals("", true)
+        cinemasList.run {
+            layoutManager = LinearLayoutManager(activity)
+            adapter = CinemasAdapter(cinemas, ::openCinema)
+            addItemDecoration(MarginDivider(requireActivity()).apply { setDrawable(R.drawable.cinema_divider) })
+        }
+    }
+
+    private fun showCinemasMap(city: City) {
+        analytics().logOpenCinemasMap(city.name, true)
+        CinemasMapActivity.start(requireActivity(), city.location.latitude, city.location.longitude, city.location.zoom)
+    }
+
+    private fun onError(throwable: Throwable) {
         Toast.makeText(activity, throwable.message, Toast.LENGTH_SHORT).show()
     }
 
-    override fun showProgress() {
+    private fun showProgress() {
         loadingController.switchState(ContentLoadingController.State.PROGRESS)
     }
 
-    override fun hideProgress() {
+    private fun hideProgress() {
         loadingController.switchState(ContentLoadingController.State.CONTENT)
     }
 

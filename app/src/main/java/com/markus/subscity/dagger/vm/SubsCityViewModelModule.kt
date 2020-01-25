@@ -1,11 +1,11 @@
 package com.markus.subscity.dagger.vm
 
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStore
 import com.markus.subscity.ui.about.AboutViewModel
 import com.markus.subscity.ui.cinema.CinemaViewModel
+import com.markus.subscity.ui.cinemas.CinemasViewModel
 import com.markus.subscity.viewmodels.ViewModelFactory
 import dagger.Binds
 import dagger.MapKey
@@ -35,6 +35,11 @@ abstract class SubsCityViewModelModule {
     @IntoMap
     @ViewModelKey(CinemaViewModel::class)
     abstract fun bindCinemaViewModel(viewModel: CinemaViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CinemasViewModel::class)
+    abstract fun bindCinemasViewModel(viewModel: CinemasViewModel): ViewModel
 
     @Module
     companion object {

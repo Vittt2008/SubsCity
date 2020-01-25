@@ -1,5 +1,6 @@
 package com.markus.subscity.viewmodels
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -10,6 +11,11 @@ import io.reactivex.rxkotlin.plusAssign
 abstract class BaseViewModel : ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
+
+    protected val errorEventInner = LiveEvent<Throwable>()
+
+    val errorEvent: LiveData<Throwable>
+        get() = errorEventInner
 
     override fun onCleared() {
         super.onCleared()

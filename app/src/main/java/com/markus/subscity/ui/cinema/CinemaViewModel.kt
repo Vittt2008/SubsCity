@@ -24,13 +24,9 @@ class CinemaViewModel @Inject constructor(private val cinemaRepository: CinemaRe
                                           private val dateTimeProvider: DateTimeProvider) : BaseInitableViewModel() {
 
     private val cinemaEventInner = MutableLiveData<CinemaEvent>()
-    private val errorEventInner = LiveEvent<Throwable>()
 
     val cinemaEvent: LiveData<CinemaEvent>
         get() = cinemaEventInner
-
-    val errorEvent: LiveData<Throwable>
-        get() = errorEventInner
 
     var cinemaId: Long = 0
 

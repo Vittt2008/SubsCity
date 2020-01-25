@@ -30,5 +30,4 @@ class AboutViewModel @Inject constructor(private val cityProvider: CityProvider)
             val city: String,
             val url: String
     )
-
 }
