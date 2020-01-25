@@ -15,7 +15,7 @@ import com.markus.subscity.dagger.SubsCityDagger
 import com.markus.subscity.providers.DisplayLanguageProvider
 import com.markus.subscity.providers.LanguageProvider
 import com.markus.subscity.providers.isRussian
-import com.markus.subscity.ui.cinema.CinemaPresenter
+import com.markus.subscity.ui.cinema.CinemaViewModel
 import com.markus.subscity.ui.movie.MovieScreeningAdapter
 import com.markus.subscity.widgets.divider.ImageGridItemDecoration
 import javax.inject.Inject
@@ -24,7 +24,7 @@ import javax.inject.Inject
  * @author Vitaliy Markus
  */
 class MovieScreeningsDelegate(private val screeningClickListener: (Screening) -> Unit,
-                              private val movieTitleClickListener: (Movie) -> Unit) : AbsListItemAdapterDelegate<CinemaPresenter.MovieScreenings, Any, MovieScreeningsDelegate.MovieScreeningsViewHolder>() {
+                              private val movieTitleClickListener: (Movie) -> Unit) : AbsListItemAdapterDelegate<CinemaViewModel.MovieScreenings, Any, MovieScreeningsDelegate.MovieScreeningsViewHolder>() {
 
     companion object {
         private const val SPAN_COUNT = 4
@@ -46,10 +46,10 @@ class MovieScreeningsDelegate(private val screeningClickListener: (Screening) ->
     }
 
     override fun isForViewType(item: Any, items: List<Any>, position: Int): Boolean {
-        return item is CinemaPresenter.MovieScreenings
+        return item is CinemaViewModel.MovieScreenings
     }
 
-    override fun onBindViewHolder(item: CinemaPresenter.MovieScreenings, viewHolder: MovieScreeningsViewHolder, payloads: List<Any>) {
+    override fun onBindViewHolder(item: CinemaViewModel.MovieScreenings, viewHolder: MovieScreeningsViewHolder, payloads: List<Any>) {
         viewHolder.bind(item)
     }
 
@@ -65,7 +65,7 @@ class MovieScreeningsDelegate(private val screeningClickListener: (Screening) ->
             titleLayout.setOnClickListener { movieTitleClickListener.invoke(movie) }
         }
 
-        fun bind(movieScreenings: CinemaPresenter.MovieScreenings) {
+        fun bind(movieScreenings: CinemaViewModel.MovieScreenings) {
             movie = movieScreenings.movie
             movieTitle.text = if (displayLanguageProvider.isRussian) movie.title.russian else movie.title.original
             movieLanguage.text = movieLanguage()

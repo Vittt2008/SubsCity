@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStore
 import com.markus.subscity.ui.about.AboutViewModel
+import com.markus.subscity.ui.cinema.CinemaViewModel
 import com.markus.subscity.viewmodels.ViewModelFactory
 import dagger.Binds
 import dagger.MapKey
@@ -29,6 +30,11 @@ abstract class SubsCityViewModelModule {
     @IntoMap
     @ViewModelKey(AboutViewModel::class)
     abstract fun bindAboutViewModel(viewModel: AboutViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CinemaViewModel::class)
+    abstract fun bindCinemaViewModel(viewModel: CinemaViewModel): ViewModel
 
     @Module
     companion object {

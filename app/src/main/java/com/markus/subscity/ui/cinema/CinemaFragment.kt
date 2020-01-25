@@ -9,26 +9,20 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.RecyclerView
-import com.arellomobile.mvp.MvpAppCompatFragment
-import com.arellomobile.mvp.presenter.InjectPresenter
-import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.markus.subscity.R
 import com.markus.subscity.api.entities.cinema.Cinema
 import com.markus.subscity.api.entities.movie.Movie
 import com.markus.subscity.api.entities.screening.Screening
-import com.markus.subscity.dagger.SubsCityDagger
 import com.markus.subscity.extensions.*
 import com.markus.subscity.ui.movie.MovieActivity
 import com.markus.subscity.utils.IntentUtils
+import com.markus.subscity.viewmodels.ViewModelFragment
 import com.markus.subscity.widgets.SpeedyLinearLayoutManager
 
 /**
  * @author Vitaliy Markus
  */
- class CinemaFragment : MvpAppCompatFragment(), CinemaView {
-
-    @InjectPresenter
-    lateinit var cinemaPresenter: CinemaPresenter
+class CinemaFragment : ViewModelFragment<CinemaViewModel>(CinemaViewModel::class) {
 
     private lateinit var cinemaInfoList: RecyclerView
     private var toolbar: Toolbar? = null
@@ -55,11 +49,10 @@ import com.markus.subscity.widgets.SpeedyLinearLayoutManager
         }
     }
 
-    @ProvidePresenter
-    fun cinemaPresenter(): CinemaPresenter {
-        return SubsCityDagger.component.createCinemaPresenter().apply {
-            cinemaId = arguments!!.getLong(CinemaActivity.EXTRA_CINEMA_ID)
-        }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.cinemaId = arguments!!.getLong(CinemaActivity.EXTRA_CINEMA_ID)
+        viewModel.init()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -71,7 +64,13 @@ import com.markus.subscity.widgets.SpeedyLinearLayoutManager
         return root
     }
 
-    override fun showCinema(cinema: Cinema, second: List<CinemaPresenter.MovieScreenings>) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.cinemaEvent.observe { event -> showCinema(event.cinema, event.screenings) }
+        viewModel.errorEvent.observe { throwable -> onError(throwable) }
+    }
+
+    private fun showCinema(cinema: Cinema, second: List<CinemaViewModel.MovieScreenings>) {
         if (adapter == null) {
             toolbar?.title = cinema.name
             adapter = CinemaAdapterDelegates(cinema, second, arguments!!.getBoolean(EXTRA_SHOW_NAME), ::openMap, ::call, ::openSite, ::buyTicket, ::openMovie)
@@ -81,12 +80,12 @@ import com.markus.subscity.widgets.SpeedyLinearLayoutManager
         }
     }
 
-    override fun onError(throwable: Throwable) {
+    private fun onError(throwable: Throwable) {
         toast(throwable.message)
         adapter?.updateScreenings(emptyList())
     }
 
-    override fun openMovie(movie: Movie) {
+    private fun openMovie(movie: Movie) {
         analytics().logOpenMovie(movie.id, movie.title.russian, false)
         MovieActivity.start(requireActivity(), movie.id)
     }

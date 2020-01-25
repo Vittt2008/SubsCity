@@ -11,7 +11,7 @@ import com.markus.subscity.ui.cinema.delegates.*
  * @author Vitaliy Markus
  */
 class CinemaAdapterDelegates(cinema: Cinema,
-                             movieScreenings: List<CinemaPresenter.MovieScreenings>,
+                             movieScreenings: List<CinemaViewModel.MovieScreenings>,
                              showCinemaName: Boolean,
                              mapClickListener: (Cinema) -> Unit,
                              phoneClickListener: (Cinema) -> Unit,
@@ -38,7 +38,7 @@ class CinemaAdapterDelegates(cinema: Cinema,
         setItems(data)
     }
 
-    fun updateScreenings(movieScreenings: List<CinemaPresenter.MovieScreenings>) {
+    fun updateScreenings(movieScreenings: List<CinemaViewModel.MovieScreenings>) {
         val oldSize = itemCount
         if (movieScreenings.isNotEmpty()) {
             data[oldSize - 1] = TitleDelegate.TitleInfo(R.string.movie_screenings_title)
