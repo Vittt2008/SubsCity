@@ -3,6 +3,8 @@ package com.markus.subscity.ui.cinemas
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.markus.subscity.R

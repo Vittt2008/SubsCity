@@ -73,6 +73,7 @@ dependencies {
     //ROOM
     implementation "androidx.room:room-runtime:$roomVersion"
     implementation "androidx.room:room-rxjava2:$roomVersion"
+    implementation "androidx.room:room-ktx:$roomVersion"
     kapt "androidx.room:room-compiler:$roomVersion"
     implementation "com.facebook.stetho:stetho:$slethoVersion"
 
@@ -112,6 +113,11 @@ dependencies {
     implementation "androidx.activity:activity-ktx:1.1.0"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:2.2.0"
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.3"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.3"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-rx2:1.3.3"
+    implementation "com.github.MohammadSianaki:Retrofit2-Flow-Call-Adapter:0.2.0"
 
 }
 

@@ -1,9 +1,12 @@
 package com.markus.subscity
 
 import com.markus.subscity.db.converters.Converter
+import io.reactivex.Observable
+import io.reactivex.schedulers.Schedulers
 import org.joda.time.DateTime
 import org.junit.Assert.assertTrue
 import org.junit.Test
+import java.util.concurrent.TimeUnit
 import kotlin.random.Random
 
 /**
@@ -33,5 +36,28 @@ class DbConverterTest {
         val dbValue = Converter.convertDateToLong(expectedDateTime)
         val actualDateTime = Converter.convertLongToDate(dbValue)
         assertTrue(expectedDateTime == actualDateTime)
+    }
+
+    @Test
+    fun aaaaa(){
+        Observable.timer(10, TimeUnit.MILLISECONDS, Schedulers.newThread())
+                .subscribeOn(Schedulers.io())
+                .map {
+                    println("mapThread = ${Thread.currentThread().name}")
+                }
+                .doOnSubscribe {
+                    println("onSubscribeThread = ${Thread.currentThread().name}")
+                }
+                .subscribeOn(Schedulers.computation())
+                .observeOn(Schedulers.single())
+                .flatMap {
+                    println("flatMapThread = ${Thread.currentThread().name}")
+                    Observable.just(it)
+                            .subscribeOn(Schedulers.computation())
+                }
+                .subscribe {
+                    println("subscribeThread = ${Thread.currentThread().name}")
+                }
+        Thread.sleep(5000)
     }
 }

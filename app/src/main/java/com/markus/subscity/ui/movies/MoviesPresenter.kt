@@ -6,6 +6,11 @@ import com.markus.subscity.repositories.MovieRepository
 import com.markus.subscity.ui.base.BaseMvpPresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.lang.Exception
 import javax.inject.Inject
 
 /**
@@ -17,16 +22,32 @@ class MoviesPresenter @Inject constructor(private val movieRepository: MovieRepo
 
     override fun onFirstViewAttach() {
         viewState.showProgress()
-        cityProvider.asyncCity
-                .flatMapSingle { movieRepository.getMovies() }
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeTillDetach({ movies ->
+//        cityProvider.asyncCity
+//                .flatMapSingle { movieRepository.getMovies() }
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribeTillDetach({ movies ->
+//                    viewState.hideProgress()
+//                    viewState.showMovies(movies)
+//                }, {
+//                    viewState.hideProgress()
+//                    viewState.onError(it)
+//                })
+        viewState.showProgress()
+        GlobalScope.launch {
+            try {
+                val movies = movieRepository.getMoviesSuspend()
+                withContext(Dispatchers.Main) {
                     viewState.hideProgress()
                     viewState.showMovies(movies)
-                }, {
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
                     viewState.hideProgress()
-                    viewState.onError(it)
-                })
+                    viewState.onError(e)
+                }
+            }
+
+        }
     }
 }

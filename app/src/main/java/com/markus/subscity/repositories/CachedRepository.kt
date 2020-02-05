@@ -48,7 +48,7 @@ abstract class CachedRepository(protected val databaseProvider: DatabaseProvider
 
     private fun isCacheActual(key: String, syncTimes: List<DateTime>): Single<Boolean> {
         val now = dateTimeProvider.now()
-        val syncTime = syncTimes.last { it < now }
+        val syncTime = syncTimes.lastOrNull { it < now } ?: DateTime.now()
         return databaseProvider.currentDatabaseClient.cacheTimestampDao.getCacheTimestamp(key)
                 .map { it.timestamp > syncTime.millis }
                 .onErrorReturnItem(false)
@@ -62,8 +62,10 @@ abstract class CachedRepository(protected val databaseProvider: DatabaseProvider
 
     private fun calculateSyncTime(): List<DateTime> {
         val now = dateTimeProvider.now().withTimeAtStartOfDay()
-        var times = getSyncTime().map { now.plus(Period.parse(it, periodParser)) }
-        times = mutableListOf(times.last().minusDays(1)).apply { addAll(times) }
-        return times
+        val times = getSyncTime().map { now.plus(Period.parse(it, periodParser)) }
+        if (times.isEmpty()) {
+            return emptyList()
+        }
+        return mutableListOf(times.last().minusDays(1)).apply { addAll(times) }
     }
 }

@@ -5,6 +5,7 @@ import com.markus.subscity.api.entities.cinema.Cinema
 import com.markus.subscity.api.entities.movie.Movie
 import com.markus.subscity.api.entities.screening.Screening
 import io.reactivex.Single
+import kotlinx.coroutines.flow.Flow
 import org.joda.time.DateTime
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -15,10 +16,10 @@ import retrofit2.http.Path
 interface SubsCityService {
 
     @GET("https://{city}.subscity.ru/movies.json")
-    fun getMovies(@Path("city") city: String): Single<List<Movie>>
+    suspend fun getMovies(@Path("city") city: String): List<Movie>
 
     @GET("https://{city}.subscity.ru/cinemas.json")
-    fun getCinemas(@Path("city") city: String): Single<List<Cinema>>
+    fun getCinemas(@Path("city") city: String): Flow<List<Cinema>>
 
     @GET("https://{city}.subscity.ru/movies/screenings/{movie_id}.json")
     fun getMovieScreenings(@Path("city") city: String, @Path("movie_id") movieId: Long): Single<List<Screening>>

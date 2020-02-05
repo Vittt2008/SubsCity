@@ -7,6 +7,10 @@ import com.markus.subscity.providers.CityProvider
 import com.markus.subscity.providers.DatabaseProvider
 import com.markus.subscity.providers.DateTimeProvider
 import io.reactivex.Single
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.reactive.asFlow
+import kotlinx.coroutines.rx2.asObservable
+import kotlinx.coroutines.rx2.await
 import javax.inject.Inject
 
 /**
@@ -21,10 +25,24 @@ class CinemaRepository @Inject constructor(private val apiClient: ApiClient,
         return isCacheActual()
                 .flatMap { isActual ->
                     if (isActual) {
+                        getCinemasFromDb().asObservable().firstOrError()
+                    } else {
+                        getCinemaFromApi().asObservable().firstOrError()
+                                .onErrorResumeNext { getCinemasFromDb().asObservable().firstOrError() }
+                    }
+                }
+                .map { cinema -> cinema.sortedBy { it.name } }
+    }
+
+    fun getCinemasFlow(): Flow<List<Cinema>> {
+        return isCacheActual().toFlowable().asFlow()
+                .flatMapConcat { isActual ->
+                    if (isActual) {
                         getCinemasFromDb()
                     } else {
                         getCinemaFromApi()
-                                .onErrorResumeNext { getCinemasFromDb() }
+                                .catch { emitAll(getCinemasFromDb()) }
+
                     }
                 }
                 .map { cinema -> cinema.sortedBy { it.name } }
@@ -34,7 +52,7 @@ class CinemaRepository @Inject constructor(private val apiClient: ApiClient,
         return databaseProvider.currentDatabaseClient.cinemaDao.getCinema(id)
                 .onErrorResumeNext {
                     getCinemaFromApi()
-                            .toObservable()
+                            .asObservable()
                             .flatMapIterable { it }
                             .filter { it.id == id }
                             .singleOrError()
@@ -45,16 +63,14 @@ class CinemaRepository @Inject constructor(private val apiClient: ApiClient,
 
     override fun getSyncTime() = arrayOf("10:00", "14:00", "22:00")
 
-    private fun getCinemaFromApi(): Single<List<Cinema>> {
+    private fun getCinemaFromApi(): Flow<List<Cinema>> {
         return apiClient.subsCityService.getCinemas(cityProvider.cityId)
-                .doOnSuccess { databaseProvider.currentDatabaseClient.cinemaDao.deleteAllCinemas() }
-                .doOnSuccess { databaseProvider.currentDatabaseClient.cinemaDao.saveCinemas(it) }
-                .doOnSuccess { updateCacheTimestamp() }
-                .timeout()
+                .onEach { databaseProvider.currentDatabaseClient.cinemaDao.deleteAllCinemas() }
+                .onEach { databaseProvider.currentDatabaseClient.cinemaDao.saveCinemas(it) }
+                .onEach { updateCacheTimestamp() }
     }
 
-    private fun getCinemasFromDb(): Single<List<Cinema>> {
-        return databaseProvider.currentDatabaseClient.cinemaDao.getAllCinemas()
-                .firstOrError()
+    private fun getCinemasFromDb(): Flow<List<Cinema>> {
+        return databaseProvider.currentDatabaseClient.cinemaDao.getAllCinemas().asFlow()
     }
 }

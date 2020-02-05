@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import com.markus.subscity.api.client.converters.StringConverterFactory
 import com.markus.subscity.api.services.SubsCityService
 import io.reactivex.Scheduler
+import me.sianaki.flowretrofitadapter.FlowCallAdapterFactory
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -22,6 +23,7 @@ class ApiClient(okHttpClient: OkHttpClient,
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addConverterFactory(StringConverterFactory())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(scheduler))
+            .addCallAdapterFactory(FlowCallAdapterFactory.create())
             .build()
 
     val subsCityService by lazy { retrofit.create(SubsCityService::class.java)!! }
