@@ -83,6 +83,7 @@
             android:name=".ui.youtube.YouTubeActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|keyboard"
             android:label="@string/empty_title"
+            android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.YouTube" />
 
         <activity

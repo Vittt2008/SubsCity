@@ -9,9 +9,9 @@ android {
     defaultConfig {
         applicationId "com.markus.subscity"
         minSdkVersion 16
-        targetSdkVersion 26
+        targetSdkVersion 29
         versionCode 20
-        versionName "2.0.0-alpha-3"
+        versionName "2.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
