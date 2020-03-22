@@ -21,8 +21,9 @@ class ScreeningDatabaseTest {
 
     private val allScreenings: List<Screening> by lazy {
         val listScreeningType = object : TypeToken<List<Screening>>() {}.type
-        createGson().fromJson(screeningJson, listScreeningType)
+        createGson().fromJson<List<Screening>>(screeningJson, listScreeningType)
     }
+    
     private val screeningDao: ScreeningDao by lazy {
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
         Room.databaseBuilder(appContext, DatabaseClient::class.java, "subs_city")
@@ -68,8 +69,8 @@ class ScreeningDatabaseTest {
 
     companion object {
         private val screeningJson = """
-[  
-   {  
+[
+   {
       "cinema_id":81,
       "date_time":"2019-09-06T14:35:00+03:00",
       "id":271361,
@@ -78,7 +79,7 @@ class ScreeningDatabaseTest {
       "price_min":190,
       "tickets_url":"https://subscity.ru/screenings/tickets/271361"
    },
-   {  
+   {
       "cinema_id":83,
       "date_time":"2019-09-06T16:05:00+03:00",
       "id":271106,
@@ -87,7 +88,7 @@ class ScreeningDatabaseTest {
       "price_min":240,
       "tickets_url":"https://subscity.ru/screenings/tickets/271106"
    },
-   {  
+   {
       "cinema_id":65,
       "date_time":"2019-09-06T19:05:00+03:00",
       "id":271644,
@@ -96,7 +97,7 @@ class ScreeningDatabaseTest {
       "price_min":390,
       "tickets_url":"https://subscity.ru/screenings/tickets/271644"
    },
-   {  
+   {
       "cinema_id":121,
       "date_time":"2019-09-06T19:50:00+03:00",
       "id":271409,
@@ -105,7 +106,7 @@ class ScreeningDatabaseTest {
       "price_min":300,
       "tickets_url":"https://subscity.ru/screenings/tickets/271409"
    },
-   {  
+   {
       "cinema_id":70,
       "date_time":"2019-09-06T19:55:00+03:00",
       "id":271616,
@@ -114,7 +115,7 @@ class ScreeningDatabaseTest {
       "price_min":390,
       "tickets_url":"https://subscity.ru/screenings/tickets/271616"
    },
-   {  
+   {
       "cinema_id":65,
       "date_time":"2019-09-06T20:00:00+03:00",
       "id":270903,
@@ -123,7 +124,7 @@ class ScreeningDatabaseTest {
       "price_min":440,
       "tickets_url":"https://subscity.ru/screenings/tickets/270903"
    },
-   {  
+   {
       "cinema_id":121,
       "date_time":"2019-09-06T20:35:00+03:00",
       "id":271360,
@@ -132,7 +133,7 @@ class ScreeningDatabaseTest {
       "price_min":300,
       "tickets_url":"https://subscity.ru/screenings/tickets/271360"
    },
-   {  
+   {
       "cinema_id":81,
       "date_time":"2019-09-06T21:15:00+03:00",
       "id":271362,
@@ -141,7 +142,7 @@ class ScreeningDatabaseTest {
       "price_min":280,
       "tickets_url":"https://subscity.ru/screenings/tickets/271362"
    },
-   {  
+   {
       "cinema_id":121,
       "date_time":"2019-09-06T21:20:00+03:00",
       "id":270943,
@@ -150,7 +151,7 @@ class ScreeningDatabaseTest {
       "price_min":null,
       "tickets_url":"https://subscity.ru/screenings/tickets/270943"
    },
-   {  
+   {
       "cinema_id":121,
       "date_time":"2019-09-06T21:30:00+03:00",
       "id":271392,
@@ -159,7 +160,7 @@ class ScreeningDatabaseTest {
       "price_min":300,
       "tickets_url":"https://subscity.ru/screenings/tickets/271392"
    },
-   {  
+   {
       "cinema_id":65,
       "date_time":"2019-09-06T23:25:00+03:00",
       "id":271615,
