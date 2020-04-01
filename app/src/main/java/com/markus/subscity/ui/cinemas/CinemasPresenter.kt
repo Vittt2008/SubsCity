@@ -22,10 +22,12 @@ class CinemasPresenter @Inject constructor(private val cinemaRepository: CinemaR
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeTillDetach({ cinemas ->
-                    viewState.hideProgress()
-                    viewState.showCinemas(cinemas)
+                    if (cinemas.isEmpty()) {
+                        viewState.showEmptyMessage()
+                    } else {
+                        viewState.showCinemas(cinemas)
+                    }
                 }, {
-                    viewState.hideProgress()
                     viewState.onError(it)
                 })
     }

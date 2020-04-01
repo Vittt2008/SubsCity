@@ -22,10 +22,12 @@ class MoviesPresenter @Inject constructor(private val movieRepository: MovieRepo
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeTillDetach({ movies ->
-                    viewState.hideProgress()
-                    viewState.showMovies(movies)
+                    if (movies.isEmpty()) {
+                        viewState.showEmptyMessage()
+                    } else {
+                        viewState.showMovies(movies)
+                    }
                 }, {
-                    viewState.hideProgress()
                     viewState.onError(it)
                 })
     }

@@ -14,6 +14,9 @@ interface MoviesView : MvpView {
     @StateStrategyType(SingleStateStrategy::class)
     fun showMovies(movies: List<Movie>)
 
+    @StateStrategyType(SingleStateStrategy::class)
+    fun showEmptyMessage()
+
     @StateStrategyType(OneExecutionStateStrategy::class)
     fun onError(throwable: Throwable)
 

@@ -43,7 +43,7 @@ class MoviesFragment : MvpAppCompatFragment(), MoviesView {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root = inflater.inflate(R.layout.fragment_movies, container, false)
         moviesList = root.findViewById(R.id.rv_list)
-        loadingController = ContentLoadingController(root, R.id.rv_list, R.id.pb_progress)
+        loadingController = ContentLoadingController(root, R.id.rv_list, R.id.pb_progress, R.id.empty)
         return root
     }
 
@@ -57,10 +57,16 @@ class MoviesFragment : MvpAppCompatFragment(), MoviesView {
         moviesList.run {
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             adapter = MoviesAdapter(requireActivity(), movies, ::openMovie)
+            setBackgroundResource(R.color.movies_background_color)
         }
     }
 
+    override fun showEmptyMessage() {
+        loadingController.switchState(ContentLoadingController.State.EMPTY)
+    }
+
     override fun onError(throwable: Throwable) {
+        showEmptyMessage()
         Toast.makeText(activity, throwable.message, Toast.LENGTH_SHORT).show()
     }
 

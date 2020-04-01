@@ -12,6 +12,9 @@
     <string name="rate_button">Rate the App</string>
     <string name="rate_no_play_store">The Play Store App is absent</string>
 
+    <string name="no_shows_title">No shows available :(</string>
+    <string name="no_shows_subtitle">We will inform you when the situation changes.</string>
+
     <!-- MainActivity -->
     <string name="main_films">Movies</string>
     <string name="main_cinemas">Cinemas</string>

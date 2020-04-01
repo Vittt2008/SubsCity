@@ -12,6 +12,9 @@
     <string name="rate_button">Оценить приложение</string>
     <string name="rate_no_play_store">Отсутвет приложение Play Store</string>
 
+    <string name="no_shows_title">Сеансов нет :(</string>
+    <string name="no_shows_subtitle">Мы сообщим вам, когда ситуация изменится.</string>
+
     <!-- MainActivity -->
     <string name="main_films">Фильмы</string>
     <string name="main_cinemas">Кинотеатры</string>

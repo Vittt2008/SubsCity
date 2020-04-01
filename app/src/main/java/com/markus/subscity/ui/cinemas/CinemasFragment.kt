@@ -1,10 +1,10 @@
 package com.markus.subscity.ui.cinemas
 
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.*
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
@@ -48,7 +48,7 @@ class CinemasFragment : MvpAppCompatFragment(), CinemasView {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root = inflater.inflate(R.layout.fragment_cinemas, container, false)
         cinemasList = root.findViewById(R.id.rv_list)
-        loadingController = ContentLoadingController(root, R.id.rv_list, R.id.pb_progress)
+        loadingController = ContentLoadingController(root, R.id.rv_list, R.id.pb_progress, R.id.empty)
         return root
     }
 
@@ -58,12 +58,16 @@ class CinemasFragment : MvpAppCompatFragment(), CinemasView {
     }
 
     override fun showCinemas(cinemas: List<Cinema>) {
-        cinemas.toString().equals("", true)
+        loadingController.switchState(ContentLoadingController.State.CONTENT)
         cinemasList.run {
             layoutManager = LinearLayoutManager(activity)
             adapter = CinemasAdapter(cinemas, ::openCinema)
             addItemDecoration(MarginDivider(requireActivity()).apply { setDrawable(R.drawable.cinema_divider) })
         }
+    }
+
+    override fun showEmptyMessage() {
+        loadingController.switchState(ContentLoadingController.State.EMPTY)
     }
 
     override fun showCinemasMap(city: City) {
@@ -84,6 +88,7 @@ class CinemasFragment : MvpAppCompatFragment(), CinemasView {
     }
 
     override fun onError(throwable: Throwable) {
+        showEmptyMessage()
         Toast.makeText(activity, throwable.message, Toast.LENGTH_SHORT).show()
     }
 

@@ -6,13 +6,17 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/movies_background_color" />
+        android:layout_height="match_parent" />
 
     <ProgressBar
         android:id="@+id/pb_progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center" />
+
+    <include
+        layout="@layout/layout_no_screenings"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </FrameLayout>
