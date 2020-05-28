@@ -30,6 +30,7 @@ import com.markus.subscity.R
 import com.markus.subscity.api.entities.cinema.Cinema
 import com.markus.subscity.dagger.SubsCityDagger
 import com.markus.subscity.extensions.analytics
+import com.markus.subscity.extensions.longToast
 import com.markus.subscity.extensions.toast
 import com.markus.subscity.utils.MapSlidr
 import com.markus.subscity.widgets.ViewPagerBottomSheetBehavior
@@ -140,8 +141,13 @@ class CinemasMapActivity : MvpAppCompatActivity(), CinemasMapView, GoogleMap.OnM
         this.cinemaIdMarkerIdMap = markerCinemaMap.entries.associateBy({ it.value }, { it.key })
         this.markers = markers as List<Marker>
 
-        val markerId = cinemaIdMarkerIdMap.getValue(cinemas.first().id)
-        selectMarker(markerId)
+        val markerId = cinemaIdMarkerIdMap[cinemas.firstOrNull()?.id]
+        if (markerId != null) {
+            selectMarker(markerId)
+        } else {
+            val message = getString(R.string.no_shows_title) + "\n" + getString(R.string.no_shows_subtitle)
+            longToast(message)
+        }
     }
 
     override fun onError(throwable: Throwable) {
